@@ -1,4 +1,6 @@
-/* SafeRoute Neo-Command - Ultra Modern Dark Neomorphic Design System */
+/* ========================================================================= */
+/* SafeRoute Neomorphic Command & Analytics - Soft UI Design System          */
+/* ========================================================================= */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -6,43 +8,40 @@
   --neo-bg: #0e131f;
   --neo-surface: #121827;
   --neo-surface-raised: #151d30;
+  --neo-surface-recessed: #0a0e18;
   
-  /* Neomorphic Shadows: Dual Light Source (Upper-left Specular / Lower-right Drop) */
+  /* Neomorphic Shadows: Dual Light Source Calibration */
   --neo-convex: 
-    6px 6px 14px rgba(3, 6, 12, 0.8),
-    -4px -4px 12px rgba(30, 41, 67, 0.45);
+    8px 8px 18px rgba(3, 6, 12, 0.85),
+    -6px -6px 16px rgba(30, 42, 68, 0.45);
 
   --neo-convex-sm: 
-    3px 3px 8px rgba(3, 6, 12, 0.75),
-    -2px -2px 6px rgba(30, 41, 67, 0.4);
+    4px 4px 10px rgba(3, 6, 12, 0.8),
+    -3px -3px 8px rgba(30, 42, 68, 0.4);
 
   --neo-concave-inset: 
-    inset 4px 4px 10px rgba(3, 6, 12, 0.85),
-    inset -3px -3px 8px rgba(30, 41, 67, 0.35);
+    inset 5px 5px 12px rgba(2, 5, 10, 0.9),
+    inset -4px -4px 10px rgba(30, 42, 68, 0.3);
 
   --neo-concave-inset-sm: 
-    inset 2px 2px 6px rgba(3, 6, 12, 0.9),
-    inset -2px -2px 5px rgba(30, 41, 67, 0.3);
-
-  --neo-card-pill: 
-    8px 8px 18px rgba(2, 5, 10, 0.85),
-    -6px -6px 16px rgba(28, 38, 64, 0.5);
+    inset 3px 3px 8px rgba(2, 5, 10, 0.95),
+    inset -2px -2px 6px rgba(30, 42, 68, 0.3);
 
   --neo-pressed: 
-    inset 3px 3px 8px rgba(2, 5, 10, 0.95),
-    inset -2px -2px 6px rgba(30, 41, 67, 0.35);
+    inset 4px 4px 10px rgba(2, 5, 10, 0.98),
+    inset -2px -2px 6px rgba(30, 42, 68, 0.3);
 
-  /* Vivid Neomorphic Glows */
+  /* Neon Neomorphic Accents */
   --neo-cyan: #00f0ff;
-  --neo-glow-cyan: 0 0 16px rgba(0, 240, 255, 0.45);
+  --neo-glow-cyan: 0 0 16px rgba(0, 240, 255, 0.5);
   --neo-emerald: #10b981;
-  --neo-glow-emerald: 0 0 16px rgba(16, 185, 129, 0.4);
+  --neo-glow-emerald: 0 0 16px rgba(16, 185, 129, 0.45);
   --neo-rose: #f43f5e;
-  --neo-glow-rose: 0 0 16px rgba(244, 63, 94, 0.45);
+  --neo-glow-rose: 0 0 16px rgba(244, 63, 94, 0.5);
   --neo-amber: #f59e0b;
-  --neo-glow-amber: 0 0 16px rgba(245, 158, 11, 0.4);
+  --neo-glow-amber: 0 0 16px rgba(245, 158, 11, 0.45);
 
-  /* Typography */
+  /* Fonts */
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -52,9 +51,10 @@ body {
   color: #e2e8f0;
   font-family: var(--font-mono);
   margin: 0;
+  overflow-x: hidden;
 }
 
-/* Custom Neomorphic Utility Classes */
+/* Neomorphic Building Blocks */
 .neo-box-convex {
   background: linear-gradient(145deg, #161e33, #101624);
   box-shadow: var(--neo-convex);
@@ -68,15 +68,15 @@ body {
 }
 
 .neo-box-inset {
-  background: #0c111c;
+  background: var(--neo-surface-recessed);
   box-shadow: var(--neo-concave-inset);
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .neo-box-inset-sm {
-  background: #0c111c;
+  background: var(--neo-surface-recessed);
   box-shadow: var(--neo-concave-inset-sm);
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .neo-button {
@@ -84,11 +84,12 @@ body {
   box-shadow: var(--neo-convex-sm);
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 .neo-button:hover {
-  background: linear-gradient(145deg, #1a243d, #131a2c);
-  box-shadow: 4px 4px 10px rgba(3, 6, 12, 0.9), -3px -3px 8px rgba(35, 48, 78, 0.5);
+  background: linear-gradient(145deg, #1b253e, #131a2c);
+  box-shadow: 5px 5px 12px rgba(3, 6, 12, 0.9), -3px -3px 8px rgba(35, 48, 78, 0.5);
 }
 
 .neo-button:active {

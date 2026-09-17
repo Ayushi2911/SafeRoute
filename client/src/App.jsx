@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import AdminDashboard from './components/admin/AdminDashboard'
-import IncidentReport from './pages/IncidentReport'
-import IncidentHistory from './pages/IncidentHistory'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -9,119 +7,158 @@ import './components/admin/admin.css'
 import './App.css'
 
 function App() {
-  const [currentView, setCurrentView] = useState('admin') // 'admin', 'report', 'history', 'home'
+  const [currentView, setCurrentView] = useState('admin') // 'home', 'admin'
   const [count, setCount] = useState(0)
 
-  const navItems = [
-    { id: 'admin', label: '📊 Neomorphic Admin', badge: 'Khushi' },
-    { id: 'report', label: '🚨 Report Incident', badge: 'Rekha' },
-    { id: 'history', label: '📜 Incident History', badge: 'Rekha' },
-    { id: 'home', label: '🏠 Platform Portal', badge: 'Overview' },
-  ]
-
   return (
-    <div className="min-h-screen bg-[#0e131f] text-slate-200 flex flex-col font-mono">
-      {/* Universal Neomorphic Nav Header */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-3.5 bg-[#121827] border-b border-slate-800/60 shadow-[0_8px_20px_rgba(3,6,12,0.8)] flex-wrap gap-3">
-        {/* Left: Logo mark with glowing cyan beacon */}
-        <div className="flex items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 drop-shadow-[0_0_8px_rgba(0,240,255,0.9)] animate-pulse" />
-          <div className="flex items-center gap-2">
-            <span className="font-extrabold text-sm tracking-widest text-cyan-400 uppercase font-sans">
-              SAFEROUTE
-            </span>
-            <span className="text-[10px] tracking-widest text-slate-500 uppercase">
-              // NEOMORPHIC PLATFORM
-            </span>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#070a10' }}>
+      {/* Universal Tactical Agency Bar */}
+      <nav style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '12px 24px',
+        background: 'linear-gradient(135deg, #182030 0%, #0d1320 100%)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.7)',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+        flexWrap: 'wrap',
+        gap: '12px'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '20px' }}>🛡️</span>
+          <div>
+            <span style={{ fontWeight: 800, fontSize: '16px', color: '#7df4ff', letterSpacing: '0.04em', fontFamily: 'Space Grotesk, sans-serif' }}>SAFEROUTE</span>
+            <span style={{ fontSize: '10px', color: '#849495', marginLeft: '8px', fontFamily: 'JetBrains Mono, monospace' }}>// UNIFIED PLATFORM</span>
           </div>
         </div>
 
-        {/* Right: Neomorphic Tab Buttons */}
-        <div className="neo-box-inset p-1.5 rounded-2xl flex items-center gap-2 flex-wrap">
-          {navItems.map((item) => {
-            const isActive = currentView === item.id
-            return (
-              <button
-                key={item.id}
-                onClick={() => setCurrentView(item.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${
-                  isActive
-                    ? 'neo-button-cyan-active'
-                    : 'text-slate-400 hover:text-slate-200'
-                }`}
-              >
-                <span>{item.label}</span>
-                <span className={`text-[9px] px-1.5 py-0.5 rounded-md ${
-                  isActive ? 'bg-slate-950/40 text-slate-950 font-black' : 'bg-slate-800/80 text-cyan-400'
-                }`}>
-                  {item.badge}
-                </span>
-              </button>
-            )
-          })}
+        {/* Navigation Switcher */}
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button
+            onClick={() => setCurrentView('home')}
+            style={{
+              padding: '7px 14px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              background: currentView === 'home' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
+              color: currentView === 'home' ? '#002022' : '#849495',
+              cursor: 'pointer',
+              fontWeight: 700,
+              fontSize: '11px',
+              fontFamily: 'JetBrains Mono, monospace',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              boxShadow: currentView === 'home' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            🏠 Home
+          </button>
+
+          <button
+            onClick={() => setCurrentView('admin')}
+            style={{
+              padding: '7px 14px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              background: currentView === 'admin' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
+              color: currentView === 'admin' ? '#002022' : '#849495',
+              cursor: 'pointer',
+              fontWeight: 700,
+              fontSize: '11px',
+              fontFamily: 'JetBrains Mono, monospace',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              boxShadow: currentView === 'admin' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            📊 Admin & Analytics
+          </button>
         </div>
       </nav>
 
-      {/* Main Viewport */}
-      <main className="flex-1">
-        {currentView === 'admin' && <AdminDashboard />}
-        {currentView === 'report' && <IncidentReport />}
-        {currentView === 'history' && <IncidentHistory />}
-        {currentView === 'home' && (
-          <div className="p-8 max-w-4xl mx-auto space-y-8">
-            <section id="center" className="text-center space-y-4 py-8">
-              <div className="hero inline-flex items-center justify-center gap-4">
-                <img src={heroImg} className="base" width="140" height="150" alt="" />
-                <img src={reactLogo} className="framework" alt="React logo" width="60" />
-                <img src={viteLogo} className="vite" alt="Vite logo" width="60" />
+      {/* Main View Area */}
+      <div style={{ flex: 1 }}>
+        {currentView === 'admin' ? (
+          <AdminDashboard />
+        ) : (
+          <main style={{ padding: '30px' }}>
+            <section id="center">
+              <div className="hero">
+                <img src={heroImg} className="base" width="170" height="179" alt="" />
+                <img src={reactLogo} className="framework" alt="React logo" />
+                <img src={viteLogo} className="vite" alt="Vite logo" />
               </div>
               <div>
-                <h1 className="text-3xl font-extrabold text-white font-sans">SafeRoute Platform</h1>
-                <p className="text-sm text-slate-400 mt-1">Smart Public Safety & Emergency Assistance Platform</p>
+                <h1 style={{ fontFamily: 'Space Grotesk, sans-serif' }}>SafeRoute Platform</h1>
+                <p>Smart Public Safety & Emergency Assistance Platform</p>
               </div>
               <button
                 type="button"
-                className="neo-button px-5 py-2.5 rounded-2xl text-xs font-bold text-cyan-400 active:scale-95 transition-all"
+                className="counter"
                 onClick={() => setCount((c) => c + 1)}
               >
                 Count is {count}
               </button>
             </section>
 
-            <section id="next-steps" className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div id="docs" className="neo-box-convex rounded-3xl p-6 space-y-2">
-                <h2 className="text-base font-bold text-white font-sans">Documentation</h2>
-                <p className="text-xs text-slate-400">Neomorphic API specifications and contracts</p>
-                <ul className="text-xs text-slate-300 space-y-2 pt-2">
+            <div className="ticks"></div>
+
+            <section id="next-steps">
+              <div id="docs">
+                <svg className="icon" role="presentation" aria-hidden="true">
+                  <use href="/icons.svg#documentation-icon"></use>
+                </svg>
+                <h2>Documentation</h2>
+                <p>Your questions, answered</p>
+                <ul>
                   <li>
-                    <a href="https://vite.dev/" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
-                      Explore Vite & React 19
+                    <a href="https://vite.dev/" target="_blank" rel="noreferrer">
+                      <img className="logo" src={viteLogo} alt="" />
+                      Explore Vite
                     </a>
                   </li>
                   <li>
-                    <a href="https://github.com/Ayushi2911/SafeRoute" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
-                      GitHub Repository (Ayushi2911/SafeRoute)
+                    <a href="https://react.dev/" target="_blank" rel="noreferrer">
+                      <img className="button-icon" src={reactLogo} alt="" />
+                      Learn more
                     </a>
                   </li>
                 </ul>
               </div>
-
-              <div id="social" className="neo-box-convex rounded-3xl p-6 space-y-2">
-                <h2 className="text-base font-bold text-white font-sans">Tactile Safety Matrix</h2>
-                <p className="text-xs text-slate-400">Real-time threat triage and emergency routing</p>
-                <ul className="text-xs text-slate-300 space-y-2 pt-2">
-                  <li className="text-emerald-400">
-                    ✓ Multi-Factor Haversine Safety Algorithm Active
+              <div id="social">
+                <svg className="icon" role="presentation" aria-hidden="true">
+                  <use href="/icons.svg#social-icon"></use>
+                </svg>
+                <h2>Connect with us</h2>
+                <p>Join the SafeRoute Community</p>
+                <ul>
+                  <li>
+                    <a href="https://github.com/Ayushi2911/SafeRoute" target="_blank" rel="noreferrer">
+                      <svg className="button-icon" role="presentation" aria-hidden="true">
+                        <use href="/icons.svg#github-icon"></use>
+                      </svg>
+                      GitHub Repo
+                    </a>
                   </li>
-                  <li className="text-cyan-400">
-                    ✓ 24-Hour Velocity Curve Integrated with MySQL
+                  <li>
+                    <a href="https://chat.vite.dev/" target="_blank" rel="noreferrer">
+                      <svg className="button-icon" role="presentation" aria-hidden="true">
+                        <use href="/icons.svg#discord-icon"></use>
+                      </svg>
+                      Discord
+                    </a>
                   </li>
                 </ul>
               </div>
             </section>
-          </div>
+          </main>
         )}
-      </main>
+      </div>
     </div>
   )
 }
