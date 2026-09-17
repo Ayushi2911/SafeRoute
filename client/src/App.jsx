@@ -11,13 +11,19 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#070a10' }}>
-      {/* Universal Tactical Agency Bar */}
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#16171d',
+      color: '#f3f4f6'
+    }}>
+      {/* Platform Navigation Bar */}
       <nav style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '12px 24px',
+        padding: '12px 28px',
         background: 'linear-gradient(135deg, #182030 0%, #0d1320 100%)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
         boxShadow: '0 8px 24px rgba(0, 0, 0, 0.7)',
@@ -30,8 +36,23 @@ function App() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '20px' }}>🛡️</span>
           <div>
-            <span style={{ fontWeight: 800, fontSize: '16px', color: '#7df4ff', letterSpacing: '0.04em', fontFamily: 'Space Grotesk, sans-serif' }}>SAFEROUTE</span>
-            <span style={{ fontSize: '10px', color: '#849495', marginLeft: '8px', fontFamily: 'JetBrains Mono, monospace' }}>// UNIFIED PLATFORM</span>
+            <span style={{
+              fontWeight: 800,
+              fontSize: '16px',
+              color: '#7df4ff',
+              letterSpacing: '0.04em',
+              fontFamily: 'Space Grotesk, system-ui, sans-serif'
+            }}>
+              SAFEROUTE
+            </span>
+            <span style={{
+              fontSize: '10px',
+              color: '#849495',
+              marginLeft: '8px',
+              fontFamily: 'ui-monospace, JetBrains Mono, monospace'
+            }}>
+              // UNIFIED PLATFORM
+            </span>
           </div>
         </div>
 
