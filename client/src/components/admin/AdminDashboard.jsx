@@ -20,7 +20,8 @@ import {
   Check,
   X,
   Phone,
-  Shield
+  Layers,
+  BarChart3
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -63,7 +64,7 @@ export default function AdminDashboard() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [actionNotice, setActionNotice] = useState(null);
 
-  // Helper for auth headers
+  // Helper for auth headers (Integrates with Shaily's auth token)
   const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
     return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
@@ -112,7 +113,7 @@ export default function AdminDashboard() {
         setIncidents((prev) =>
           prev.map((item) => (item.id === id ? { ...item, status } : item))
         );
-        setActionNotice({ type: 'success', text: `Incident #${id} marked as ${status}.` });
+        setActionNotice({ type: 'success', text: `Incident #${id} marked as ${status} in database.` });
         setTimeout(() => setActionNotice(null), 4000);
         fetchData();
       }
@@ -134,7 +135,7 @@ export default function AdminDashboard() {
         setSosRequests((prev) =>
           prev.map((item) => (item.id === id ? { ...item, status } : item))
         );
-        setActionNotice({ type: 'success', text: `SOS #${id} status updated to ${status}.` });
+        setActionNotice({ type: 'success', text: `SOS #${id} status updated to ${status} in database.` });
         setTimeout(() => setActionNotice(null), 4000);
         fetchData();
       }
@@ -174,7 +175,7 @@ export default function AdminDashboard() {
   const SEVERITY_COLORS = {
     high: '#f43f5e',
     medium: '#f59e0b',
-    low: '#38bdf8'
+    low: '#00f0ff'
   };
 
   const velocityData = analytics?.velocityData || [
@@ -188,29 +189,18 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="sr-dashboard">
-      <div className="sr-container">
+    <div className="neo-dashboard">
+      <div className="neo-container">
         {/* Banner Alert Messages */}
         {errorMessage && (
-          <div style={{
-            background: 'rgba(244, 63, 94, 0.12)',
-            border: '1px solid rgba(244, 63, 94, 0.3)',
-            color: '#fda4af',
-            padding: '12px 18px',
-            borderRadius: 10,
-            marginBottom: 20,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: 13
-          }}>
+          <div className="neo-banner error">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <AlertCircle size={18} />
+              <AlertCircle size={18} color="#f43f5e" />
               <span>{errorMessage}</span>
             </div>
             <button
               onClick={() => setErrorMessage(null)}
-              style={{ background: 'none', border: 'none', color: '#fda4af', cursor: 'pointer', fontSize: 16 }}
+              style={{ background: 'none', border: 'none', color: '#fda4af', cursor: 'pointer' }}
             >
               ✕
             </button>
@@ -218,159 +208,154 @@ export default function AdminDashboard() {
         )}
 
         {actionNotice && (
-          <div style={{
-            background: actionNotice.type === 'success' ? 'rgba(16, 185, 129, 0.12)' : 'rgba(244, 63, 94, 0.12)',
-            border: `1px solid ${actionNotice.type === 'success' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(244, 63, 94, 0.3)'}`,
-            color: actionNotice.type === 'success' ? '#6ee7b7' : '#fda4af',
-            padding: '12px 18px',
-            borderRadius: 10,
-            marginBottom: 20,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: 13
-          }}>
+          <div className={`neo-banner ${actionNotice.type}`}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              {actionNotice.type === 'success' ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
+              {actionNotice.type === 'success' ? (
+                <CheckCircle size={18} color="#10b981" />
+              ) : (
+                <AlertCircle size={18} color="#f43f5e" />
+              )}
               <span>{actionNotice.text}</span>
             </div>
             <button
               onClick={() => setActionNotice(null)}
-              style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer', fontSize: 16 }}
+              style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer' }}
             >
               ✕
             </button>
           </div>
         )}
 
-        {/* Dashboard Top Header */}
-        <header className="sr-header">
-          <div className="sr-brand">
-            <div className="sr-brand-logo">
-              <Shield size={22} />
-            </div>
+        {/* 1. Master Agency Header */}
+        <header className="neo-header">
+          <div className="neo-header-brand">
+            <div className="neo-pilot-beacon" />
             <div>
-              <h1 className="sr-brand-title">SafeRoute Administration & Analytics</h1>
-              <p className="sr-brand-subtitle">Citywide Safety Operations & Incident Response Management</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span className="neo-badge-tag">Agency Neocontrol</span>
+                <span style={{ fontSize: 11, color: '#8fa0b5', fontFamily: 'JetBrains Mono' }}>TACTICAL DISPATCH ENGINE</span>
+              </div>
+              <h1>SafeRoute Command & Telemetry</h1>
             </div>
           </div>
 
-          <div className="sr-header-actions">
-            <button className="sr-btn" onClick={fetchData} title="Refresh Live Data">
-              <RefreshCw size={14} /> Refresh
+          <div className="neo-header-actions">
+            <button className="neo-btn" onClick={fetchData} title="Resync Hardware & Database">
+              <RefreshCw size={13} /> Resync
             </button>
-            <button className="sr-btn primary" onClick={handleExportCSV}>
-              <Download size={14} /> Export CSV Report
+            <button className="neo-btn emerald" onClick={handleExportCSV}>
+              <Download size={13} /> Export CAD Report
             </button>
           </div>
         </header>
 
-        {/* Navigation Tabs */}
-        <nav className="sr-nav-tabs">
+        {/* 2. Recessed Neomorphic Nav Trough */}
+        <nav className="neo-nav-trough">
           <button
-            className={`sr-tab-button ${activeTab === 'overview' ? 'active' : ''}`}
+            className={`neo-nav-tab ${activeTab === 'overview' ? 'active' : ''}`}
             onClick={() => setActiveTab('overview')}
           >
-            <TrendingUp size={16} /> Analytics & Metrics
+            <TrendingUp size={16} /> Telemetry & Analytics
           </button>
           <button
-            className={`sr-tab-button ${activeTab === 'incidents' ? 'active' : ''}`}
+            className={`neo-nav-tab ${activeTab === 'incidents' ? 'active' : ''}`}
             onClick={() => setActiveTab('incidents')}
           >
             <AlertTriangle size={16} /> Incident Moderation
             {stats.pendingIncidents > 0 && (
-              <span className="sr-tab-pill">{stats.pendingIncidents}</span>
+              <span className="neo-tab-badge">{stats.pendingIncidents}</span>
             )}
           </button>
           <button
-            className={`sr-tab-button ${activeTab === 'sos' ? 'active' : ''}`}
+            className={`neo-nav-tab ${activeTab === 'sos' ? 'active' : ''}`}
             onClick={() => setActiveTab('sos')}
           >
-            <Radio size={16} /> Emergency SOS
+            <Radio size={16} /> SOS Dispatch Matrix
             {stats.activeSos > 0 && (
-              <span className="sr-tab-pill">{stats.activeSos}</span>
+              <span className="neo-tab-badge">{stats.activeSos}</span>
             )}
           </button>
           <button
-            className={`sr-tab-button ${activeTab === 'services' ? 'active' : ''}`}
+            className={`neo-nav-tab ${activeTab === 'services' ? 'active' : ''}`}
             onClick={() => setActiveTab('services')}
           >
             <Building2 size={16} /> Emergency Services
           </button>
           <button
-            className={`sr-tab-button ${activeTab === 'users' ? 'active' : ''}`}
+            className={`neo-nav-tab ${activeTab === 'users' ? 'active' : ''}`}
             onClick={() => setActiveTab('users')}
           >
-            <Users size={16} /> User Directory
+            <Users size={16} /> Citizen Directory
           </button>
         </nav>
 
-        {/* Top KPI Metrics Row */}
-        <div className="sr-metrics-row">
-          <div className="sr-metric-card">
-            <div className="sr-metric-top">
-              <span className="sr-metric-label">Registered Citizens</span>
-              <div className="sr-metric-icon" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8' }}>
-                <Users size={18} />
+        {/* 3. Extruded Neomorphic KPI Billets */}
+        <div className="neo-kpi-grid">
+          <div className="neo-kpi-card">
+            <div className="neo-kpi-top">
+              <span className="neo-kpi-label">Registered Citizens</span>
+              <div className="neo-kpi-well">
+                <Users size={18} color="#00f0ff" />
               </div>
             </div>
-            <div className="sr-metric-value">{stats.totalUsers}</div>
-            <div className="sr-metric-footnote">
-              <Zap size={13} color="#818cf8" /> Verified platform members
+            <div className="neo-kpi-val">{stats.totalUsers}</div>
+            <div className="neo-kpi-sub">
+              <Zap size={13} color="#00f0ff" /> Verified network accounts
             </div>
           </div>
 
-          <div className="sr-metric-card">
-            <div className="sr-metric-top">
-              <span className="sr-metric-label">Pending Verification</span>
-              <div className="sr-metric-icon" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' }}>
-                <Clock size={18} />
+          <div className="neo-kpi-card">
+            <div className="neo-kpi-top">
+              <span className="neo-kpi-label">Pending Hazards</span>
+              <div className="neo-kpi-well">
+                <AlertTriangle size={18} color="#f59e0b" />
               </div>
             </div>
-            <div className="sr-metric-value">{stats.pendingIncidents}</div>
-            <div className="sr-metric-footnote">
-              <AlertTriangle size={13} color="#fbbf24" /> Requires moderator action
+            <div className="neo-kpi-val">{stats.pendingIncidents}</div>
+            <div className="neo-kpi-sub">
+              <Clock size={13} color="#f59e0b" /> Requires tactile authorization
             </div>
           </div>
 
-          <div className="sr-metric-card">
-            <div className="sr-metric-top">
-              <span className="sr-metric-label">Verified Hazards</span>
-              <div className="sr-metric-icon" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>
-                <ShieldCheck size={18} />
+          <div className="neo-kpi-card">
+            <div className="neo-kpi-top">
+              <span className="neo-kpi-label">Verified Hazards</span>
+              <div className="neo-kpi-well">
+                <ShieldCheck size={18} color="#10b981" />
               </div>
             </div>
-            <div className="sr-metric-value">{stats.verifiedIncidents}</div>
-            <div className="sr-metric-footnote">
-              <CheckCircle size={13} color="#34d399" /> Mapped into routing calculations
+            <div className="neo-kpi-val">{stats.verifiedIncidents}</div>
+            <div className="neo-kpi-sub">
+              <CheckCircle size={13} color="#10b981" /> Mapped to public algorithm
             </div>
           </div>
 
-          <div className="sr-metric-card">
-            <div className="sr-metric-top">
-              <span className="sr-metric-label">Active SOS Alerts</span>
-              <div className="sr-metric-icon" style={{ background: 'rgba(244, 63, 94, 0.15)', color: '#f43f5e' }}>
-                <ShieldAlert size={18} />
+          <div className="neo-kpi-card">
+            <div className="neo-kpi-top">
+              <span className="neo-kpi-label">Active SOS Beacons</span>
+              <div className="neo-kpi-well">
+                <ShieldAlert size={18} color="#f43f5e" />
               </div>
             </div>
-            <div className="sr-metric-value" style={{ color: '#f43f5e' }}>{stats.activeSos}</div>
-            <div className="sr-metric-footnote">
+            <div className="neo-kpi-val" style={{ color: '#f43f5e' }}>{stats.activeSos}</div>
+            <div className="neo-kpi-sub">
               <Activity size={13} color="#f43f5e" /> Active emergency signals
             </div>
           </div>
         </div>
 
-        {/* TAB 1: Analytics Overview */}
+        {/* TAB 1: Visual Analytics */}
         {activeTab === 'overview' && (
           <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: 24, marginBottom: 24 }}>
-              {/* Category Breakdown */}
-              <div className="sr-panel" style={{ margin: 0 }}>
-                <div className="sr-panel-header">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: 24, marginBottom: 28 }}>
+              {/* Category Breakdown Slab */}
+              <div className="neo-panel" style={{ margin: 0 }}>
+                <div className="neo-panel-header">
                   <div>
-                    <h3 className="sr-panel-title">Incidents by Category</h3>
-                    <p className="sr-panel-subtitle">Distribution of reported public safety hazards</p>
+                    <h3 className="neo-panel-title">Incident Distribution by Category</h3>
+                    <p className="neo-panel-subtitle">Frequency count across all reported hazards</p>
                   </div>
+                  <span className="neo-badge-tag">Telemetry</span>
                 </div>
                 <div style={{ height: 260 }}>
                   {analytics?.categoryBreakdown ? (
@@ -380,28 +365,30 @@ export default function AdminDashboard() {
                         <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#0f172a',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            backgroundColor: '#070c14',
+                            border: '1px solid rgba(0, 240, 255, 0.3)',
                             borderRadius: 8,
-                            color: '#ffffff'
+                            color: '#ffffff',
+                            fontFamily: 'JetBrains Mono'
                           }}
                         />
-                        <Bar dataKey="count" fill="#6366f1" radius={[6, 6, 0, 0]} />
+                        <Bar dataKey="count" fill="#00f0ff" radius={[6, 6, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   ) : (
-                    <p style={{ color: '#94a3b8', textAlign: 'center', marginTop: 90 }}>Loading metrics...</p>
+                    <p style={{ color: '#8fa0b5', textAlign: 'center', marginTop: 90 }}>Loading visual metrics...</p>
                   )}
                 </div>
               </div>
 
-              {/* Severity Breakdown */}
-              <div className="sr-panel" style={{ margin: 0 }}>
-                <div className="sr-panel-header">
+              {/* Severity Risk Donut Slab */}
+              <div className="neo-panel" style={{ margin: 0 }}>
+                <div className="neo-panel-header">
                   <div>
-                    <h3 className="sr-panel-title">Severity Breakdown</h3>
-                    <p className="sr-panel-subtitle">Proportion of high, medium, and low severity events</p>
+                    <h3 className="neo-panel-title">Severity Proportion Matrix</h3>
+                    <p className="neo-panel-subtitle">Calculated ratio of critical vs minor events</p>
                   </div>
+                  <span className="neo-badge-tag">Risk Ratio</span>
                 </div>
                 <div style={{ height: 260 }}>
                   {analytics?.severityBreakdown ? (
@@ -415,105 +402,109 @@ export default function AdminDashboard() {
                           cy="50%"
                           innerRadius={60}
                           outerRadius={90}
-                          paddingAngle={4}
+                          paddingAngle={5}
                         >
                           {analytics.severityBreakdown.map((entry, index) => (
                             <Cell
                               key={`cell-${index}`}
-                              fill={SEVERITY_COLORS[entry.severity?.toLowerCase()] || '#6366f1'}
+                              fill={SEVERITY_COLORS[entry.severity?.toLowerCase()] || '#00f0ff'}
                             />
                           ))}
                         </Pie>
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#0f172a',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            backgroundColor: '#070c14',
+                            border: '1px solid rgba(0, 240, 255, 0.3)',
                             borderRadius: 8,
-                            color: '#ffffff'
+                            color: '#ffffff',
+                            fontFamily: 'JetBrains Mono'
                           }}
                         />
-                        <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
+                        <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px', fontFamily: 'JetBrains Mono' }} />
                       </PieChart>
                     </ResponsiveContainer>
                   ) : (
-                    <p style={{ color: '#94a3b8', textAlign: 'center', marginTop: 90 }}>Loading metrics...</p>
+                    <p style={{ color: '#8fa0b5', textAlign: 'center', marginTop: 90 }}>Loading visual metrics...</p>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* 24h Velocity */}
-            <div className="sr-panel">
-              <div className="sr-panel-header">
+            {/* 24-Hour Velocity Curve */}
+            <div className="neo-panel">
+              <div className="neo-panel-header">
                 <div>
-                  <h3 className="sr-panel-title">24-Hour Reporting Frequency</h3>
-                  <p className="sr-panel-subtitle">Incident velocity curve across the day</p>
+                  <h3 className="neo-panel-title">24-Hour Reporting Velocity Curve</h3>
+                  <p className="neo-panel-subtitle">Cadence of citizen transmissions across sectors</p>
                 </div>
+                <span className="neo-badge-tag">Cadence</span>
               </div>
               <div style={{ height: 200 }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={velocityData}>
                     <defs>
-                      <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.35} />
-                        <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.0} />
+                      <linearGradient id="neoCyanGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#00f0ff" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="#00f0ff" stopOpacity={0.0} />
                       </linearGradient>
                     </defs>
                     <XAxis dataKey="time" stroke="#64748b" fontSize={11} tickLine={false} />
                     <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#0f172a',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        backgroundColor: '#070c14',
+                        border: '1px solid rgba(0, 240, 255, 0.3)',
                         borderRadius: 8,
-                        color: '#ffffff'
+                        color: '#ffffff',
+                        fontFamily: 'JetBrains Mono'
                       }}
                     />
-                    <Area type="monotone" dataKey="reports" stroke="#3b82f6" strokeWidth={2.5} fillOpacity={1} fill="url(#areaGrad)" />
+                    <Area type="monotone" dataKey="reports" stroke="#00f0ff" strokeWidth={2.5} fillOpacity={1} fill="url(#neoCyanGrad)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
-            {/* Monitored Risk Zones */}
-            <div className="sr-panel">
-              <div className="sr-panel-header">
+            {/* Risk Zones Safety Score Overview */}
+            <div className="neo-panel">
+              <div className="neo-panel-header">
                 <div>
-                  <h3 className="sr-panel-title">Monitored Risk Zones & Safety Index</h3>
-                  <p className="sr-panel-subtitle">Geographic risk boundaries and live scores</p>
+                  <h3 className="neo-panel-title">Critical Urban Risk Zones & Tactile Index</h3>
+                  <p className="neo-panel-subtitle">Monitored physical perimeters and calculated safety scores</p>
                 </div>
+                <span className="neo-badge-tag">{riskZones.length} Zones</span>
               </div>
 
-              <div className="sr-table-wrapper">
-                <table className="sr-table">
+              <div className="neo-table-well">
+                <table className="neo-table">
                   <thead>
                     <tr>
                       <th>Zone ID</th>
                       <th>Area Name</th>
-                      <th>Coordinates</th>
+                      <th>Geo Coordinates</th>
                       <th>Radius</th>
                       <th>Risk Level</th>
-                      <th>Safety Score</th>
+                      <th>Calculated Score</th>
                     </tr>
                   </thead>
                   <tbody>
                     {riskZones.map((z) => (
                       <tr key={z.id}>
-                        <td style={{ fontFamily: 'var(--font-mono)', color: '#818cf8' }}>ZONE-0{z.id}</td>
-                        <td style={{ fontWeight: 600 }}>{z.area_name}</td>
-                        <td style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#94a3b8' }}>
+                        <td style={{ fontFamily: 'var(--font-mono)', color: '#00f0ff' }}>ZONE-0{z.id}</td>
+                        <td style={{ fontWeight: 700 }}>{z.area_name}</td>
+                        <td style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                           {Number(z.latitude).toFixed(4)}, {Number(z.longitude).toFixed(4)}
                         </td>
-                        <td>{z.radius}m</td>
+                        <td>{z.radius} meters</td>
                         <td>
-                          <span className={`sr-badge ${z.risk_level === 'high' ? 'rejected' : z.risk_level === 'medium' ? 'pending' : 'verified'}`}>
+                          <span className={`neo-chip ${z.risk_level === 'high' ? 'rejected' : z.risk_level === 'medium' ? 'pending' : 'verified'}`}>
                             {z.risk_level}
                           </span>
                         </td>
                         <td style={{
-                          fontWeight: 700,
+                          fontWeight: 800,
                           fontFamily: 'var(--font-mono)',
-                          color: z.safety_score > 75 ? '#34d399' : z.safety_score > 50 ? '#fbbf24' : '#fb7185'
+                          color: z.safety_score > 75 ? '#10b981' : z.safety_score > 50 ? '#f59e0b' : '#f43f5e'
                         }}>
                           {z.safety_score} / 100
                         </td>
@@ -526,22 +517,23 @@ export default function AdminDashboard() {
           </>
         )}
 
-        {/* TAB 2: Incident Moderation */}
+        {/* TAB 2: Incident Moderation & Search */}
         {activeTab === 'incidents' && (
-          <div className="sr-panel">
-            <div className="sr-panel-header">
+          <div className="neo-panel">
+            <div className="neo-panel-header">
               <div>
-                <h3 className="sr-panel-title">Incident Verification & Moderation</h3>
-                <p className="sr-panel-subtitle">Review crowd-sourced reports and update status</p>
+                <h3 className="neo-panel-title">Incident Moderation Queue</h3>
+                <p className="neo-panel-subtitle">Review and authorize crowd-sourced public safety reports</p>
               </div>
+              <span className="neo-badge-tag">{filteredIncidents.length} Records</span>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, gap: 16, flexWrap: 'wrap' }}>
-              <div className="sr-search-bar">
-                <Search size={15} color="#64748b" />
+              <div className="neo-search-well">
+                <Search size={15} color="#8fa0b5" />
                 <input
                   type="text"
-                  placeholder="Search by category, description, address..."
+                  placeholder="Search hazard description, category, address..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -552,12 +544,11 @@ export default function AdminDashboard() {
                   <button
                     key={f}
                     onClick={() => setIncidentFilter(f)}
-                    className="sr-btn"
+                    className="neo-btn"
                     style={{
                       textTransform: 'capitalize',
-                      background: incidentFilter === f ? 'rgba(99, 102, 241, 0.2)' : 'rgba(255, 255, 255, 0.04)',
-                      borderColor: incidentFilter === f ? '#6366f1' : 'rgba(255, 255, 255, 0.07)',
-                      color: incidentFilter === f ? '#818cf8' : '#94a3b8'
+                      boxShadow: incidentFilter === f ? 'var(--neo-depressed-btn)' : 'var(--neo-extrude-btn)',
+                      color: incidentFilter === f ? '#00f0ff' : '#8fa0b5'
                     }}
                   >
                     {f}
@@ -566,51 +557,69 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            <div className="sr-table-wrapper">
-              <table className="sr-table">
+            <div className="neo-table-well">
+              <table className="neo-table">
                 <thead>
                   <tr>
                     <th>ID</th>
                     <th>Category</th>
                     <th>Severity</th>
+                    <th>AI Assessment</th>
                     <th>Location</th>
                     <th>Description</th>
                     <th>Reporter</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Tactile Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredIncidents.length === 0 ? (
                     <tr>
-                      <td colSpan="8" style={{ textAlign: 'center', color: '#94a3b8', padding: 32 }}>
-                        No incident reports found matching this criteria.
+                      <td colSpan="9" style={{ textAlign: 'center', color: '#8fa0b5', padding: 32 }}>
+                        No incident reports match this filter or search query.
                       </td>
                     </tr>
                   ) : (
                     filteredIncidents.map((item) => (
                       <tr key={item.id}>
-                        <td style={{ fontFamily: 'var(--font-mono)', color: '#818cf8' }}>#{item.id}</td>
-                        <td style={{ fontWeight: 600 }}>{item.category}</td>
+                        <td style={{ fontFamily: 'var(--font-mono)', color: '#00f0ff' }}>#{item.id}</td>
+                        <td style={{ fontWeight: 700 }}>{item.category}</td>
                         <td>
-                          <span className={`sr-badge ${item.severity?.toLowerCase() === 'high' ? 'rejected' : item.severity?.toLowerCase() === 'medium' ? 'pending' : 'verified'}`}>
+                          <span className={`neo-chip ${item.severity?.toLowerCase() === 'high' ? 'rejected' : item.severity?.toLowerCase() === 'medium' ? 'pending' : 'verified'}`}>
                             {item.severity}
                           </span>
                         </td>
                         <td>
-                          <div style={{ fontWeight: 500 }}>{item.address || 'GPS Location'}</div>
+                          {item.aiAnalysis ? (
+                            <div>
+                              <span className={`neo-chip ${item.aiAnalysis.aiSeverity === 'high' ? 'rejected' : item.aiAnalysis.aiSeverity === 'medium' ? 'pending' : 'verified'}`} style={{ fontSize: '10px' }}>
+                                <Zap size={10} style={{ display: 'inline', marginRight: 2 }} />
+                                {item.aiAnalysis.urgency} ({item.aiAnalysis.confidence}%)
+                              </span>
+                              {item.aiAnalysis.detectedKeywords?.length > 0 && (
+                                <div style={{ fontSize: '10px', color: '#64748b', fontFamily: 'var(--font-mono)', marginTop: 3 }}>
+                                  {item.aiAnalysis.detectedKeywords.join(', ')}
+                                </div>
+                              )}
+                            </div>
+                          ) : (
+                            <span style={{ fontSize: 11, color: '#64748b' }}>Pending AI</span>
+                          )}
+                        </td>
+                        <td>
+                          <div style={{ fontWeight: 600 }}>{item.address || 'GPS Coordinates'}</div>
                           <div style={{ fontSize: 11, color: '#64748b', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
                             <MapPin size={10} style={{ display: 'inline', marginRight: 3 }} />
                             {Number(item.latitude).toFixed(4)}, {Number(item.longitude).toFixed(4)}
                           </div>
                         </td>
-                        <td style={{ maxWidth: 240, color: '#cbd5e1', fontSize: 12.5 }}>{item.description}</td>
+                        <td style={{ maxWidth: 220, color: '#8fa0b5', fontSize: 12 }}>{item.description}</td>
                         <td>
-                          <div style={{ fontWeight: 500 }}>{item.reporter_name || 'Anonymous'}</div>
+                          <div style={{ fontWeight: 600 }}>{item.reporter_name || 'Anonymous'}</div>
                           <div style={{ fontSize: 11, color: '#64748b' }}>{item.reporter_phone || item.reporter_email || '-'}</div>
                         </td>
                         <td>
-                          <span className={`sr-badge ${item.status}`}>
+                          <span className={`neo-chip ${item.status}`}>
                             {item.status}
                           </span>
                         </td>
@@ -618,20 +627,20 @@ export default function AdminDashboard() {
                           {item.status === 'pending' ? (
                             <div style={{ display: 'flex', gap: 6 }}>
                               <button
-                                className="sr-action-btn approve"
+                                className="neo-rocker-btn approve"
                                 onClick={() => handleUpdateIncidentStatus(item.id, 'verified')}
                               >
                                 <Check size={12} /> Verify
                               </button>
                               <button
-                                className="sr-action-btn reject"
+                                className="neo-rocker-btn reject"
                                 onClick={() => handleUpdateIncidentStatus(item.id, 'rejected')}
                               >
                                 <X size={12} /> Dismiss
                               </button>
                             </div>
                           ) : (
-                            <span style={{ fontSize: 11, color: '#64748b' }}>Resolved</span>
+                            <span style={{ fontSize: 11, color: '#64748b', fontWeight: 600 }}>Reviewed</span>
                           )}
                         </td>
                       </tr>
@@ -643,61 +652,60 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* TAB 3: SOS Emergency */}
+        {/* TAB 3: SOS Emergency Monitor */}
         {activeTab === 'sos' && (
-          <div className="sr-panel">
-            <div className="sr-panel-header">
+          <div className="neo-panel">
+            <div className="neo-panel-header">
               <div>
-                <h3 className="sr-panel-title">SOS Emergency Dispatch</h3>
-                <p className="sr-panel-subtitle">Immediate distress alerts requiring emergency action</p>
+                <h3 className="neo-panel-title">Tactile SOS Emergency Dispatch</h3>
+                <p className="neo-panel-subtitle">Immediate citizen distress beacons with tactile dispatch controls</p>
               </div>
+              <span className="neo-badge-tag">{sosRequests.length} Signals</span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 18 }}>
+            <div className="neo-sos-grid">
               {sosRequests.length === 0 ? (
-                <p style={{ color: '#94a3b8' }}>No active distress requests.</p>
+                <p style={{ color: '#8fa0b5', padding: 20 }}>No active emergency requests in database.</p>
               ) : (
                 sosRequests.map((sos) => (
-                  <div key={sos.id} style={{
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    border: sos.status === 'pending' ? '1px solid rgba(244, 63, 94, 0.4)' : '1px solid var(--border-subtle)',
-                    borderRadius: 12,
-                    padding: 18
-                  }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                      <span style={{ fontSize: 12, fontWeight: 700, color: '#f43f5e', fontFamily: 'var(--font-mono)' }}>EMERGENCY #{sos.id}</span>
-                      <span className={`sr-badge ${sos.status === 'pending' ? 'active' : sos.status === 'responding' ? 'pending' : 'verified'}`}>
+                  <div key={sos.id} className={`neo-sos-card ${sos.status}`}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        {sos.status === 'pending' && <div className="neo-sos-beacon" />}
+                        <span style={{ fontSize: 11, color: '#f43f5e', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>EMERGENCY #{sos.id}</span>
+                      </div>
+                      <span className={`neo-chip ${sos.status === 'pending' ? 'rejected' : sos.status === 'responding' ? 'pending' : 'verified'}`}>
                         {sos.status}
                       </span>
                     </div>
 
-                    <h4 style={{ margin: '0 0 6px', fontSize: 16, color: '#ffffff' }}>{sos.emergency_type}</h4>
+                    <h3 style={{ margin: '0 0 8px', fontSize: 17, color: '#ffffff' }}>{sos.emergency_type}</h3>
                     <p style={{ margin: '0 0 14px', fontSize: 13, color: '#cbd5e1' }}>"{sos.message}"</p>
 
-                    <div style={{ fontSize: 12, color: '#94a3b8', borderTop: '1px solid rgba(255, 255, 255, 0.06)', paddingTop: 10, marginBottom: 14 }}>
-                      <div><strong>Citizen:</strong> {sos.user_name || 'Emergency User'} ({sos.user_phone || 'N/A'})</div>
+                    <div style={{ fontSize: 12, color: '#8fa0b5', borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: 10, marginBottom: 16 }}>
+                      <div><strong style={{ color: '#ffffff' }}>Citizen:</strong> {sos.user_name || 'Emergency User'} ({sos.user_phone || 'N/A'})</div>
                       <div style={{ fontFamily: 'var(--font-mono)', marginTop: 2 }}>
-                        <strong>GPS:</strong> {Number(sos.latitude).toFixed(4)}, {Number(sos.longitude).toFixed(4)}
+                        <strong style={{ color: '#ffffff' }}>GPS Vector:</strong> {Number(sos.latitude).toFixed(4)}, {Number(sos.longitude).toFixed(4)}
                       </div>
                     </div>
 
-                    <div style={{ display: 'flex', gap: 8 }}>
+                    <div style={{ display: 'flex', gap: 10 }}>
                       {sos.status === 'pending' && (
                         <button
-                          className="sr-btn primary"
-                          style={{ flex: 1, justifyContent: 'center', padding: '8px' }}
+                          className="neo-btn primary"
+                          style={{ flex: 1, justifyContent: 'center', padding: '10px' }}
                           onClick={() => handleUpdateSosStatus(sos.id, 'responding')}
                         >
-                          Dispatch Responders
+                          <Radio size={14} /> Dispatch Responders
                         </button>
                       )}
                       {sos.status === 'responding' && (
                         <button
-                          className="sr-btn"
-                          style={{ flex: 1, justifyContent: 'center', padding: '8px', background: 'rgba(16, 185, 129, 0.2)', color: '#34d399', borderColor: 'rgba(16, 185, 129, 0.4)' }}
+                          className="neo-btn emerald"
+                          style={{ flex: 1, justifyContent: 'center', padding: '10px' }}
                           onClick={() => handleUpdateSosStatus(sos.id, 'resolved')}
                         >
-                          Mark Resolved
+                          <CheckCircle size={14} /> Mark Resolved
                         </button>
                       )}
                     </div>
@@ -708,21 +716,22 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* TAB 4: Emergency Services */}
+        {/* TAB 4: Emergency Services Directory */}
         {activeTab === 'services' && (
-          <div className="sr-panel">
-            <div className="sr-panel-header">
+          <div className="neo-panel">
+            <div className="neo-panel-header">
               <div>
-                <h3 className="sr-panel-title">Emergency Services Directory</h3>
-                <p className="sr-panel-subtitle">Registered police stations, hospitals, and fire departments</p>
+                <h3 className="neo-panel-title">Emergency Services Network</h3>
+                <p className="neo-panel-subtitle">Police stations, hospitals, and fire departments connected to dispatch</p>
               </div>
+              <span className="neo-badge-tag">{services.length} Facilities</span>
             </div>
 
-            <div className="sr-table-wrapper">
-              <table className="sr-table">
+            <div className="neo-table-well">
+              <table className="neo-table">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>Service ID</th>
                     <th>Facility Name</th>
                     <th>Type</th>
                     <th>Helpline Phone</th>
@@ -734,23 +743,23 @@ export default function AdminDashboard() {
                 <tbody>
                   {services.map((s) => (
                     <tr key={s.id}>
-                      <td style={{ fontFamily: 'var(--font-mono)', color: '#818cf8' }}>SVC-0{s.id}</td>
-                      <td style={{ fontWeight: 600 }}>{s.name}</td>
+                      <td style={{ fontFamily: 'var(--font-mono)', color: '#00f0ff' }}>SVC-0{s.id}</td>
+                      <td style={{ fontWeight: 700 }}>{s.name}</td>
                       <td>
-                        <span className="sr-badge verified">
+                        <span className="neo-chip verified">
                           {s.type.replace('_', ' ')}
                         </span>
                       </td>
                       <td style={{ fontFamily: 'var(--font-mono)' }}>
-                        <Phone size={11} style={{ display: 'inline', marginRight: 4, color: '#38bdf8' }} />
+                        <Phone size={11} style={{ display: 'inline', marginRight: 4, color: '#00f0ff' }} />
                         {s.phone}
                       </td>
-                      <td>{s.address || 'Central Sector'}</td>
-                      <td style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#94a3b8' }}>
+                      <td>{s.address || 'Central Zone'}</td>
+                      <td style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                         {Number(s.latitude).toFixed(4)}, {Number(s.longitude).toFixed(4)}
                       </td>
                       <td>
-                        <span className="sr-badge verified">Available</span>
+                        <span className="neo-chip verified">Available</span>
                       </td>
                     </tr>
                   ))}
@@ -762,16 +771,17 @@ export default function AdminDashboard() {
 
         {/* TAB 5: User Directory */}
         {activeTab === 'users' && (
-          <div className="sr-panel">
-            <div className="sr-panel-header">
+          <div className="neo-panel">
+            <div className="neo-panel-header">
               <div>
-                <h3 className="sr-panel-title">Registered Citizen Directory</h3>
-                <p className="sr-panel-subtitle">Accounts, contact information, and platform roles</p>
+                <h3 className="neo-panel-title">Registered Citizen Directory</h3>
+                <p className="neo-panel-subtitle">Registered user credentials, contact information, and roles</p>
               </div>
+              <span className="neo-badge-tag">{users.length} Users</span>
             </div>
 
-            <div className="sr-table-wrapper">
-              <table className="sr-table">
+            <div className="neo-table-well">
+              <table className="neo-table">
                 <thead>
                   <tr>
                     <th>User ID</th>
@@ -785,14 +795,14 @@ export default function AdminDashboard() {
                 <tbody>
                   {users.map((u) => (
                     <tr key={u.id}>
-                      <td style={{ fontFamily: 'var(--font-mono)', color: '#818cf8' }}>USR-00{u.id}</td>
-                      <td style={{ fontWeight: 600 }}>{u.name}</td>
+                      <td style={{ fontFamily: 'var(--font-mono)', color: '#00f0ff' }}>USR-00{u.id}</td>
+                      <td style={{ fontWeight: 700 }}>{u.name}</td>
                       <td style={{ color: '#cbd5e1' }}>{u.email}</td>
-                      <td style={{ color: '#94a3b8', fontFamily: 'var(--font-mono)' }}>{u.phone || '-'}</td>
+                      <td style={{ color: '#8fa0b5', fontFamily: 'var(--font-mono)' }}>{u.phone || '-'}</td>
                       <td>
-                        <span className="sr-badge verified">{u.role}</span>
+                        <span className="neo-chip verified">{u.role}</span>
                       </td>
-                      <td style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: '#94a3b8' }}>
+                      <td style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>
                         {new Date(u.created_at).toLocaleDateString()}
                       </td>
                     </tr>

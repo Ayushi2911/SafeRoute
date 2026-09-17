@@ -1,414 +1,560 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* SafeRoute Dark Tactical Neomorphic Command & Agency Web Styling */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-main: #0b0f19;
-  --bg-sidebar: #0f172a;
-  --bg-card: rgba(17, 24, 39, 0.85);
-  --bg-card-hover: rgba(24, 33, 53, 0.95);
-  --bg-inset: #090d16;
-  --border-subtle: rgba(255, 255, 255, 0.07);
-  --border-focus: #38bdf8;
-  --primary-indigo: #6366f1;
-  --primary-blue: #3b82f6;
-  --primary-cyan: #06b6d4;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-rose: #f43f5e;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-  --radius-lg: 16px;
-  --radius-md: 10px;
-  --radius-sm: 6px;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 16px -2px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  /* 1. Base Dark Slate Foundation */
+  --neo-bg-canvas: #0a0f18;
+  --neo-bg-plate: #111a2d;
+  --neo-bg-plate-hover: #16223a;
+  --neo-bg-well: #070c14;
+  --neo-bg-inset-deep: #05080f;
+
+  /* 2. Neomorphic Dual-Shadow Lighting System (135-degree Universal Angle) */
+  --neo-extrude-card: 
+    -7px -7px 16px rgba(255, 255, 255, 0.038),
+    9px 9px 24px rgba(0, 0, 0, 0.92);
+
+  --neo-extrude-btn: 
+    -4px -4px 10px rgba(255, 255, 255, 0.05),
+    5px 5px 14px rgba(0, 0, 0, 0.85);
+
+  --neo-recessed-well: 
+    inset 5px 5px 12px rgba(0, 0, 0, 0.95),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.03);
+
+  --neo-depressed-btn: 
+    inset 3px 3px 8px rgba(0, 0, 0, 0.95),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.04);
+
+  /* 3. High-Caliber Neon Pilots */
+  --pilot-cyan: #00f0ff;
+  --pilot-cyan-glow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 24px rgba(0, 240, 255, 0.25);
+  --pilot-emerald: #10b981;
+  --pilot-emerald-glow: 0 0 12px rgba(16, 185, 129, 0.6), 0 0 24px rgba(16, 185, 129, 0.25);
+  --pilot-amber: #f59e0b;
+  --pilot-amber-glow: 0 0 12px rgba(245, 158, 11, 0.6), 0 0 24px rgba(245, 158, 11, 0.25);
+  --pilot-rose: #f43f5e;
+  --pilot-rose-glow: 0 0 12px rgba(244, 63, 94, 0.6), 0 0 24px rgba(244, 63, 94, 0.25);
+
+  /* 4. Fine Machinery Borders & Dimensions */
+  --neo-border: 1px solid rgba(255, 255, 255, 0.06);
+  --neo-border-active: 1px solid rgba(0, 240, 255, 0.45);
+  --neo-radius-lg: 18px;
+  --neo-radius-md: 12px;
+  --neo-radius-sm: 8px;
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-body {
-  margin: 0;
-  background-color: var(--bg-main);
-  color: var(--text-main);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-}
-
-.sr-dashboard {
+/* Base Body Environment */
+.neo-dashboard {
   min-height: 100vh;
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent 70%),
-    radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.08), transparent 40%),
-    var(--bg-main);
-  padding: 28px 36px;
+  background-color: var(--neo-bg-canvas);
+  background-image: 
+    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(0, 240, 255, 0.08), transparent 70%),
+    radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.05), transparent 50%),
+    var(--neo-bg-canvas);
+  color: #e2e8f0;
+  font-family: var(--font-heading);
+  padding: 30px 40px;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
-.sr-container {
-  max-width: 1440px;
+.neo-container {
+  max-width: 1480px;
   margin: 0 auto;
 }
 
-/* Header & Top Bar */
-.sr-header {
+/* Animations */
+@keyframes neoPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px var(--pilot-cyan);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 20px var(--pilot-cyan);
+    opacity: 1;
+  }
+}
+
+@keyframes neoAlertPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px var(--pilot-rose);
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 22px var(--pilot-rose);
+  }
+}
+
+/* Banner Alert Notifications */
+.neo-banner {
+  padding: 14px 20px;
+  border-radius: var(--neo-radius-md);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  box-shadow: var(--neo-extrude-card);
+}
+
+.neo-banner.error {
+  background: #14090d;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  color: #fda4af;
+  box-shadow: var(--neo-recessed-well);
+}
+
+.neo-banner.success {
+  background: #081512;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
+  box-shadow: var(--neo-recessed-well);
+}
+
+/* 1. Master Agency Header Console */
+.neo-header {
+  background: var(--neo-bg-plate);
+  box-shadow: var(--neo-extrude-card);
+  border: var(--neo-border);
+  border-radius: var(--neo-radius-lg);
+  padding: 24px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 28px;
   flex-wrap: wrap;
+  gap: 20px;
+}
+
+.neo-header-brand {
+  display: flex;
+  align-items: center;
   gap: 16px;
 }
 
-.sr-brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+.neo-pilot-beacon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--pilot-cyan) 45%, #00606b 100%);
+  box-shadow: var(--pilot-cyan-glow);
+  animation: neoPulse 2.8s infinite ease-in-out;
 }
 
-.sr-brand-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--primary-indigo), var(--primary-cyan));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+.neo-badge-tag {
+  background: var(--neo-bg-well);
+  color: var(--pilot-cyan);
+  box-shadow: var(--neo-recessed-well);
+  padding: 4px 10px;
+  border-radius: var(--neo-radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.sr-brand-title {
+.neo-header h1 {
   margin: 0;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-.sr-brand-subtitle {
-  margin: 2px 0 0;
+.neo-header p {
+  margin: 4px 0 0;
   font-size: 13px;
-  color: var(--text-muted);
+  color: #8fa0b5;
+  letter-spacing: 0.01em;
 }
 
-.sr-header-actions {
+/* Header Action Buttons */
+.neo-header-actions {
   display: flex;
+  gap: 12px;
   align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
 }
 
-.sr-btn {
+.neo-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 16px;
-  border-radius: var(--radius-md);
+  background: var(--neo-bg-plate);
+  color: #cbd5e1;
+  box-shadow: var(--neo-extrude-btn);
+  border: var(--neo-border);
+  padding: 10px 18px;
+  border-radius: var(--neo-radius-md);
   font-size: 13px;
-  font-weight: 600;
-  font-family: var(--font-sans);
+  font-weight: 700;
+  font-family: var(--font-mono);
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border-subtle);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.sr-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
-}
-
-.sr-btn.primary {
-  background: linear-gradient(135deg, #4f46e5, #0284c7);
-  border: none;
+.neo-btn:hover {
+  background: var(--neo-bg-plate-hover);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  transform: translateY(-2px);
 }
 
-.sr-btn.primary:hover {
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
-  transform: translateY(-1px);
+.neo-btn:active {
+  box-shadow: var(--neo-depressed-btn);
+  transform: translateY(1px);
 }
 
-/* Nav Tab Bar */
-.sr-nav-tabs {
+.neo-btn.primary {
+  color: var(--pilot-cyan);
+  border-color: rgba(0, 240, 255, 0.3);
+}
+
+.neo-btn.primary:hover {
+  box-shadow: var(--neo-extrude-btn), 0 0 16px rgba(0, 240, 255, 0.3);
+  color: #ffffff;
+}
+
+.neo-btn.emerald {
+  color: var(--pilot-emerald);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.neo-btn.emerald:hover {
+  box-shadow: var(--neo-extrude-btn), 0 0 16px rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+/* 2. Recessed Neomorphic Nav Trough */
+.neo-nav-trough {
+  background: var(--neo-bg-well);
+  box-shadow: var(--neo-recessed-well);
+  border-radius: var(--neo-radius-lg);
+  padding: 8px;
   display: flex;
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-subtle);
-  padding: 5px;
-  border-radius: var(--radius-lg);
-  gap: 6px;
+  gap: 10px;
   margin-bottom: 28px;
   overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
-.sr-tab-button {
+.neo-nav-tab {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  color: var(--text-muted);
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: var(--neo-radius-md);
   font-size: 13.5px;
-  font-weight: 600;
-  font-family: var(--font-sans);
+  font-weight: 700;
+  font-family: var(--font-heading);
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  border: none;
+  background: transparent;
+  color: #8494a8;
 }
 
-.sr-tab-button:hover {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.03);
+.neo-nav-tab:hover {
+  color: #f1f5f9;
 }
 
-.sr-tab-button.active {
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
-  border-color: rgba(99, 102, 241, 0.3);
+.neo-nav-tab.active {
+  background: var(--neo-bg-plate);
+  color: var(--pilot-cyan);
+  box-shadow: var(--neo-extrude-btn);
+  border: var(--neo-border);
 }
 
-.sr-tab-pill {
-  background: var(--accent-rose);
+.neo-tab-badge {
+  background: var(--pilot-rose);
   color: #ffffff;
-  font-size: 11px;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: 9999px;
+  font-size: 10.5px;
+  font-family: var(--font-mono);
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.5);
 }
 
-/* Key Metrics Cards */
-.sr-metrics-row {
+/* 3. Extruded Neomorphic KPI Billets */
+.neo-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
   margin-bottom: 28px;
 }
 
-.sr-metric-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-  transition: all 0.25s ease;
-  position: relative;
+.neo-kpi-card {
+  background: var(--neo-bg-plate);
+  box-shadow: var(--neo-extrude-card);
+  border: var(--neo-border);
+  border-radius: var(--neo-radius-lg);
+  padding: 24px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.sr-metric-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-md);
+.neo-kpi-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
-.sr-metric-top {
+.neo-kpi-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-.sr-metric-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
+.neo-kpi-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8fa0b5;
+  font-family: var(--font-mono);
 }
 
-.sr-metric-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
+.neo-kpi-well {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--neo-radius-md);
+  background: var(--neo-bg-well);
+  box-shadow: var(--neo-recessed-well);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.sr-metric-value {
-  font-size: 32px;
+.neo-kpi-val {
+  font-size: 36px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  font-family: var(--font-mono);
   color: #ffffff;
-  font-family: var(--font-sans);
   line-height: 1;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.sr-metric-footnote {
+.neo-kpi-sub {
   font-size: 12px;
-  color: var(--text-dim);
+  color: #6c7d93;
   display: flex;
   align-items: center;
   gap: 6px;
+  font-family: var(--font-mono);
 }
 
-/* Panels & Cards */
-.sr-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  margin-bottom: 24px;
+/* 4. Extruded Panels & Tables */
+.neo-panel {
+  background: var(--neo-bg-plate);
+  box-shadow: var(--neo-extrude-card);
+  border: var(--neo-border);
+  border-radius: var(--neo-radius-lg);
+  padding: 26px;
+  margin-bottom: 28px;
 }
 
-.sr-panel-header {
+.neo-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.sr-panel-title {
+.neo-panel-title {
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 800;
   color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
-.sr-panel-subtitle {
-  margin: 2px 0 0;
+.neo-panel-subtitle {
+  margin: 3px 0 0;
   font-size: 12.5px;
-  color: var(--text-muted);
+  color: #8fa0b5;
 }
 
-/* Modern Clean Table */
-.sr-table-wrapper {
+/* Recessed Inset Table Well */
+.neo-table-well {
+  background: var(--neo-bg-well);
+  box-shadow: var(--neo-recessed-well);
+  border-radius: var(--neo-radius-md);
+  padding: 8px;
   overflow-x: auto;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
-.sr-table {
+.neo-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   font-size: 13px;
 }
 
-.sr-table th {
-  background: rgba(255, 255, 255, 0.02);
-  padding: 12px 16px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
+.neo-table th {
+  padding: 14px 18px;
   font-size: 11px;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--border-subtle);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: #8fa0b5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.sr-table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border-subtle);
-  color: var(--text-main);
+.neo-table td {
+  padding: 16px 18px;
+  color: #e2e8f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   vertical-align: middle;
 }
 
-.sr-table tr:last-child td {
+.neo-table tr:last-child td {
   border-bottom: none;
 }
 
-.sr-table tr:hover td {
+.neo-table tr:hover td {
   background: rgba(255, 255, 255, 0.02);
 }
 
-/* Badges & Tags */
-.sr-badge {
+/* Status Chips on Extruded Plates */
+.neo-chip {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 3px 9px;
-  border-radius: 9999px;
-  font-size: 11.5px;
-  font-weight: 600;
-  text-transform: capitalize;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: var(--neo-extrude-btn);
+  background: var(--neo-bg-plate);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.sr-badge.verified {
-  background: rgba(16, 185, 129, 0.12);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.25);
+.neo-chip.verified {
+  color: var(--pilot-emerald);
+  border-color: rgba(16, 185, 129, 0.35);
 }
 
-.sr-badge.pending {
-  background: rgba(245, 158, 11, 0.12);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.25);
+.neo-chip.pending {
+  color: var(--pilot-amber);
+  border-color: rgba(245, 158, 11, 0.35);
 }
 
-.sr-badge.rejected {
-  background: rgba(244, 63, 94, 0.12);
-  color: #fb7185;
-  border: 1px solid rgba(244, 63, 94, 0.25);
+.neo-chip.rejected {
+  color: var(--pilot-rose);
+  border-color: rgba(244, 63, 94, 0.35);
 }
 
-.sr-badge.active {
-  background: rgba(244, 63, 94, 0.2);
-  color: #f43f5e;
-  border: 1px solid rgba(244, 63, 94, 0.4);
-}
-
-/* Custom Action Buttons */
-.sr-action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  border-radius: var(--radius-sm);
+/* Tactile Rocker Buttons */
+.neo-rocker-btn {
+  padding: 7px 14px;
+  border-radius: var(--neo-radius-sm);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: var(--font-mono);
   cursor: pointer;
-  border: 1px solid transparent;
+  background: var(--neo-bg-plate);
+  box-shadow: var(--neo-extrude-btn);
+  border: var(--neo-border);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   transition: all 0.15s ease;
+  text-transform: uppercase;
 }
 
-.sr-action-btn.approve {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border-color: rgba(16, 185, 129, 0.3);
+.neo-rocker-btn:hover {
+  transform: translateY(-1px);
 }
 
-.sr-action-btn.approve:hover {
-  background: rgba(16, 185, 129, 0.25);
-  color: #ffffff;
+.neo-rocker-btn:active {
+  box-shadow: var(--neo-depressed-btn);
+  transform: translateY(1px);
 }
 
-.sr-action-btn.reject {
-  background: rgba(244, 63, 94, 0.15);
-  color: #fb7185;
-  border-color: rgba(244, 63, 94, 0.3);
+.neo-rocker-btn.approve {
+  color: var(--pilot-emerald);
+  border-color: rgba(16, 185, 129, 0.4);
 }
 
-.sr-action-btn.reject:hover {
-  background: rgba(244, 63, 94, 0.25);
-  color: #ffffff;
+.neo-rocker-btn.reject {
+  color: var(--pilot-rose);
+  border-color: rgba(244, 63, 94, 0.4);
 }
 
-/* Filter / Search Bar */
-.sr-search-bar {
+/* Recessed Search Bar */
+.neo-search-well {
   display: flex;
   align-items: center;
-  background: var(--bg-inset);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
+  background: var(--neo-bg-well);
+  box-shadow: var(--neo-recessed-well);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: var(--neo-radius-md);
   padding: 8px 14px;
   gap: 10px;
   min-width: 260px;
 }
 
-.sr-search-bar input {
+.neo-search-well input {
   background: transparent;
   border: none;
-  outline: none;
   color: #ffffff;
   font-size: 13px;
+  outline: none;
   width: 100%;
+  font-family: var(--font-heading);
+}
+
+/* SOS Dispatch Grid */
+.neo-sos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+.neo-sos-card {
+  background: var(--neo-bg-plate);
+  box-shadow: var(--neo-extrude-card);
+  border: var(--neo-border);
+  border-radius: var(--neo-radius-lg);
+  padding: 22px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.neo-sos-card.pending {
+  border-color: rgba(244, 63, 94, 0.4);
+  box-shadow: var(--neo-extrude-card), 0 0 20px rgba(244, 63, 94, 0.15);
+}
+
+.neo-sos-beacon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pilot-rose);
+  box-shadow: var(--pilot-rose-glow);
+  animation: neoAlertPulse 2s infinite ease-in-out;
 }
