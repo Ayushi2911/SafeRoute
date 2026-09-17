@@ -12,72 +12,53 @@ function App() {
   const [currentView, setCurrentView] = useState('admin') // 'admin', 'report', 'history', 'home'
   const [count, setCount] = useState(0)
 
+  const navItems = [
+    { id: 'admin', label: '📊 Neomorphic Admin', badge: 'Khushi' },
+    { id: 'report', label: '🚨 Report Incident', badge: 'Rekha' },
+    { id: 'history', label: '📜 Incident History', badge: 'Rekha' },
+    { id: 'home', label: '🏠 Platform Portal', badge: 'Overview' },
+  ]
+
   return (
-    <div className="min-h-screen bg-[#050811] text-slate-200 flex flex-col font-mono">
-      {/* Top Navigation Bar adhering to Global Theme */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-3.5 bg-[#0c1322] border-b border-slate-800 shadow-[0_8px_20px_rgba(0,0,0,0.8)] flex-wrap gap-3">
-        {/* Left: Logo mark (blue glowing dot) + "SAFEROUTE // UNIFIED PLATFORM" */}
+    <div className="min-h-screen bg-[#0e131f] text-slate-200 flex flex-col font-mono">
+      {/* Universal Neomorphic Nav Header */}
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-3.5 bg-[#121827] border-b border-slate-800/60 shadow-[0_8px_20px_rgba(3,6,12,0.8)] flex-wrap gap-3">
+        {/* Left: Logo mark with glowing cyan beacon */}
         <div className="flex items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.9)] animate-pulse" />
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 drop-shadow-[0_0_8px_rgba(0,240,255,0.9)] animate-pulse" />
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-sm tracking-widest text-cyan-400 uppercase font-sans">
               SAFEROUTE
             </span>
             <span className="text-[10px] tracking-widest text-slate-500 uppercase">
-              // UNIFIED PLATFORM
+              // NEOMORPHIC PLATFORM
             </span>
           </div>
         </div>
 
-        {/* Right: Tactile tab buttons */}
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* HOME */}
-          <button
-            onClick={() => setCurrentView('home')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
-              currentView === 'home'
-                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
-                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
-            }`}
-          >
-            HOME
-          </button>
-
-          {/* ADMIN & ANALYTICS (Highlighted in Cyan) */}
-          <button
-            onClick={() => setCurrentView('admin')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
-              currentView === 'admin'
-                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
-                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
-            }`}
-          >
-            ADMIN & ANALYTICS
-          </button>
-
-          {/* REPORT INCIDENT */}
-          <button
-            onClick={() => setCurrentView('report')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
-              currentView === 'report'
-                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
-                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
-            }`}
-          >
-            REPORT INCIDENT
-          </button>
-
-          {/* INCIDENT HISTORY */}
-          <button
-            onClick={() => setCurrentView('history')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
-              currentView === 'history'
-                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
-                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
-            }`}
-          >
-            HISTORY
-          </button>
+        {/* Right: Neomorphic Tab Buttons */}
+        <div className="neo-box-inset p-1.5 rounded-2xl flex items-center gap-2 flex-wrap">
+          {navItems.map((item) => {
+            const isActive = currentView === item.id
+            return (
+              <button
+                key={item.id}
+                onClick={() => setCurrentView(item.id)}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 ${
+                  isActive
+                    ? 'neo-button-cyan-active'
+                    : 'text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <span>{item.label}</span>
+                <span className={`text-[9px] px-1.5 py-0.5 rounded-md ${
+                  isActive ? 'bg-slate-950/40 text-slate-950 font-black' : 'bg-slate-800/80 text-cyan-400'
+                }`}>
+                  {item.badge}
+                </span>
+              </button>
+            )
+          })}
         </div>
       </nav>
 
@@ -100,7 +81,7 @@ function App() {
               </div>
               <button
                 type="button"
-                className="px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold text-cyan-400 hover:bg-slate-800 active:scale-95 transition-all shadow-md"
+                className="neo-button px-5 py-2.5 rounded-2xl text-xs font-bold text-cyan-400 active:scale-95 transition-all"
                 onClick={() => setCount((c) => c + 1)}
               >
                 Count is {count}
@@ -108,31 +89,32 @@ function App() {
             </section>
 
             <section id="next-steps" className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div id="docs" className="bg-[#0c1322] border border-slate-800 rounded-xl p-5 shadow-lg space-y-2">
-                <h2 className="text-base font-bold text-white">Documentation</h2>
-                <p className="text-xs text-slate-400">Tactile API specifications and contracts</p>
-                <ul className="text-xs text-slate-300 space-y-1.5 pt-2">
+              <div id="docs" className="neo-box-convex rounded-3xl p-6 space-y-2">
+                <h2 className="text-base font-bold text-white font-sans">Documentation</h2>
+                <p className="text-xs text-slate-400">Neomorphic API specifications and contracts</p>
+                <ul className="text-xs text-slate-300 space-y-2 pt-2">
                   <li>
                     <a href="https://vite.dev/" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
-                      Explore Vite
+                      Explore Vite & React 19
                     </a>
                   </li>
                   <li>
-                    <a href="https://react.dev/" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
-                      Learn React 19
+                    <a href="https://github.com/Ayushi2911/SafeRoute" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
+                      GitHub Repository (Ayushi2911/SafeRoute)
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <div id="social" className="bg-[#0c1322] border border-slate-800 rounded-xl p-5 shadow-lg space-y-2">
-                <h2 className="text-base font-bold text-white">Repository</h2>
-                <p className="text-xs text-slate-400">Join the SafeRoute Community</p>
-                <ul className="text-xs text-slate-300 space-y-1.5 pt-2">
-                  <li>
-                    <a href="https://github.com/Ayushi2911/SafeRoute" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
-                      GitHub Repository (Ayushi2911/SafeRoute)
-                    </a>
+              <div id="social" className="neo-box-convex rounded-3xl p-6 space-y-2">
+                <h2 className="text-base font-bold text-white font-sans">Tactile Safety Matrix</h2>
+                <p className="text-xs text-slate-400">Real-time threat triage and emergency routing</p>
+                <ul className="text-xs text-slate-300 space-y-2 pt-2">
+                  <li className="text-emerald-400">
+                    ✓ Multi-Factor Haversine Safety Algorithm Active
+                  </li>
+                  <li className="text-cyan-400">
+                    ✓ 24-Hour Velocity Curve Integrated with MySQL
                   </li>
                 </ul>
               </div>
