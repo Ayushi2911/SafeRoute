@@ -3,12 +3,16 @@ const cors = require("cors");
 require("dotenv").config();
 
 const db = require("./config/db");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+
+// SafeRoute Admin & Analytics APIs
+app.use("/api/admin", adminRoutes);
 
 app.get("/api/test", (req, res) => {
   res.json({
