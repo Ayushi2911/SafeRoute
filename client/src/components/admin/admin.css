@@ -1,524 +1,542 @@
-/* SafeRoute Dark Tactical Neomorphic Command & Agency Web Styling */
+/* SafeRoute Command Glass - Luxury Agency Glassmorphism Design System */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* 1. Base Dark Slate Foundation */
-  --neo-bg-canvas: #0a0f18;
-  --neo-bg-plate: #111a2d;
-  --neo-bg-plate-hover: #16223a;
-  --neo-bg-well: #070c14;
-  --neo-bg-inset-deep: #05080f;
+  /* 1. Cosmic Void & Ambient Glows */
+  --glass-bg-canvas: #0b0f19;
+  --glass-surface-1: rgba(15, 23, 42, 0.65);
+  --glass-surface-2: rgba(30, 41, 59, 0.70);
+  --glass-surface-elevated: rgba(15, 23, 42, 0.85);
+  --glass-surface-subtle: rgba(255, 255, 255, 0.03);
 
-  /* 2. Neomorphic Dual-Shadow Lighting System (135-degree Universal Angle) */
-  --neo-extrude-card: 
-    -7px -7px 16px rgba(255, 255, 255, 0.038),
-    9px 9px 24px rgba(0, 0, 0, 0.92);
+  /* 2. Glassmorphism Refraction & Borders */
+  --glass-blur: blur(20px);
+  --glass-blur-lg: blur(28px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-border-gradient: 1px solid rgba(6, 182, 212, 0.25);
+  --glass-border-hover: 1px solid rgba(6, 182, 212, 0.5);
 
-  --neo-extrude-btn: 
-    -4px -4px 10px rgba(255, 255, 255, 0.05),
-    5px 5px 14px rgba(0, 0, 0, 0.85);
+  /* 3. High-Refraction Shadows & Ambient Neon Glows */
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  --glass-shadow-lg: 0 16px 48px 0 rgba(0, 0, 0, 0.6), 0 0 24px rgba(6, 182, 212, 0.15);
+  --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.45);
+  --glow-emerald: 0 0 20px rgba(16, 185, 129, 0.45);
+  --glow-amber: 0 0 20px rgba(245, 158, 11, 0.45);
+  --glow-rose: 0 0 22px rgba(244, 63, 94, 0.45);
 
-  --neo-recessed-well: 
-    inset 5px 5px 12px rgba(0, 0, 0, 0.95),
-    inset -3px -3px 8px rgba(255, 255, 255, 0.03);
+  /* 4. Vivid Status Neons */
+  --color-cyan: #06b6d4;
+  --color-emerald: #10b981;
+  --color-amber: #f59e0b;
+  --color-rose: #f43f5e;
+  --color-violet: #8b5cf6;
 
-  --neo-depressed-btn: 
-    inset 3px 3px 8px rgba(0, 0, 0, 0.95),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.04);
-
-  /* 3. High-Caliber Neon Pilots */
-  --pilot-cyan: #00f0ff;
-  --pilot-cyan-glow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 24px rgba(0, 240, 255, 0.25);
-  --pilot-emerald: #10b981;
-  --pilot-emerald-glow: 0 0 12px rgba(16, 185, 129, 0.6), 0 0 24px rgba(16, 185, 129, 0.25);
-  --pilot-amber: #f59e0b;
-  --pilot-amber-glow: 0 0 12px rgba(245, 158, 11, 0.6), 0 0 24px rgba(245, 158, 11, 0.25);
-  --pilot-rose: #f43f5e;
-  --pilot-rose-glow: 0 0 12px rgba(244, 63, 94, 0.6), 0 0 24px rgba(244, 63, 94, 0.25);
-
-  /* 4. Fine Machinery Borders & Dimensions */
-  --neo-border: 1px solid rgba(255, 255, 255, 0.06);
-  --neo-border-active: 1px solid rgba(0, 240, 255, 0.45);
-  --neo-radius-lg: 18px;
-  --neo-radius-md: 12px;
-  --neo-radius-sm: 8px;
-
-  /* Typography */
+  /* 5. Geometry & Typography */
+  --radius-pill: 9999px;
+  --radius-card: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
   --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
 /* Base Body Environment */
-.neo-dashboard {
+.glass-dashboard {
   min-height: 100vh;
-  background-color: var(--neo-bg-canvas);
+  background-color: var(--glass-bg-canvas);
   background-image: 
-    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(0, 240, 255, 0.08), transparent 70%),
-    radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.05), transparent 50%),
-    var(--neo-bg-canvas);
-  color: #e2e8f0;
+    radial-gradient(ellipse 65% 50% at 15% 0%, rgba(6, 182, 212, 0.14), transparent 60%),
+    radial-gradient(ellipse 65% 50% at 85% 0%, rgba(139, 92, 246, 0.12), transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.08), transparent 50%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  color: #dfe2f1;
   font-family: var(--font-heading);
-  padding: 30px 40px;
+  padding: 28px 36px;
   box-sizing: border-box;
   overflow-x: hidden;
 }
 
-.neo-container {
+.glass-container {
   max-width: 1480px;
   margin: 0 auto;
 }
 
 /* Animations */
-@keyframes neoPulse {
+@keyframes glassGlowPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 8px var(--pilot-cyan);
+    box-shadow: 0 0 10px var(--color-cyan);
     opacity: 0.85;
   }
   50% {
     transform: scale(1.15);
-    box-shadow: 0 0 20px var(--pilot-cyan);
+    box-shadow: 0 0 24px var(--color-cyan);
     opacity: 1;
   }
 }
 
-@keyframes neoAlertPulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 0 8px var(--pilot-rose);
-  }
-  50% {
-    transform: scale(1.15);
-    box-shadow: 0 0 22px var(--pilot-rose);
-  }
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Banner Alert Notifications */
-.neo-banner {
-  padding: 14px 20px;
-  border-radius: var(--neo-radius-md);
+/* Glass Banner Notification */
+.glass-banner {
+  backdrop-filter: var(--glass-blur);
+  padding: 14px 22px;
+  border-radius: var(--radius-md);
   margin-bottom: 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-family: var(--font-mono);
   font-size: 13px;
-  box-shadow: var(--neo-extrude-card);
+  box-shadow: var(--glass-shadow);
 }
 
-.neo-banner.error {
-  background: #14090d;
-  border: 1px solid rgba(244, 63, 94, 0.4);
+.glass-banner.error {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1px solid rgba(244, 63, 94, 0.35);
   color: #fda4af;
-  box-shadow: var(--neo-recessed-well);
+  box-shadow: 0 0 24px rgba(244, 63, 94, 0.2);
 }
 
-.neo-banner.success {
-  background: #081512;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+.glass-banner.success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
   color: #6ee7b7;
-  box-shadow: var(--neo-recessed-well);
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.2);
 }
 
-/* 1. Master Agency Header Console */
-.neo-header {
-  background: var(--neo-bg-plate);
-  box-shadow: var(--neo-extrude-card);
-  border: var(--neo-border);
-  border-radius: var(--neo-radius-lg);
-  padding: 24px 32px;
+/* 1. Floating Translucent Glass Header */
+.glass-header {
+  background: var(--glass-surface-1);
+  backdrop-filter: var(--glass-blur-lg);
+  border: var(--glass-border);
+  border-radius: var(--radius-card);
+  padding: 22px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--glass-shadow);
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
 }
 
-.neo-header-brand {
+.glass-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.6), rgba(139, 92, 246, 0.6), transparent);
+}
+
+.glass-brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
-.neo-pilot-beacon {
-  width: 14px;
-  height: 14px;
+.glass-beacon-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.glass-beacon-core {
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--pilot-cyan) 45%, #00606b 100%);
-  box-shadow: var(--pilot-cyan-glow);
-  animation: neoPulse 2.8s infinite ease-in-out;
+  background: var(--color-cyan);
+  animation: glassGlowPulse 2.6s infinite ease-in-out;
 }
 
-.neo-badge-tag {
-  background: var(--neo-bg-well);
-  color: var(--pilot-cyan);
-  box-shadow: var(--neo-recessed-well);
+.glass-beacon-ping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-cyan);
+  opacity: 0.6;
+  animation: glassGlowPulse 2.6s infinite ease-in-out;
+}
+
+.glass-badge {
+  background: rgba(6, 182, 212, 0.12);
+  color: var(--color-cyan);
+  border: 1px solid rgba(6, 182, 212, 0.3);
   padding: 4px 10px;
-  border-radius: var(--neo-radius-sm);
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.neo-header h1 {
+.glass-header h1 {
   margin: 0;
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-.neo-header p {
-  margin: 4px 0 0;
+.glass-header p {
+  margin: 3px 0 0;
   font-size: 13px;
-  color: #8fa0b5;
-  letter-spacing: 0.01em;
+  color: #94a3b8;
 }
 
-/* Header Action Buttons */
-.neo-header-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.neo-btn {
+/* Glass Buttons */
+.glass-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--neo-bg-plate);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
   color: #cbd5e1;
-  box-shadow: var(--neo-extrude-btn);
-  border: var(--neo-border);
-  padding: 10px 18px;
-  border-radius: var(--neo-radius-md);
+  border: var(--glass-border);
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
   font-size: 13px;
-  font-weight: 700;
-  font-family: var(--font-mono);
+  font-weight: 600;
+  font-family: var(--font-heading);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
-.neo-btn:hover {
-  background: var(--neo-bg-plate-hover);
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
   color: #ffffff;
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
-.neo-btn:active {
-  box-shadow: var(--neo-depressed-btn);
-  transform: translateY(1px);
+.glass-btn.primary {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(6, 182, 212, 0.1));
+  border-color: rgba(6, 182, 212, 0.4);
+  color: #67e8f9;
 }
 
-.neo-btn.primary {
-  color: var(--pilot-cyan);
-  border-color: rgba(0, 240, 255, 0.3);
-}
-
-.neo-btn.primary:hover {
-  box-shadow: var(--neo-extrude-btn), 0 0 16px rgba(0, 240, 255, 0.3);
+.glass-btn.primary:hover {
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.4), rgba(6, 182, 212, 0.2));
+  box-shadow: var(--glow-cyan);
   color: #ffffff;
 }
 
-.neo-btn.emerald {
-  color: var(--pilot-emerald);
-  border-color: rgba(16, 185, 129, 0.3);
+.glass-btn.emerald {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.1));
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #6ee7b7;
 }
 
-.neo-btn.emerald:hover {
-  box-shadow: var(--neo-extrude-btn), 0 0 16px rgba(16, 185, 129, 0.3);
+.glass-btn.emerald:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(16, 185, 129, 0.2));
+  box-shadow: var(--glow-emerald);
   color: #ffffff;
 }
 
-/* 2. Recessed Neomorphic Nav Trough */
-.neo-nav-trough {
-  background: var(--neo-bg-well);
-  box-shadow: var(--neo-recessed-well);
-  border-radius: var(--neo-radius-lg);
-  padding: 8px;
+/* 2. Glass Pill Navigation Bar */
+.glass-nav-bar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 28px;
+  background: var(--glass-surface-1);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 24px;
+  gap: 8px;
   overflow-x: auto;
-  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
-.neo-nav-tab {
+.glass-nav-tab {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 22px;
-  border-radius: var(--neo-radius-md);
+  gap: 9px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  color: #94a3b8;
   font-size: 13.5px;
-  font-weight: 700;
-  font-family: var(--font-heading);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
-  border: none;
-  background: transparent;
-  color: #8494a8;
 }
 
-.neo-nav-tab:hover {
-  color: #f1f5f9;
-}
-
-.neo-nav-tab.active {
-  background: var(--neo-bg-plate);
-  color: var(--pilot-cyan);
-  box-shadow: var(--neo-extrude-btn);
-  border: var(--neo-border);
-}
-
-.neo-tab-badge {
-  background: var(--pilot-rose);
+.glass-nav-tab:hover {
   color: #ffffff;
-  padding: 2px 7px;
-  border-radius: 9999px;
-  font-size: 10.5px;
-  font-family: var(--font-mono);
-  box-shadow: 0 0 8px rgba(244, 63, 94, 0.5);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-/* 3. Extruded Neomorphic KPI Billets */
-.neo-kpi-grid {
+.glass-nav-tab.active {
+  background: rgba(6, 182, 212, 0.15);
+  color: #38bdf8;
+  border-color: rgba(6, 182, 212, 0.35);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.15);
+}
+
+.glass-tab-badge {
+  background: rgba(244, 63, 94, 0.25);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+}
+
+/* 3. Floating Glass KPI Cards */
+.glass-kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  margin-bottom: 28px;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-.neo-kpi-card {
-  background: var(--neo-bg-plate);
-  box-shadow: var(--neo-extrude-card);
-  border: var(--neo-border);
-  border-radius: var(--neo-radius-lg);
-  padding: 24px;
+.glass-kpi-card {
+  background: var(--glass-surface-1);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-card);
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.neo-kpi-card:hover {
+.glass-kpi-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(6, 182, 212, 0.35);
+  box-shadow: var(--glass-shadow-lg);
 }
 
-.neo-kpi-top {
+.glass-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+}
+
+.glass-kpi-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
-.neo-kpi-label {
-  font-size: 12px;
+.glass-kpi-label {
+  font-size: 12.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #8fa0b5;
-  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  color: #94a3b8;
 }
 
-.neo-kpi-well {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--neo-radius-md);
-  background: var(--neo-bg-well);
-  box-shadow: var(--neo-recessed-well);
+.glass-kpi-icon-pod {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.neo-kpi-val {
-  font-size: 36px;
+.glass-kpi-val {
+  font-size: 34px;
   font-weight: 800;
   font-family: var(--font-mono);
   color: #ffffff;
   line-height: 1;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 8px;
 }
 
-.neo-kpi-sub {
+.glass-kpi-sub {
   font-size: 12px;
-  color: #6c7d93;
+  color: #64748b;
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-mono);
 }
 
-/* 4. Extruded Panels & Tables */
-.neo-panel {
-  background: var(--neo-bg-plate);
-  box-shadow: var(--neo-extrude-card);
-  border: var(--neo-border);
-  border-radius: var(--neo-radius-lg);
-  padding: 26px;
-  margin-bottom: 28px;
+/* 4. Glass Panels & Visualizations */
+.glass-panel {
+  background: var(--glass-surface-1);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 24px;
 }
 
-.neo-panel-header {
+.glass-panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 22px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.neo-panel-title {
+.glass-panel-title {
   margin: 0;
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 17px;
+  font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.01em;
 }
 
-.neo-panel-subtitle {
+.glass-panel-subtitle {
   margin: 3px 0 0;
   font-size: 12.5px;
-  color: #8fa0b5;
+  color: #94a3b8;
 }
 
-/* Recessed Inset Table Well */
-.neo-table-well {
-  background: var(--neo-bg-well);
-  box-shadow: var(--neo-recessed-well);
-  border-radius: var(--neo-radius-md);
-  padding: 8px;
+/* Glass Table Wrapper */
+.glass-table-wrapper {
   overflow-x: auto;
-  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(11, 15, 25, 0.4);
 }
 
-.neo-table {
+.glass-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   font-size: 13px;
 }
 
-.neo-table th {
+.glass-table th {
   padding: 14px 18px;
   font-size: 11px;
   font-weight: 700;
   font-family: var(--font-mono);
-  color: #8fa0b5;
+  color: #94a3b8;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.neo-table td {
-  padding: 16px 18px;
-  color: #e2e8f0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-  vertical-align: middle;
-}
-
-.neo-table tr:last-child td {
-  border-bottom: none;
-}
-
-.neo-table tr:hover td {
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.02);
 }
 
-/* Status Chips on Extruded Plates */
-.neo-chip {
+.glass-table td {
+  padding: 16px 18px;
+  color: #dfe2f1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+
+.glass-table tr:last-child td {
+  border-bottom: none;
+}
+
+.glass-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Glass Status Chips */
+.glass-chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: var(--radius-pill);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  box-shadow: var(--neo-extrude-btn);
-  background: var(--neo-bg-plate);
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.neo-chip.verified {
-  color: var(--pilot-emerald);
-  border-color: rgba(16, 185, 129, 0.35);
+.glass-chip.verified {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
 }
 
-.neo-chip.pending {
-  color: var(--pilot-amber);
-  border-color: rgba(245, 158, 11, 0.35);
+.glass-chip.pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
 }
 
-.neo-chip.rejected {
-  color: var(--pilot-rose);
-  border-color: rgba(244, 63, 94, 0.35);
+.glass-chip.rejected {
+  background: rgba(244, 63, 94, 0.12);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.35);
 }
 
-/* Tactile Rocker Buttons */
-.neo-rocker-btn {
-  padding: 7px 14px;
-  border-radius: var(--neo-radius-sm);
+/* Action Rockers */
+.glass-action-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
   font-size: 12px;
-  font-weight: 700;
-  font-family: var(--font-mono);
+  font-weight: 600;
   cursor: pointer;
-  background: var(--neo-bg-plate);
-  box-shadow: var(--neo-extrude-btn);
-  border: var(--neo-border);
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.15s ease;
-  text-transform: uppercase;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
 
-.neo-rocker-btn:hover {
-  transform: translateY(-1px);
+.glass-action-btn.approve {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.35);
 }
 
-.neo-rocker-btn:active {
-  box-shadow: var(--neo-depressed-btn);
-  transform: translateY(1px);
+.glass-action-btn.approve:hover {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
 }
 
-.neo-rocker-btn.approve {
-  color: var(--pilot-emerald);
-  border-color: rgba(16, 185, 129, 0.4);
+.glass-action-btn.reject {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+  border-color: rgba(244, 63, 94, 0.35);
 }
 
-.neo-rocker-btn.reject {
-  color: var(--pilot-rose);
-  border-color: rgba(244, 63, 94, 0.4);
+.glass-action-btn.reject:hover {
+  background: rgba(244, 63, 94, 0.3);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(244, 63, 94, 0.4);
 }
 
-/* Recessed Search Bar */
-.neo-search-well {
+/* Glass Search Bar */
+.glass-search-box {
   display: flex;
   align-items: center;
-  background: var(--neo-bg-well);
-  box-shadow: var(--neo-recessed-well);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  border-radius: var(--neo-radius-md);
-  padding: 8px 14px;
+  background: rgba(11, 15, 25, 0.5);
+  border: var(--glass-border);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
   gap: 10px;
-  min-width: 260px;
+  min-width: 270px;
 }
 
-.neo-search-well input {
+.glass-search-box input {
   background: transparent;
   border: none;
   color: #ffffff;
@@ -528,33 +546,24 @@
   font-family: var(--font-heading);
 }
 
-/* SOS Dispatch Grid */
-.neo-sos-grid {
+/* SOS Emergency Grid */
+.glass-sos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 22px;
+  gap: 20px;
 }
 
-.neo-sos-card {
-  background: var(--neo-bg-plate);
-  box-shadow: var(--neo-extrude-card);
-  border: var(--neo-border);
-  border-radius: var(--neo-radius-lg);
+.glass-sos-card {
+  background: var(--glass-surface-1);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-card);
   padding: 22px;
   position: relative;
   transition: all 0.25s ease;
 }
 
-.neo-sos-card.pending {
+.glass-sos-card.pending {
   border-color: rgba(244, 63, 94, 0.4);
-  box-shadow: var(--neo-extrude-card), 0 0 20px rgba(244, 63, 94, 0.15);
-}
-
-.neo-sos-beacon {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--pilot-rose);
-  box-shadow: var(--pilot-rose-glow);
-  animation: neoAlertPulse 2s infinite ease-in-out;
+  box-shadow: 0 0 24px rgba(244, 63, 94, 0.2);
 }
