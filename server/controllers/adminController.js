@@ -1,5 +1,5 @@
 const db = require('../config/db');
-const { analyzeIncidentThreat, computeSafetyScore } = require('../utils/safetyEngine');
+const { analyzeIncidentThreat } = require('../utils/safetyEngine');
 
 // 1. Overview KPI Stats
 const getStats = async (req, res) => {
@@ -16,31 +16,21 @@ const getStats = async (req, res) => {
     res.json({
       success: true,
       data: {
-        totalUsers: userCount.total_users || 0,
-        totalIncidents: incidentCount.total_incidents || 0,
-        pendingIncidents: pendingIncidents.pending_incidents || 0,
-        verifiedIncidents: verifiedIncidents.verified_incidents || 0,
-        rejectedIncidents: rejectedIncidents.rejected_incidents || 0,
-        activeSos: activeSosCount.active_sos || 0,
-        availableServices: servicesCount.total_services || 0,
-        riskZones: riskZonesCount.total_risk_zones || 0,
+        totalUsers: userCount?.total_users || 0,
+        totalIncidents: incidentCount?.total_incidents || 0,
+        pendingIncidents: pendingIncidents?.pending_incidents || 0,
+        verifiedIncidents: verifiedIncidents?.verified_incidents || 0,
+        rejectedIncidents: rejectedIncidents?.rejected_incidents || 0,
+        activeSos: activeSosCount?.active_sos || 0,
+        availableServices: servicesCount?.total_services || 0,
+        riskZones: riskZonesCount?.total_risk_zones || 0,
       }
     });
   } catch (error) {
-    console.error('Error fetching admin stats:', error.message);
-    res.json({
-      success: true,
-      data: {
-        totalUsers: 48,
-        totalIncidents: 32,
-        pendingIncidents: 6,
-        verifiedIncidents: 22,
-        rejectedIncidents: 4,
-        activeSos: 2,
-        availableServices: 14,
-        riskZones: 3,
-      },
-      note: 'Fallback dataset active'
+    console.error('Database error in getStats:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve admin stats from database: ' + error.message,
     });
   }
 };
@@ -73,6 +63,37 @@ const getAnalytics = async (req, res) => {
       GROUP BY status
     `);
 
+    // Dynamic 24-Hour Velocity: Group incidents created in last 24 hours into 4-hour intervals
+    const [velocityRows] = await db.query(`
+      SELECT 
+        DATE_FORMAT(created_at, '%H:00') AS hour_slot,
+        HOUR(created_at) AS hr,
+        COUNT(*) AS count
+      FROM incidents
+      WHERE created_at >= NOW() - INTERVAL 24 HOUR
+      GROUP BY HOUR(created_at), DATE_FORMAT(created_at, '%H:00')
+      ORDER BY HOUR(created_at) ASC
+    `);
+
+    // Format 24-hour cadence dynamically
+    const standardIntervals = [
+      { time: '00:00', reports: 0 },
+      { time: '04:00', reports: 0 },
+      { time: '08:00', reports: 0 },
+      { time: '12:00', reports: 0 },
+      { time: '16:00', reports: 0 },
+      { time: '20:00', reports: 0 },
+      { time: '23:59', reports: 0 }
+    ];
+
+    if (velocityRows && velocityRows.length > 0) {
+      velocityRows.forEach(row => {
+        const h = row.hr;
+        let slotIndex = Math.min(Math.floor(h / 4), 5);
+        standardIntervals[slotIndex].reports += row.count;
+      });
+    }
+
     res.json({
       success: true,
       data: {
@@ -80,37 +101,14 @@ const getAnalytics = async (req, res) => {
         categoryBreakdown: categoryData,
         statusBreakdown: statusData,
         sosStatusBreakdown: sosStatusData,
+        velocityData: standardIntervals,
       }
     });
   } catch (error) {
-    console.error('Error fetching analytics:', error.message);
-    res.json({
-      success: true,
-      data: {
-        severityBreakdown: [
-          { severity: 'high', count: 12 },
-          { severity: 'medium', count: 14 },
-          { severity: 'low', count: 6 },
-        ],
-        categoryBreakdown: [
-          { category: 'Theft / Robbery', count: 11 },
-          { category: 'Poor Street Lighting', count: 9 },
-          { category: 'Harassment', count: 7 },
-          { category: 'Accident Prone Area', count: 5 },
-        ],
-        statusBreakdown: [
-          { status: 'verified', count: 22 },
-          { status: 'pending', count: 6 },
-          { status: 'rejected', count: 4 },
-        ],
-        sosStatusBreakdown: [
-          { status: 'resolved', count: 18 },
-          { status: 'responding', count: 2 },
-          { status: 'pending', count: 1 },
-          { status: 'cancelled', count: 3 },
-        ],
-      },
-      note: 'Fallback dataset active'
+    console.error('Database error in getAnalytics:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve analytics data from database: ' + error.message,
     });
   }
 };
@@ -148,6 +146,7 @@ const getIncidents = async (req, res) => {
 
     const [incidents] = await db.query(query, params);
     
+    // Enrich with genuine AI threat classification logic
     const enrichedIncidents = incidents.map(item => ({
       ...item,
       aiAnalysis: analyzeIncidentThreat(item.description, item.category)
@@ -155,79 +154,22 @@ const getIncidents = async (req, res) => {
 
     res.json({ success: true, data: enrichedIncidents });
   } catch (error) {
-    console.error('Error fetching incidents:', error.message);
-    const mockList = [
-      {
-        id: 1,
-        reporter_name: 'Rahul Sharma',
-        reporter_email: 'rahul@example.com',
-        category: 'Poor Street Lighting',
-        severity: 'medium',
-        description: 'Dark alley near metro station gate 2 with no operational streetlights.',
-        latitude: 19.0760,
-        longitude: 72.8777,
-        address: 'Station Road, Mumbai',
-        status: 'pending',
-        created_at: new Date(Date.now() - 3600000).toISOString()
-      },
-      {
-        id: 2,
-        reporter_name: 'Sneha Patel',
-        reporter_email: 'sneha@example.com',
-        category: 'Theft / Robbery',
-        severity: 'high',
-        description: 'Bag snatching incident with a weapon reported around 9:30 PM.',
-        latitude: 19.0820,
-        longitude: 72.8890,
-        address: 'Main Market Square, Mumbai',
-        status: 'pending',
-        created_at: new Date(Date.now() - 7200000).toISOString()
-      },
-      {
-        id: 3,
-        reporter_name: 'Ankit Verma',
-        reporter_email: 'ankit@example.com',
-        category: 'Accident Prone Area',
-        severity: 'high',
-        description: 'Open road work without warning signs or barricades, dangerous speeding.',
-        latitude: 19.0650,
-        longitude: 72.8820,
-        address: 'Highway Flyover Entry',
-        status: 'verified',
-        created_at: new Date(Date.now() - 86400000).toISOString()
-      },
-      {
-        id: 4,
-        reporter_name: 'Priya Mehta',
-        reporter_email: 'priya@example.com',
-        category: 'Harassment',
-        severity: 'high',
-        description: 'Catcalling and suspicious individuals loitering near the bus stop late night.',
-        latitude: 19.0710,
-        longitude: 72.8750,
-        address: 'Central Park West',
-        status: 'pending',
-        created_at: new Date(Date.now() - 14400000).toISOString()
-      }
-    ];
-
-    const enrichedMock = mockList.map(item => ({
-      ...item,
-      aiAnalysis: analyzeIncidentThreat(item.description, item.category)
-    }));
-
-    res.json({ success: true, data: enrichedMock });
+    console.error('Database error in getIncidents:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve incidents from database: ' + error.message,
+    });
   }
 };
 
-// 4. Update Incident Status (Verify / Reject)
+// 4. Update Incident Status (Verify / Reject) - Strict DB Validation
 const updateIncidentStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
 
     if (!['pending', 'verified', 'rejected'].includes(status)) {
-      return res.status(400).json({ success: false, message: 'Invalid status value' });
+      return res.status(400).json({ success: false, message: 'Invalid status value. Must be pending, verified, or rejected.' });
     }
 
     const [result] = await db.query(
@@ -236,13 +178,16 @@ const updateIncidentStatus = async (req, res) => {
     );
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: 'Incident not found' });
+      return res.status(404).json({ success: false, message: `Incident #${id} not found in database.` });
     }
 
-    res.json({ success: true, message: `Incident #${id} marked as ${status}` });
+    res.json({ success: true, message: `Incident #${id} successfully marked as ${status}` });
   } catch (error) {
-    console.error('Error updating incident status:', error.message);
-    res.json({ success: true, message: `Incident status simulated to ${req.body.status}` });
+    console.error('Database error in updateIncidentStatus:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Database error updating incident status: ' + error.message,
+    });
   }
 };
 
@@ -258,75 +203,54 @@ const getSosRequests = async (req, res) => {
     const [requests] = await db.query(query);
     res.json({ success: true, data: requests });
   } catch (error) {
-    console.error('Error fetching SOS requests:', error.message);
-    res.json({
-      success: true,
-      data: [
-        {
-          id: 101,
-          user_name: 'Pooja Nair',
-          user_phone: '+91 98765 43210',
-          emergency_type: 'Medical Emergency',
-          message: 'Severe dizziness, need immediate medical assistance near bus depot.',
-          latitude: 19.0755,
-          longitude: 72.8780,
-          status: 'responding',
-          created_at: new Date(Date.now() - 900000).toISOString()
-        },
-        {
-          id: 102,
-          user_name: 'Rohan Gupta',
-          user_phone: '+91 91234 56789',
-          emergency_type: 'Immediate Threat / Stalking',
-          message: 'Someone suspicious following on foot along Link Road.',
-          latitude: 19.0830,
-          longitude: 72.8850,
-          status: 'pending',
-          created_at: new Date(Date.now() - 300000).toISOString()
-        }
-      ]
+    console.error('Database error in getSosRequests:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve SOS requests from database: ' + error.message,
     });
   }
 };
 
-// 6. Update SOS Status (responding / resolved / cancelled)
+// 6. Update SOS Status (Strict DB Validation)
 const updateSosStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
 
     if (!['pending', 'responding', 'resolved', 'cancelled'].includes(status)) {
-      return res.status(400).json({ success: false, message: 'Invalid SOS status' });
+      return res.status(400).json({ success: false, message: 'Invalid SOS status. Must be pending, responding, resolved, or cancelled.' });
     }
 
     const resolvedAt = status === 'resolved' ? new Date() : null;
-    await db.query(
+    const [result] = await db.query(
       'UPDATE sos_requests SET status = ?, resolved_at = ? WHERE id = ?',
       [status, resolvedAt, id]
     );
 
-    res.json({ success: true, message: `SOS #${id} status updated to ${status}` });
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ success: false, message: `SOS request #${id} not found in database.` });
+    }
+
+    res.json({ success: true, message: `SOS #${id} status successfully updated to ${status}` });
   } catch (error) {
-    console.error('Error updating SOS status:', error.message);
-    res.json({ success: true, message: `SOS #${req.params.id} updated to ${req.body.status}` });
+    console.error('Database error in updateSosStatus:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Database error updating SOS status: ' + error.message,
+    });
   }
 };
 
-// 7. Emergency Services Management (Day 4/5 Feature)
+// 7. Emergency Services Management
 const getServices = async (req, res) => {
   try {
     const [services] = await db.query('SELECT * FROM emergency_services ORDER BY type, name');
     res.json({ success: true, data: services });
   } catch (error) {
-    console.error('Error fetching services:', error.message);
-    res.json({
-      success: true,
-      data: [
-        { id: 1, name: 'Central Police Station', type: 'police', phone: '100', latitude: 19.0760, longitude: 72.8777, address: 'Central Mumbai', availability: 'available' },
-        { id: 2, name: 'City General Hospital', type: 'hospital', phone: '108', latitude: 19.0820, longitude: 72.8890, address: 'Mumbai Central', availability: 'available' },
-        { id: 3, name: 'Central Fire Station', type: 'fire_station', phone: '101', latitude: 19.0650, longitude: 72.8820, address: 'South Mumbai', availability: 'available' },
-        { id: 4, name: 'Metro Trauma Care', type: 'hospital', phone: '022-2410101', latitude: 19.0790, longitude: 72.8910, address: 'East Zone Road', availability: 'available' }
-      ]
+    console.error('Database error in getServices:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve emergency services from database: ' + error.message,
     });
   }
 };
@@ -335,7 +259,7 @@ const addService = async (req, res) => {
   try {
     const { name, type, phone, latitude, longitude, address, availability } = req.body;
     if (!name || !type || !latitude || !longitude) {
-      return res.status(400).json({ success: false, message: 'Required fields missing' });
+      return res.status(400).json({ success: false, message: 'Required fields missing (name, type, latitude, longitude)' });
     }
 
     const [result] = await db.query(
@@ -343,27 +267,26 @@ const addService = async (req, res) => {
       [name, type, phone || null, latitude, longitude, address || null, availability || 'available']
     );
 
-    res.json({ success: true, data: { id: result.insertId, ...req.body }, message: 'Emergency service registered' });
+    res.json({ success: true, data: { id: result.insertId, ...req.body }, message: 'Emergency service registered successfully' });
   } catch (error) {
-    console.error('Error adding service:', error.message);
-    res.json({ success: true, message: 'Service registered (simulated)' });
+    console.error('Database error in addService:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Database error creating emergency service: ' + error.message,
+    });
   }
 };
 
-// 8. Risk Zones Management (Day 4/5 Feature)
+// 8. Risk Zones Management
 const getRiskZones = async (req, res) => {
   try {
     const [zones] = await db.query('SELECT * FROM risk_zones ORDER BY safety_score ASC');
     res.json({ success: true, data: zones });
   } catch (error) {
-    console.error('Error fetching risk zones:', error.message);
-    res.json({
-      success: true,
-      data: [
-        { id: 1, area_name: 'Zone A - Station Alley', latitude: 19.0780, longitude: 72.8790, radius: 500, risk_level: 'low', safety_score: 88 },
-        { id: 2, area_name: 'Zone B - Market Crossing', latitude: 19.0850, longitude: 72.8920, radius: 700, risk_level: 'medium', safety_score: 67 },
-        { id: 3, area_name: 'Zone C - Underpass Area', latitude: 19.0700, longitude: 72.9000, radius: 600, risk_level: 'high', safety_score: 42 }
-      ]
+    console.error('Database error in getRiskZones:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve risk zones from database: ' + error.message,
     });
   }
 };
@@ -380,16 +303,10 @@ const getUsers = async (req, res) => {
     `);
     res.json({ success: true, data: users });
   } catch (error) {
-    console.error('Error fetching users:', error.message);
-    res.json({
-      success: true,
-      data: [
-        { id: 1, name: 'SafeRoute SuperAdmin', email: 'admin@saferoute.com', phone: '+91 99999 00001', role: 'admin', created_at: '2026-01-10T10:00:00Z' },
-        { id: 2, name: 'Ayushi Team', email: 'ayushi@saferoute.com', phone: '+91 99999 00002', role: 'user', created_at: '2026-01-11T11:00:00Z' },
-        { id: 3, name: 'Rekha Team', email: 'rekha@saferoute.com', phone: '+91 99999 00003', role: 'user', created_at: '2026-01-12T12:00:00Z' },
-        { id: 4, name: 'Sufiya Team', email: 'sufiya@saferoute.com', phone: '+91 99999 00004', role: 'user', created_at: '2026-01-13T13:00:00Z' },
-        { id: 5, name: 'Shaily Team', email: 'shaily@saferoute.com', phone: '+91 99999 00005', role: 'user', created_at: '2026-01-14T14:00:00Z' }
-      ]
+    console.error('Database error in getUsers:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve users from database: ' + error.message,
     });
   }
 };

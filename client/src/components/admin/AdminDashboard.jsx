@@ -15,7 +15,8 @@ import {
   Zap,
   Download,
   Search,
-  Building2
+  Building2,
+  AlertCircle
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -55,18 +56,28 @@ export default function AdminDashboard() {
   const [services, setServices] = useState([]);
   const [riskZones, setRiskZones] = useState([]);
   const [users, setUsers] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [actionNotice, setActionNotice] = useState(null);
 
-  // Fetch all admin data
+  // Helper for auth headers
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+  };
+
+  // Fetch all admin data directly from database
   const fetchData = useCallback(async () => {
+    setErrorMessage(null);
     try {
+      const authOpts = getAuthHeaders();
       const [statsRes, analyticsRes, incidentsRes, sosRes, servicesRes, riskRes, usersRes] = await Promise.all([
-        axios.get(`${API_BASE}/stats`).catch(() => ({ data: { success: false } })),
-        axios.get(`${API_BASE}/analytics`).catch(() => ({ data: { success: false } })),
-        axios.get(`${API_BASE}/incidents`).catch(() => ({ data: { success: false } })),
-        axios.get(`${API_BASE}/sos`).catch(() => ({ data: { success: false } })),
-        axios.get(`${API_BASE}/services`).catch(() => ({ data: { success: false } })),
-        axios.get(`${API_BASE}/risk-zones`).catch(() => ({ data: { success: false } })),
-        axios.get(`${API_BASE}/users`).catch(() => ({ data: { success: false } })),
+        axios.get(`${API_BASE}/stats`, authOpts),
+        axios.get(`${API_BASE}/analytics`, authOpts),
+        axios.get(`${API_BASE}/incidents`, authOpts),
+        axios.get(`${API_BASE}/sos`, authOpts),
+        axios.get(`${API_BASE}/services`, authOpts),
+        axios.get(`${API_BASE}/risk-zones`, authOpts),
+        axios.get(`${API_BASE}/users`, authOpts),
       ]);
 
       if (statsRes.data?.data) setStats(statsRes.data.data);
@@ -77,7 +88,9 @@ export default function AdminDashboard() {
       if (riskRes.data?.data) setRiskZones(riskRes.data.data);
       if (usersRes.data?.data) setUsers(usersRes.data.data);
     } catch (err) {
-      console.error('Error fetching admin data:', err);
+      console.error('Error fetching real admin data:', err);
+      const msg = err.response?.data?.message || err.message || 'Failed to connect to backend database.';
+      setErrorMessage(`Database / API Error: ${msg}`);
     }
   }, []);
 
@@ -85,32 +98,48 @@ export default function AdminDashboard() {
     fetchData();
   }, [fetchData]);
 
-  // Update incident verification status
+  // Update incident verification status with STRICT DB validation
   const handleUpdateIncidentStatus = async (id, status) => {
     try {
-      await axios.put(`${API_BASE}/incidents/${id}/status`, { status });
-      setIncidents((prev) =>
-        prev.map((item) => (item.id === id ? { ...item, status } : item))
-      );
-      if (status === 'verified') {
-        setStats(prev => ({ ...prev, verifiedIncidents: prev.verifiedIncidents + 1, pendingIncidents: Math.max(0, prev.pendingIncidents - 1) }));
-      } else if (status === 'rejected') {
-        setStats(prev => ({ ...prev, rejectedIncidents: prev.rejectedIncidents + 1, pendingIncidents: Math.max(0, prev.pendingIncidents - 1) }));
+      setErrorMessage(null);
+      const res = await axios.put(`${API_BASE}/incidents/${id}/status`, { status }, getAuthHeaders());
+      
+      if (res.data?.success) {
+        setIncidents((prev) =>
+          prev.map((item) => (item.id === id ? { ...item, status } : item))
+        );
+        setActionNotice({ type: 'success', text: `Incident #${id} marked as ${status} in database.` });
+        setTimeout(() => setActionNotice(null), 4000);
+        // Refresh live stats from DB
+        fetchData();
       }
     } catch (err) {
-      console.error('Failed to update incident:', err);
+      const msg = err.response?.data?.message || 'Database update failed.';
+      setErrorMessage(`Action Failed: ${msg}`);
+      setActionNotice({ type: 'error', text: `Failed to update incident #${id}: ${msg}` });
+      setTimeout(() => setActionNotice(null), 4000);
     }
   };
 
-  // Update SOS status
+  // Update SOS status with STRICT DB validation
   const handleUpdateSosStatus = async (id, status) => {
     try {
-      await axios.put(`${API_BASE}/sos/${id}/status`, { status });
-      setSosRequests((prev) =>
-        prev.map((item) => (item.id === id ? { ...item, status } : item))
-      );
+      setErrorMessage(null);
+      const res = await axios.put(`${API_BASE}/sos/${id}/status`, { status }, getAuthHeaders());
+      
+      if (res.data?.success) {
+        setSosRequests((prev) =>
+          prev.map((item) => (item.id === id ? { ...item, status } : item))
+        );
+        setActionNotice({ type: 'success', text: `SOS #${id} status updated to ${status} in database.` });
+        setTimeout(() => setActionNotice(null), 4000);
+        fetchData();
+      }
     } catch (err) {
-      console.error('Failed to update SOS:', err);
+      const msg = err.response?.data?.message || 'Database update failed.';
+      setErrorMessage(`Action Failed: ${msg}`);
+      setActionNotice({ type: 'error', text: `Failed to update SOS #${id}: ${msg}` });
+      setTimeout(() => setActionNotice(null), 4000);
     }
   };
 
@@ -147,32 +176,68 @@ export default function AdminDashboard() {
     low: '#0284c7'
   };
 
-  const velocityData = [
-    { time: '00:00', reports: 2 },
-    { time: '04:00', reports: 1 },
-    { time: '08:00', reports: 5 },
-    { time: '12:00', reports: 8 },
-    { time: '16:00', reports: 12 },
-    { time: '20:00', reports: 18 },
-    { time: '23:59', reports: 9 },
+  // Dynamic velocity from real database query
+  const velocityData = analytics?.velocityData || [
+    { time: '00:00', reports: 0 },
+    { time: '04:00', reports: 0 },
+    { time: '08:00', reports: 0 },
+    { time: '12:00', reports: 0 },
+    { time: '16:00', reports: 0 },
+    { time: '20:00', reports: 0 },
+    { time: '23:59', reports: 0 },
   ];
 
   return (
     <div className="admin-container">
+      {/* Alert Notices */}
+      {errorMessage && (
+        <div style={{
+          backgroundColor: 'rgba(225, 29, 72, 0.15)',
+          border: '1px solid #e11d48',
+          color: '#fda4af',
+          padding: '12px 18px',
+          borderRadius: 6,
+          marginBottom: 16,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: 12
+        }}>
+          <AlertCircle size={16} color="#e11d48" />
+          <span>{errorMessage}</span>
+        </div>
+      )}
+
+      {actionNotice && (
+        <div style={{
+          backgroundColor: actionNotice.type === 'success' ? 'rgba(5, 150, 105, 0.15)' : 'rgba(225, 29, 72, 0.15)',
+          border: `1px solid ${actionNotice.type === 'success' ? '#059669' : '#e11d48'}`,
+          color: actionNotice.type === 'success' ? '#6ee7b7' : '#fda4af',
+          padding: '10px 16px',
+          borderRadius: 6,
+          marginBottom: 16,
+          fontFamily: 'JetBrains Mono, monospace',
+          fontSize: 12
+        }}>
+          {actionNotice.text}
+        </div>
+      )}
+
       {/* Skeuomorphic Beveled Header */}
       <header className="admin-header">
         <div>
           <div className="admin-header-title">
-            <div className="admin-beacon" title="Hardware Operational Sensor Active" />
-            <span className="admin-badge">SkeuoControl v3.0</span>
-            <h1>SafeRoute Tactile Command & Analytics</h1>
+            <div className="admin-beacon" title="Live Database Status Active" />
+            <span className="admin-badge">SkeuoControl v3.2</span>
+            <h1>SafeRoute Tactical Command & Analytics</h1>
           </div>
-          <p>Physical-feel public safety administration, AI threat triage, and tactile dispatch controls</p>
+          <p>Physical-feel public safety administration, live database aggregations, and verified dispatch controls</p>
         </div>
 
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <button className="admin-pill-btn" onClick={fetchData} title="Resync Hardware Data">
-            <RefreshCw size={13} style={{ marginRight: 6, verticalAlign: 'middle' }} /> Resync
+          <button className="admin-pill-btn" onClick={fetchData} title="Resync Live Database Data">
+            <RefreshCw size={13} style={{ marginRight: 6, verticalAlign: 'middle' }} /> Resync DB
           </button>
 
           <button 
@@ -238,7 +303,7 @@ export default function AdminDashboard() {
           </div>
           <h2 className="admin-stat-number">{stats.totalUsers}</h2>
           <div className="admin-stat-footer">
-            <Zap size={13} color="#818cf8" /> Verified platform members
+            <Zap size={13} color="#818cf8" /> Live database accounts
           </div>
         </div>
 
@@ -251,7 +316,7 @@ export default function AdminDashboard() {
           </div>
           <h2 className="admin-stat-number">{stats.pendingIncidents}</h2>
           <div className="admin-stat-footer">
-            <Clock size={13} color="#fbbf24" /> Requires tactile authorization
+            <Clock size={13} color="#fbbf24" /> Requires admin audit
           </div>
         </div>
 
@@ -290,10 +355,10 @@ export default function AdminDashboard() {
             <div className="admin-chart-card">
               <div className="admin-chart-header">
                 <h3>Incident Distribution by Category</h3>
-                <span className="admin-badge">Hardware Vector</span>
+                <span className="admin-badge">Real-Time DB</span>
               </div>
               <div style={{ height: 260 }}>
-                {analytics?.categoryBreakdown ? (
+                {analytics?.categoryBreakdown && analytics.categoryBreakdown.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={analytics.categoryBreakdown}>
                       <XAxis dataKey="category" stroke="#64748b" fontSize={11} tickLine={false} />
@@ -311,7 +376,7 @@ export default function AdminDashboard() {
                     </BarChart>
                   </ResponsiveContainer>
                 ) : (
-                  <p style={{ color: '#94a3b8', textAlign: 'center', marginTop: 80 }}>Loading visual metrics...</p>
+                  <p style={{ color: '#94a3b8', textAlign: 'center', marginTop: 80 }}>No category records in database.</p>
                 )}
               </div>
             </div>
@@ -320,10 +385,10 @@ export default function AdminDashboard() {
             <div className="admin-chart-card">
               <div className="admin-chart-header">
                 <h3>Severity Risk Matrix</h3>
-                <span className="admin-badge">Physical Donut</span>
+                <span className="admin-badge">Real-Time DB</span>
               </div>
               <div style={{ height: 260 }}>
-                {analytics?.severityBreakdown ? (
+                {analytics?.severityBreakdown && analytics.severityBreakdown.length > 0 ? (
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -356,17 +421,17 @@ export default function AdminDashboard() {
                     </PieChart>
                   </ResponsiveContainer>
                 ) : (
-                  <p style={{ color: '#94a3b8', textAlign: 'center', marginTop: 80 }}>Loading visual metrics...</p>
+                  <p style={{ color: '#94a3b8', textAlign: 'center', marginTop: 80 }}>No severity records in database.</p>
                 )}
               </div>
             </div>
           </div>
 
-          {/* 24-Hour Velocity Curve */}
+          {/* Dynamic 24-Hour Velocity Curve */}
           <div className="admin-chart-card" style={{ marginBottom: 28 }}>
             <div className="admin-chart-header">
-              <h3>24-Hour Reporting Velocity Curve</h3>
-              <span className="admin-badge">Telemetry Cadence</span>
+              <h3>24-Hour Reporting Velocity Curve (Dynamic DB Data)</h3>
+              <span className="admin-badge">Last 24 Hours</span>
             </div>
             <div style={{ height: 200 }}>
               <ResponsiveContainer width="100%" height="100%">
@@ -397,7 +462,7 @@ export default function AdminDashboard() {
           <div className="admin-table-container">
             <div style={{ marginBottom: 18 }}>
               <h3 style={{ margin: 0, fontSize: 16, fontFamily: 'var(--font-display)' }}>Critical Urban Risk Zones & Tactile Index</h3>
-              <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+              <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--skeuo-text-dim)' }}>
                 Monitored physical perimeters and dynamic 0–100 safety scores
               </p>
             </div>
@@ -437,8 +502,8 @@ export default function AdminDashboard() {
           <div className="admin-table-controls">
             <div>
               <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Incident Moderation Center</h2>
-              <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
-                Review and physically authorize crowd-sourced safety hazards
+              <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--skeuo-text-dim)' }}>
+                Review and physically authorize crowd-sourced safety hazards in database
               </p>
             </div>
             
@@ -497,7 +562,7 @@ export default function AdminDashboard() {
               {filteredIncidents.length === 0 ? (
                 <tr>
                   <td colSpan="9" style={{ textAlign: 'center', color: '#94a3b8', padding: 28 }}>
-                    No incident reports match this filter or search query.
+                    No incident reports found in database matching this criteria.
                   </td>
                 </tr>
               ) : (
@@ -577,14 +642,14 @@ export default function AdminDashboard() {
         <div>
           <div style={{ marginBottom: 20 }}>
             <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Tactile SOS Emergency Dispatch Center</h2>
-            <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--skeuo-text-dim)' }}>
               Physical distress console with GPS coordinates and push-button responder triggers
             </p>
           </div>
 
           <div className="admin-sos-grid">
             {sosRequests.length === 0 ? (
-              <p style={{ color: '#94a3b8' }}>No active emergency requests.</p>
+              <p style={{ color: '#94a3b8' }}>No active emergency requests in database.</p>
             ) : (
               sosRequests.map((sos) => (
                 <div key={sos.id} className={`admin-sos-card ${sos.status}`}>
@@ -637,7 +702,7 @@ export default function AdminDashboard() {
         <div className="admin-table-container">
           <div style={{ marginBottom: 16 }}>
             <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Emergency Services Network</h2>
-            <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--skeuo-text-dim)' }}>
               Police stations, hospitals, and fire stations connected to the SafeRoute physical response matrix
             </p>
           </div>
@@ -682,7 +747,7 @@ export default function AdminDashboard() {
         <div className="admin-table-container">
           <div style={{ marginBottom: 16 }}>
             <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Registered Citizen Directory</h2>
-            <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--skeuo-text-dim)' }}>
               Registered user accounts, contact credentials, and platform access roles
             </p>
           </div>
@@ -719,8 +784,4 @@ export default function AdminDashboard() {
       )}
     </div>
   );
-}
-
-function varCSS(varName) {
-  return `var(${varName})`;
 }
