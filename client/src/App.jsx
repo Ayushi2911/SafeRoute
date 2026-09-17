@@ -3,61 +3,77 @@ import AdminDashboard from './components/admin/AdminDashboard'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import './components/admin/admin.css'
 import './App.css'
 
 function App() {
-  const [currentView, setCurrentView] = useState('admin')
+  const [currentView, setCurrentView] = useState('admin') // 'home', 'admin'
   const [count, setCount] = useState(0)
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Platform Navigation Bar */}
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#070a10' }}>
+      {/* Universal Tactical Agency Bar */}
       <nav style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '12px 24px',
-        backgroundColor: '#0f172a',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        background: 'linear-gradient(135deg, #182030 0%, #0d1320 100%)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.7)',
         position: 'sticky',
         top: 0,
-        zIndex: 1000
+        zIndex: 1000,
+        flexWrap: 'wrap',
+        gap: '12px'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '20px' }}>🛡️</span>
-          <span style={{ fontWeight: 800, fontSize: '18px', color: '#6366f1', letterSpacing: '-0.02em' }}>SafeRoute</span>
+          <div>
+            <span style={{ fontWeight: 800, fontSize: '16px', color: '#7df4ff', letterSpacing: '0.04em', fontFamily: 'Space Grotesk, sans-serif' }}>SAFEROUTE</span>
+            <span style={{ fontSize: '10px', color: '#849495', marginLeft: '8px', fontFamily: 'JetBrains Mono, monospace' }}>// UNIFIED PLATFORM</span>
+          </div>
         </div>
         
-        <div style={{ display: 'flex', gap: '10px' }}>
+        {/* Navigation Switcher */}
+        <div style={{ display: 'flex', gap: '8px' }}>
           <button
             onClick={() => setCurrentView('home')}
             style={{
-              padding: '6px 14px',
-              borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              background: currentView === 'home' ? '#6366f1' : '#1e293b',
-              color: '#ffffff',
+              padding: '7px 14px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              background: currentView === 'home' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
+              color: currentView === 'home' ? '#002022' : '#849495',
               cursor: 'pointer',
-              fontWeight: 600,
-              fontSize: '13px',
-              transition: 'all 0.2s'
+              fontWeight: 700,
+              fontSize: '11px',
+              fontFamily: 'JetBrains Mono, monospace',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              boxShadow: currentView === 'home' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
+              transition: 'all 0.15s ease'
             }}
           >
-            🏠 Home View
+            🏠 Home
           </button>
           
           <button
             onClick={() => setCurrentView('admin')}
             style={{
-              padding: '6px 14px',
-              borderRadius: '8px',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              background: currentView === 'admin' ? '#6366f1' : '#1e293b',
-              color: '#ffffff',
+              padding: '7px 14px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              background: currentView === 'admin' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
+              color: currentView === 'admin' ? '#002022' : '#849495',
               cursor: 'pointer',
-              fontWeight: 600,
-              fontSize: '13px',
-              transition: 'all 0.2s'
+              fontWeight: 700,
+              fontSize: '11px',
+              fontFamily: 'JetBrains Mono, monospace',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              boxShadow: currentView === 'admin' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
+              transition: 'all 0.15s ease'
             }}
           >
             📊 Admin & Analytics
@@ -65,12 +81,12 @@ function App() {
         </div>
       </nav>
 
-      {/* Main Content Area */}
+      {/* Main View Area */}
       <div style={{ flex: 1 }}>
         {currentView === 'admin' ? (
           <AdminDashboard />
         ) : (
-          <main>
+          <main style={{ padding: '30px' }}>
             <section id="center">
               <div className="hero">
                 <img src={heroImg} className="base" width="170" height="179" alt="" />
@@ -78,10 +94,8 @@ function App() {
                 <img src={viteLogo} className="vite" alt="Vite logo" />
               </div>
               <div>
-                <h1>SafeRoute Platform</h1>
-                <p>
-                  Smart Public Safety & Emergency Assistance Platform
-                </p>
+                <h1 style={{ fontFamily: 'Space Grotesk, sans-serif' }}>SafeRoute Platform</h1>
+                <p>Smart Public Safety & Emergency Assistance Platform</p>
               </div>
               <button
                 type="button"
@@ -121,14 +135,14 @@ function App() {
                   <use href="/icons.svg#social-icon"></use>
                 </svg>
                 <h2>Connect with us</h2>
-                <p>Join the Vite community</p>
+                <p>Join the SafeRoute Community</p>
                 <ul>
                   <li>
-                    <a href="https://github.com/vitejs/vite" target="_blank" rel="noreferrer">
+                    <a href="https://github.com/Ayushi2911/SafeRoute" target="_blank" rel="noreferrer">
                       <svg className="button-icon" role="presentation" aria-hidden="true">
                         <use href="/icons.svg#github-icon"></use>
                       </svg>
-                      GitHub
+                      GitHub Repo
                     </a>
                   </li>
                   <li>
@@ -139,28 +153,9 @@ function App() {
                       Discord
                     </a>
                   </li>
-                  <li>
-                    <a href="https://x.com/vite_js" target="_blank" rel="noreferrer">
-                      <svg className="button-icon" role="presentation" aria-hidden="true">
-                        <use href="/icons.svg#x-icon"></use>
-                      </svg>
-                      X.com
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://bsky.app/profile/vite.dev" target="_blank" rel="noreferrer">
-                      <svg className="button-icon" role="presentation" aria-hidden="true">
-                        <use href="/icons.svg#bluesky-icon"></use>
-                      </svg>
-                      Bluesky
-                    </a>
-                  </li>
                 </ul>
               </div>
             </section>
-
-            <div className="ticks"></div>
-            <section id="spacer"></section>
           </main>
         )}
       </div>

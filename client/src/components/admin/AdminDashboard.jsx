@@ -114,7 +114,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // Export Safety CSV Report (Day 5 feature)
+  // Export Safety CSV Report
   const handleExportCSV = () => {
     const headers = ['ID,Category,Severity,Status,Address,Latitude,Longitude,Reporter,Date\n'];
     const rows = incidents.map(i => 
@@ -159,28 +159,27 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-container">
-      {/* Header */}
+      {/* Skeuomorphic Beveled Header */}
       <header className="admin-header">
         <div>
           <div className="admin-header-title">
-            <div className="admin-beacon" title="Live Operations Standby" />
-            <span className="admin-badge">Platform Operations</span>
-            <h1>SafeRoute Administration & Intelligence</h1>
+            <div className="admin-beacon" title="Hardware Operational Sensor Active" />
+            <span className="admin-badge">SkeuoControl v3.0</span>
+            <h1>SafeRoute Tactile Command & Analytics</h1>
           </div>
-          <p>Real-time public safety analytics, AI threat triage, incident moderation, and SOS dispatch center</p>
+          <p>Physical-feel public safety administration, AI threat triage, and tactile dispatch controls</p>
         </div>
 
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
-          <button className="admin-pill-btn" onClick={fetchData} title="Resync Data">
-            <RefreshCw size={13} style={{ marginRight: 6, verticalAlign: 'middle' }} /> Refresh
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <button className="admin-pill-btn" onClick={fetchData} title="Resync Hardware Data">
+            <RefreshCw size={13} style={{ marginRight: 6, verticalAlign: 'middle' }} /> Resync
           </button>
 
           <button 
-            className="admin-pill-btn" 
+            className="admin-action-btn verify" 
             onClick={handleExportCSV}
-            style={{ backgroundColor: 'rgba(5, 150, 105, 0.15)', color: '#6ee7b7', border: '1px solid rgba(5, 150, 105, 0.3)' }}
           >
-            <Download size={13} style={{ marginRight: 6, verticalAlign: 'middle' }} /> Export CSV
+            <Download size={13} /> Export CSV
           </button>
           
           <nav className="admin-nav-tabs">
@@ -194,7 +193,7 @@ export default function AdminDashboard() {
               className={`admin-nav-btn ${activeTab === 'incidents' ? 'active' : ''}`}
               onClick={() => setActiveTab('incidents')}
             >
-              <AlertTriangle size={15} /> Incident Moderation
+              <AlertTriangle size={15} /> Moderation
               {stats.pendingIncidents > 0 && (
                 <span className="status-tag pending" style={{ padding: '1px 6px', fontSize: '10px' }}>
                   {stats.pendingIncidents}
@@ -216,7 +215,7 @@ export default function AdminDashboard() {
               className={`admin-nav-btn ${activeTab === 'services' ? 'active' : ''}`}
               onClick={() => setActiveTab('services')}
             >
-              <Building2 size={15} /> Emergency Services
+              <Building2 size={15} /> Services
             </button>
             <button
               className={`admin-nav-btn ${activeTab === 'users' ? 'active' : ''}`}
@@ -228,7 +227,7 @@ export default function AdminDashboard() {
         </div>
       </header>
 
-      {/* KPI Metric Cards */}
+      {/* Skeuomorphic Extruded Metric Cards */}
       <div className="admin-stats-grid">
         <div className="admin-stat-card">
           <div className="admin-stat-top">
@@ -239,7 +238,7 @@ export default function AdminDashboard() {
           </div>
           <h2 className="admin-stat-number">{stats.totalUsers}</h2>
           <div className="admin-stat-footer">
-            <Zap size={13} color="#0284c7" /> Active verified platform accounts
+            <Zap size={13} color="#818cf8" /> Verified platform members
           </div>
         </div>
 
@@ -252,46 +251,46 @@ export default function AdminDashboard() {
           </div>
           <h2 className="admin-stat-number">{stats.pendingIncidents}</h2>
           <div className="admin-stat-footer">
-            <Clock size={13} color="#d97706" /> Requires immediate admin audit
+            <Clock size={13} color="#fbbf24" /> Requires tactile authorization
           </div>
         </div>
 
         <div className="admin-stat-card">
           <div className="admin-stat-top">
-            <span className="admin-stat-label">Verified Safety Hazards</span>
+            <span className="admin-stat-label">Verified Hazards</span>
             <div className="admin-stat-icon success">
               <ShieldCheck size={18} />
             </div>
           </div>
           <h2 className="admin-stat-number">{stats.verifiedIncidents}</h2>
           <div className="admin-stat-footer">
-            <CheckCircle size={13} color="#059669" /> Active in public safety routing algorithm
+            <CheckCircle size={13} color="#34d399" /> Mapped to public algorithm
           </div>
         </div>
 
         <div className="admin-stat-card">
           <div className="admin-stat-top">
-            <span className="admin-stat-label">Active Distress (SOS)</span>
+            <span className="admin-stat-label">Active SOS Beacons</span>
             <div className="admin-stat-icon danger">
               <ShieldAlert size={18} />
             </div>
           </div>
-          <h2 className="admin-stat-number" style={{ color: '#fda4af' }}>{stats.activeSos}</h2>
+          <h2 className="admin-stat-number" style={{ color: '#fb7185' }}>{stats.activeSos}</h2>
           <div className="admin-stat-footer">
-            <Activity size={13} color="#e11d48" /> Units dispatched on active standby
+            <Activity size={13} color="#fb7185" /> Live emergency dispatch units
           </div>
         </div>
       </div>
 
-      {/* TAB 1: Visual Analytics & Charts */}
+      {/* TAB 1: Visual Analytics */}
       {activeTab === 'overview' && (
         <>
           <div className="admin-charts-grid">
-            {/* Category Chart */}
+            {/* Category Chart Plate */}
             <div className="admin-chart-card">
               <div className="admin-chart-header">
                 <h3>Incident Distribution by Category</h3>
-                <span className="admin-badge">Aggregate</span>
+                <span className="admin-badge">Hardware Vector</span>
               </div>
               <div style={{ height: 260 }}>
                 {analytics?.categoryBreakdown ? (
@@ -301,13 +300,14 @@ export default function AdminDashboard() {
                       <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
                       <Tooltip 
                         contentStyle={{ 
-                          backgroundColor: '#1e293b', 
-                          border: '1px solid #334155', 
-                          borderRadius: 8, 
-                          color: '#f8fafc' 
+                          backgroundColor: '#141c2e', 
+                          border: '1px solid rgba(255, 255, 255, 0.1)', 
+                          borderRadius: 10, 
+                          color: '#f8fafc',
+                          boxShadow: '0 8px 16px rgba(0,0,0,0.5)'
                         }} 
                       />
-                      <Bar dataKey="count" fill="#4f46e5" radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="count" fill="#4f46e5" radius={[6, 6, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 ) : (
@@ -316,11 +316,11 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            {/* Severity Proportions */}
+            {/* Severity Proportions Plate */}
             <div className="admin-chart-card">
               <div className="admin-chart-header">
-                <h3>Severity Risk Proportions</h3>
-                <span className="admin-badge">Threat Matrix</span>
+                <h3>Severity Risk Matrix</h3>
+                <span className="admin-badge">Physical Donut</span>
               </div>
               <div style={{ height: 260 }}>
                 {analytics?.severityBreakdown ? (
@@ -333,8 +333,8 @@ export default function AdminDashboard() {
                         cx="50%"
                         cy="50%"
                         innerRadius={60}
-                        outerRadius={90}
-                        paddingAngle={4}
+                        outerRadius={92}
+                        paddingAngle={5}
                       >
                         {analytics.severityBreakdown.map((entry, index) => (
                           <Cell 
@@ -345,13 +345,14 @@ export default function AdminDashboard() {
                       </Pie>
                       <Tooltip 
                         contentStyle={{ 
-                          backgroundColor: '#1e293b', 
-                          border: '1px solid #334155', 
-                          borderRadius: 8, 
-                          color: '#f8fafc' 
+                          backgroundColor: '#141c2e', 
+                          border: '1px solid rgba(255, 255, 255, 0.1)', 
+                          borderRadius: 10, 
+                          color: '#f8fafc',
+                          boxShadow: '0 8px 16px rgba(0,0,0,0.5)' 
                         }} 
                       />
-                      <Legend wrapperStyle={{ fontSize: '12px' }} />
+                      <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 ) : (
@@ -362,17 +363,17 @@ export default function AdminDashboard() {
           </div>
 
           {/* 24-Hour Velocity Curve */}
-          <div className="admin-chart-card" style={{ marginBottom: 24 }}>
+          <div className="admin-chart-card" style={{ marginBottom: 28 }}>
             <div className="admin-chart-header">
-              <h3>24-Hour Incident Reporting Cadence</h3>
-              <span className="admin-badge">Time Curve</span>
+              <h3>24-Hour Reporting Velocity Curve</h3>
+              <span className="admin-badge">Telemetry Cadence</span>
             </div>
             <div style={{ height: 200 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={velocityData}>
                   <defs>
-                    <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#0284c7" stopOpacity={0.3}/>
+                    <linearGradient id="skeuoTealGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#0284c7" stopOpacity={0.4}/>
                       <stop offset="95%" stopColor="#0284c7" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
@@ -380,23 +381,24 @@ export default function AdminDashboard() {
                   <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: '#1e293b', 
-                      border: '1px solid #334155', 
-                      borderRadius: 8 
+                      backgroundColor: '#141c2e', 
+                      border: '1px solid rgba(255, 255, 255, 0.1)', 
+                      borderRadius: 10,
+                      boxShadow: '0 8px 16px rgba(0,0,0,0.5)' 
                     }} 
                   />
-                  <Area type="monotone" dataKey="reports" stroke="#0284c7" strokeWidth={2} fillOpacity={1} fill="url(#areaGradient)" />
+                  <Area type="monotone" dataKey="reports" stroke="#0284c7" strokeWidth={2.5} fillOpacity={1} fill="url(#skeuoTealGrad)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
 
-          {/* Risk Zones Safety Score Overview (Day 4/5) */}
+          {/* Risk Zones Safety Score Overview */}
           <div className="admin-table-container">
-            <div style={{ marginBottom: 16 }}>
-              <h3 style={{ margin: 0, fontSize: 16, fontFamily: 'var(--font-display)' }}>Critical Urban Risk Zones & Safety Index</h3>
-              <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--sr-text-secondary)' }}>
-                Identified safety zones and dynamic 0–100 safety scores calculated from incident clusters
+            <div style={{ marginBottom: 18 }}>
+              <h3 style={{ margin: 0, fontSize: 16, fontFamily: 'var(--font-display)' }}>Critical Urban Risk Zones & Tactile Index</h3>
+              <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+                Monitored physical perimeters and dynamic 0–100 safety scores
               </p>
             </div>
             <table className="admin-table">
@@ -414,11 +416,11 @@ export default function AdminDashboard() {
                 {riskZones.map(z => (
                   <tr key={z.id}>
                     <td style={{ fontFamily: 'var(--font-mono)' }}>ZONE-0{z.id}</td>
-                    <td style={{ fontWeight: 600 }}>{z.area_name}</td>
+                    <td style={{ fontWeight: 700, color: '#ffffff' }}>{z.area_name}</td>
                     <td style={{ fontFamily: 'var(--font-mono)' }}>{Number(z.latitude).toFixed(4)}, {Number(z.longitude).toFixed(4)}</td>
                     <td>{z.radius} meters</td>
                     <td><span className={`status-tag ${z.risk_level}`}>{z.risk_level}</span></td>
-                    <td style={{ fontWeight: 700, color: z.safety_score > 75 ? '#6ee7b7' : z.safety_score > 50 ? '#fcd34d' : '#fda4af' }}>
+                    <td style={{ fontWeight: 800, color: z.safety_score > 75 ? '#34d399' : z.safety_score > 50 ? '#fbbf24' : '#fb7185' }}>
                       {z.safety_score} / 100
                     </td>
                   </tr>
@@ -434,29 +436,30 @@ export default function AdminDashboard() {
         <div className="admin-table-container">
           <div className="admin-table-controls">
             <div>
-              <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Incident Moderation Queue</h2>
-              <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--sr-text-secondary)' }}>
-                Review crowd-sourced hazard reports with real-time AI threat analysis & verification actions
+              <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Incident Moderation Center</h2>
+              <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+                Review and physically authorize crowd-sourced safety hazards
               </p>
             </div>
             
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
               <div style={{ position: 'relative' }}>
-                <Search size={14} style={{ position: 'absolute', left: 10, top: 9, color: '#64748b' }} />
+                <Search size={14} style={{ position: 'absolute', left: 12, top: 11, color: '#64748b' }} />
                 <input
                   type="text"
                   placeholder="Search incidents, address..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{
-                    backgroundColor: 'var(--sr-bg)',
-                    border: '1px solid var(--sr-border)',
-                    borderRadius: 6,
-                    padding: '6px 12px 6px 30px',
+                    backgroundColor: 'var(--skeuo-bg)',
+                    boxShadow: 'var(--skeuo-inset-sm)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    borderRadius: 10,
+                    padding: '8px 14px 8px 34px',
                     color: '#f8fafc',
                     fontSize: 12,
                     outline: 'none',
-                    width: 180
+                    width: 200
                   }}
                 />
               </div>
@@ -487,7 +490,7 @@ export default function AdminDashboard() {
                 <th>Description</th>
                 <th>Reporter</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th>Tactile Action</th>
               </tr>
             </thead>
             <tbody>
@@ -501,7 +504,7 @@ export default function AdminDashboard() {
                 filteredIncidents.map((item) => (
                   <tr key={item.id}>
                     <td style={{ fontFamily: 'var(--font-mono)' }}>#{item.id}</td>
-                    <td style={{ fontWeight: 600 }}>{item.category}</td>
+                    <td style={{ fontWeight: 700, color: '#ffffff' }}>{item.category}</td>
                     <td>
                       <span className={`status-tag ${item.severity?.toLowerCase()}`}>
                         {item.severity}
@@ -525,7 +528,7 @@ export default function AdminDashboard() {
                       )}
                     </td>
                     <td>
-                      <div style={{ fontWeight: 500 }}>{item.address || 'GPS Coordinates'}</div>
+                      <div style={{ fontWeight: 600, color: '#f8fafc' }}>{item.address || 'GPS Coordinates'}</div>
                       <div style={{ fontSize: 11, color: '#64748b', fontFamily: 'var(--font-mono)' }}>
                         <MapPin size={10} style={{ display: 'inline', marginRight: 3 }} />
                         {Number(item.latitude).toFixed(4)}, {Number(item.longitude).toFixed(4)}
@@ -533,7 +536,7 @@ export default function AdminDashboard() {
                     </td>
                     <td style={{ maxWidth: 240, color: '#94a3b8' }}>{item.description}</td>
                     <td>
-                      <div style={{ fontWeight: 500 }}>{item.reporter_name || 'Anonymous'}</div>
+                      <div style={{ fontWeight: 600, color: '#ffffff' }}>{item.reporter_name || 'Anonymous'}</div>
                       <div style={{ fontSize: 11, color: '#64748b' }}>{item.reporter_phone || item.reporter_email || '-'}</div>
                     </td>
                     <td>
@@ -558,7 +561,7 @@ export default function AdminDashboard() {
                           </button>
                         </div>
                       ) : (
-                        <span style={{ fontSize: 11, color: '#64748b' }}>Reviewed</span>
+                        <span style={{ fontSize: 11, color: '#64748b', fontWeight: 600 }}>Reviewed</span>
                       )}
                     </td>
                   </tr>
@@ -572,10 +575,10 @@ export default function AdminDashboard() {
       {/* TAB 3: SOS Emergency Monitor */}
       {activeTab === 'sos' && (
         <div>
-          <div style={{ marginBottom: 18 }}>
-            <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Emergency Distress Response Center</h2>
-            <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--sr-text-secondary)' }}>
-              Active SOS distress beacons with live GPS coordinates and responder dispatch status controls
+          <div style={{ marginBottom: 20 }}>
+            <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Tactile SOS Emergency Dispatch Center</h2>
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+              Physical distress console with GPS coordinates and push-button responder triggers
             </p>
           </div>
 
@@ -588,37 +591,37 @@ export default function AdminDashboard() {
                   {sos.status === 'pending' && <div className="admin-sos-pulse" />}
                   
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                    <span style={{ fontSize: 11, color: '#fda4af', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>EMERGENCY #{sos.id}</span>
+                    <span style={{ fontSize: 11, color: '#fb7185', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>EMERGENCY #{sos.id}</span>
                     <span className={`status-tag ${sos.status}`}>{sos.status}</span>
                   </div>
 
-                  <h3 style={{ margin: '0 0 8px', fontSize: 16, fontFamily: 'var(--font-display)' }}>{sos.emergency_type}</h3>
+                  <h3 style={{ margin: '0 0 8px', fontSize: 17, fontFamily: 'var(--font-display)', color: '#ffffff' }}>{sos.emergency_type}</h3>
                   <p style={{ margin: '0 0 14px', fontSize: 13, color: '#cbd5e1' }}>"{sos.message}"</p>
 
-                  <div style={{ fontSize: 12, color: '#94a3b8', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 10, marginBottom: 14 }}>
-                    <div><strong>Citizen:</strong> {sos.user_name || 'Emergency User'} ({sos.user_phone || 'N/A'})</div>
+                  <div style={{ fontSize: 12, color: '#94a3b8', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 10, marginBottom: 16 }}>
+                    <div><strong style={{ color: '#ffffff' }}>Citizen:</strong> {sos.user_name || 'Emergency User'} ({sos.user_phone || 'N/A'})</div>
                     <div style={{ fontFamily: 'var(--font-mono)', marginTop: 2 }}>
-                      <strong>GPS:</strong> {Number(sos.latitude).toFixed(4)}, {Number(sos.longitude).toFixed(4)}
+                      <strong style={{ color: '#ffffff' }}>GPS Vector:</strong> {Number(sos.latitude).toFixed(4)}, {Number(sos.longitude).toFixed(4)}
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', gap: 8 }}>
+                  <div style={{ display: 'flex', gap: 10 }}>
                     {sos.status === 'pending' && (
                       <button
                         className="admin-action-btn verify"
-                        style={{ flex: 1, justifyContent: 'center' }}
+                        style={{ flex: 1, justifyContent: 'center', padding: '10px' }}
                         onClick={() => handleUpdateSosStatus(sos.id, 'responding')}
                       >
-                        <Radio size={13} /> Dispatch Responders
+                        <Radio size={14} /> Dispatch Responders
                       </button>
                     )}
                     {sos.status === 'responding' && (
                       <button
                         className="admin-action-btn verify"
-                        style={{ flex: 1, justifyContent: 'center' }}
+                        style={{ flex: 1, justifyContent: 'center', padding: '10px' }}
                         onClick={() => handleUpdateSosStatus(sos.id, 'resolved')}
                       >
-                        <CheckCircle size={13} /> Mark Resolved
+                        <CheckCircle size={14} /> Mark Resolved
                       </button>
                     )}
                   </div>
@@ -629,13 +632,13 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* TAB 4: Emergency Services Directory (Day 4/5) */}
+      {/* TAB 4: Emergency Services Directory */}
       {activeTab === 'services' && (
         <div className="admin-table-container">
           <div style={{ marginBottom: 16 }}>
             <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Emergency Services Network</h2>
-            <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--sr-text-secondary)' }}>
-              Police stations, hospitals, and fire stations connected to the SafeRoute emergency assistance grid
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
+              Police stations, hospitals, and fire stations connected to the SafeRoute physical response matrix
             </p>
           </div>
 
@@ -655,7 +658,7 @@ export default function AdminDashboard() {
               {services.map(s => (
                 <tr key={s.id}>
                   <td style={{ fontFamily: 'var(--font-mono)' }}>SVC-0{s.id}</td>
-                  <td style={{ fontWeight: 600 }}>{s.name}</td>
+                  <td style={{ fontWeight: 700, color: '#ffffff' }}>{s.name}</td>
                   <td>
                     <span className={`status-tag ${s.type === 'police' ? 'low' : s.type === 'hospital' ? 'verified' : 'medium'}`}>
                       {s.type.replace('_', ' ')}
@@ -679,7 +682,7 @@ export default function AdminDashboard() {
         <div className="admin-table-container">
           <div style={{ marginBottom: 16 }}>
             <h2 style={{ margin: 0, fontSize: 18, fontFamily: 'var(--font-display)' }}>Registered Citizen Directory</h2>
-            <p style={{ margin: '4px 0 0', fontSize: 12, color: 'var(--sr-text-secondary)' }}>
+            <p style={{ margin: '4px 0 0', fontSize: 12, color: varCSS('--skeuo-text-dim') }}>
               Registered user accounts, contact credentials, and platform access roles
             </p>
           </div>
@@ -699,7 +702,7 @@ export default function AdminDashboard() {
               {users.map((u) => (
                 <tr key={u.id}>
                   <td style={{ fontFamily: 'var(--font-mono)' }}>USR-00{u.id}</td>
-                  <td style={{ fontWeight: 600 }}>{u.name}</td>
+                  <td style={{ fontWeight: 700, color: '#ffffff' }}>{u.name}</td>
                   <td style={{ color: '#cbd5e1' }}>{u.email}</td>
                   <td style={{ color: '#94a3b8' }}>{u.phone || '-'}</td>
                   <td>
@@ -716,4 +719,8 @@ export default function AdminDashboard() {
       )}
     </div>
   );
+}
+
+function varCSS(varName) {
+  return `var(${varName})`;
 }

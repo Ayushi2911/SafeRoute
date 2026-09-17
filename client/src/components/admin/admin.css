@@ -1,30 +1,51 @@
-/* SafeRoute Minimalist, Human-Centered Design System */
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+/* SafeRoute Obsidian Command - Agency Skeuomorphic Design System */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Clean, Human-Friendly Matte Palette (Zero Neon / Zero Glow) */
-  --sr-bg: #0f172a;               /* Deep slate background */
-  --sr-card: #1e293b;             /* Solid card surface */
-  --sr-card-hover: #24344d;       /* Subtle hover state */
-  --sr-border: #334155;           /* Clean solid border */
-  --sr-border-subtle: #1e293b;
-
-  /* Natural, Non-Fluorescent Color Tokens */
-  --sr-accent: #4f46e5;           /* Muted Indigo */
-  --sr-accent-bg: #312e81;        /* Deep Indigo base */
-  --sr-teal: #0284c7;             /* Soft Sky Blue */
-  --sr-emerald: #059669;          /* Earthy Forest Green */
-  --sr-amber: #d97706;            /* Natural Warm Amber */
-  --sr-rose: #e11d48;             /* Natural Rose Red */
+  /* Machined Alloy Palette */
+  --obsidian-base: #070a10;
+  --obsidian-chassis: #0d1320;
+  --obsidian-plate: #131926;
+  --obsidian-plate-raised: #1c2436;
+  --obsidian-recessed: #080c13;
   
-  /* Text & Readability */
-  --sr-text-primary: #f8fafc;     /* Crisp readable text */
-  --sr-text-secondary: #94a3b8;   /* Muted secondary text */
-  --sr-text-muted: #64748b;       /* Darker description text */
+  /* 135deg Directional Lighting & Bevel System */
+  --skeuo-specular-rim: rgba(255, 255, 255, 0.18);
+  --skeuo-specular-edge: #38455d;
+  --skeuo-ambient-shadow: rgba(0, 0, 0, 0.85);
 
-  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-body: 'Geist', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', monospace;
+  /* Tier +1: Chassis Module Plates (Extruded Machined Billets) */
+  --chassis-plate-shadow: 
+    0 12px 28px -4px rgba(0, 0, 0, 0.85),
+    0 4px 10px rgba(0, 0, 0, 0.6),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.16),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.7);
+
+  /* Tier -1: Countersunk Recessed Pockets & Meter Wells */
+  --recessed-well: 
+    inset 3px 3px 8px rgba(0, 0, 0, 0.95),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* Tier +2: Physical Machined Titanium Actuators & Buttons */
+  --actuator-raised: 
+    0 4px 10px rgba(0, 0, 0, 0.75),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.25),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.6);
+
+  --actuator-pressed: 
+    inset 2px 2px 6px rgba(0, 0, 0, 0.95),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.08);
+
+  /* Indicator Pilot Lamp Glows */
+  --glow-emerald: 0 0 10px 2px rgba(0, 230, 118, 0.55);
+  --glow-amber: 0 0 10px 2px rgba(255, 153, 0, 0.55);
+  --glow-ruby: 0 0 10px 2px rgba(255, 23, 68, 0.55);
+  --glow-cyan: 0 0 10px 2px rgba(0, 240, 255, 0.55);
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 html {
@@ -34,29 +55,34 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--sr-bg);
-  color: var(--sr-text-primary);
-  font-family: var(--font-body);
+  background-color: var(--obsidian-base);
+  color: #dde2f5;
+  font-family: var(--font-mono);
   overflow-x: hidden;
 }
 
 .admin-container {
   min-height: 100vh;
-  background-color: var(--sr-bg);
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(28, 36, 54, 0.4) 0%, transparent 65%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px),
+    var(--obsidian-base);
   padding: 24px;
   box-sizing: border-box;
 }
 
-/* Header */
+/* Master Command Console Header (Milled Titanium Deck) */
 .admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 24px;
-  background-color: var(--sr-card);
-  border: 1px solid var(--sr-border);
-  border-radius: 12px;
+  padding: 20px 26px;
+  background: linear-gradient(135deg, #182030 0%, #0d1320 100%);
+  box-shadow: var(--chassis-plate-shadow);
+  border-radius: 8px;
   margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
   flex-wrap: wrap;
   gap: 16px;
 }
@@ -64,102 +90,119 @@ body {
 .admin-header-title {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 
+/* Countersunk Glass Pilot Bulb */
 .admin-beacon {
-  width: 8px;
-  height: 8px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background-color: var(--sr-teal);
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #00f0ff 40%, #006970 100%);
+  box-shadow: var(--glow-cyan), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  position: relative;
 }
 
+/* Laser-Etched Nameplate Badge */
 .admin-badge {
-  background-color: rgba(79, 70, 229, 0.15);
-  color: #c7d2fe;
-  border: 1px solid rgba(79, 70, 229, 0.3);
-  padding: 3px 8px;
-  border-radius: 6px;
+  background: var(--obsidian-recessed);
+  color: #7df4ff;
+  box-shadow: var(--recessed-well);
+  padding: 4px 10px;
+  border-radius: 4px;
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .admin-header h1 {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 20px;
+  font-family: var(--font-heading);
+  font-size: 22px;
   font-weight: 700;
-  color: var(--sr-text-primary);
-  letter-spacing: -0.01em;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15), 0 -1px 0 rgba(0, 0, 0, 0.8);
 }
 
 .admin-header p {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: var(--sr-text-secondary);
+  margin: 3px 0 0;
+  font-size: 12px;
+  color: #849495;
+  letter-spacing: 0.02em;
 }
 
-/* Navigation Tabs */
+/* Hardware Push-Button Cassette Tray */
 .admin-nav-tabs {
   display: flex;
   gap: 6px;
-  background-color: var(--sr-bg);
-  padding: 4px;
-  border-radius: 8px;
-  border: 1px solid var(--sr-border);
+  background: var(--obsidian-recessed);
+  padding: 5px;
+  border-radius: 6px;
+  box-shadow: var(--recessed-well);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   flex-wrap: wrap;
 }
 
 .admin-nav-btn {
-  background: transparent;
-  border: none;
-  color: var(--sr-text-secondary);
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
+  background: linear-gradient(135deg, #1c2436 0%, #111622 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #849495;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: background-color 0.2s, color 0.2s;
+  gap: 7px;
+  box-shadow: var(--actuator-raised);
+  transition: all 0.12s ease;
 }
 
 .admin-nav-btn:hover {
-  color: var(--sr-text-primary);
-  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  background: linear-gradient(135deg, #243048 0%, #141b2a 100%);
+}
+
+.admin-nav-btn:active {
+  box-shadow: var(--actuator-pressed);
+  transform: translateY(1px);
 }
 
 .admin-nav-btn.active {
-  background-color: var(--sr-accent);
-  color: #ffffff;
-  font-weight: 600;
+  background: linear-gradient(135deg, #00f0ff 0%, #008b94 100%);
+  color: #002022;
+  box-shadow: var(--glow-cyan), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* KPI Cards Grid */
+/* 4 Milled Metal Metric Cassettes */
 .admin-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
   margin-bottom: 24px;
 }
 
 .admin-stat-card {
-  background-color: var(--sr-card);
-  border: 1px solid var(--sr-border);
-  border-radius: 12px;
+  background: linear-gradient(135deg, #161e2e 0%, #0d1320 100%);
+  box-shadow: var(--chassis-plate-shadow);
+  border-radius: 6px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.admin-stat-card:hover {
-  transform: translateY(-2px);
-  border-color: #475569;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
 }
 
 .admin-stat-top {
@@ -170,83 +213,98 @@ body {
 }
 
 .admin-stat-label {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--sr-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #849495;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.9);
 }
 
+/* Sunken Beveled Icon Pod */
 .admin-stat-icon {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--recessed-well);
+  background: var(--obsidian-recessed);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.admin-stat-icon.primary { background-color: rgba(79, 70, 229, 0.15); color: #a5b4fc; }
-.admin-stat-icon.warning { background-color: rgba(217, 119, 6, 0.15); color: #fcd34d; }
-.admin-stat-icon.success { background-color: rgba(5, 150, 105, 0.15); color: #6ee7b7; }
-.admin-stat-icon.danger { background-color: rgba(225, 29, 72, 0.15); color: #fda4af; }
+.admin-stat-icon.primary { color: #7df4ff; }
+.admin-stat-icon.warning { color: #ffb86f; }
+.admin-stat-icon.success { color: #62ff96; }
+.admin-stat-icon.danger { color: #ffb4ab; }
 
+/* Sunken VFD / Phosphor Digit Well */
 .admin-stat-number {
   font-family: var(--font-mono);
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--sr-text-primary);
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
   margin: 0;
   letter-spacing: -0.02em;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.35), 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .admin-stat-footer {
-  margin-top: 12px;
-  font-size: 12px;
-  color: var(--sr-text-muted);
+  margin-top: 14px;
+  font-size: 11px;
+  color: #849495;
   display: flex;
   align-items: center;
   gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 10px;
+  letter-spacing: 0.04em;
 }
 
-/* Charts Grid */
+/* Skeuomorphic Scope & Telemetry Plates */
 .admin-charts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
   gap: 20px;
   margin-bottom: 24px;
 }
 
 .admin-chart-card {
-  background-color: var(--sr-card);
-  border: 1px solid var(--sr-border);
-  border-radius: 12px;
-  padding: 20px;
+  background: linear-gradient(135deg, #141c2c 0%, #0d1320 100%);
+  box-shadow: var(--chassis-plate-shadow);
+  border-radius: 6px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .admin-chart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--sr-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .admin-chart-header h3 {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-heading);
   font-size: 15px;
-  font-weight: 600;
-  color: var(--sr-text-primary);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
 }
 
-/* Table Container */
+/* Recessed Chassis Table Container */
 .admin-table-container {
-  background-color: var(--sr-card);
-  border: 1px solid var(--sr-border);
-  border-radius: 12px;
-  padding: 20px;
+  background: linear-gradient(135deg, #141c2c 0%, #0d1320 100%);
+  box-shadow: var(--chassis-plate-shadow);
+  border-radius: 6px;
+  padding: 22px;
   overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .admin-table-controls {
@@ -255,57 +313,63 @@ body {
   align-items: center;
   margin-bottom: 18px;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
 }
 
+/* Countersunk Search Terminal */
 .admin-filter-group {
   display: flex;
-  gap: 6px;
-  background-color: var(--sr-bg);
+  gap: 4px;
+  background: var(--obsidian-recessed);
   padding: 4px;
-  border-radius: 8px;
-  border: 1px solid var(--sr-border);
+  border-radius: 4px;
+  box-shadow: var(--recessed-well);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .admin-pill-btn {
-  background: transparent;
-  border: none;
-  color: var(--sr-text-secondary);
+  background: linear-gradient(135deg, #1c2436 0%, #111622 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #849495;
   padding: 5px 12px;
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   cursor: pointer;
-  transition: all 0.2s;
+  box-shadow: var(--actuator-raised);
+  transition: all 0.12s ease;
 }
 
 .admin-pill-btn:hover {
-  color: var(--sr-text-primary);
+  color: #ffffff;
 }
 
 .admin-pill-btn.active {
-  background-color: #334155;
-  color: #ffffff;
-  font-weight: 600;
+  background: var(--obsidian-recessed);
+  color: #7df4ff;
+  box-shadow: var(--recessed-well);
+  border-color: rgba(0, 240, 255, 0.3);
 }
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .admin-table th {
   padding: 12px 14px;
-  color: var(--sr-text-muted);
-  border-bottom: 1px solid var(--sr-border);
-  font-family: var(--font-body);
-  font-weight: 600;
+  color: #849495;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.05em;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.9);
 }
 
 .admin-table td {
@@ -318,83 +382,101 @@ body {
   background-color: rgba(255, 255, 255, 0.02);
 }
 
-/* Status Chips (Matte, No Glow) */
+/* Stamped Metal Status Badges */
 .status-tag {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 3px 8px;
-  border-radius: 4px;
+  border-radius: 3px;
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  text-transform: capitalize;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: var(--recessed-well);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.status-tag.pending { background-color: rgba(217, 119, 6, 0.15); color: #fcd34d; border: 1px solid rgba(217, 119, 6, 0.3); }
-.status-tag.verified { background-color: rgba(5, 150, 105, 0.15); color: #6ee7b7; border: 1px solid rgba(5, 150, 105, 0.3); }
-.status-tag.rejected { background-color: rgba(225, 29, 72, 0.15); color: #fda4af; border: 1px solid rgba(225, 29, 72, 0.3); }
+.status-tag.pending { background: #2a1b05; color: #ffb86f; border-color: rgba(255, 184, 111, 0.3); }
+.status-tag.verified { background: #072614; color: #62ff96; border-color: rgba(98, 255, 150, 0.3); }
+.status-tag.rejected { background: #2e080d; color: #ffb4ab; border-color: rgba(255, 180, 171, 0.3); }
 
-.status-tag.high { background-color: rgba(225, 29, 72, 0.15); color: #fda4af; }
-.status-tag.medium { background-color: rgba(217, 119, 6, 0.15); color: #fcd34d; }
-.status-tag.low { background-color: rgba(2, 132, 199, 0.15); color: #7dd3fc; }
+.status-tag.high { background: #2e080d; color: #ffb4ab; }
+.status-tag.medium { background: #2a1b05; color: #ffb86f; }
+.status-tag.low { background: #002228; color: #7df4ff; }
 
-/* Action Buttons */
+/* Machined Stamp Action Buttons */
 .admin-action-btn {
   border: none;
   padding: 6px 12px;
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 5px;
   margin-right: 6px;
-  transition: opacity 0.2s;
+  box-shadow: var(--actuator-raised);
+  transition: all 0.12s ease;
 }
 
 .admin-action-btn:hover {
-  opacity: 0.9;
+  filter: brightness(1.15);
+}
+
+.admin-action-btn:active {
+  transform: translateY(1.5px);
+  box-shadow: var(--actuator-pressed);
 }
 
 .admin-action-btn.verify {
-  background-color: var(--sr-emerald);
-  color: #ffffff;
+  background: linear-gradient(135deg, #00e475 0%, #006e35 100%);
+  color: #00210b;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .admin-action-btn.reject {
-  background-color: var(--sr-rose);
+  background: linear-gradient(135deg, #ff1744 0%, #8a001a 100%);
   color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* SOS Cards */
+/* Industrial Alert SOS Cassettes */
 .admin-sos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 18px;
 }
 
 .admin-sos-card {
-  background-color: var(--sr-card);
-  border: 1px solid var(--sr-border);
-  border-left: 3px solid var(--sr-rose);
-  border-radius: 12px;
+  background: linear-gradient(135deg, #1c141a 0%, #0d1320 100%);
+  box-shadow: var(--chassis-plate-shadow);
+  border-left: 4px solid #ff1744;
+  border-radius: 6px;
   padding: 20px;
   position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .admin-sos-card.responding {
-  border-left-color: var(--sr-amber);
+  border-left-color: #ff9900;
 }
 
 .admin-sos-pulse {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 8px;
-  height: 8px;
+  top: 16px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background-color: var(--sr-rose);
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ff1744 60%, #690005 100%);
+  box-shadow: var(--glow-ruby);
 }
