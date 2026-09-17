@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import AdminDashboard from './components/admin/AdminDashboard'
+import IncidentReport from './pages/IncidentReport'
+import IncidentHistory from './pages/IncidentHistory'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -7,7 +9,7 @@ import './components/admin/admin.css'
 import './App.css'
 
 function App() {
-  const [currentView, setCurrentView] = useState('admin') // 'home', 'admin'
+  const [currentView, setCurrentView] = useState('admin') // 'home', 'report', 'history', 'admin'
   const [count, setCount] = useState(0)
 
   return (
@@ -80,6 +82,48 @@ function App() {
           </button>
 
           <button
+            onClick={() => setCurrentView('report')}
+            style={{
+              padding: '7px 14px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              background: currentView === 'report' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
+              color: currentView === 'report' ? '#002022' : '#849495',
+              cursor: 'pointer',
+              fontWeight: 700,
+              fontSize: '11px',
+              fontFamily: 'JetBrains Mono, monospace',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              boxShadow: currentView === 'report' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            ⚠️ Report Incident
+          </button>
+
+          <button
+            onClick={() => setCurrentView('history')}
+            style={{
+              padding: '7px 14px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              background: currentView === 'history' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
+              color: currentView === 'history' ? '#002022' : '#849495',
+              cursor: 'pointer',
+              fontWeight: 700,
+              fontSize: '11px',
+              fontFamily: 'JetBrains Mono, monospace',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              boxShadow: currentView === 'history' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            📜 History
+          </button>
+
+          <button
             onClick={() => setCurrentView('admin')}
             style={{
               padding: '7px 14px',
@@ -104,9 +148,10 @@ function App() {
 
       {/* Main View Area */}
       <div style={{ flex: 1 }}>
-        {currentView === 'admin' ? (
-          <AdminDashboard />
-        ) : (
+        {currentView === 'admin' && <AdminDashboard />}
+        {currentView === 'report' && <IncidentReport />}
+        {currentView === 'history' && <IncidentHistory />}
+        {currentView === 'home' && (
           <main style={{ padding: '30px' }}>
             <section id="center">
               <div className="hero">

@@ -238,23 +238,25 @@ export default function AdminDashboard() {
         <header className="admin-header">
           <div>
             <div className="admin-header-title">
-              <div className="admin-beacon" title="Live Operations Active" />
-              <span className="admin-badge">Operations Deck</span>
-              <h1>SafeRoute Command & Analytics</h1>
+              <div className="admin-beacon" title="Community Safety Grid Active" />
+              <span className="admin-badge">Safety Operations</span>
+              <h1>Community Safety & Response Center</h1>
             </div>
-            <p className="admin-header-subtitle">Real-time public safety dispatch, incident moderation, and response analytics</p>
+            <p className="admin-header-subtitle">
+              Empowering citizens and responders with real-time incident support, verified safe zones, and rapid emergency dispatch.
+            </p>
           </div>
 
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
-            <button className="admin-pill-btn" onClick={fetchData} title="Sync latest data">
-              <RefreshCw size={13} style={{ marginRight: 6 }} /> Sync Data
+            <button className="admin-pill-btn" onClick={fetchData} title="Sync latest community reports">
+              <RefreshCw size={13} style={{ marginRight: 6 }} /> Refresh Feed
             </button>
 
             <button
               className="admin-action-btn verify"
               onClick={handleExportCSV}
             >
-              <Download size={13} /> Export CSV
+              <Download size={13} /> Export Report
             </button>
 
             <nav className="admin-nav-tabs">
@@ -268,7 +270,7 @@ export default function AdminDashboard() {
                 className={`admin-nav-btn ${activeTab === 'incidents' ? 'active' : ''}`}
                 onClick={() => setActiveTab('incidents')}
               >
-                <AlertTriangle size={15} /> Moderation
+                <AlertTriangle size={15} /> Incident Moderation
                 {stats.pendingIncidents > 0 && (
                   <span className="status-tag pending" style={{ padding: '1px 6px', fontSize: '10px', marginLeft: 4 }}>
                     {stats.pendingIncidents}
@@ -290,13 +292,13 @@ export default function AdminDashboard() {
                 className={`admin-nav-btn ${activeTab === 'services' ? 'active' : ''}`}
                 onClick={() => setActiveTab('services')}
               >
-                <Building2 size={15} /> Services
+                <Building2 size={15} /> Emergency Services
               </button>
               <button
                 className={`admin-nav-btn ${activeTab === 'users' ? 'active' : ''}`}
                 onClick={() => setActiveTab('users')}
               >
-                <Users size={15} /> Users
+                <Users size={15} /> Community Members
               </button>
             </nav>
           </div>
@@ -306,53 +308,53 @@ export default function AdminDashboard() {
         <div className="admin-stats-grid">
           <div className="admin-stat-card">
             <div className="admin-stat-top">
-              <span className="admin-stat-label">Registered Citizens</span>
+              <span className="admin-stat-label">Community Members</span>
               <div className="admin-stat-icon primary">
                 <Users size={18} />
               </div>
             </div>
             <h2 className="admin-stat-number">{stats.totalUsers}</h2>
             <div className="admin-stat-footer">
-              <Zap size={13} color="#c084fc" /> Platform accounts
+              <Zap size={13} color="#dba6ff" /> Active protected citizens
             </div>
           </div>
 
           <div className="admin-stat-card">
             <div className="admin-stat-top">
-              <span className="admin-stat-label">Pending Verification</span>
+              <span className="admin-stat-label">Reports Awaiting Review</span>
               <div className="admin-stat-icon warning">
                 <AlertTriangle size={18} />
               </div>
             </div>
             <h2 className="admin-stat-number">{stats.pendingIncidents}</h2>
             <div className="admin-stat-footer">
-              <Clock size={13} color="#f59e0b" /> Requires moderator review
+              <Clock size={13} color="#f59e0b" /> Verified for citizen safety
             </div>
           </div>
 
           <div className="admin-stat-card">
             <div className="admin-stat-top">
-              <span className="admin-stat-label">Verified Hazards</span>
+              <span className="admin-stat-label">Verified Safe Routes</span>
               <div className="admin-stat-icon success">
                 <ShieldCheck size={18} />
               </div>
             </div>
             <h2 className="admin-stat-number">{stats.verifiedIncidents}</h2>
             <div className="admin-stat-footer">
-              <CheckCircle size={13} color="#10b981" /> Publicly mapped routes
+              <CheckCircle size={13} color="#10b981" /> Mapped and secured
             </div>
           </div>
 
           <div className="admin-stat-card">
             <div className="admin-stat-top">
-              <span className="admin-stat-label">Active SOS Beacons</span>
+              <span className="admin-stat-label">Active Emergency Beacons</span>
               <div className="admin-stat-icon danger">
                 <ShieldAlert size={18} />
               </div>
             </div>
-            <h2 className="admin-stat-number" style={{ color: '#f43f5e' }}>{stats.activeSos}</h2>
+            <h2 className="admin-stat-number" style={{ color: '#ff3864' }}>{stats.activeSos}</h2>
             <div className="admin-stat-footer">
-              <Activity size={13} color="#f43f5e" /> Emergency dispatch requests
+              <Activity size={13} color="#ff3864" /> Live emergency assistance
             </div>
           </div>
         </div>
