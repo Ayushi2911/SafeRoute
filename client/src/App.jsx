@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import AdminDashboard from './components/admin/AdminDashboard'
+import IncidentReport from './pages/IncidentReport'
+import IncidentHistory from './pages/IncidentHistory'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -7,8 +9,15 @@ import './components/admin/admin.css'
 import './App.css'
 
 function App() {
-  const [currentView, setCurrentView] = useState('admin') // 'home', 'admin'
+  const [currentView, setCurrentView] = useState('admin') // 'admin', 'report', 'history', 'home'
   const [count, setCount] = useState(0)
+
+  const navItems = [
+    { id: 'admin', label: '📊 Admin & Analytics', badge: 'Khushi' },
+    { id: 'report', label: '🚨 Report Incident', badge: 'Rekha' },
+    { id: 'history', label: '📜 Incident History', badge: 'Rekha' },
+    { id: 'home', label: '🏠 Platform Portal', badge: 'Overview' },
+  ]
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#070a10' }}>
@@ -36,56 +45,54 @@ function App() {
         </div>
         
         {/* Navigation Switcher */}
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button
-            onClick={() => setCurrentView('home')}
-            style={{
-              padding: '7px 14px',
-              borderRadius: '4px',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              background: currentView === 'home' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
-              color: currentView === 'home' ? '#002022' : '#849495',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              boxShadow: currentView === 'home' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
-              transition: 'all 0.15s ease'
-            }}
-          >
-            🏠 Home
-          </button>
-          
-          <button
-            onClick={() => setCurrentView('admin')}
-            style={{
-              padding: '7px 14px',
-              borderRadius: '4px',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              background: currentView === 'admin' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
-              color: currentView === 'admin' ? '#002022' : '#849495',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              boxShadow: currentView === 'admin' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
-              transition: 'all 0.15s ease'
-            }}
-          >
-            📊 Admin & Analytics
-          </button>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {navItems.map((item) => {
+            const isActive = currentView === item.id
+            return (
+              <button
+                key={item.id}
+                onClick={() => setCurrentView(item.id)}
+                style={{
+                  padding: '7px 14px',
+                  borderRadius: '4px',
+                  border: isActive ? '1px solid #7df4ff' : '1px solid rgba(255, 255, 255, 0.08)',
+                  background: isActive ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
+                  color: isActive ? '#002022' : '#849495',
+                  cursor: 'pointer',
+                  fontWeight: 700,
+                  fontSize: '11px',
+                  fontFamily: 'JetBrains Mono, monospace',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  boxShadow: isActive ? '0 0 12px rgba(0, 240, 255, 0.4)' : 'none',
+                  transition: 'all 0.15s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                <span>{item.label}</span>
+                <span style={{
+                  fontSize: '9px',
+                  padding: '2px 5px',
+                  borderRadius: '3px',
+                  background: isActive ? 'rgba(0, 32, 34, 0.3)' : 'rgba(255, 255, 255, 0.05)',
+                  color: isActive ? '#002022' : '#00f0ff'
+                }}>
+                  {item.badge}
+                </span>
+              </button>
+            )
+          })}
         </div>
       </nav>
 
       {/* Main View Area */}
       <div style={{ flex: 1 }}>
-        {currentView === 'admin' ? (
-          <AdminDashboard />
-        ) : (
+        {currentView === 'admin' && <AdminDashboard />}
+        {currentView === 'report' && <IncidentReport />}
+        {currentView === 'history' && <IncidentHistory />}
+        {currentView === 'home' && (
           <main style={{ padding: '30px' }}>
             <section id="center">
               <div className="hero">
