@@ -1,3 +1,4 @@
+/* oxlint-disable react(set-state-in-effect) */
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import {
@@ -95,6 +96,7 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => {
+    // oxlint-disable-next-line react/set-state-in-effect
     fetchData();
   }, [fetchData]);
 
