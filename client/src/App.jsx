@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import AdminDashboard from './components/admin/AdminDashboard'
+import IncidentReport from './pages/IncidentReport'
+import IncidentHistory from './pages/IncidentHistory'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -7,158 +9,137 @@ import './components/admin/admin.css'
 import './App.css'
 
 function App() {
-  const [currentView, setCurrentView] = useState('admin') // 'home', 'admin'
+  const [currentView, setCurrentView] = useState('admin') // 'admin', 'report', 'history', 'home'
   const [count, setCount] = useState(0)
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#070a10' }}>
-      {/* Universal Tactical Agency Bar */}
-      <nav style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '12px 24px',
-        background: 'linear-gradient(135deg, #182030 0%, #0d1320 100%)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.7)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-        flexWrap: 'wrap',
-        gap: '12px'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ fontSize: '20px' }}>🛡️</span>
-          <div>
-            <span style={{ fontWeight: 800, fontSize: '16px', color: '#7df4ff', letterSpacing: '0.04em', fontFamily: 'Space Grotesk, sans-serif' }}>SAFEROUTE</span>
-            <span style={{ fontSize: '10px', color: '#849495', marginLeft: '8px', fontFamily: 'JetBrains Mono, monospace' }}>// UNIFIED PLATFORM</span>
+    <div className="min-h-screen bg-[#050811] text-slate-200 flex flex-col font-mono">
+      {/* Top Navigation Bar adhering to Global Theme */}
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-3.5 bg-[#0c1322] border-b border-slate-800 shadow-[0_8px_20px_rgba(0,0,0,0.8)] flex-wrap gap-3">
+        {/* Left: Logo mark (blue glowing dot) + "SAFEROUTE // UNIFIED PLATFORM" */}
+        <div className="flex items-center gap-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.9)] animate-pulse" />
+          <div className="flex items-center gap-2">
+            <span className="font-extrabold text-sm tracking-widest text-cyan-400 uppercase font-sans">
+              SAFEROUTE
+            </span>
+            <span className="text-[10px] tracking-widest text-slate-500 uppercase">
+              // UNIFIED PLATFORM
+            </span>
           </div>
         </div>
 
-        {/* Navigation Switcher */}
-        <div style={{ display: 'flex', gap: '8px' }}>
+        {/* Right: Tactile tab buttons */}
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* HOME */}
           <button
             onClick={() => setCurrentView('home')}
-            style={{
-              padding: '7px 14px',
-              borderRadius: '4px',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              background: currentView === 'home' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
-              color: currentView === 'home' ? '#002022' : '#849495',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              boxShadow: currentView === 'home' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
-              transition: 'all 0.15s ease'
-            }}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
+              currentView === 'home'
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
+                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
+            }`}
           >
-            🏠 Home
+            HOME
           </button>
 
+          {/* ADMIN & ANALYTICS (Highlighted in Cyan) */}
           <button
             onClick={() => setCurrentView('admin')}
-            style={{
-              padding: '7px 14px',
-              borderRadius: '4px',
-              border: '1px solid rgba(255, 255, 255, 0.06)',
-              background: currentView === 'admin' ? 'linear-gradient(135deg, #00f0ff 0%, #008b94 100%)' : '#141c2c',
-              color: currentView === 'admin' ? '#002022' : '#849495',
-              cursor: 'pointer',
-              fontWeight: 700,
-              fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              boxShadow: currentView === 'admin' ? '0 0 10px rgba(0, 240, 255, 0.4)' : 'none',
-              transition: 'all 0.15s ease'
-            }}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
+              currentView === 'admin'
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
+                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
+            }`}
           >
-            📊 Admin & Analytics
+            ADMIN & ANALYTICS
+          </button>
+
+          {/* REPORT INCIDENT */}
+          <button
+            onClick={() => setCurrentView('report')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
+              currentView === 'report'
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
+                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
+            }`}
+          >
+            REPORT INCIDENT
+          </button>
+
+          {/* INCIDENT HISTORY */}
+          <button
+            onClick={() => setCurrentView('history')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 border ${
+              currentView === 'history'
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.6)] drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]'
+                : 'bg-[#141d30] text-slate-400 border-slate-700/80 hover:text-slate-200 hover:bg-[#1a2640]'
+            }`}
+          >
+            HISTORY
           </button>
         </div>
       </nav>
 
-      {/* Main View Area */}
-      <div style={{ flex: 1 }}>
-        {currentView === 'admin' ? (
-          <AdminDashboard />
-        ) : (
-          <main style={{ padding: '30px' }}>
-            <section id="center">
-              <div className="hero">
-                <img src={heroImg} className="base" width="170" height="179" alt="" />
-                <img src={reactLogo} className="framework" alt="React logo" />
-                <img src={viteLogo} className="vite" alt="Vite logo" />
+      {/* Main Viewport */}
+      <main className="flex-1">
+        {currentView === 'admin' && <AdminDashboard />}
+        {currentView === 'report' && <IncidentReport />}
+        {currentView === 'history' && <IncidentHistory />}
+        {currentView === 'home' && (
+          <div className="p-8 max-w-4xl mx-auto space-y-8">
+            <section id="center" className="text-center space-y-4 py-8">
+              <div className="hero inline-flex items-center justify-center gap-4">
+                <img src={heroImg} className="base" width="140" height="150" alt="" />
+                <img src={reactLogo} className="framework" alt="React logo" width="60" />
+                <img src={viteLogo} className="vite" alt="Vite logo" width="60" />
               </div>
               <div>
-                <h1 style={{ fontFamily: 'Space Grotesk, sans-serif' }}>SafeRoute Platform</h1>
-                <p>Smart Public Safety & Emergency Assistance Platform</p>
+                <h1 className="text-3xl font-extrabold text-white font-sans">SafeRoute Platform</h1>
+                <p className="text-sm text-slate-400 mt-1">Smart Public Safety & Emergency Assistance Platform</p>
               </div>
               <button
                 type="button"
-                className="counter"
+                className="px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-xs font-bold text-cyan-400 hover:bg-slate-800 active:scale-95 transition-all shadow-md"
                 onClick={() => setCount((c) => c + 1)}
               >
                 Count is {count}
               </button>
             </section>
 
-            <div className="ticks"></div>
-
-            <section id="next-steps">
-              <div id="docs">
-                <svg className="icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#documentation-icon"></use>
-                </svg>
-                <h2>Documentation</h2>
-                <p>Your questions, answered</p>
-                <ul>
+            <section id="next-steps" className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div id="docs" className="bg-[#0c1322] border border-slate-800 rounded-xl p-5 shadow-lg space-y-2">
+                <h2 className="text-base font-bold text-white">Documentation</h2>
+                <p className="text-xs text-slate-400">Tactile API specifications and contracts</p>
+                <ul className="text-xs text-slate-300 space-y-1.5 pt-2">
                   <li>
-                    <a href="https://vite.dev/" target="_blank" rel="noreferrer">
-                      <img className="logo" src={viteLogo} alt="" />
+                    <a href="https://vite.dev/" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
                       Explore Vite
                     </a>
                   </li>
                   <li>
-                    <a href="https://react.dev/" target="_blank" rel="noreferrer">
-                      <img className="button-icon" src={reactLogo} alt="" />
-                      Learn more
+                    <a href="https://react.dev/" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
+                      Learn React 19
                     </a>
                   </li>
                 </ul>
               </div>
-              <div id="social">
-                <svg className="icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#social-icon"></use>
-                </svg>
-                <h2>Connect with us</h2>
-                <p>Join the SafeRoute Community</p>
-                <ul>
+
+              <div id="social" className="bg-[#0c1322] border border-slate-800 rounded-xl p-5 shadow-lg space-y-2">
+                <h2 className="text-base font-bold text-white">Repository</h2>
+                <p className="text-xs text-slate-400">Join the SafeRoute Community</p>
+                <ul className="text-xs text-slate-300 space-y-1.5 pt-2">
                   <li>
-                    <a href="https://github.com/Ayushi2911/SafeRoute" target="_blank" rel="noreferrer">
-                      <svg className="button-icon" role="presentation" aria-hidden="true">
-                        <use href="/icons.svg#github-icon"></use>
-                      </svg>
-                      GitHub Repo
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://chat.vite.dev/" target="_blank" rel="noreferrer">
-                      <svg className="button-icon" role="presentation" aria-hidden="true">
-                        <use href="/icons.svg#discord-icon"></use>
-                      </svg>
-                      Discord
+                    <a href="https://github.com/Ayushi2911/SafeRoute" target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">
+                      GitHub Repository (Ayushi2911/SafeRoute)
                     </a>
                   </li>
                 </ul>
               </div>
             </section>
-          </main>
+          </div>
         )}
-      </div>
+      </main>
     </div>
   )
 }
