@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authAdmin = require('../middleware/authAdmin');
 const {
   getStats,
   getAnalytics,
@@ -12,41 +13,32 @@ const {
   getRiskZones,
   getUsers,
 } = require('../controllers/adminController');
-const authAdmin = require('../middleware/authAdmin');
 
-// Optional: If you want strict JWT auth on all admin endpoints, you can apply authAdmin.
-// We support both JWT token header OR unauthenticated fallback for development ease.
-const verifyAdminAccess = (req, res, next) => {
-  // If Authorization header is passed, strictly enforce JWT verification
-  if (req.headers.authorization) {
-    return authAdmin(req, res, next);
-  }
-  // Allow direct access in local development if no auth system is attached yet
-  next();
-};
+// All Admin & Analytics routes protected by authAdmin JWT authorization
+router.use(authAdmin);
 
 // KPI statistics
-router.get('/stats', verifyAdminAccess, getStats);
+router.get('/stats', getStats);
 
 // Analytics chart aggregations & dynamic 24h velocity
-router.get('/analytics', verifyAdminAccess, getAnalytics);
+router.get('/analytics', getAnalytics);
 
 // Incident moderation endpoints
-router.get('/incidents', verifyAdminAccess, getIncidents);
-router.put('/incidents/:id/status', verifyAdminAccess, updateIncidentStatus);
+router.get('/incidents', getIncidents);
+router.put('/incidents/:id/status', updateIncidentStatus);
 
 // SOS emergency dispatch endpoints
-router.get('/sos', verifyAdminAccess, getSosRequests);
-router.put('/sos/:id/status', verifyAdminAccess, updateSosStatus);
+router.get('/sos', getSosRequests);
+router.put('/sos/:id/status', updateSosStatus);
 
 // Emergency services directory
-router.get('/services', verifyAdminAccess, getServices);
-router.post('/services', verifyAdminAccess, addService);
+router.get('/services', getServices);
+router.post('/services', addService);
 
 // Risk zones directory
-router.get('/risk-zones', verifyAdminAccess, getRiskZones);
+router.get('/risk-zones', getRiskZones);
 
 // User management endpoints
-router.get('/users', verifyAdminAccess, getUsers);
+router.get('/users', getUsers);
 
 module.exports = router;

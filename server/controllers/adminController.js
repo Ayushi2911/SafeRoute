@@ -1,7 +1,7 @@
 const db = require('../config/db');
 const { analyzeIncidentThreat } = require('../utils/safetyEngine');
 
-// 1. Overview KPI Stats
+// 1. Overview KPI Stats (Strict DB Aggregation)
 const getStats = async (req, res) => {
   try {
     const [[userCount]] = await db.query('SELECT COUNT(*) AS total_users FROM users');
@@ -13,7 +13,7 @@ const getStats = async (req, res) => {
     const [[servicesCount]] = await db.query("SELECT COUNT(*) AS total_services FROM emergency_services WHERE availability = 'available'");
     const [[riskZonesCount]] = await db.query("SELECT COUNT(*) AS total_risk_zones FROM risk_zones");
 
-    res.json({
+    return res.json({
       success: true,
       data: {
         totalUsers: userCount?.total_users || 0,
@@ -27,15 +27,15 @@ const getStats = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Database error in getStats:', error.message);
-    res.status(500).json({
+    console.error('Database Error [getStats]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Failed to retrieve admin stats from database: ' + error.message,
+      message: `Failed to retrieve admin stats from database: ${error.message}`
     });
   }
 };
 
-// 2. Comprehensive Analytics for Charts & Trends
+// 2. Comprehensive Analytics for Charts & Dynamic 24h Velocity
 const getAnalytics = async (req, res) => {
   try {
     const [severityData] = await db.query(`
@@ -63,57 +63,52 @@ const getAnalytics = async (req, res) => {
       GROUP BY status
     `);
 
-    // Dynamic 24-Hour Velocity: Group incidents created in last 24 hours into 4-hour intervals
+    // Dynamic 24-Hour Velocity calculation from actual incidents table
     const [velocityRows] = await db.query(`
       SELECT 
-        DATE_FORMAT(created_at, '%H:00') AS hour_slot,
-        HOUR(created_at) AS hr,
-        COUNT(*) AS count
+        HOUR(created_at) AS hr, 
+        COUNT(*) AS reports
       FROM incidents
       WHERE created_at >= NOW() - INTERVAL 24 HOUR
-      GROUP BY HOUR(created_at), DATE_FORMAT(created_at, '%H:00')
-      ORDER BY HOUR(created_at) ASC
+      GROUP BY HOUR(created_at)
+      ORDER BY hr ASC
     `);
 
-    // Format 24-hour cadence dynamically
-    const standardIntervals = [
-      { time: '00:00', reports: 0 },
-      { time: '04:00', reports: 0 },
-      { time: '08:00', reports: 0 },
-      { time: '12:00', reports: 0 },
-      { time: '16:00', reports: 0 },
-      { time: '20:00', reports: 0 },
-      { time: '23:59', reports: 0 }
+    const velocityMap = {};
+    velocityRows.forEach(row => {
+      velocityMap[row.hr] = row.reports;
+    });
+
+    const velocityData = [
+      { time: '00:00', reports: velocityMap[0] || 0 },
+      { time: '04:00', reports: velocityMap[4] || 0 },
+      { time: '08:00', reports: velocityMap[8] || 0 },
+      { time: '12:00', reports: velocityMap[12] || 0 },
+      { time: '16:00', reports: velocityMap[16] || 0 },
+      { time: '20:00', reports: velocityMap[20] || 0 },
+      { time: '23:59', reports: velocityMap[23] || 0 },
     ];
 
-    if (velocityRows && velocityRows.length > 0) {
-      velocityRows.forEach(row => {
-        const h = row.hr;
-        let slotIndex = Math.min(Math.floor(h / 4), 5);
-        standardIntervals[slotIndex].reports += row.count;
-      });
-    }
-
-    res.json({
+    return res.json({
       success: true,
       data: {
         severityBreakdown: severityData,
         categoryBreakdown: categoryData,
         statusBreakdown: statusData,
         sosStatusBreakdown: sosStatusData,
-        velocityData: standardIntervals,
+        velocityData: velocityData
       }
     });
   } catch (error) {
-    console.error('Database error in getAnalytics:', error.message);
-    res.status(500).json({
+    console.error('Database Error [getAnalytics]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Failed to retrieve analytics data from database: ' + error.message,
+      message: `Failed to retrieve analytics from database: ${error.message}`
     });
   }
 };
 
-// 3. Incident Management (List, Filter, Search & AI Enrichment)
+// 3. Incident Management with Dynamic AI NLP Enrichment
 const getIncidents = async (req, res) => {
   try {
     const { status, severity, category, search } = req.query;
@@ -145,24 +140,23 @@ const getIncidents = async (req, res) => {
     query += ' ORDER BY i.created_at DESC';
 
     const [incidents] = await db.query(query, params);
-    
-    // Enrich with genuine AI threat classification logic
+
     const enrichedIncidents = incidents.map(item => ({
       ...item,
       aiAnalysis: analyzeIncidentThreat(item.description, item.category)
     }));
 
-    res.json({ success: true, data: enrichedIncidents });
+    return res.json({ success: true, data: enrichedIncidents });
   } catch (error) {
-    console.error('Database error in getIncidents:', error.message);
-    res.status(500).json({
+    console.error('Database Error [getIncidents]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Failed to retrieve incidents from database: ' + error.message,
+      message: `Failed to retrieve incidents from database: ${error.message}`
     });
   }
 };
 
-// 4. Update Incident Status (Verify / Reject) - Strict DB Validation
+// 4. Update Incident Status with STRICT DB validation
 const updateIncidentStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -178,15 +172,15 @@ const updateIncidentStatus = async (req, res) => {
     );
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: `Incident #${id} not found in database.` });
+      return res.status(404).json({ success: false, message: `Incident #${id} was not found in the database.` });
     }
 
-    res.json({ success: true, message: `Incident #${id} successfully marked as ${status}` });
+    return res.json({ success: true, message: `Incident #${id} status updated to ${status} in database.` });
   } catch (error) {
-    console.error('Database error in updateIncidentStatus:', error.message);
-    res.status(500).json({
+    console.error('Database Error [updateIncidentStatus]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Database error updating incident status: ' + error.message,
+      message: `Database update failed: ${error.message}`
     });
   }
 };
@@ -201,24 +195,24 @@ const getSosRequests = async (req, res) => {
       ORDER BY s.created_at DESC
     `;
     const [requests] = await db.query(query);
-    res.json({ success: true, data: requests });
+    return res.json({ success: true, data: requests });
   } catch (error) {
-    console.error('Database error in getSosRequests:', error.message);
-    res.status(500).json({
+    console.error('Database Error [getSosRequests]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Failed to retrieve SOS requests from database: ' + error.message,
+      message: `Failed to retrieve SOS emergency requests: ${error.message}`
     });
   }
 };
 
-// 6. Update SOS Status (Strict DB Validation)
+// 6. Update SOS Status with STRICT DB validation
 const updateSosStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
 
     if (!['pending', 'responding', 'resolved', 'cancelled'].includes(status)) {
-      return res.status(400).json({ success: false, message: 'Invalid SOS status. Must be pending, responding, resolved, or cancelled.' });
+      return res.status(400).json({ success: false, message: 'Invalid SOS status value.' });
     }
 
     const resolvedAt = status === 'resolved' ? new Date() : null;
@@ -228,15 +222,15 @@ const updateSosStatus = async (req, res) => {
     );
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: `SOS request #${id} not found in database.` });
+      return res.status(404).json({ success: false, message: `SOS request #${id} was not found in database.` });
     }
 
-    res.json({ success: true, message: `SOS #${id} status successfully updated to ${status}` });
+    return res.json({ success: true, message: `SOS #${id} status updated to ${status} in database.` });
   } catch (error) {
-    console.error('Database error in updateSosStatus:', error.message);
-    res.status(500).json({
+    console.error('Database Error [updateSosStatus]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Database error updating SOS status: ' + error.message,
+      message: `Failed to update SOS status in database: ${error.message}`
     });
   }
 };
@@ -245,12 +239,12 @@ const updateSosStatus = async (req, res) => {
 const getServices = async (req, res) => {
   try {
     const [services] = await db.query('SELECT * FROM emergency_services ORDER BY type, name');
-    res.json({ success: true, data: services });
+    return res.json({ success: true, data: services });
   } catch (error) {
-    console.error('Database error in getServices:', error.message);
-    res.status(500).json({
+    console.error('Database Error [getServices]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Failed to retrieve emergency services from database: ' + error.message,
+      message: `Failed to retrieve emergency services: ${error.message}`
     });
   }
 };
@@ -259,7 +253,7 @@ const addService = async (req, res) => {
   try {
     const { name, type, phone, latitude, longitude, address, availability } = req.body;
     if (!name || !type || !latitude || !longitude) {
-      return res.status(400).json({ success: false, message: 'Required fields missing (name, type, latitude, longitude)' });
+      return res.status(400).json({ success: false, message: 'Missing required service fields (name, type, coordinates).' });
     }
 
     const [result] = await db.query(
@@ -267,12 +261,12 @@ const addService = async (req, res) => {
       [name, type, phone || null, latitude, longitude, address || null, availability || 'available']
     );
 
-    res.json({ success: true, data: { id: result.insertId, ...req.body }, message: 'Emergency service registered successfully' });
+    return res.status(201).json({ success: true, data: { id: result.insertId, ...req.body }, message: 'Emergency service registered successfully in database.' });
   } catch (error) {
-    console.error('Database error in addService:', error.message);
-    res.status(500).json({
+    console.error('Database Error [addService]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Database error creating emergency service: ' + error.message,
+      message: `Failed to register emergency service: ${error.message}`
     });
   }
 };
@@ -281,12 +275,12 @@ const addService = async (req, res) => {
 const getRiskZones = async (req, res) => {
   try {
     const [zones] = await db.query('SELECT * FROM risk_zones ORDER BY safety_score ASC');
-    res.json({ success: true, data: zones });
+    return res.json({ success: true, data: zones });
   } catch (error) {
-    console.error('Database error in getRiskZones:', error.message);
-    res.status(500).json({
+    console.error('Database Error [getRiskZones]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Failed to retrieve risk zones from database: ' + error.message,
+      message: `Failed to retrieve risk zones: ${error.message}`
     });
   }
 };
@@ -301,12 +295,12 @@ const getUsers = async (req, res) => {
       LEFT JOIN user_profiles p ON u.id = p.user_id
       ORDER BY u.created_at DESC
     `);
-    res.json({ success: true, data: users });
+    return res.json({ success: true, data: users });
   } catch (error) {
-    console.error('Database error in getUsers:', error.message);
-    res.status(500).json({
+    console.error('Database Error [getUsers]:', error.message);
+    return res.status(500).json({
       success: false,
-      message: 'Failed to retrieve users from database: ' + error.message,
+      message: `Failed to retrieve user directory: ${error.message}`
     });
   }
 };

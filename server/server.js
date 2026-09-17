@@ -2,21 +2,17 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-const path = require("path");
 const db = require("./config/db");
 const adminRoutes = require("./routes/adminRoutes");
-const incidentRoutes = require("./routes/incidentRoutes");
 
 const app = express();
 const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// SafeRoute APIs
+// SafeRoute Admin & Analytics APIs
 app.use("/api/admin", adminRoutes);
-app.use("/api/incidents", incidentRoutes);
 
 app.get("/api/test", (req, res) => {
   res.json({
