@@ -5,6 +5,7 @@ import IncidentHistory from './pages/IncidentHistory'
 import SafeRouteMap from './pages/SafeRouteMap'
 import HomePage from './pages/HomePage'
 import SafeRouteLogo from './components/SafeRouteLogo'
+import InstallPrompt from './components/InstallPrompt'
 import './components/admin/admin.css'
 import './App.css'
 
@@ -77,6 +78,7 @@ function App() {
               {label}
             </button>
           ))}
+          <InstallPrompt />
         </div>
       </nav>
 
