@@ -114,8 +114,99 @@ const computeSafetyScore = (lat, lon, incidents = [], emergencyServices = []) =>
   };
 };
 
+// 4. Multi-Waypoint Route Safety Score Evaluator
+const evaluateRouteSafety = (coordinates = [], incidents = [], emergencyServices = [], riskZones = []) => {
+  if (!coordinates || coordinates.length === 0) {
+    return {
+      safetyScore: 100,
+      riskTier: 'Low Risk (Safe)',
+      riskFactors: {
+        incidentCountAlongRoute: 0,
+        riskZonesIntersected: [],
+        averageWaypointScore: 100
+      }
+    };
+  }
+
+  // Sample coordinates to maintain high performance (< 25ms)
+  const step = Math.max(1, Math.floor(coordinates.length / 40));
+  const sampled = [];
+  for (let i = 0; i < coordinates.length; i += step) {
+    sampled.push(coordinates[i]);
+  }
+  // Include last coordinate if not already present
+  if (sampled.length > 0 && sampled[sampled.length - 1] !== coordinates[coordinates.length - 1]) {
+    sampled.push(coordinates[coordinates.length - 1]);
+  }
+
+  let totalScore = 0;
+  const intersectedZoneIds = new Set();
+  const intersectedZoneNames = [];
+  const nearbyIncidentIds = new Set();
+
+  sampled.forEach((pt) => {
+    // GeoJSON coordinates are [longitude, latitude]
+    const lon = Number(pt[0]);
+    const lat = Number(pt[1]);
+
+    const { score } = computeSafetyScore(lat, lon, incidents, emergencyServices);
+    totalScore += score;
+
+    // Check intersecting risk zones
+    riskZones.forEach((zone) => {
+      const distKm = calculateDistance(lat, lon, Number(zone.latitude), Number(zone.longitude));
+      const radiusKm = Number(zone.radius) / 1000;
+      if (distKm <= radiusKm && !intersectedZoneIds.has(zone.id)) {
+        intersectedZoneIds.add(zone.id);
+        intersectedZoneNames.push({
+          id: zone.id,
+          name: zone.area_name,
+          riskLevel: zone.risk_level,
+          safetyScore: zone.safety_score
+        });
+      }
+    });
+
+    // Check unique incidents within 500m of path
+    incidents.forEach((inc) => {
+      const distKm = calculateDistance(lat, lon, Number(inc.latitude), Number(inc.longitude));
+      if (distKm <= 0.5 && !nearbyIncidentIds.has(inc.id)) {
+        nearbyIncidentIds.add(inc.id);
+      }
+    });
+  });
+
+  const avgScore = Math.round(totalScore / (sampled.length || 1));
+
+  // Risk zone intersection penalties
+  let zonePenalty = 0;
+  intersectedZoneNames.forEach((z) => {
+    if (z.riskLevel === 'high') zonePenalty += 18;
+    else if (z.riskLevel === 'medium') zonePenalty += 10;
+    else zonePenalty += 4;
+  });
+
+  const finalScore = Math.max(10, Math.min(100, Math.round(avgScore - zonePenalty)));
+
+  let riskTier = 'Low Risk (Safe)';
+  if (finalScore < 50) riskTier = 'High Risk Zone';
+  else if (finalScore < 75) riskTier = 'Moderate Caution';
+
+  return {
+    safetyScore: finalScore,
+    riskTier,
+    riskFactors: {
+      averageWaypointScore: avgScore,
+      incidentCountAlongRoute: nearbyIncidentIds.size,
+      riskZonesIntersected: intersectedZoneNames,
+      sampledWaypointsCount: sampled.length
+    }
+  };
+};
+
 module.exports = {
   analyzeIncidentThreat,
   calculateDistance,
-  computeSafetyScore
+  computeSafetyScore,
+  evaluateRouteSafety
 };

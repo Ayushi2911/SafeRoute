@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import AdminDashboard from './components/admin/AdminDashboard'
 import IncidentReport from './pages/IncidentReport'
 import IncidentHistory from './pages/IncidentHistory'
+import SafeRouteMap from './pages/SafeRouteMap'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
@@ -10,6 +11,7 @@ import './App.css'
 
 const navigationItems = [
   ['home', 'Home'],
+  ['safe-route', 'Safe Route & Maps'],
   ['report', 'Report Incident'],
   ['history', 'History'],
   ['admin', 'Admin & Analytics'],
@@ -81,6 +83,7 @@ function App() {
       </nav>
 
       <div className="app-content">
+        {currentView === 'safe-route' && <SafeRouteMap />}
         {currentView === 'admin' && <AdminDashboard />}
         {currentView === 'report' && <IncidentReport />}
         {currentView === 'history' && <IncidentHistory />}
