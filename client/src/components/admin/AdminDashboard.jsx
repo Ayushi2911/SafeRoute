@@ -214,7 +214,7 @@ export default function AdminDashboard() {
           fontSize: 12
         }}>
           <AlertCircle size={16} color="#f43f5e" />
-          <span>{errorMessage}</span>
+          <span>Unable to load the admin workspace. Please try again.</span>
         </div>
       )}
 
@@ -388,7 +388,7 @@ export default function AdminDashboard() {
                       </BarChart>
                     </ResponsiveContainer>
                   ) : (
-                    <p style={{ color: '#9ca3af', textAlign: 'center', marginTop: 80 }}>Loading visual metrics...</p>
+                    <p className="admin-chart-empty">No data available yet</p>
                   )}
                 </div>
               </div>
@@ -433,7 +433,7 @@ export default function AdminDashboard() {
                       </PieChart>
                     </ResponsiveContainer>
                   ) : (
-                    <p style={{ color: '#9ca3af', textAlign: 'center', marginTop: 80 }}>Loading visual metrics...</p>
+                    <p className="admin-chart-empty">No data available yet</p>
                   )}
                 </div>
               </div>

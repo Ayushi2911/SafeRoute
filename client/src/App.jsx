@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import AdminDashboard from './components/admin/AdminDashboard'
 import IncidentReport from './pages/IncidentReport'
 import IncidentHistory from './pages/IncidentHistory'
@@ -18,9 +18,45 @@ const navigationItems = [
 function App() {
   const [currentView, setCurrentView] = useState('admin')
   const [count, setCount] = useState(0)
+  const cursorGlowRef = useRef(null)
+
+  useEffect(() => {
+    const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches
+    if (isTouchDevice) {
+      return undefined
+    }
+
+    cursorGlowRef.current?.classList.add('is-visible')
+
+    let frameId = 0
+    let nextPosition = { x: -100, y: -100 }
+
+    const updateGlow = () => {
+      frameId = 0
+      if (cursorGlowRef.current) {
+        cursorGlowRef.current.style.transform = `translate3d(${nextPosition.x}px, ${nextPosition.y}px, 0)`
+      }
+    }
+
+    const handlePointerMove = (event) => {
+      nextPosition = { x: event.clientX, y: event.clientY }
+      if (!frameId) {
+        frameId = window.requestAnimationFrame(updateGlow)
+      }
+    }
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove)
+      if (frameId) {
+        window.cancelAnimationFrame(frameId)
+      }
+    }
+  }, [])
 
   return (
     <div className="app-shell">
+      <div className="cursor-glow" ref={cursorGlowRef} aria-hidden="true" />
       <nav className="app-nav">
         <button className="app-brand" type="button" onClick={() => setCurrentView('home')}>
           <span className="app-brand-mark" aria-hidden="true">S</span>
