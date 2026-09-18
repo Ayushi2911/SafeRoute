@@ -324,8 +324,9 @@ const calculateRoute = async (req, res) => {
     const dLat = Number(destination.lat);
     const dLon = Number(destination.lon);
 
-    // Call OSRM public API (format: {lon},{lat};{lon},{lat})
-    const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${oLon},${oLat};${dLon},${dLat}?overview=full&geometries=geojson&alternatives=true&steps=true`;
+    // Call OSRM routing API (format: {lon},{lat};{lon},{lat})
+    const osrmBase = process.env.OSRM_BASE_URL || 'https://router.project-osrm.org';
+    const osrmUrl = `${osrmBase}/route/v1/driving/${oLon},${oLat};${dLon},${dLat}?overview=full&geometries=geojson&alternatives=true&steps=true`;
 
     let osrmData;
     try {

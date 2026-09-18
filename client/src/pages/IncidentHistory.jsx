@@ -1,8 +1,10 @@
 /* oxlint-disable react(set-state-in-effect) */
 import { useEffect, useState } from 'react';
 import IncidentReport from './IncidentReport';
+import SafeRouteLogo from '../components/SafeRouteLogo';
 
-const INCIDENTS_URL = 'http://localhost:5000/api/incidents/user/1';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+const INCIDENTS_URL = `${API_BASE_URL}/api/incidents/user/1`;
 const INCIDENT_REPORT_HASH = '#incident-report';
 
 function formatDate(dateValue) {
@@ -29,7 +31,7 @@ function getSeverityClass(severity) {
   return String(severity || 'Medium').toLowerCase();
 }
 
-function IncidentHistory() {
+function IncidentHistory({ onNavigate }) {
   const [incidents, setIncidents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -60,15 +62,6 @@ function IncidentHistory() {
         const response = await fetch(INCIDENTS_URL);
         const data = await response.json();
 
-        console.log("=== INCIDENT DEBUG ===");
-        console.log("HTTP STATUS:", response.status);
-        console.log("API DATA:", data);
-        console.log("API INCIDENTS:", data.incidents);
-        console.log(
-          "API INCIDENT COUNT:",
-          Array.isArray(data.incidents) ? data.incidents.length : "NOT ARRAY",
-        );
-
         if (!response.ok) {
           throw new Error(data.message || 'Failed to fetch incidents');
         }
@@ -79,9 +72,8 @@ function IncidentHistory() {
 
         setIncidents(data.incidents);
         setIsLoading(false);
-        console.log("SET INCIDENTS COUNT:", data.incidents.length);
       } catch (error) {
-        console.error("INCIDENT FETCH ERROR:", error);
+        console.error("Incident fetch error:", error.message);
         setErrorMessage('Unable to load your incident history. Please try again.');
         setIsLoading(false);
       }
@@ -96,14 +88,8 @@ function IncidentHistory() {
   };
 
   if (isReportPage) {
-    return <IncidentReport />;
+    return <IncidentReport onNavigate={onNavigate} />;
   }
-
-  console.log("=== RENDER DEBUG ===");
-  console.log("loading:", isLoading);
-  console.log("error:", errorMessage);
-  console.log("incidents:", incidents);
-  console.log("incidents.length:", incidents.length);
 
   return (
     <main className="incident-history-page">
@@ -173,13 +159,33 @@ function IncidentHistory() {
           box-shadow: 0 0 18px rgba(239, 112, 189, 0.8);
         }
 
+        .incident-history-brand-wrap {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+        }
+
+        .incident-history-logo-box {
+          display: grid;
+          place-items: center;
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: rgba(185, 155, 255, 0.12);
+          border: 1px solid rgba(185, 155, 255, 0.3);
+          flex-shrink: 0;
+          margin-top: 4px;
+        }
+
         .incident-history-title {
           max-width: 700px;
           margin: 0;
           color: var(--history-white);
+          font-family: 'Space Grotesk', system-ui, sans-serif;
           font-size: clamp(2.2rem, 5vw, 4.4rem);
-          letter-spacing: -0.055em;
-          line-height: 0.98;
+          font-weight: 760;
+          letter-spacing: -0.04em;
+          line-height: 1.05;
         }
 
         .incident-history-intro {
@@ -404,22 +410,32 @@ function IncidentHistory() {
 
       <div className="incident-history-shell">
         <header className="incident-history-header">
-          <div>
-            <div className="incident-history-eyebrow">
-              <span className="incident-history-eyebrow-mark" aria-hidden="true" />
-              SafeRoute / Community Safety
+          <div className="incident-history-brand-wrap">
+            <div className="incident-history-logo-box">
+              <SafeRouteLogo size={30} />
             </div>
-            <h1 className="incident-history-title">Incident History</h1>
-            <p className="incident-history-intro">
-              View the incidents you have previously reported and keep track of their
-              review status in one place.
-            </p>
+            <div>
+              <div className="incident-history-eyebrow">
+                <span className="incident-history-eyebrow-mark" aria-hidden="true" />
+                SafeRoute / Activity Log
+              </div>
+              <h1 className="incident-history-title">Incident History</h1>
+              <p className="incident-history-intro">
+                View the incidents you have previously reported and keep track of their
+                review status in one place.
+              </p>
+            </div>
           </div>
 
           <div className="incident-history-actions">
-            <a className="incident-history-nav-link" href="#incident-report">
+            <button
+              type="button"
+              className="incident-history-nav-link"
+              onClick={() => (onNavigate ? onNavigate('report') : (window.location.hash = 'incident-report'))}
+              style={{ background: 'none', border: '1px solid var(--history-line-strong)', cursor: 'pointer' }}
+            >
               Report New Incident <span aria-hidden="true">→</span>
-            </a>
+            </button>
             <button
               className="incident-history-refresh"
               type="button"

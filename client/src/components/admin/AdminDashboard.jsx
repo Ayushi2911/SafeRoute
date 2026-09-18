@@ -32,9 +32,10 @@ import {
   AreaChart,
   Area
 } from 'recharts';
+import SafeRouteLogo from '../SafeRouteLogo';
 import './admin.css';
 
-const API_BASE = 'http://localhost:5000/api/admin';
+const API_BASE = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/admin`;
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('overview'); // overview, incidents, sos, services, users
@@ -236,15 +237,31 @@ export default function AdminDashboard() {
       <div className="admin-container">
         {/* Header Section */}
         <header className="admin-header">
-          <div>
-            <div className="admin-header-title">
-              <div className="admin-beacon" title="Community Safety Grid Active" />
-              <span className="admin-badge">Safety Operations</span>
-              <h1>Community Safety & Response Center</h1>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+            <div style={{
+              display: 'grid',
+              placeItems: 'center',
+              width: 48,
+              height: 48,
+              borderRadius: 14,
+              background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(168, 85, 247, 0.18))',
+              border: '1px solid rgba(185, 155, 255, 0.38)',
+              boxShadow: '0 0 20px rgba(168, 85, 247, 0.25)',
+              flexShrink: 0,
+              marginTop: 4
+            }}>
+              <SafeRouteLogo size={32} />
             </div>
-            <p className="admin-header-subtitle">
-              Empowering citizens and responders with real-time incident support, verified safe zones, and rapid emergency dispatch.
-            </p>
+            <div>
+              <div className="admin-header-title">
+                <div className="admin-beacon" title="Community Safety Grid Active" />
+                <span className="admin-badge">Safety Operations</span>
+                <h1>Community Safety &amp; Response Center</h1>
+              </div>
+              <p className="admin-header-subtitle">
+                Empowering citizens and responders with real-time incident support, verified safe zones, and rapid emergency dispatch.
+              </p>
+            </div>
           </div>
 
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>

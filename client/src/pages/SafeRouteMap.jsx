@@ -32,6 +32,7 @@ import {
   getSafetyScore,
   calculateRoute,
 } from '../services/routeService';
+import SafeRouteLogo from '../components/SafeRouteLogo';
 import './SafeRouteMap.css';
 
 // Fix Vite asset URL resolution for default Leaflet markers
@@ -240,7 +241,7 @@ export default function SafeRouteMap() {
       setNotification({
         type: 'warning',
         title: 'Backend Connectivity Notice',
-        message: 'Could not fetch live map data. Ensure the SafeRoute server is running on http://localhost:5000.',
+        message: 'Could not fetch live map data. Ensure the SafeRoute backend API is accessible and running.',
       });
     } finally {
       setIsLoadingMapData(false);
@@ -669,12 +670,12 @@ export default function SafeRouteMap() {
       <header className="saferoute-header">
         <div className="header-brand-wrap">
           <div className="header-icon-box">
-            <ShieldCheck className="brand-shield-icon" size={28} />
+            <SafeRouteLogo size={32} />
           </div>
           <div>
             <div className="eyebrow-tag">
               <Sparkles size={13} />
-              <span>AYUSHI&apos;S SAFETY ENGINE</span>
+              <span>SAFEROUTE SAFETY ENGINE</span>
             </div>
             <h1 className="page-title">Safe Route & Maps</h1>
             <p className="page-description">

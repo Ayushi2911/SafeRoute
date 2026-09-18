@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SafeRouteLogo from '../components/SafeRouteLogo';
 
 const categories = [
   'Theft',
@@ -32,7 +33,7 @@ const severityOptions = [
   },
 ];
 
-function IncidentReport() {
+function IncidentReport({ onNavigate }) {
   const [form, setForm] = useState({
     category: '',
     severity: '',
@@ -133,7 +134,8 @@ function IncidentReport() {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/incidents', {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiBaseUrl}/api/incidents`, {
         method: 'POST',
         body: formData,
       });
@@ -253,13 +255,32 @@ function IncidentReport() {
           box-shadow: 0 0 0 5px rgba(239, 112, 189, 0.12), 0 0 18px rgba(239, 112, 189, 0.8);
         }
 
+        .incident-brand-wrap {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+        }
+
+        .incident-logo-box {
+          display: grid;
+          place-items: center;
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: rgba(185, 155, 255, 0.12);
+          border: 1px solid rgba(185, 155, 255, 0.3);
+          flex-shrink: 0;
+          margin-top: 4px;
+        }
+
         .incident-title {
           margin: 15px 0 11px;
           color: var(--incident-white);
+          font-family: 'Space Grotesk', system-ui, sans-serif;
           font-size: clamp(2.35rem, 5vw, 4.05rem);
           font-weight: 760;
-          letter-spacing: -0.065em;
-          line-height: 0.98;
+          letter-spacing: -0.04em;
+          line-height: 1.05;
         }
 
         .incident-intro {
@@ -844,16 +865,21 @@ function IncidentReport() {
 
       <div className="incident-shell">
         <header className="incident-header">
-          <div>
-            <div className="incident-eyebrow">
-              <span className="incident-eyebrow-mark" aria-hidden="true" />
-              SafeRoute / Community Safety
+          <div className="incident-brand-wrap">
+            <div className="incident-logo-box">
+              <SafeRouteLogo size={30} />
             </div>
-            <h1 className="incident-title">Report an Incident</h1>
-            <p className="incident-intro">
-              Help make your community safer by reporting unsafe situations and
-              providing accurate information.
-            </p>
+            <div>
+              <div className="incident-eyebrow">
+                <span className="incident-eyebrow-mark" aria-hidden="true" />
+                SafeRoute / Community Safety
+              </div>
+              <h1 className="incident-title">Report an Incident</h1>
+              <p className="incident-intro">
+                Help make your community safer by reporting unsafe situations and
+                providing accurate information.
+              </p>
+            </div>
           </div>
 
           <div className="incident-status" aria-label="Safety channel status">
@@ -864,9 +890,14 @@ function IncidentReport() {
             </div>
           </div>
 
-          <a className="incident-nav-link" href="#incident-history">
+          <button
+            type="button"
+            className="incident-nav-link"
+            onClick={() => (onNavigate ? onNavigate('history') : (window.location.hash = 'history'))}
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
             View Incident History <span aria-hidden="true">→</span>
-          </a>
+          </button>
         </header>
 
         <form className="incident-layout" onSubmit={handleSubmit}>
