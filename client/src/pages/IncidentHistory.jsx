@@ -82,7 +82,7 @@ function IncidentHistory() {
         console.log("SET INCIDENTS COUNT:", data.incidents.length);
       } catch (error) {
         console.error("INCIDENT FETCH ERROR:", error);
-        setErrorMessage(error.message || 'Failed to fetch incidents');
+        setErrorMessage('Unable to load your incident history. Please try again.');
         setIsLoading(false);
       }
     };
@@ -446,7 +446,7 @@ function IncidentHistory() {
         {!isLoading && errorMessage && (
           <div className="incident-history-message incident-history-error" role="alert">
             <strong>We couldn&apos;t load your incidents</strong>
-            {errorMessage}
+            Unable to load your incident history. Please try again.
             <br />
             <button className="incident-history-retry" type="button" onClick={handleRefresh}>
               Try again
@@ -455,9 +455,9 @@ function IncidentHistory() {
         )}
 
         {!isLoading && !errorMessage && incidents.length === 0 && (
-          <div className="incident-history-message">
-            <strong>No incidents reported yet</strong>
-            Your reported incidents will appear here once you submit one.
+          <div className="incident-history-message incident-history-empty">
+            <strong>No history available for now</strong>
+            You haven&apos;t reported any incidents yet.
           </div>
         )}
 
