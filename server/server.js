@@ -3,13 +3,16 @@ const cors = require("cors");
 require("dotenv").config();
 
 const db = require("./config/db");
-
+const authRoutes = require("./routes/authRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 const app = express();
 const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
-
+app.use("/api/auth", authRoutes);
+app.use("/api/profile", profileRoutes);
+console.log("Profile route loaded");
 app.get("/api/test", (req, res) => {
   res.json({
     message: "SafeRoute API is working!",
