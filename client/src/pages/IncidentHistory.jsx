@@ -4,7 +4,7 @@ import IncidentReport from './IncidentReport';
 import SafeRouteLogo from '../components/SafeRouteLogo';
 import { useAuth } from '../context/AuthContext';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 const INCIDENT_REPORT_HASH = '#incident-report';
 
 function formatDate(dateValue) {
@@ -71,10 +71,14 @@ function IncidentHistory({ onNavigate }) {
           headers.Authorization = `Bearer ${token}`;
         }
 
-        const response = await fetch(`${API_BASE_URL}/api/incidents/user/${user.id}`, {
-          headers,
-          cache: 'no-store',
-        });
+        const response = await fetch(
+          `${API_BASE_URL}/api/incidents/user/${user.id}`,
+          {
+            headers,
+            cache: 'no-store',
+          },
+        );
+
         const data = await response.json();
 
         if (!response.ok) {
@@ -88,8 +92,10 @@ function IncidentHistory({ onNavigate }) {
         setIncidents(data.incidents);
         setIsLoading(false);
       } catch (error) {
-        console.error("Incident fetch error:", error.message);
-        setErrorMessage('Unable to load your incident history. Please try again.');
+        console.error('Incident fetch error:', error.message);
+        setErrorMessage(
+          'Unable to load your incident history. Please try again.',
+        );
         setIsLoading(false);
       }
     };
@@ -403,23 +409,57 @@ function IncidentHistory({ onNavigate }) {
           overflow-wrap: anywhere;
         }
 
-        .incident-history-severity-low { color: #91e3bd; }
-        .incident-history-severity-medium { color: #ffd17d; }
-        .incident-history-severity-high { color: #ff8eaf; }
+        .incident-history-severity-low {
+          color: #91e3bd;
+        }
+
+        .incident-history-severity-medium {
+          color: #ffd17d;
+        }
+
+        .incident-history-severity-high {
+          color: #ff8eaf;
+        }
 
         @media (max-width: 760px) {
-          .incident-history-page { padding-top: 32px; }
-          .incident-history-header { align-items: flex-start; flex-direction: column; }
-          .incident-history-actions { width: 100%; flex-direction: column; }
+          .incident-history-page {
+            padding-top: 32px;
+          }
+
+          .incident-history-header {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .incident-history-actions {
+            width: 100%;
+            flex-direction: column;
+          }
+
           .incident-history-nav-link,
-          .incident-history-refresh { width: 100%; justify-content: center; }
-          .incident-history-grid { grid-template-columns: 1fr; }
+          .incident-history-refresh {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .incident-history-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         @media (max-width: 480px) {
-          .incident-history-page { padding-right: 14px; padding-left: 14px; }
-          .incident-history-card { padding: 19px; }
-          .incident-history-card-meta { flex-direction: column; }
+          .incident-history-page {
+            padding-right: 14px;
+            padding-left: 14px;
+          }
+
+          .incident-history-card {
+            padding: 19px;
+          }
+
+          .incident-history-card-meta {
+            flex-direction: column;
+          }
         }
       `}</style>
 
@@ -429,15 +469,21 @@ function IncidentHistory({ onNavigate }) {
             <div className="incident-history-logo-box">
               <SafeRouteLogo size={30} />
             </div>
+
             <div>
               <div className="incident-history-eyebrow">
-                <span className="incident-history-eyebrow-mark" aria-hidden="true" />
+                <span
+                  className="incident-history-eyebrow-mark"
+                  aria-hidden="true"
+                />
                 SafeRoute / Activity Log
               </div>
+
               <h1 className="incident-history-title">Incident History</h1>
+
               <p className="incident-history-intro">
-                View the incidents you have previously reported and keep track of their
-                review status in one place.
+                View the incidents you have previously reported and keep track
+                of their review status in one place.
               </p>
             </div>
           </div>
@@ -446,11 +492,20 @@ function IncidentHistory({ onNavigate }) {
             <button
               type="button"
               className="incident-history-nav-link"
-              onClick={() => (onNavigate ? onNavigate('report') : (window.location.hash = 'incident-report'))}
-              style={{ background: 'none', border: '1px solid var(--history-line-strong)', cursor: 'pointer' }}
+              onClick={() =>
+                onNavigate
+                  ? onNavigate('report')
+                  : (window.location.hash = 'incident-report')
+              }
+              style={{
+                background: 'none',
+                border: '1px solid var(--history-line-strong)',
+                cursor: 'pointer',
+              }}
             >
               Report New Incident <span aria-hidden="true">→</span>
             </button>
+
             <button
               className="incident-history-refresh"
               type="button"
@@ -464,8 +519,15 @@ function IncidentHistory({ onNavigate }) {
         </header>
 
         {isAuthenticated && user ? (
-          <div className="incident-history-detail-value" style={{ marginBottom: '18px', color: '#d8b4fe' }}>
-            Reporting citizen: <strong>{user.name}</strong> ({user.email}) &bull; Loaded incidents: {incidents.length}
+          <div
+            className="incident-history-detail-value"
+            style={{
+              marginBottom: '18px',
+              color: '#d8b4fe',
+            }}
+          >
+            Reporting citizen: <strong>{user.name}</strong> ({user.email})
+            &bull; Loaded incidents: {incidents.length}
           </div>
         ) : null}
 
@@ -480,11 +542,17 @@ function IncidentHistory({ onNavigate }) {
           <div className="incident-history-message" role="status">
             <strong>Citizen Sign-In Required</strong>
             Please sign in to view your verified incident history.
+
             <div style={{ marginTop: '16px' }}>
               <button
                 type="button"
                 className="incident-history-retry"
-                style={{ background: 'linear-gradient(135deg, #8b5cf6, #6366f1)', color: '#ffffff', border: 'none' }}
+                style={{
+                  background:
+                    'linear-gradient(135deg, #8b5cf6, #6366f1)',
+                  color: '#ffffff',
+                  border: 'none',
+                }}
                 onClick={() => onNavigate && onNavigate('login')}
               >
                 Sign In to SafeRoute
@@ -494,68 +562,116 @@ function IncidentHistory({ onNavigate }) {
         )}
 
         {!isLoading && isAuthenticated && errorMessage && (
-          <div className="incident-history-message incident-history-error" role="alert">
+          <div
+            className="incident-history-message incident-history-error"
+            role="alert"
+          >
             <strong>We couldn&apos;t load your incidents</strong>
             Unable to load your incident history. Please try again.
             <br />
-            <button className="incident-history-retry" type="button" onClick={handleRefresh}>
+
+            <button
+              className="incident-history-retry"
+              type="button"
+              onClick={handleRefresh}
+            >
               Try again
             </button>
           </div>
         )}
 
-        {!isLoading && isAuthenticated && !errorMessage && incidents.length === 0 && (
-          <div className="incident-history-message incident-history-empty">
-            <strong>No history available for now</strong>
-            You haven&apos;t reported any incidents yet.
-          </div>
-        )}
+        {!isLoading &&
+          isAuthenticated &&
+          !errorMessage &&
+          incidents.length === 0 && (
+            <div
+              className="incident-history-message incident-history-empty"
+            >
+              <strong>No history available for now</strong>
+              You haven&apos;t reported any incidents yet.
+            </div>
+          )}
 
-        {!isLoading && !errorMessage && incidents.length > 0 && (
-          <section className="incident-history-grid" aria-label="Previously reported incidents">
-            {incidents.map((incident) => {
-              const status = getStatusClass(incident.status);
-              const severity = getSeverityClass(incident.severity);
-              const location = incident.address
-                || (incident.latitude && incident.longitude
-                  ? `${incident.latitude}, ${incident.longitude}`
-                  : 'Location unavailable');
+        {!isLoading &&
+          !errorMessage &&
+          incidents.length > 0 && (
+            <section
+              className="incident-history-grid"
+              aria-label="Previously reported incidents"
+            >
+              {incidents.map((incident) => {
+                const status = getStatusClass(incident.status);
+                const severity = getSeverityClass(incident.severity);
 
-              return (
-                <article className="incident-history-card" key={incident.id}>
-                  <div className="incident-history-card-top">
-                    <span className="incident-history-id">Incident #{incident.id}</span>
-                    <span className={`incident-history-badge incident-history-status-${status}`}>
-                      {incident.status || 'Pending'}
-                    </span>
-                  </div>
+                const location =
+                  incident.address ||
+                  (incident.latitude && incident.longitude
+                    ? `${incident.latitude}, ${incident.longitude}`
+                    : 'Location unavailable');
 
-                  <h2 className="incident-history-category">{incident.category || 'Uncategorized incident'}</h2>
-                  <p className="incident-history-description">
-                    {incident.description || 'No description provided.'}
-                  </p>
+                return (
+                  <article
+                    className="incident-history-card"
+                    key={incident.id}
+                  >
+                    <div className="incident-history-card-top">
+                      <span className="incident-history-id">
+                        Incident #{incident.id}
+                      </span>
 
-                  <div className="incident-history-card-meta">
-                    <div className="incident-history-detail">
-                      <span className="incident-history-detail-label">Severity</span>
-                      <strong className={`incident-history-detail-value incident-history-severity-${severity}`}>
-                        {incident.severity || 'Medium'}
-                      </strong>
+                      <span
+                        className={`incident-history-badge incident-history-status-${status}`}
+                      >
+                        {incident.status || 'Pending'}
+                      </span>
                     </div>
-                    <div className="incident-history-detail">
-                      <span className="incident-history-detail-label">Location</span>
-                      <span className="incident-history-detail-value">{location}</span>
+
+                    <h2 className="incident-history-category">
+                      {incident.category || 'Uncategorized incident'}
+                    </h2>
+
+                    <p className="incident-history-description">
+                      {incident.description || 'No description provided.'}
+                    </p>
+
+                    <div className="incident-history-card-meta">
+                      <div className="incident-history-detail">
+                        <span className="incident-history-detail-label">
+                          Severity
+                        </span>
+
+                        <strong
+                          className={`incident-history-detail-value incident-history-severity-${severity}`}
+                        >
+                          {incident.severity || 'Medium'}
+                        </strong>
+                      </div>
+
+                      <div className="incident-history-detail">
+                        <span className="incident-history-detail-label">
+                          Location
+                        </span>
+
+                        <span className="incident-history-detail-value">
+                          {location}
+                        </span>
+                      </div>
+
+                      <div className="incident-history-detail">
+                        <span className="incident-history-detail-label">
+                          Reported
+                        </span>
+
+                        <span className="incident-history-detail-value">
+                          {formatDate(incident.created_at)}
+                        </span>
+                      </div>
                     </div>
-                    <div className="incident-history-detail">
-                      <span className="incident-history-detail-label">Reported</span>
-                      <span className="incident-history-detail-value">{formatDate(incident.created_at)}</span>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </section>
-        )}
+                  </article>
+                );
+              })}
+            </section>
+          )}
       </div>
     </main>
   );

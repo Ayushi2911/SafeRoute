@@ -33,11 +33,14 @@ import {
   Area
 } from 'recharts';
 import SafeRouteLogo from '../SafeRouteLogo';
+import { useAuth } from '../../context/AuthContext';
 import './admin.css';
 
-const API_BASE = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/admin`;
+const API_BASE = `${import.meta.env.VITE_API_BASE_URL || ''}/api/admin`;
 
 export default function AdminDashboard() {
+  const { token, user } = useAuth();
+  const isAdmin = Boolean(token && user?.role === 'admin');
   const [activeTab, setActiveTab] = useState('overview'); // overview, incidents, sos, services, users
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -60,28 +63,18 @@ export default function AdminDashboard() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [actionNotice, setActionNotice] = useState(null);
 
-  // Helper for auth headers with auto token provision
-  const getAuthHeaders = useCallback(async () => {
-    let token = localStorage.getItem('token');
-    if (!token) {
-      try {
-        const tokenRes = await axios.get(`${API_BASE}/dev-token`);
-        if (tokenRes.data?.token) {
-          token = tokenRes.data.token;
-          localStorage.setItem('token', token);
-        }
-      } catch (e) {
-        console.warn('Could not auto-generate dev token:', e.message);
-      }
-    }
-    return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-  }, []);
+  const getAuthHeaders = useCallback(() => ({
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }), [token]);
 
   // Fetch all admin data directly from database
   const fetchData = useCallback(async () => {
+    if (!isAdmin) return;
     setErrorMessage(null);
     try {
-      const authOpts = await getAuthHeaders();
+      const authOpts = getAuthHeaders();
       const [statsRes, analyticsRes, incidentsRes, sosRes, servicesRes, riskRes, usersRes] = await Promise.all([
         axios.get(`${API_BASE}/stats`, authOpts),
         axios.get(`${API_BASE}/analytics`, authOpts),
@@ -104,17 +97,17 @@ export default function AdminDashboard() {
       const msg = err.response?.data?.message || err.message || 'Database / API connection failed.';
       setErrorMessage(`Database / API Error: ${msg}`);
     }
-  }, [getAuthHeaders]);
+  }, [getAuthHeaders, isAdmin]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (isAdmin) fetchData();
+  }, [fetchData, isAdmin]);
 
   // Update incident verification status
   const handleUpdateIncidentStatus = async (id, status) => {
     try {
       setErrorMessage(null);
-      const authOpts = await getAuthHeaders();
+      const authOpts = getAuthHeaders();
       const res = await axios.put(`${API_BASE}/incidents/${id}/status`, { status }, authOpts);
 
       if (res.data?.success) {
@@ -137,7 +130,7 @@ export default function AdminDashboard() {
   const handleUpdateSosStatus = async (id, status) => {
     try {
       setErrorMessage(null);
-      const authOpts = await getAuthHeaders();
+      const authOpts = getAuthHeaders();
       const res = await axios.put(`${API_BASE}/sos/${id}/status`, { status }, authOpts);
 
       if (res.data?.success) {
@@ -196,6 +189,21 @@ export default function AdminDashboard() {
     { time: '20:00', reports: 0 },
     { time: '23:59', reports: 0 },
   ];
+
+  if (!isAdmin) {
+    return (
+      <div className="admin-body">
+        <div className="admin-container">
+          <div className="admin-table-container">
+            <h2>Admin access required</h2>
+            <p className="admin-chart-empty">
+              Sign in with an account that has the admin role to access this workspace.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-body">

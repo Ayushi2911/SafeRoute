@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
+    "build:client": "npm --prefix ../client run build",
     "start": "node server.js",
+    "start:single": "npm run build:client && npm start",
+    "create-admin": "node scripts/createAdmin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
