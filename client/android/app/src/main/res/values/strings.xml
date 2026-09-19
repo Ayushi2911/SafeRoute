@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SafeRoute</string>
+    <string name="title_activity_main">SafeRoute</string>
+    <string name="package_name">com.saferoute.app</string>
+    <string name="custom_url_scheme">com.saferoute.app</string>
+</resources>

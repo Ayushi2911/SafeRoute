@@ -1,0 +1,6 @@
+﻿{
+  "appId": "com.saferoute.app",
+  "appName": "SafeRoute",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
