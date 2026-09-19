@@ -5,7 +5,9 @@ require("dotenv").config();
 const path = require("path");
 const db = require("./config/db");
 const adminRoutes = require("./routes/adminRoutes");
+const authRoutes = require("./routes/authRoutes");
 const incidentRoutes = require("./routes/incidentRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 const routeRoutes = require("./routes/routeRoutes");
 
 const app = express();
@@ -43,7 +45,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // SafeRoute APIs
 app.use("/api/admin", adminRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/incidents", incidentRoutes);
+app.use("/api/profile", profileRoutes);
 app.use("/api/routes", routeRoutes);
 
 app.get("/api/test", (req, res) => {

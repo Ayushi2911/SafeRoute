@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { ShieldCheck, AlertTriangle } from 'lucide-react';
 import SafeRouteLogo from '../components/SafeRouteLogo';
+import { useAuth } from '../context/AuthContext';
 
 const categories = [
   'Theft',
@@ -34,6 +36,7 @@ const severityOptions = [
 ];
 
 function IncidentReport({ onNavigate }) {
+  const { user, token, isAuthenticated } = useAuth();
   const [form, setForm] = useState({
     category: '',
     severity: '',
@@ -59,31 +62,55 @@ function IncidentReport({ onNavigate }) {
 
   const handleUseLocation = () => {
     if (!navigator.geolocation) {
-      setLocationStatus('Location services are not supported by this browser');
+      setLocationStatus('Geolocation is not supported by your browser.');
       return;
     }
 
-    setLocationStatus('Getting your location...');
+    setLocationStatus('Locating your position...');
     navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
+      (position) => {
+        const { latitude, longitude } = position.coords;
         setForm((current) => ({
           ...current,
-          latitude: String(coords.latitude),
-          longitude: String(coords.longitude),
+          latitude: latitude.toFixed(6),
+          longitude: longitude.toFixed(6),
         }));
-        setLocationStatus('Location added successfully');
+        setLocationStatus(`Captured: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
         setMessage('');
       },
-      () => {
-        setLocationStatus('Unable to access your location. Please allow location access and try again.');
+      (error) => {
+        setLocationStatus(`Location error: ${error.message}`);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
+      { enableHighAccuracy: true, timeout: 10000 },
     );
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setMessage('Please upload a valid image file.');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage('Image size must be 5MB or smaller.');
+      return;
+    }
+
+    setSelectedImage(file);
+    setMessage('');
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formElement = event.currentTarget;
+
+    if (!isAuthenticated || !user?.id) {
+      setMessage('Citizen authentication required: Please sign in or register to submit a verified report.');
+      return;
+    }
 
     if (!form.category) {
       setMessage('Please select an incident category.');
@@ -91,12 +118,12 @@ function IncidentReport({ onNavigate }) {
     }
 
     if (!form.severity) {
-      setMessage('Please select a severity level.');
+      setMessage('Please choose a severity level.');
       return;
     }
 
     if (!form.description.trim()) {
-      setMessage('Please provide a description.');
+      setMessage('Please provide a brief description of the incident.');
       return;
     }
 
@@ -105,8 +132,8 @@ function IncidentReport({ onNavigate }) {
     if (
       !form.latitude ||
       !form.longitude ||
-      !Number.isFinite(latitude) ||
-      !Number.isFinite(longitude) ||
+      Number.isNaN(latitude) ||
+      Number.isNaN(longitude) ||
       latitude < -90 ||
       latitude > 90 ||
       longitude < -180 ||
@@ -117,8 +144,7 @@ function IncidentReport({ onNavigate }) {
     }
 
     const formData = new FormData();
-    // TODO: Replace development user_id with the authenticated user/session value.
-    formData.append('user_id', '1');
+    formData.append('user_id', String(user.id));
     formData.append('category', form.category);
     formData.append('severity', form.severity);
     formData.append('description', form.description.trim());
@@ -135,8 +161,14 @@ function IncidentReport({ onNavigate }) {
 
     try {
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+      const headers = {};
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
       const response = await fetch(`${apiBaseUrl}/api/incidents`, {
         method: 'POST',
+        headers,
         body: formData,
       });
       const data = await response.json().catch(() => ({}));
@@ -902,6 +934,64 @@ function IncidentReport({ onNavigate }) {
 
         <form className="incident-layout" onSubmit={handleSubmit}>
           <section className="incident-card incident-form-card" aria-labelledby="incident-details-title">
+            {isAuthenticated && user ? (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 14px',
+                  background: 'rgba(139, 92, 246, 0.1)',
+                  border: '1px solid rgba(185, 155, 255, 0.25)',
+                  borderRadius: '10px',
+                  marginBottom: '18px',
+                  fontSize: '0.86rem',
+                  color: '#e0d8ff',
+                }}
+              >
+                <ShieldCheck size={16} style={{ color: '#a78bfa', flexShrink: 0 }} />
+                <span>
+                  Reporting as verified citizen: <strong>{user.name}</strong> ({user.email})
+                </span>
+              </div>
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '12px',
+                  padding: '12px 14px',
+                  background: 'rgba(245, 158, 11, 0.1)',
+                  border: '1px solid rgba(245, 158, 11, 0.3)',
+                  borderRadius: '10px',
+                  marginBottom: '18px',
+                  fontSize: '0.86rem',
+                  color: '#fde68a',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <AlertTriangle size={16} style={{ color: '#f59e0b', flexShrink: 0 }} />
+                  <span>Citizen sign-in required to submit verified reports.</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onNavigate && onNavigate('login')}
+                  style={{
+                    background: 'rgba(245, 158, 11, 0.2)',
+                    border: '1px solid rgba(245, 158, 11, 0.4)',
+                    color: '#fef3c7',
+                    borderRadius: '6px',
+                    padding: '5px 12px',
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Sign In
+                </button>
+              </div>
+            )}
             <div className="incident-kicker">01 / Incident details</div>
             <h2 id="incident-details-title" className="incident-card-title">Tell us what happened</h2>
 
@@ -1008,8 +1098,8 @@ function IncidentReport({ onNavigate }) {
                 <input
                   id="incident-evidence"
                   type="file"
-                  accept="image/png,image/jpeg"
-                  onChange={(event) => setSelectedImage(event.target.files?.[0] || null)}
+                  accept="image/png,image/jpeg,image/webp"
+                  onChange={handleImageChange}
                 />
                 <span>
                   <span className="incident-upload-icon" aria-hidden="true">↑</span>

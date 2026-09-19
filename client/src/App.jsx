@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
+import { LogIn, UserPlus, User, LogOut } from 'lucide-react'
 import AdminDashboard from './components/admin/AdminDashboard'
 import IncidentReport from './pages/IncidentReport'
 import IncidentHistory from './pages/IncidentHistory'
 import SafeRouteMap from './pages/SafeRouteMap'
 import HomePage from './pages/HomePage'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Profile from './pages/Profile'
+import ProtectedRoute from './components/ProtectedRoute'
 import SafeRouteLogo from './components/SafeRouteLogo'
 import InstallPrompt from './components/InstallPrompt'
+import { AuthProvider, useAuth } from './context/AuthContext'
 import './components/admin/admin.css'
 import './App.css'
 
@@ -17,8 +23,9 @@ const navigationItems = [
   ['admin', 'Admin & Analytics'],
 ]
 
-function App() {
+function AppContent() {
   const [currentView, setCurrentView] = useState('home')
+  const { user, isAuthenticated, logout } = useAuth()
   const cursorGlowRef = useRef(null)
 
   useEffect(() => {
@@ -55,6 +62,11 @@ function App() {
     }
   }, [])
 
+  const handleLogout = () => {
+    logout()
+    setCurrentView('home')
+  }
+
   return (
     <div className="app-shell">
       <div className="cursor-glow" ref={cursorGlowRef} aria-hidden="true" />
@@ -78,6 +90,50 @@ function App() {
               {label}
             </button>
           ))}
+
+          {isAuthenticated && user ? (
+            <>
+              <button
+                className={`app-nav-link app-nav-auth-profile ${currentView === 'profile' ? 'is-active' : ''}`}
+                onClick={() => setCurrentView('profile')}
+                type="button"
+                title={`Signed in as ${user.name}`}
+              >
+                <User size={14} />
+                <span>{user.name.split(' ')[0] || 'Profile'}</span>
+              </button>
+
+              <button
+                className="app-nav-link app-nav-auth-logout"
+                onClick={handleLogout}
+                type="button"
+                title="Sign out of SafeRoute"
+              >
+                <LogOut size={14} />
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className={`app-nav-link app-nav-auth-btn ${currentView === 'login' ? 'is-active' : ''}`}
+                onClick={() => setCurrentView('login')}
+                type="button"
+              >
+                <LogIn size={14} />
+                <span>Sign In</span>
+              </button>
+
+              <button
+                className={`app-nav-link app-nav-auth-register ${currentView === 'register' ? 'is-active' : ''}`}
+                onClick={() => setCurrentView('register')}
+                type="button"
+              >
+                <UserPlus size={14} />
+                <span>Register</span>
+              </button>
+            </>
+          )}
+
           <InstallPrompt />
         </div>
       </nav>
@@ -88,8 +144,23 @@ function App() {
         {currentView === 'report' && <IncidentReport onNavigate={(view) => setCurrentView(view)} />}
         {currentView === 'history' && <IncidentHistory onNavigate={(view) => setCurrentView(view)} />}
         {currentView === 'admin' && <AdminDashboard />}
+        {currentView === 'login' && <Login onNavigate={(view) => setCurrentView(view)} />}
+        {currentView === 'register' && <Register onNavigate={(view) => setCurrentView(view)} />}
+        {currentView === 'profile' && (
+          <ProtectedRoute onNavigate={(view) => setCurrentView(view)}>
+            <Profile onNavigate={(view) => setCurrentView(view)} />
+          </ProtectedRoute>
+        )}
       </div>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   )
 }
 

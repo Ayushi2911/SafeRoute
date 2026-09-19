@@ -540,6 +540,11 @@ export default function HomePage({ onNavigate }) {
                   Admin &amp; Analytics
                 </button>
               </li>
+              <li>
+                <button type="button" onClick={() => onNavigate('profile')}>
+                  Citizen Profile &amp; Account
+                </button>
+              </li>
             </ul>
           </div>
 

@@ -143,6 +143,51 @@
   box-shadow: inset 0 -2px 0 rgba(208, 181, 255, 0.75);
 }
 
+.app-nav-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.app-nav-auth-register {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-color: rgba(185, 155, 255, 0.28);
+  color: #e9dcff;
+  background: rgba(185, 155, 255, 0.08);
+}
+
+.app-nav-auth-register:hover {
+  background: rgba(185, 155, 255, 0.16);
+  border-color: rgba(185, 155, 255, 0.5);
+}
+
+.app-nav-auth-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #f2eaff;
+  border-color: rgba(185, 155, 255, 0.2);
+  background: rgba(185, 155, 255, 0.06);
+}
+
+.app-nav-auth-profile:hover {
+  background: rgba(185, 155, 255, 0.12);
+  border-color: rgba(185, 155, 255, 0.4);
+}
+
+.app-nav-auth-logout {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 10px;
+}
+
+.app-nav-auth-logout:hover {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.12);
+}
+
 .app-content {
   min-height: calc(100vh - 72px);
 }
