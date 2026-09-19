@@ -13,7 +13,6 @@ const sosRoutes = require("./routes/sosRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const clientDistPath = path.join(__dirname, "..", "client", "dist");
 
 // Production-ready CORS setup supporting local and deployed origins
 const defaultOrigins = [
@@ -23,6 +22,7 @@ const defaultOrigins = [
   "http://127.0.0.1:5173",
   "http://localhost:5176",
   "http://127.0.0.1:5176",
+  "https://saferoute-7xd8.onrender.com",
 ];
 
 const configuredOrigins = process.env.CLIENT_URL
@@ -79,20 +79,17 @@ app.get("/api/test-db", async (req, res) => {
   }
 });
 
-// Serve the production Vite build after all API routes.
-app.use(express.static(clientDistPath));
+app.get("/", (req, res) => {
+  res.json({
+    message: "SafeRoute API Server is running",
+    status: "healthy",
+  });
+});
 
-// React SPA fallback: return index.html for browser routes, but never mask API
-// or upload requests so their normal Express 404/error behavior is preserved.
-app.use((req, res, next) => {
-  const isApiRequest = req.path === "/api" || req.path.startsWith("/api/");
-  const isUploadRequest = req.path === "/uploads" || req.path.startsWith("/uploads/");
-
-  if (req.method !== "GET" || isApiRequest || isUploadRequest) {
-    return next();
-  }
-
-  return res.sendFile(path.join(clientDistPath, "index.html"));
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Route not found",
+  });
 });
 
 app.listen(PORT, () => {
