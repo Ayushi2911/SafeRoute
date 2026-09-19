@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import IncidentReport from './IncidentReport';
 import SafeRouteLogo from '../components/SafeRouteLogo';
+import { useAuth } from '../context/AuthContext';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
-const INCIDENTS_URL = `${API_BASE_URL}/api/incidents/user/1`;
 const INCIDENT_REPORT_HASH = '#incident-report';
 
 function formatDate(dateValue) {
@@ -32,6 +32,7 @@ function getSeverityClass(severity) {
 }
 
 function IncidentHistory({ onNavigate }) {
+  const { user, token, isAuthenticated } = useAuth();
   const [incidents, setIncidents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -54,12 +55,26 @@ function IncidentHistory({ onNavigate }) {
       return undefined;
     }
 
+    if (!isAuthenticated || !user?.id) {
+      setIncidents([]);
+      setIsLoading(false);
+      return undefined;
+    }
+
     const loadIncidents = async () => {
       try {
         setIsLoading(true);
         setErrorMessage('');
 
-        const response = await fetch(INCIDENTS_URL);
+        const headers = {};
+        if (token) {
+          headers.Authorization = `Bearer ${token}`;
+        }
+
+        const response = await fetch(`${API_BASE_URL}/api/incidents/user/${user.id}`, {
+          headers,
+          cache: 'no-store',
+        });
         const data = await response.json();
 
         if (!response.ok) {
@@ -81,7 +96,7 @@ function IncidentHistory({ onNavigate }) {
 
     loadIncidents();
     return undefined;
-  }, [isReportPage, refreshKey]);
+  }, [isReportPage, refreshKey, isAuthenticated, user?.id, token]);
 
   const handleRefresh = () => {
     setRefreshKey((current) => current + 1);
@@ -448,9 +463,11 @@ function IncidentHistory({ onNavigate }) {
           </div>
         </header>
 
-        <div className="incident-history-detail-value" style={{ marginBottom: '18px' }}>
-          Loaded incidents: {incidents.length}
-        </div>
+        {isAuthenticated && user ? (
+          <div className="incident-history-detail-value" style={{ marginBottom: '18px', color: '#d8b4fe' }}>
+            Reporting citizen: <strong>{user.name}</strong> ({user.email}) &bull; Loaded incidents: {incidents.length}
+          </div>
+        ) : null}
 
         {isLoading && (
           <div className="incident-history-message" role="status">
@@ -459,7 +476,24 @@ function IncidentHistory({ onNavigate }) {
           </div>
         )}
 
-        {!isLoading && errorMessage && (
+        {!isLoading && !isAuthenticated && (
+          <div className="incident-history-message" role="status">
+            <strong>Citizen Sign-In Required</strong>
+            Please sign in to view your verified incident history.
+            <div style={{ marginTop: '16px' }}>
+              <button
+                type="button"
+                className="incident-history-retry"
+                style={{ background: 'linear-gradient(135deg, #8b5cf6, #6366f1)', color: '#ffffff', border: 'none' }}
+                onClick={() => onNavigate && onNavigate('login')}
+              >
+                Sign In to SafeRoute
+              </button>
+            </div>
+          </div>
+        )}
+
+        {!isLoading && isAuthenticated && errorMessage && (
           <div className="incident-history-message incident-history-error" role="alert">
             <strong>We couldn&apos;t load your incidents</strong>
             Unable to load your incident history. Please try again.
@@ -470,7 +504,7 @@ function IncidentHistory({ onNavigate }) {
           </div>
         )}
 
-        {!isLoading && !errorMessage && incidents.length === 0 && (
+        {!isLoading && isAuthenticated && !errorMessage && incidents.length === 0 && (
           <div className="incident-history-message incident-history-empty">
             <strong>No history available for now</strong>
             You haven&apos;t reported any incidents yet.
