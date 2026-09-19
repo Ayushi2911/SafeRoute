@@ -16,6 +16,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 
 export default function Profile({ onNavigate }) {
   const { user: authUser, token, logout } = useAuth();
@@ -34,7 +35,7 @@ export default function Profile({ onNavigate }) {
     safety_preferences: '',
   });
 
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+  const apiBaseUrl = API_BASE_URL;
 
   const fetchProfile = useCallback(async () => {
     if (!token) {

@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import IncidentReport from './IncidentReport';
 import SafeRouteLogo from '../components/SafeRouteLogo';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 const INCIDENT_REPORT_HASH = '#incident-report';
 
 function formatDate(dateValue) {

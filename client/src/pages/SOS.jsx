@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import SafeRouteLogo from '../components/SafeRouteLogo';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 
 const EMERGENCY_TYPES = [
   { id: 'General Emergency', label: 'General Emergency', icon: '🚨' },
@@ -37,7 +38,7 @@ const DIRECT_HOTLINES = [
 
 export default function SOS({ onNavigate }) {
   const { user, token, isAuthenticated } = useAuth();
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+  const apiBaseUrl = API_BASE_URL;
 
   // SOS Trigger State
   const [selectedType, setSelectedType] = useState('General Emergency');

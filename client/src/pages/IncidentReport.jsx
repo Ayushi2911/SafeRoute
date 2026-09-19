@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ShieldCheck, AlertTriangle } from 'lucide-react';
 import SafeRouteLogo from '../components/SafeRouteLogo';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 
 const categories = [
   'Theft',
@@ -160,7 +161,7 @@ function IncidentReport({ onNavigate }) {
     setMessage('');
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const apiBaseUrl = API_BASE_URL;
       const headers = {};
       if (token) {
         headers.Authorization = `Bearer ${token}`;

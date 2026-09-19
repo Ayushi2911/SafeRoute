@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { LogIn, Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react';
 import SafeRouteLogo from '../components/SafeRouteLogo';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config/api';
 
 export default function Login({ onNavigate }) {
   const { login } = useAuth();
@@ -24,7 +25,7 @@ export default function Login({ onNavigate }) {
     setIsSubmitting(true);
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const apiBaseUrl = API_BASE_URL;
       const response = await fetch(`${apiBaseUrl}/api/auth/login`, {
         method: 'POST',
         headers: {

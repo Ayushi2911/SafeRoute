@@ -34,9 +34,10 @@ import {
 } from 'recharts';
 import SafeRouteLogo from '../SafeRouteLogo';
 import { useAuth } from '../../context/AuthContext';
+import { API_BASE_URL } from '../../config/api';
 import './admin.css';
 
-const API_BASE = `${import.meta.env.VITE_API_BASE_URL || ''}/api/admin`;
+const API_BASE = `${API_BASE_URL}/api/admin`;
 
 export default function AdminDashboard() {
   const { token, user } = useAuth();

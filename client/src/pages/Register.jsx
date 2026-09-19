@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { UserPlus, User, Mail, Lock, Phone, Eye, EyeOff, ArrowRight, ShieldCheck, AlertCircle, CheckCircle2 } from 'lucide-react';
 import SafeRouteLogo from '../components/SafeRouteLogo';
+import { API_BASE_URL } from '../config/api';
 
 export default function Register({ onNavigate }) {
   const [form, setForm] = useState({
@@ -53,7 +54,7 @@ export default function Register({ onNavigate }) {
     setIsSubmitting(true);
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const apiBaseUrl = API_BASE_URL;
       const response = await fetch(`${apiBaseUrl}/api/auth/register`, {
         method: 'POST',
         headers: {
