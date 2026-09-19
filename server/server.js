@@ -9,6 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 const incidentRoutes = require("./routes/incidentRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const routeRoutes = require("./routes/routeRoutes");
+const sosRoutes = require("./routes/sosRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -49,6 +50,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/incidents", incidentRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/routes", routeRoutes);
+app.use("/api/sos", sosRoutes);
 
 app.get("/api/test", (req, res) => {
   res.json({

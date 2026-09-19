@@ -67,10 +67,14 @@ export default function HomePage({ onNavigate }) {
               <span>Report an Incident</span>
             </button>
 
-            <a href="#emergency-section" className="btn-emergency-pill">
+            <button
+              type="button"
+              className="btn-emergency-pill"
+              onClick={() => onNavigate('sos')}
+            >
               <PhoneCall size={16} />
-              <span>Emergency Hotlines</span>
-            </a>
+              <span>SOS &amp; Hotlines</span>
+            </button>
           </div>
 
           {/* Descriptive Pillar Cards (No fake stats) */}
@@ -538,6 +542,11 @@ export default function HomePage({ onNavigate }) {
               <li>
                 <button type="button" onClick={() => onNavigate('admin')}>
                   Admin &amp; Analytics
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={() => onNavigate('sos')}>
+                  SOS Emergency Assistance
                 </button>
               </li>
               <li>

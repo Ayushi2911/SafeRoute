@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { LogIn, UserPlus, User, LogOut } from 'lucide-react'
+import { LogIn, UserPlus, User, LogOut, AlertOctagon } from 'lucide-react'
 import AdminDashboard from './components/admin/AdminDashboard'
 import IncidentReport from './pages/IncidentReport'
 import IncidentHistory from './pages/IncidentHistory'
@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
+import SOS from './pages/SOS'
 import ProtectedRoute from './components/ProtectedRoute'
 import SafeRouteLogo from './components/SafeRouteLogo'
 import InstallPrompt from './components/InstallPrompt'
@@ -20,6 +21,7 @@ const navigationItems = [
   ['safe-route', 'Safe Route & Maps'],
   ['report', 'Report Incident'],
   ['history', 'History'],
+  ['sos', 'SOS Emergency'],
   ['admin', 'Admin & Analytics'],
 ]
 
@@ -82,11 +84,12 @@ function AppContent() {
         <div className="app-nav-links" aria-label="Primary navigation">
           {navigationItems.map(([view, label]) => (
             <button
-              className={`app-nav-link ${currentView === view ? 'is-active' : ''}`}
+              className={`app-nav-link ${view === 'sos' ? 'app-nav-link-sos' : ''} ${currentView === view ? 'is-active' : ''}`}
               key={view}
               onClick={() => setCurrentView(view)}
               type="button"
             >
+              {view === 'sos' && <AlertOctagon size={13} style={{ marginRight: 4 }} />}
               {label}
             </button>
           ))}
@@ -143,6 +146,7 @@ function AppContent() {
         {currentView === 'safe-route' && <SafeRouteMap />}
         {currentView === 'report' && <IncidentReport onNavigate={(view) => setCurrentView(view)} />}
         {currentView === 'history' && <IncidentHistory onNavigate={(view) => setCurrentView(view)} />}
+        {currentView === 'sos' && <SOS onNavigate={(view) => setCurrentView(view)} />}
         {currentView === 'admin' && <AdminDashboard />}
         {currentView === 'login' && <Login onNavigate={(view) => setCurrentView(view)} />}
         {currentView === 'register' && <Register onNavigate={(view) => setCurrentView(view)} />}
