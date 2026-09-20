@@ -279,6 +279,46 @@ function IncidentReport({ onNavigate }) {
           border-color: rgba(148, 163, 184, 0.25);
         }
 
+        [data-theme="light"] .incident-kicker,
+        [data-theme="light"] .incident-eyebrow {
+          color: #6d28d9;
+        }
+
+        [data-theme="light"] .incident-required {
+          color: #9d174d;
+        }
+
+        [data-theme="light"] .incident-select-wrap::after {
+          color: #475569;
+        }
+
+        [data-theme="light"] .incident-input::placeholder,
+        [data-theme="light"] .incident-textarea::placeholder,
+        [data-theme="light"] .incident-location-status,
+        [data-theme="light"] .incident-upload-copy,
+        [data-theme="light"] .incident-guideline-note,
+        [data-theme="light"] .incident-privacy,
+        [data-theme="light"] .incident-guideline {
+          color: #475569;
+        }
+
+        [data-theme="light"] .incident-button {
+          color: #6d28d9;
+          background: rgba(124, 58, 237, 0.1);
+          border-color: rgba(124, 58, 237, 0.4);
+        }
+
+        [data-theme="light"] .incident-button:hover {
+          color: #5b21b6;
+          background: rgba(124, 58, 237, 0.16);
+          border-color: rgba(124, 58, 237, 0.65);
+        }
+
+        [data-theme="light"] .incident-severity-description,
+        [data-theme="light"] .incident-status span {
+          color: #475569;
+        }
+
         .incident-page *,
         .incident-page *::before,
         .incident-page *::after {

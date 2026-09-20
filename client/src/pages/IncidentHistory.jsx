@@ -176,6 +176,38 @@ function IncidentHistory({ onNavigate }) {
           color: #6d28d9;
         }
 
+        [data-theme="light"] .incident-history-nav-link,
+        [data-theme="light"] .incident-history-refresh {
+          color: #5b21b6;
+        }
+
+        [data-theme="light"] .incident-history-status-pending {
+          border-color: rgba(180, 83, 9, 0.35);
+          color: #92400e;
+          background: rgba(245, 158, 11, 0.12);
+        }
+
+        [data-theme="light"] .incident-history-status-verified {
+          border-color: rgba(4, 120, 87, 0.35);
+          color: #047857;
+          background: rgba(16, 185, 129, 0.12);
+        }
+
+        [data-theme="light"] .incident-history-status-rejected {
+          border-color: rgba(190, 24, 93, 0.35);
+          color: #9d174d;
+          background: rgba(239, 93, 145, 0.12);
+        }
+
+        [data-theme="light"] .incident-history-detail-label {
+          color: #475569;
+        }
+
+        [data-theme="light"] .incident-history-detail-value,
+        [data-theme="light"] .incident-history-description {
+          color: #334155;
+        }
+
         .incident-history-page *,
         .incident-history-page *::before,
         .incident-history-page *::after {
