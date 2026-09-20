@@ -106,6 +106,18 @@ function AppContent() {
     <div className="app-shell">
       <div className="cursor-glow" ref={cursorGlowRef} aria-hidden="true" />
       <nav className="app-nav">
+        {/* Mobile Hamburger Toggle Button (Left on Mobile) */}
+        <button
+          className="app-nav-hamburger-btn"
+          type="button"
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav-drawer"
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        >
+          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+
         <button className="app-brand" type="button" onClick={() => handleNavigate('home')}>
           <SafeRouteLogo size={32} className="app-brand-logo" />
           <span className="app-brand-copy">
@@ -174,18 +186,6 @@ function AppContent() {
           <InstallPrompt renderBanner={true} />
           <ThemeToggle />
         </div>
-
-        {/* Mobile Hamburger Toggle Button */}
-        <button
-          className="app-nav-hamburger-btn"
-          type="button"
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
-          aria-expanded={mobileMenuOpen}
-          aria-controls="mobile-nav-drawer"
-          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-        >
-          {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
       </nav>
 
       {/* Mobile Drawer & Backdrop */}
