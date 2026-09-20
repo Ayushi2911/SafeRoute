@@ -270,7 +270,43 @@ export default function SOS({ onNavigate }) {
   };
 
   return (
-    <div style={{ maxWidth: '960px', margin: '0 auto', padding: '32px 20px 80px' }}>
+    <div className="sos-page" style={{ maxWidth: '960px', margin: '0 auto', padding: '32px 20px 80px' }}>
+      <style>{`
+        [data-theme="light"] .sos-page [style*="color: var(--text-heading)"] {
+          color: #0f172a !important;
+        }
+
+        [data-theme="light"] .sos-page [style*="color: var(--text-subtle)"] {
+          color: #334155 !important;
+        }
+
+        [data-theme="light"] .sos-page [style*="color: var(--muted)"] {
+          color: #475569 !important;
+        }
+
+        [data-theme="light"] .sos-page [style*="color: '#fca5a5'"],
+        [data-theme="light"] .sos-page [style*="color: #fca5a5"] {
+          color: #b91c1c !important;
+        }
+
+        [data-theme="light"] .sos-page [style*="color: '#f87171'"],
+        [data-theme="light"] .sos-page [style*="color: #f87171"] {
+          color: #b91c1c !important;
+        }
+
+        [data-theme="light"] .sos-page [style*="color: '#6ee7b7'"],
+        [data-theme="light"] .sos-page [style*="color: #6ee7b7"] {
+          color: #047857 !important;
+        }
+
+        [data-theme="light"] .sos-page a[style*="color: var(--text)"] {
+          color: #0f172a !important;
+        }
+
+        [data-theme="light"] .sos-page a:hover {
+          color: #0f172a;
+        }
+      `}</style>
       {/* Header Banner */}
       <div
         style={{

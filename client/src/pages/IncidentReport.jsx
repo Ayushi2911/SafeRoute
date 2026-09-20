@@ -319,6 +319,28 @@ function IncidentReport({ onNavigate }) {
           color: #475569;
         }
 
+        [data-theme="light"] .incident-auth-banner {
+          color: #334155 !important;
+        }
+
+        [data-theme="light"] .incident-auth-banner button {
+          color: #92400e !important;
+        }
+
+        [data-theme="light"] .incident-submit-button {
+          color: #ffffff !important;
+        }
+
+        [data-theme="light"] .incident-guideline {
+          color: #334155 !important;
+        }
+
+        [data-theme="light"] .incident-guideline-number {
+          color: #6d28d9 !important;
+          background: rgba(124, 58, 237, 0.14);
+          border: 1px solid rgba(109, 40, 217, 0.25);
+        }
+
         .incident-page *,
         .incident-page *::before,
         .incident-page *::after {
@@ -1025,6 +1047,7 @@ function IncidentReport({ onNavigate }) {
           <section className="incident-card incident-form-card" aria-labelledby="incident-details-title">
             {isAuthenticated && user ? (
               <div
+                className="incident-auth-banner"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -1045,6 +1068,7 @@ function IncidentReport({ onNavigate }) {
               </div>
             ) : (
               <div
+                className="incident-auth-banner"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
