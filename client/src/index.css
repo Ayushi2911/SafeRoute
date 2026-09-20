@@ -118,22 +118,104 @@
 [data-theme="light"] input,
 [data-theme="light"] select,
 [data-theme="light"] textarea {
-  background-color: var(--color-input);
-  border-color: var(--color-input-border);
-  color: var(--color-text-primary);
+  background-color: #ffffff !important;
+  border-color: var(--color-input-border) !important;
+  color: var(--color-text-primary) !important;
 }
 
 [data-theme="light"] input::placeholder,
 [data-theme="light"] textarea::placeholder {
-  color: var(--color-text-muted);
+  color: var(--color-text-muted) !important;
   opacity: 1;
 }
 
 [data-theme="light"] input:focus,
 [data-theme="light"] select:focus,
 [data-theme="light"] textarea:focus {
-  border-color: var(--color-focus);
-  box-shadow: 0 0 0 3px rgb(var(--color-teal-dark-rgb) / 0.16);
+  border-color: var(--color-focus) !important;
+  box-shadow: 0 0 0 3px rgb(var(--color-teal-dark-rgb) / 0.16) !important;
+}
+
+[data-theme="light"] .auth-page label,
+[data-theme="light"] .auth-page .auth-supporting-text,
+[data-theme="light"] .auth-page .auth-footer {
+  color: var(--color-text) !important;
+}
+
+[data-theme="light"] .auth-page input {
+  background: #ffffff !important;
+  color: #202544 !important;
+  border-color: rgb(var(--color-teal-dark-rgb) / 0.42) !important;
+}
+
+[data-theme="light"] .auth-page input::placeholder {
+  color: #0B3143 !important;
+  opacity: 0.78;
+}
+
+[data-theme="light"] .auth-page label {
+  font-weight: 700;
+}
+
+[data-theme="light"] .auth-page input + button,
+[data-theme="light"] .auth-page button[aria-label*="password" i] {
+  color: var(--color-primary-dark) !important;
+}
+
+[data-theme="light"] .auth-page button[type="submit"] {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .auth-page .auth-link {
+  color: var(--color-primary-dark) !important;
+}
+
+[data-theme="light"] .profile-page [style*="color: var(--color-accent-soft)"],
+[data-theme="light"] .profile-page [style*="color: var(--accent-soft)"],
+[data-theme="light"] .profile-page [style*="color: var(--muted)"],
+[data-theme="light"] .profile-page [style*="color: var(--text-subtle)"],
+[data-theme="light"] .sos-page [style*="color: var(--color-accent-soft)"],
+[data-theme="light"] .sos-page [style*="color: var(--accent-soft)"],
+[data-theme="light"] .sos-page [style*="color: var(--muted)"],
+[data-theme="light"] .sos-page [style*="color: var(--text-subtle)"] {
+  color: var(--color-text) !important;
+}
+
+[data-theme="light"] .profile-page input,
+[data-theme="light"] .profile-page textarea,
+[data-theme="light"] .sos-page input,
+[data-theme="light"] .sos-page textarea,
+[data-theme="light"] .sos-page select {
+  background: #ffffff !important;
+  color: #202544 !important;
+  border-color: rgb(var(--color-teal-dark-rgb) / 0.42) !important;
+}
+
+[data-theme="light"] .profile-page input::placeholder,
+[data-theme="light"] .profile-page textarea::placeholder,
+[data-theme="light"] .sos-page input::placeholder,
+[data-theme="light"] .sos-page textarea::placeholder {
+  color: #0B3143 !important;
+  opacity: 0.78;
+}
+
+[data-theme="light"] .profile-page button,
+[data-theme="light"] .sos-page button {
+  font-weight: 600;
+}
+
+[data-theme="light"] .profile-page button:not([type="submit"]):not(.sos-primary-action),
+[data-theme="light"] .sos-page button:not(.sos-primary-action):not([aria-label="Trigger Emergency SOS"]) {
+  color: var(--color-text) !important;
+}
+
+[data-theme="light"] .profile-page h1,
+[data-theme="light"] .profile-page h2,
+[data-theme="light"] .sos-page h1,
+[data-theme="light"] .sos-page h2 {
+  color: var(--color-text) !important;
+  font-weight: 700;
 }
 
 * {

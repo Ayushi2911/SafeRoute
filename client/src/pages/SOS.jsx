@@ -270,7 +270,7 @@ export default function SOS({ onNavigate }) {
   };
 
   return (
-    <div style={{ maxWidth: '960px', margin: '0 auto', padding: '32px 20px 80px' }}>
+    <div className="sos-page" style={{ maxWidth: '960px', margin: '0 auto', padding: '32px 20px 80px' }}>
       {/* Header Banner */}
       <div
         style={{

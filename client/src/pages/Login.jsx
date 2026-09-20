@@ -62,6 +62,7 @@ export default function Login({ onNavigate }) {
 
   return (
     <div
+      className="auth-page login-page"
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -121,7 +122,7 @@ export default function Login({ onNavigate }) {
           >
             Citizen Sign In
           </h1>
-          <p style={{ fontSize: '0.88rem', color: 'var(--muted)', margin: 0 }}>
+          <p className="auth-supporting-text" style={{ fontSize: '0.88rem', color: 'var(--muted)', margin: 0 }}>
             Access verified safety routing and personal incident tracking
           </p>
         </div>
@@ -293,6 +294,7 @@ export default function Login({ onNavigate }) {
         </form>
 
         <div
+          className="auth-footer"
           style={{
             marginTop: '24px',
             paddingTop: '20px',
@@ -304,6 +306,7 @@ export default function Login({ onNavigate }) {
         >
           <span>Need a SafeRoute citizen account? </span>
           <button
+            className="auth-link"
             type="button"
             onClick={() => onNavigate && onNavigate('register')}
             style={{

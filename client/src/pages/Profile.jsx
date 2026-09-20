@@ -138,6 +138,7 @@ export default function Profile({ onNavigate }) {
   if (loading) {
     return (
       <div
+        className="profile-page"
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -155,6 +156,7 @@ export default function Profile({ onNavigate }) {
 
   return (
     <div
+      className="profile-page"
       style={{
         maxWidth: '820px',
         margin: '0 auto',

@@ -90,6 +90,7 @@ export default function Register({ onNavigate }) {
 
   return (
     <div
+      className="auth-page register-page"
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -148,7 +149,7 @@ export default function Register({ onNavigate }) {
           >
             Create Citizen Account
           </h1>
-          <p style={{ fontSize: '0.88rem', color: 'var(--muted)', margin: 0 }}>
+          <p className="auth-supporting-text" style={{ fontSize: '0.88rem', color: 'var(--muted)', margin: 0 }}>
             Join the SafeRoute community network for verified safety
           </p>
         </div>
@@ -435,6 +436,7 @@ export default function Register({ onNavigate }) {
         </form>
 
         <div
+          className="auth-footer"
           style={{
             marginTop: '22px',
             paddingTop: '18px',
@@ -446,6 +448,7 @@ export default function Register({ onNavigate }) {
         >
           <span>Already have a citizen account? </span>
           <button
+            className="auth-link"
             type="button"
             onClick={() => onNavigate && onNavigate('login')}
             style={{
