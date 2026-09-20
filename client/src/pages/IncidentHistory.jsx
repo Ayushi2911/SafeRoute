@@ -116,64 +116,64 @@ function IncidentHistory({ onNavigate }) {
     <main className="incident-history-page">
       <style>{`
         .incident-history-page {
-          --history-background: var(--color-background);
-          --history-surface: rgb(var(--color-surface-rgb) / 0.78);
-          --history-surface-light: rgb(var(--color-surface-elevated-rgb) / 0.72);
-          --history-line: rgb(var(--color-accent-soft-rgb) / 0.14);
-          --history-line-strong: rgb(var(--color-accent-rgb) / 0.48);
-          --history-white: var(--color-text-heading);
-          --history-lavender: var(--color-text-subtle);
-          --history-muted: var(--color-text-muted);
-          --history-faint: var(--color-text-muted);
-          --history-mauve: var(--color-accent);
-          --history-primary: var(--color-accent);
+          --history-background: #080713;
+          --history-surface: rgba(24, 18, 42, 0.78);
+          --history-surface-light: rgba(39, 27, 63, 0.72);
+          --history-line: rgba(222, 193, 255, 0.14);
+          --history-line-strong: rgba(226, 127, 255, 0.48);
+          --history-white: #fbf8ff;
+          --history-lavender: #dcd0ec;
+          --history-muted: #a398b9;
+          --history-faint: #756986;
+          --history-pink: #ef70bd;
+          --history-violet: #9b6cff;
           width: 100%;
           min-height: 100vh;
           padding: 48px clamp(18px, 5vw, 78px) 68px;
           color: var(--history-white);
           background:
-            radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.18), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.1), transparent 28rem),
-            linear-gradient(125deg, var(--color-background) 0%, var(--color-surface) 48%, var(--color-surface) 100%);
+            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.18), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.1), transparent 28rem),
+            linear-gradient(125deg, #080713 0%, #0d0a1c 48%, #100b20 100%);
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
           box-sizing: border-box;
         }
 
         [data-theme="light"] .incident-history-page {
-          --history-background: var(--color-background);
+          --history-background: #f8f9fc;
           --history-surface: rgba(255, 255, 255, 0.92);
           --history-surface-light: rgba(241, 245, 249, 0.92);
-          --history-line: rgb(var(--color-primary-light-rgb) / 0.22);
-          --history-line-strong: rgb(var(--color-primary-light-rgb) / 0.45);
-          --history-white: var(--color-text);
-          --history-lavender: var(--color-text-subtle);
-          --history-muted: var(--color-text-muted);
-          --history-faint: var(--color-text-muted);
-          --history-mauve: var(--color-accent);
-          --history-primary: var(--color-primary-light);
+          --history-line: rgba(148, 163, 184, 0.22);
+          --history-line-strong: rgba(124, 58, 237, 0.45);
+          --history-white: #0f172a;
+          --history-lavender: #334155;
+          --history-muted: #64748b;
+          --history-faint: #94a3b8;
+          --history-pink: #db2777;
+          --history-violet: #7c3aed;
           background:
-            radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.06), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.05), transparent 28rem),
-            linear-gradient(125deg, var(--color-background) 0%, var(--color-surface-elevated) 48%, #ffffff 100%);
+            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.06), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.05), transparent 28rem),
+            linear-gradient(125deg, #f8f9fc 0%, #f1f5f9 48%, #ffffff 100%);
           color: var(--history-white);
         }
 
         [data-theme="light"] .incident-history-card {
           background: rgba(255, 255, 255, 0.94);
-          border-color: rgb(var(--color-primary-light-rgb) / 0.22);
+          border-color: rgba(148, 163, 184, 0.22);
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
         }
 
         [data-theme="light"] .incident-history-filter-btn {
-          background: var(--color-surface-elevated);
-          border-color: rgb(var(--color-primary-light-rgb) / 0.25);
-          color: var(--color-text-subtle);
+          background: #f1f5f9;
+          border-color: rgba(148, 163, 184, 0.25);
+          color: #334155;
         }
 
         [data-theme="light"] .incident-history-filter-btn.active {
-          background: rgb(var(--color-primary-light-rgb) / 0.1);
-          border-color: rgb(var(--color-primary-light-rgb) / 0.45);
-          color: var(--color-primary);
+          background: rgba(124, 58, 237, 0.1);
+          border-color: rgba(124, 58, 237, 0.45);
+          color: #6d28d9;
         }
 
         .incident-history-page *,
@@ -202,7 +202,7 @@ function IncidentHistory({ onNavigate }) {
           align-items: center;
           gap: 9px;
           margin-bottom: 16px;
-          color: var(--color-accent-soft);
+          color: #d795f5;
           font-size: 0.7rem;
           font-weight: 800;
           letter-spacing: 0.16em;
@@ -213,8 +213,8 @@ function IncidentHistory({ onNavigate }) {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: linear-gradient(135deg, var(--history-mauve), var(--history-primary));
-          box-shadow: 0 0 18px rgb(var(--color-mauve-rgb) / 0.8);
+          background: linear-gradient(135deg, var(--history-pink), var(--history-violet));
+          box-shadow: 0 0 18px rgba(239, 112, 189, 0.8);
         }
 
         .incident-history-brand-wrap {
@@ -229,8 +229,8 @@ function IncidentHistory({ onNavigate }) {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: rgb(var(--color-accent-soft-rgb) / 0.12);
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.3);
+          background: rgba(185, 155, 255, 0.12);
+          border: 1px solid rgba(185, 155, 255, 0.3);
           flex-shrink: 0;
           margin-top: 4px;
         }
@@ -272,7 +272,7 @@ function IncidentHistory({ onNavigate }) {
           border-radius: 12px;
           padding: 13px 17px;
           color: var(--history-white);
-          background: linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.2), rgb(var(--color-accent-soft-rgb) / 0.18));
+          background: linear-gradient(135deg, rgba(222, 105, 209, 0.2), rgba(132, 92, 255, 0.18));
           cursor: pointer;
           font: inherit;
           font-size: 0.83rem;
@@ -281,15 +281,15 @@ function IncidentHistory({ onNavigate }) {
         }
 
         .incident-history-nav-link {
-          color: var(--color-text-subtle);
-          background: rgb(var(--color-primary-light-rgb) / 0.1);
+          color: #edc9ff;
+          background: rgba(155, 108, 255, 0.1);
           text-decoration: none;
         }
 
         .incident-history-nav-link:hover,
         .incident-history-refresh:hover:not(:disabled) {
-          border-color: var(--color-accent-soft);
-          background: linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.32), rgb(var(--color-accent-soft-rgb) / 0.3));
+          border-color: #e9a1ff;
+          background: linear-gradient(135deg, rgba(222, 105, 209, 0.32), rgba(132, 92, 255, 0.3));
           transform: translateY(-2px);
         }
 
@@ -315,8 +315,8 @@ function IncidentHistory({ onNavigate }) {
         }
 
         .incident-history-error {
-          border-color: rgb(var(--color-accent-soft-rgb) / 0.35);
-          color: var(--color-accent-soft);
+          border-color: rgba(255, 126, 174, 0.35);
+          color: #f4b8d2;
         }
 
         .incident-history-retry {
@@ -325,7 +325,7 @@ function IncidentHistory({ onNavigate }) {
           border-radius: 9px;
           padding: 10px 15px;
           color: var(--history-white);
-          background: rgb(var(--color-mauve-rgb) / 0.2);
+          background: rgba(239, 112, 189, 0.2);
           cursor: pointer;
           font: inherit;
           font-weight: 700;
@@ -343,14 +343,14 @@ function IncidentHistory({ onNavigate }) {
           border-radius: 18px;
           padding: 23px;
           background:
-            linear-gradient(145deg, rgb(var(--color-background-rgb) / 0.74), rgb(var(--color-background-rgb) / 0.9)),
+            linear-gradient(145deg, rgba(44, 27, 67, 0.74), rgba(18, 14, 34, 0.9)),
             var(--history-surface);
-          box-shadow: 0 18px 45px rgb(var(--color-background-rgb) / 0.2);
+          box-shadow: 0 18px 45px rgba(3, 2, 12, 0.2);
           transition: border-color 180ms ease, transform 180ms ease;
         }
 
         .incident-history-card:hover {
-          border-color: rgb(var(--color-accent-soft-rgb) / 0.38);
+          border-color: rgba(217, 126, 255, 0.38);
           transform: translateY(-3px);
         }
 
@@ -367,7 +367,7 @@ function IncidentHistory({ onNavigate }) {
         }
 
         .incident-history-id {
-          color: var(--color-accent-soft);
+          color: #cbb7e3;
           font-size: 0.76rem;
           font-weight: 800;
           letter-spacing: 0.08em;
@@ -385,21 +385,21 @@ function IncidentHistory({ onNavigate }) {
         }
 
         .incident-history-status-pending {
-          border-color: rgb(var(--color-accent-rgb) / 0.3);
-          color: var(--color-accent);
-          background: rgb(var(--color-accent-rgb) / 0.12);
+          border-color: rgba(255, 203, 117, 0.3);
+          color: #ffd990;
+          background: rgba(255, 183, 77, 0.12);
         }
 
         .incident-history-status-verified {
-          border-color: rgb(var(--color-primary-light-rgb) / 0.3);
-          color: var(--color-primary-light);
-          background: rgb(var(--color-primary-light-rgb) / 0.12);
+          border-color: rgba(118, 232, 190, 0.3);
+          color: #9af0c8;
+          background: rgba(80, 208, 155, 0.12);
         }
 
         .incident-history-status-rejected {
-          border-color: rgb(var(--color-accent-soft-rgb) / 0.3);
-          color: var(--color-accent-soft);
-          background: rgb(var(--color-accent-soft-rgb) / 0.12);
+          border-color: rgba(255, 126, 174, 0.3);
+          color: #ffabc9;
+          background: rgba(239, 93, 145, 0.12);
         }
 
         .incident-history-category {
@@ -420,7 +420,7 @@ function IncidentHistory({ onNavigate }) {
 
         .incident-history-card-meta {
           align-items: flex-start;
-          border-top: 1px solid rgb(var(--color-accent-soft-rgb) / 0.1);
+          border-top: 1px solid rgba(222, 193, 255, 0.1);
           padding-top: 17px;
         }
 
@@ -447,15 +447,15 @@ function IncidentHistory({ onNavigate }) {
         }
 
         .incident-history-severity-low {
-          color: var(--color-primary-light);
+          color: #91e3bd;
         }
 
         .incident-history-severity-medium {
-          color: var(--color-accent);
+          color: #ffd17d;
         }
 
         .incident-history-severity-high {
-          color: var(--color-accent-soft);
+          color: #ff8eaf;
         }
 
         @media (max-width: 760px) {
@@ -560,7 +560,7 @@ function IncidentHistory({ onNavigate }) {
             className="incident-history-detail-value"
             style={{
               marginBottom: '18px',
-              color: 'var(--color-accent-soft)',
+              color: '#d8b4fe',
             }}
           >
             Reporting citizen: <strong>{user.name}</strong> ({user.email})
@@ -586,7 +586,7 @@ function IncidentHistory({ onNavigate }) {
                 className="incident-history-retry"
                 style={{
                   background:
-                    'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
+                    'linear-gradient(135deg, #8b5cf6, #6366f1)',
                   color: '#ffffff',
                   border: 'none',
                 }}

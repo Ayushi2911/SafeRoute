@@ -205,18 +205,18 @@ function IncidentReport({ onNavigate }) {
     >
       <style>{`
         .incident-page {
-          --incident-background: var(--color-background);
-          --incident-surface: rgb(var(--color-surface-rgb) / 0.78);
-          --incident-surface-light: rgb(var(--color-surface-elevated-rgb) / 0.72);
-          --incident-line: rgb(var(--color-accent-soft-rgb) / 0.14);
-          --incident-line-strong: rgb(var(--color-accent-rgb) / 0.48);
-          --incident-white: var(--color-text-heading);
-          --incident-lavender: var(--color-text-subtle);
-          --incident-muted: var(--color-text-muted);
-          --incident-faint: var(--color-text-muted);
-          --incident-mauve: var(--color-accent);
-          --incident-primary: var(--color-accent);
-          --incident-teal: var(--color-teal);
+          --incident-background: #080713;
+          --incident-surface: rgba(24, 18, 42, 0.78);
+          --incident-surface-light: rgba(39, 27, 63, 0.72);
+          --incident-line: rgba(222, 193, 255, 0.14);
+          --incident-line-strong: rgba(226, 127, 255, 0.48);
+          --incident-white: #fbf8ff;
+          --incident-lavender: #dcd0ec;
+          --incident-muted: #a398b9;
+          --incident-faint: #756986;
+          --incident-pink: #ef70bd;
+          --incident-violet: #9b6cff;
+          --incident-cyan: #88d9ec;
           position: relative;
           width: 100%;
           min-height: 100vh;
@@ -225,86 +225,58 @@ function IncidentReport({ onNavigate }) {
           padding: 48px clamp(18px, 5vw, 78px) 68px;
           color: var(--incident-white);
           background:
-            radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.18), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.1), transparent 28rem),
-            linear-gradient(125deg, var(--color-background) 0%, var(--color-surface) 48%, var(--color-surface) 100%);
+            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.18), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.1), transparent 28rem),
+            linear-gradient(125deg, #080713 0%, #0d0a1c 48%, #100b20 100%);
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
         [data-theme="light"] .incident-page {
-          --incident-background: var(--color-background);
+          --incident-background: #f8f9fc;
           --incident-surface: rgba(255, 255, 255, 0.92);
           --incident-surface-light: rgba(241, 245, 249, 0.92);
-          --incident-line: rgb(var(--color-primary-light-rgb) / 0.22);
-          --incident-line-strong: rgb(var(--color-primary-light-rgb) / 0.45);
-          --incident-white: var(--color-text);
-          --incident-lavender: var(--color-text-subtle);
-          --incident-muted: var(--color-text-muted);
-          --incident-faint: var(--color-text-muted);
-          --incident-mauve: var(--color-accent);
-          --incident-primary: var(--color-primary-light);
-          --incident-teal: var(--color-teal-dark);
+          --incident-line: rgba(148, 163, 184, 0.22);
+          --incident-line-strong: rgba(124, 58, 237, 0.45);
+          --incident-white: #0f172a;
+          --incident-lavender: #334155;
+          --incident-muted: #64748b;
+          --incident-faint: #94a3b8;
+          --incident-pink: #db2777;
+          --incident-violet: #7c3aed;
+          --incident-cyan: #0284c7;
           background:
-            radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.06), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.05), transparent 28rem),
-            linear-gradient(125deg, var(--color-background) 0%, var(--color-surface-elevated) 48%, #ffffff 100%);
+            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.06), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.05), transparent 28rem),
+            linear-gradient(125deg, #f8f9fc 0%, #f1f5f9 48%, #ffffff 100%);
           color: var(--incident-white);
         }
 
         [data-theme="light"] .incident-status {
           background: rgba(255, 255, 255, 0.9);
-          color: var(--color-text);
         }
 
         [data-theme="light"] .incident-card {
           background: rgba(255, 255, 255, 0.94);
-          border-color: rgb(var(--color-primary-light-rgb) / 0.22);
+          border-color: rgba(148, 163, 184, 0.22);
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-          color: var(--color-text);
         }
 
         [data-theme="light"] .incident-input,
         [data-theme="light"] .incident-select,
         [data-theme="light"] .incident-textarea {
-          background: var(--color-input);
-          border-color: var(--color-text-subtle);
-          color: var(--color-text-primary);
+          background: #f8fafc;
+          border-color: #cbd5e1;
+          color: #0f172a;
         }
 
         [data-theme="light"] .incident-input::placeholder,
         [data-theme="light"] .incident-textarea::placeholder {
-          color: var(--color-text-muted);
+          color: #94a3b8;
         }
 
         [data-theme="light"] .incident-severity {
-          background: var(--color-input);
-          border-color: rgb(var(--color-primary-light-rgb) / 0.25);
-          color: var(--color-text);
-        }
-
-        [data-theme="light"] .incident-label,
-        [data-theme="light"] .incident-card-title,
-        [data-theme="light"] .incident-intro,
-        [data-theme="light"] .incident-upload-title,
-        [data-theme="light"] .incident-guideline-heading,
-        [data-theme="light"] .incident-guideline-note,
-        [data-theme="light"] .incident-severity-name {
-          color: var(--color-text);
-        }
-
-        [data-theme="light"] .incident-severity-description,
-        [data-theme="light"] .incident-upload-copy,
-        [data-theme="light"] .incident-location-status,
-        [data-theme="light"] .incident-privacy,
-        [data-theme="light"] .incident-guideline,
-        [data-theme="light"] .incident-message {
-          color: var(--color-text-muted);
-        }
-
-        [data-theme="light"] .incident-button:not(.incident-submit-button):hover,
-        [data-theme="light"] .incident-severity:hover,
-        [data-theme="light"] .incident-upload:hover {
-          color: var(--color-text);
+          background: #f8fafc;
+          border-color: rgba(148, 163, 184, 0.25);
         }
 
         .incident-page *,
@@ -321,7 +293,7 @@ function IncidentReport({ onNavigate }) {
           width: 340px;
           height: 340px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgb(var(--color-accent-soft-rgb) / 0.105), rgb(var(--color-accent-soft-rgb) / 0.04) 38%, transparent 70%);
+          background: radial-gradient(circle, rgba(214, 93, 223, 0.105), rgba(139, 74, 255, 0.04) 38%, transparent 70%);
           content: "";
           pointer-events: none;
           transform: translate(-50%, -50%);
@@ -349,7 +321,7 @@ function IncidentReport({ onNavigate }) {
           display: flex;
           align-items: center;
           gap: 9px;
-          color: var(--color-accent-soft);
+          color: #dba6ff;
           font-size: 0.68rem;
           font-weight: 800;
           letter-spacing: 0.17em;
@@ -360,8 +332,8 @@ function IncidentReport({ onNavigate }) {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: var(--incident-mauve);
-          box-shadow: 0 0 0 5px rgb(var(--color-mauve-rgb) / 0.12), 0 0 18px rgb(var(--color-mauve-rgb) / 0.8);
+          background: var(--incident-pink);
+          box-shadow: 0 0 0 5px rgba(239, 112, 189, 0.12), 0 0 18px rgba(239, 112, 189, 0.8);
         }
 
         .incident-brand-wrap {
@@ -376,8 +348,8 @@ function IncidentReport({ onNavigate }) {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: rgb(var(--color-accent-soft-rgb) / 0.12);
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.3);
+          background: rgba(185, 155, 255, 0.12);
+          border: 1px solid rgba(185, 155, 255, 0.3);
           flex-shrink: 0;
           margin-top: 4px;
         }
@@ -408,7 +380,7 @@ function IncidentReport({ onNavigate }) {
           padding: 15px 17px;
           border: 1px solid var(--incident-line);
           border-radius: 15px;
-          background: rgb(var(--color-background-rgb) / 0.7);
+          background: rgba(26, 19, 45, 0.7);
           box-shadow: inset 0 1px rgba(255, 255, 255, 0.05), 0 14px 32px rgba(0, 0, 0, 0.15);
         }
 
@@ -417,10 +389,10 @@ function IncidentReport({ onNavigate }) {
           width: 36px;
           height: 36px;
           place-items: center;
-          border: 1px solid rgb(var(--color-mauve-rgb) / 0.3);
+          border: 1px solid rgba(239, 112, 189, 0.3);
           border-radius: 11px;
-          color: var(--color-accent-soft);
-          background: linear-gradient(145deg, rgb(var(--color-mauve-rgb) / 0.2), rgb(var(--color-primary-light-rgb) / 0.13));
+          color: #ffacd9;
+          background: linear-gradient(145deg, rgba(239, 112, 189, 0.2), rgba(155, 108, 255, 0.13));
           font-size: 1rem;
         }
 
@@ -447,10 +419,10 @@ function IncidentReport({ onNavigate }) {
           gap: 8px;
           min-height: 50px;
           padding: 0 16px;
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.38);
+          border: 1px solid rgba(209, 137, 255, 0.38);
           border-radius: 11px;
-          color: var(--color-text-subtle);
-          background: rgb(var(--color-primary-light-rgb) / 0.1);
+          color: #edc9ff;
+          background: rgba(155, 108, 255, 0.1);
           font-size: 0.72rem;
           font-weight: 760;
           text-decoration: none;
@@ -458,9 +430,9 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-nav-link:hover {
-          border-color: var(--color-accent-soft);
-          background: rgb(var(--color-accent-rgb) / 0.2);
-          box-shadow: 0 8px 22px rgb(var(--color-primary-light-rgb) / 0.2);
+          border-color: #e29aff;
+          background: rgba(173, 87, 255, 0.2);
+          box-shadow: 0 8px 22px rgba(149, 72, 218, 0.2);
           transform: translateY(-2px);
         }
 
@@ -474,15 +446,15 @@ function IncidentReport({ onNavigate }) {
           border: 1px solid var(--incident-line);
           border-radius: 21px;
           background:
-            linear-gradient(145deg, rgb(var(--color-background-rgb) / 0.73), rgb(var(--color-background-rgb) / 0.86)),
+            linear-gradient(145deg, rgba(45, 28, 70, 0.73), rgba(18, 15, 33, 0.86)),
             var(--incident-surface);
           box-shadow: 0 25px 65px rgba(0, 0, 0, 0.22), inset 0 1px rgba(255, 255, 255, 0.045);
           transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
         }
 
         .incident-card:hover {
-          border-color: rgb(var(--color-accent-soft-rgb) / 0.27);
-          box-shadow: 0 29px 72px rgba(0, 0, 0, 0.3), 0 0 28px rgb(var(--color-accent-soft-rgb) / 0.06), inset 0 1px rgba(255, 255, 255, 0.06);
+          border-color: rgba(208, 125, 255, 0.27);
+          box-shadow: 0 29px 72px rgba(0, 0, 0, 0.3), 0 0 28px rgba(161, 88, 255, 0.06), inset 0 1px rgba(255, 255, 255, 0.06);
           transform: translateY(-2px);
         }
 
@@ -499,7 +471,7 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-kicker {
-          color: var(--color-accent-soft);
+          color: #d69dff;
           font-size: 0.65rem;
         }
 
@@ -527,7 +499,7 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-required {
-          color: var(--color-accent-soft);
+          color: #f497ce;
           font-size: 0.63rem;
           font-weight: 650;
           letter-spacing: 0.04em;
@@ -538,11 +510,11 @@ function IncidentReport({ onNavigate }) {
         .incident-select,
         .incident-textarea {
           width: 100%;
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.17);
+          border: 1px solid rgba(215, 187, 246, 0.17);
           border-radius: 11px;
           outline: none;
           color: var(--incident-white);
-          background: rgb(var(--color-background-rgb) / 0.65);
+          background: rgba(9, 8, 20, 0.65);
           font: inherit;
           transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
         }
@@ -567,7 +539,7 @@ function IncidentReport({ onNavigate }) {
           position: absolute;
           top: 50%;
           right: 16px;
-          color: var(--color-accent-soft);
+          color: #bda5d9;
           content: "⌄";
           pointer-events: none;
           transform: translateY(-55%);
@@ -583,14 +555,14 @@ function IncidentReport({ onNavigate }) {
 
         .incident-input::placeholder,
         .incident-textarea::placeholder {
-          color: var(--color-accent);
+          color: #716780;
         }
 
         .incident-input:hover,
         .incident-select:hover,
         .incident-textarea:hover {
-          border-color: rgb(var(--color-accent-soft-rgb) / 0.4);
-          background: rgb(var(--color-background-rgb) / 0.8);
+          border-color: rgba(220, 137, 255, 0.4);
+          background: rgba(15, 11, 28, 0.8);
         }
 
         .incident-input:focus,
@@ -599,8 +571,8 @@ function IncidentReport({ onNavigate }) {
         .incident-button:focus-visible,
         .incident-severity:focus-visible,
         .incident-upload:focus-within {
-          border-color: var(--color-accent-soft);
-          box-shadow: 0 0 0 3px rgb(var(--color-accent-soft-rgb) / 0.15), 0 0 22px rgb(var(--color-accent-soft-rgb) / 0.1);
+          border-color: #d786ff;
+          box-shadow: 0 0 0 3px rgba(194, 104, 255, 0.15), 0 0 22px rgba(194, 104, 255, 0.1);
         }
 
         .incident-severity-grid {
@@ -612,26 +584,26 @@ function IncidentReport({ onNavigate }) {
         .incident-severity {
           min-height: 91px;
           padding: 14px 12px;
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.15);
+          border: 1px solid rgba(215, 187, 246, 0.15);
           border-radius: 12px;
           outline: none;
           color: var(--incident-white);
           text-align: left;
-          background: rgb(var(--color-background-rgb) / 0.42);
+          background: rgba(9, 8, 20, 0.42);
           cursor: pointer;
           transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
         }
 
         .incident-severity:hover {
-          border-color: rgb(var(--color-accent-soft-rgb) / 0.48);
-          background: rgb(var(--color-background-rgb) / 0.72);
+          border-color: rgba(220, 137, 255, 0.48);
+          background: rgba(32, 19, 51, 0.72);
           transform: translateY(-3px);
         }
 
         .incident-severity.is-selected {
-          border-color: var(--color-accent-soft);
-          background: linear-gradient(145deg, rgb(var(--color-accent-rgb) / 0.36), rgb(var(--color-accent-rgb) / 0.75));
-          box-shadow: 0 0 0 1px rgb(var(--color-accent-soft-rgb) / 0.15), 0 9px 28px rgb(var(--color-accent-soft-rgb) / 0.19);
+          border-color: #e692ff;
+          background: linear-gradient(145deg, rgba(124, 53, 154, 0.36), rgba(46, 23, 72, 0.75));
+          box-shadow: 0 0 0 1px rgba(233, 142, 255, 0.15), 0 9px 28px rgba(168, 71, 204, 0.19);
           transform: translateY(-3px);
         }
 
@@ -648,9 +620,9 @@ function IncidentReport({ onNavigate }) {
           border-radius: 50%;
         }
 
-        .incident-severity-low .incident-severity-dot { background: var(--color-teal); box-shadow: 0 0 12px var(--color-teal); }
-        .incident-severity-medium .incident-severity-dot { background: var(--color-accent-soft); box-shadow: 0 0 12px var(--color-accent-soft); }
-        .incident-severity-high .incident-severity-dot { background: var(--color-accent-soft); box-shadow: 0 0 12px var(--color-accent-soft); }
+        .incident-severity-low .incident-severity-dot { background: #74d7ad; box-shadow: 0 0 12px #74d7ad; }
+        .incident-severity-medium .incident-severity-dot { background: #eac267; box-shadow: 0 0 12px #eac267; }
+        .incident-severity-high .incident-severity-dot { background: #f36e9e; box-shadow: 0 0 12px #f36e9e; }
 
         .incident-selected-mark {
           display: grid;
@@ -665,8 +637,8 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-severity.is-selected .incident-selected-mark {
-          border-color: var(--color-accent-soft);
-          background: linear-gradient(135deg, var(--incident-mauve), var(--incident-primary));
+          border-color: #f39ddd;
+          background: linear-gradient(135deg, var(--incident-pink), var(--incident-violet));
           opacity: 1;
         }
 
@@ -700,10 +672,10 @@ function IncidentReport({ onNavigate }) {
           gap: 8px;
           min-height: 50px;
           padding: 0 16px;
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.38);
+          border: 1px solid rgba(209, 137, 255, 0.38);
           border-radius: 11px;
-          color: var(--color-text-subtle);
-          background: rgb(var(--color-primary-light-rgb) / 0.1);
+          color: #edc9ff;
+          background: rgba(155, 108, 255, 0.1);
           font: inherit;
           font-size: 0.72rem;
           font-weight: 760;
@@ -712,9 +684,9 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-button:hover {
-          border-color: var(--color-accent-soft);
-          background: rgb(var(--color-accent-rgb) / 0.2);
-          box-shadow: 0 8px 22px rgb(var(--color-primary-light-rgb) / 0.2);
+          border-color: #e29aff;
+          background: rgba(173, 87, 255, 0.2);
+          box-shadow: 0 8px 22px rgba(149, 72, 218, 0.2);
           transform: translateY(-2px);
         }
 
@@ -735,8 +707,8 @@ function IncidentReport({ onNavigate }) {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: var(--color-accent);
-          box-shadow: 0 0 8px rgb(var(--color-accent-soft-rgb) / 0.5);
+          background: #8c789e;
+          box-shadow: 0 0 8px rgba(191, 127, 219, 0.5);
           content: "";
         }
 
@@ -746,21 +718,21 @@ function IncidentReport({ onNavigate }) {
           min-height: 176px;
           align-items: center;
           justify-content: center;
-          border: 1px dashed rgb(var(--color-accent-soft-rgb) / 0.46);
+          border: 1px dashed rgba(207, 132, 255, 0.46);
           border-radius: 14px;
           outline: none;
           text-align: center;
           background:
-            linear-gradient(135deg, rgb(var(--color-accent-soft-rgb) / 0.1), rgb(var(--color-background-rgb) / 0.3)),
+            linear-gradient(135deg, rgba(169, 84, 228, 0.1), rgba(27, 16, 47, 0.3)),
             repeating-linear-gradient(135deg, transparent 0 12px, rgba(255, 255, 255, 0.012) 12px 13px);
           cursor: pointer;
           transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
         }
 
         .incident-upload:hover {
-          border-color: var(--color-accent-soft);
-          background-color: rgb(var(--color-accent-rgb) / 0.18);
-          box-shadow: 0 0 26px rgb(var(--color-accent-soft-rgb) / 0.12);
+          border-color: #e19aff;
+          background-color: rgba(119, 55, 159, 0.18);
+          box-shadow: 0 0 26px rgba(186, 80, 230, 0.12);
         }
 
         .incident-upload input {
@@ -776,10 +748,10 @@ function IncidentReport({ onNavigate }) {
           height: 45px;
           margin: 0 auto 12px;
           place-items: center;
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.36);
+          border: 1px solid rgba(224, 147, 255, 0.36);
           border-radius: 13px;
-          color: var(--color-accent-soft);
-          background: linear-gradient(145deg, rgb(var(--color-accent-soft-rgb) / 0.2), rgb(var(--color-accent-soft-rgb) / 0.2));
+          color: #f0b5ff;
+          background: linear-gradient(145deg, rgba(222, 113, 235, 0.2), rgba(126, 77, 255, 0.2));
           font-size: 1.25rem;
         }
 
@@ -805,7 +777,7 @@ function IncidentReport({ onNavigate }) {
           margin: 10px auto 0;
           padding: 0;
           overflow: hidden;
-          color: var(--color-accent-soft);
+          color: #efb4ff;
           font-size: 0.66rem;
           list-style: none;
           text-overflow: ellipsis;
@@ -819,10 +791,10 @@ function IncidentReport({ onNavigate }) {
           gap: 24px;
           margin-top: 18px;
           padding: 22px 25px;
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.23);
+          border: 1px solid rgba(231, 111, 185, 0.23);
           border-radius: 18px;
           background:
-            linear-gradient(100deg, rgb(var(--color-primary-rgb) / 0.68), rgb(var(--color-background-rgb) / 0.84)),
+            linear-gradient(100deg, rgba(67, 25, 62, 0.68), rgba(27, 18, 51, 0.84)),
             var(--incident-surface);
           box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
           animation: incident-rise 600ms 230ms ease both;
@@ -840,7 +812,7 @@ function IncidentReport({ onNavigate }) {
 
         .incident-privacy-icon {
           flex: 0 0 auto;
-          color: var(--color-accent-soft);
+          color: #f09bd0;
           font-size: 1rem;
         }
 
@@ -848,27 +820,27 @@ function IncidentReport({ onNavigate }) {
           min-width: 218px;
           border-color: transparent;
           color: white;
-          background: linear-gradient(110deg, var(--color-accent-soft), var(--color-accent-soft) 52%, var(--color-accent-soft));
-          box-shadow: 0 11px 30px rgb(var(--color-accent-soft-rgb) / 0.27), inset 0 1px rgba(255, 255, 255, 0.22);
+          background: linear-gradient(110deg, #bd5adf, #e861ae 52%, #8e6aff);
+          box-shadow: 0 11px 30px rgba(202, 83, 183, 0.27), inset 0 1px rgba(255, 255, 255, 0.22);
         }
 
         .incident-submit-button:hover {
           border-color: rgba(255, 255, 255, 0.25);
-          background: linear-gradient(110deg, var(--color-accent-soft), var(--color-accent-soft) 52%, var(--color-accent-soft));
-          box-shadow: 0 14px 34px rgb(var(--color-accent-soft-rgb) / 0.4), 0 0 25px rgb(var(--color-accent-soft-rgb) / 0.19);
+          background: linear-gradient(110deg, #c96ae9, #f074bd 52%, #9b78ff);
+          box-shadow: 0 14px 34px rgba(202, 83, 183, 0.4), 0 0 25px rgba(207, 97, 237, 0.19);
         }
 
         .incident-submit-button:active {
-          box-shadow: 0 5px 14px rgb(var(--color-accent-soft-rgb) / 0.24);
+          box-shadow: 0 5px 14px rgba(202, 83, 183, 0.24);
         }
 
         .incident-message {
           margin-top: 11px;
           padding: 12px 15px;
-          border: 1px solid rgb(var(--color-teal-rgb) / 0.25);
+          border: 1px solid rgba(136, 217, 236, 0.25);
           border-radius: 10px;
-          color: var(--color-primary-light);
-          background: rgb(var(--color-primary-light-rgb) / 0.09);
+          color: #b4edfa;
+          background: rgba(83, 174, 199, 0.09);
           font-size: 0.72rem;
           animation: incident-rise 240ms ease both;
         }
@@ -908,18 +880,18 @@ function IncidentReport({ onNavigate }) {
           gap: 12px;
           min-height: 65px;
           padding: 13px;
-          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.1);
+          border: 1px solid rgba(215, 187, 246, 0.1);
           border-radius: 11px;
           color: var(--incident-muted);
           font-size: 0.72rem;
           line-height: 1.48;
-          background: rgb(var(--color-background-rgb) / 0.3);
+          background: rgba(8, 7, 17, 0.3);
           transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
         }
 
         .incident-guideline:hover {
-          border-color: rgb(var(--color-accent-soft-rgb) / 0.3);
-          background: rgb(var(--color-background-rgb) / 0.48);
+          border-color: rgba(217, 126, 255, 0.3);
+          background: rgba(40, 23, 60, 0.48);
           transform: translateY(-2px);
         }
 
@@ -930,8 +902,8 @@ function IncidentReport({ onNavigate }) {
           flex: 0 0 auto;
           place-items: center;
           border-radius: 7px;
-          color: var(--color-accent-soft);
-          background: linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.28), rgb(var(--color-accent-soft-rgb) / 0.23));
+          color: #f3b4ff;
+          background: linear-gradient(135deg, rgba(222, 105, 209, 0.28), rgba(132, 92, 255, 0.23));
           font-size: 0.62rem;
           font-weight: 800;
         }
@@ -1018,15 +990,15 @@ function IncidentReport({ onNavigate }) {
                   alignItems: 'center',
                   gap: '8px',
                   padding: '10px 14px',
-                  background: 'rgb(var(--color-accent-rgb) / 0.1)',
-                  border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.25)',
+                  background: 'rgba(139, 92, 246, 0.1)',
+                  border: '1px solid rgba(185, 155, 255, 0.25)',
                   borderRadius: '10px',
                   marginBottom: '18px',
                   fontSize: '0.86rem',
-                  color: 'var(--color-accent-soft)',
+                  color: '#e0d8ff',
                 }}
               >
-                <ShieldCheck size={16} style={{ color: 'var(--color-accent-soft)', flexShrink: 0 }} />
+                <ShieldCheck size={16} style={{ color: '#a78bfa', flexShrink: 0 }} />
                 <span>
                   Reporting as verified citizen: <strong>{user.name}</strong> ({user.email})
                 </span>
@@ -1039,25 +1011,25 @@ function IncidentReport({ onNavigate }) {
                   justifyContent: 'space-between',
                   gap: '12px',
                   padding: '12px 14px',
-                  background: 'rgb(var(--color-accent-soft-rgb) / 0.1)',
-                  border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.3)',
+                  background: 'rgba(245, 158, 11, 0.1)',
+                  border: '1px solid rgba(245, 158, 11, 0.3)',
                   borderRadius: '10px',
                   marginBottom: '18px',
                   fontSize: '0.86rem',
-                  color: 'var(--color-text-subtle)',
+                  color: '#fde68a',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <AlertTriangle size={16} style={{ color: 'var(--color-accent-soft)', flexShrink: 0 }} />
+                  <AlertTriangle size={16} style={{ color: '#f59e0b', flexShrink: 0 }} />
                   <span>Citizen sign-in required to submit verified reports.</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => onNavigate && onNavigate('login')}
                   style={{
-                    background: 'rgb(var(--color-accent-soft-rgb) / 0.2)',
-                    border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.4)',
-                    color: 'var(--color-accent)',
+                    background: 'rgba(245, 158, 11, 0.2)',
+                    border: '1px solid rgba(245, 158, 11, 0.4)',
+                    color: '#fef3c7',
                     borderRadius: '6px',
                     padding: '5px 12px',
                     fontSize: '0.8rem',

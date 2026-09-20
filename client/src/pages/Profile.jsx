@@ -138,7 +138,6 @@ export default function Profile({ onNavigate }) {
   if (loading) {
     return (
       <div
-        className="profile-page"
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -156,7 +155,6 @@ export default function Profile({ onNavigate }) {
 
   return (
     <div
-      className="profile-page"
       style={{
         maxWidth: '820px',
         margin: '0 auto',
@@ -185,12 +183,12 @@ export default function Profile({ onNavigate }) {
               width: '68px',
               height: '68px',
               borderRadius: '16px',
-              background: 'linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.25), rgb(var(--color-primary-light-rgb) / 0.25))',
-              border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.4)',
+              background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(99, 102, 241, 0.25))',
+              border: '1px solid rgba(185, 155, 255, 0.4)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--color-accent-soft)',
+              color: '#d8b4fe',
             }}
           >
             <User size={34} />
@@ -220,9 +218,9 @@ export default function Profile({ onNavigate }) {
                   fontWeight: 700,
                   textTransform: 'uppercase',
                   letterSpacing: '0.06em',
-                  background: citizen?.role === 'admin' ? 'rgb(var(--color-accent-rgb) / 0.15)' : 'rgb(var(--color-accent-rgb) / 0.15)',
-                  border: citizen?.role === 'admin' ? '1px solid rgb(var(--color-accent-rgb) / 0.35)' : '1px solid rgb(var(--color-accent-rgb) / 0.35)',
-                  color: citizen?.role === 'admin' ? 'var(--color-accent-soft)' : 'var(--color-accent-soft)',
+                  background: citizen?.role === 'admin' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(139, 92, 246, 0.15)',
+                  border: citizen?.role === 'admin' ? '1px solid rgba(239, 68, 68, 0.35)' : '1px solid rgba(139, 92, 246, 0.35)',
+                  color: citizen?.role === 'admin' ? '#f87171' : '#c084fc',
                 }}
               >
                 <Shield size={12} />
@@ -290,9 +288,9 @@ export default function Profile({ onNavigate }) {
               alignItems: 'center',
               gap: '8px',
               padding: '9px 18px',
-              background: 'rgb(var(--color-accent-rgb) / 0.1)',
-              border: '1px solid rgb(var(--color-accent-rgb) / 0.3)',
-              color: 'var(--color-accent-soft)',
+              background: 'rgba(239, 68, 68, 0.1)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              color: '#fca5a5',
               borderRadius: '10px',
               fontSize: '0.88rem',
               fontWeight: 600,
@@ -312,10 +310,10 @@ export default function Profile({ onNavigate }) {
             alignItems: 'center',
             gap: '10px',
             padding: '12px 16px',
-            background: 'rgb(var(--color-accent-rgb) / 0.12)',
-            border: '1px solid rgb(var(--color-accent-rgb) / 0.35)',
+            background: 'rgba(239, 68, 68, 0.12)',
+            border: '1px solid rgba(239, 68, 68, 0.35)',
             borderRadius: '10px',
-            color: 'var(--color-accent-soft)',
+            color: '#fca5a5',
             fontSize: '0.88rem',
             marginBottom: '20px',
           }}
@@ -332,10 +330,10 @@ export default function Profile({ onNavigate }) {
             alignItems: 'center',
             gap: '10px',
             padding: '12px 16px',
-            background: 'rgb(var(--color-teal-dark-rgb) / 0.12)',
-            border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
+            background: 'rgba(16, 185, 129, 0.12)',
+            border: '1px solid rgba(16, 185, 129, 0.35)',
             borderRadius: '10px',
-            color: 'var(--color-teal)',
+            color: '#6ee7b7',
             fontSize: '0.88rem',
             marginBottom: '20px',
           }}
@@ -570,7 +568,7 @@ export default function Profile({ onNavigate }) {
                     alignItems: 'center',
                     gap: '6px',
                     padding: '10px 18px',
-                    background: 'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
+                    background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
                     color: '#ffffff',
                     border: 'none',
                     borderRadius: '8px',

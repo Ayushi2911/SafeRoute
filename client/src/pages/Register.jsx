@@ -90,7 +90,6 @@ export default function Register({ onNavigate }) {
 
   return (
     <div
-      className="auth-page register-page"
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -149,7 +148,7 @@ export default function Register({ onNavigate }) {
           >
             Create Citizen Account
           </h1>
-          <p className="auth-supporting-text" style={{ fontSize: '0.88rem', color: 'var(--muted)', margin: 0 }}>
+          <p style={{ fontSize: '0.88rem', color: 'var(--muted)', margin: 0 }}>
             Join the SafeRoute community network for verified safety
           </p>
         </div>
@@ -161,10 +160,10 @@ export default function Register({ onNavigate }) {
               alignItems: 'center',
               gap: '10px',
               padding: '12px 14px',
-              background: 'rgb(var(--color-accent-rgb) / 0.12)',
-              border: '1px solid rgb(var(--color-accent-rgb) / 0.35)',
+              background: 'rgba(239, 68, 68, 0.12)',
+              border: '1px solid rgba(239, 68, 68, 0.35)',
               borderRadius: '10px',
-              color: 'var(--color-accent-soft)',
+              color: '#fca5a5',
               fontSize: '0.86rem',
               marginBottom: '18px',
             }}
@@ -181,10 +180,10 @@ export default function Register({ onNavigate }) {
               alignItems: 'center',
               gap: '10px',
               padding: '12px 14px',
-              background: 'rgb(var(--color-teal-dark-rgb) / 0.12)',
-              border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
+              background: 'rgba(16, 185, 129, 0.12)',
+              border: '1px solid rgba(16, 185, 129, 0.35)',
               borderRadius: '10px',
-              color: 'var(--color-teal)',
+              color: '#6ee7b7',
               fontSize: '0.86rem',
               marginBottom: '18px',
             }}
@@ -417,7 +416,7 @@ export default function Register({ onNavigate }) {
               width: '100%',
               padding: '13px',
               marginTop: '6px',
-              background: 'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
+              background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
               color: '#ffffff',
               border: 'none',
               borderRadius: '10px',
@@ -425,7 +424,7 @@ export default function Register({ onNavigate }) {
               fontSize: '0.95rem',
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               opacity: isSubmitting ? 0.75 : 1,
-              boxShadow: '0 4px 20px rgb(var(--color-accent-rgb) / 0.35)',
+              boxShadow: '0 4px 20px rgba(139, 92, 246, 0.35)',
               transition: 'transform 150ms ease, box-shadow 150ms ease',
             }}
           >
@@ -436,7 +435,6 @@ export default function Register({ onNavigate }) {
         </form>
 
         <div
-          className="auth-footer"
           style={{
             marginTop: '22px',
             paddingTop: '18px',
@@ -448,7 +446,6 @@ export default function Register({ onNavigate }) {
         >
           <span>Already have a citizen account? </span>
           <button
-            className="auth-link"
             type="button"
             onClick={() => onNavigate && onNavigate('login')}
             style={{
@@ -476,7 +473,7 @@ export default function Register({ onNavigate }) {
             color: 'var(--muted)',
           }}
         >
-          <ShieldCheck size={14} style={{ color: 'var(--color-teal-dark)' }} />
+          <ShieldCheck size={14} style={{ color: '#10b981' }} />
           <span>Encrypted citizen session security</span>
         </div>
       </div>

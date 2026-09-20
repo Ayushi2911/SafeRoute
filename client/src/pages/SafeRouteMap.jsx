@@ -265,7 +265,7 @@ export default function SafeRouteMap() {
     riskZones.forEach((zone) => {
       const isHigh = zone.risk_level === 'high';
       const isMed = zone.risk_level === 'medium';
-      const color = isHigh ? 'var(--color-accent)' : isMed ? 'var(--color-accent-soft)' : 'var(--color-teal-dark)';
+      const color = isHigh ? '#ef4444' : isMed ? '#f59e0b' : '#10b981';
 
       const circle = L.circle([zone.latitude, zone.longitude], {
         radius: zone.radius,
@@ -544,7 +544,7 @@ export default function SafeRouteMap() {
           allLatLngs.push(...latLngs);
 
           const polyline = L.polyline(latLngs, {
-            color: 'var(--color-teal-dark)',
+            color: '#10b981',
             weight: 6,
             opacity: 0.92,
           });
@@ -560,12 +560,12 @@ export default function SafeRouteMap() {
 
           polyline.addTo(routesLayerRef.current);
         } else {
-          // Draw Fastest Route (mauve dashed line)
+          // Draw Fastest Route (amber dashed line)
           const fastLatLngs = fastestRoute.geometry.coordinates.map((coord) => [coord[1], coord[0]]);
           allLatLngs.push(...fastLatLngs);
 
           const fastPolyline = L.polyline(fastLatLngs, {
-            color: 'var(--color-accent-soft)',
+            color: '#f59e0b',
             weight: 4,
             opacity: 0.8,
             dashArray: '6, 8',
@@ -582,12 +582,12 @@ export default function SafeRouteMap() {
 
           fastPolyline.addTo(routesLayerRef.current);
 
-          // Draw Safest Route (solid teal line)
+          // Draw Safest Route (solid emerald green line)
           const safeLatLngs = safestRoute.geometry.coordinates.map((coord) => [coord[1], coord[0]]);
           allLatLngs.push(...safeLatLngs);
 
           const safePolyline = L.polyline(safeLatLngs, {
-            color: 'var(--color-teal-dark)',
+            color: '#10b981',
             weight: 6,
             opacity: 0.95,
           });
@@ -723,7 +723,7 @@ export default function SafeRouteMap() {
             {/* Origin Field */}
             <div className="input-group">
               <label htmlFor="origin-input">
-                <MapPin size={15} className="text-teal" />
+                <MapPin size={15} className="text-emerald" />
                 <span>Starting Point (Origin)</span>
               </label>
               <div className="input-with-action">
@@ -771,7 +771,7 @@ export default function SafeRouteMap() {
             {/* Destination Field */}
             <div className="input-group">
               <label htmlFor="destination-input">
-                <Milestone size={15} className="text-accent" />
+                <Milestone size={15} className="text-purple" />
                 <span>Destination</span>
               </label>
               <input
@@ -978,7 +978,7 @@ export default function SafeRouteMap() {
         <div className="bento-card card-route-safest">
           <div className="card-header">
             <div className="card-title-wrap">
-              <div className="card-icon-pill icon-teal-dark">
+              <div className="card-icon-pill icon-emerald">
                 <ShieldCheck size={18} />
               </div>
               <div>
@@ -1007,7 +1007,7 @@ export default function SafeRouteMap() {
             </div>
             <div className="metric-cell">
               <span className="metric-label">Hazards Along Path</span>
-              <span className="metric-value text-teal">
+              <span className="metric-value text-emerald">
                 {routesData?.safestRoute
                   ? `${routesData.safestRoute.riskFactors?.incidentCountAlongRoute || 0} incidents`
                   : '--'}
@@ -1041,7 +1041,7 @@ export default function SafeRouteMap() {
         <div className="bento-card card-route-fastest">
           <div className="card-header">
             <div className="card-title-wrap">
-              <div className="card-icon-pill icon-mauve">
+              <div className="card-icon-pill icon-amber">
                 <AlertTriangle size={18} />
               </div>
               <div>
@@ -1070,7 +1070,7 @@ export default function SafeRouteMap() {
             </div>
             <div className="metric-cell">
               <span className="metric-label">Caution Points</span>
-              <span className="metric-value text-mauve">
+              <span className="metric-value text-amber">
                 {routesData?.fastestRoute
                   ? `${routesData.fastestRoute.riskFactors?.riskZonesIntersected?.length || 0} risk zones`
                   : '--'}

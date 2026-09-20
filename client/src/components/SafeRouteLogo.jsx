@@ -12,19 +12,19 @@ export default function SafeRouteLogo({ size = 32, className = '' }) {
     >
       <defs>
         <linearGradient id="logoShieldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="var(--color-teal)" />
-          <stop offset="50%" stopColor="var(--color-accent)" />
-          <stop offset="100%" stopColor="var(--color-accent)" />
+          <stop offset="0%" stopColor="#00e5ff" />
+          <stop offset="50%" stopColor="#8b5cf6" />
+          <stop offset="100%" stopColor="#d946ef" />
         </linearGradient>
         <linearGradient id="logoShieldBg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="var(--color-surface)" stopOpacity="0.95" />
-          <stop offset="100%" stopColor="var(--color-background)" stopOpacity="0.98" />
+          <stop offset="0%" stopColor="#181432" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#090a16" stopOpacity="0.98" />
         </linearGradient>
         <linearGradient id="logoRouteLine" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="var(--color-teal)" />
-          <stop offset="100%" stopColor="var(--color-teal)" />
+          <stop offset="0%" stopColor="#06b6d4" />
+          <stop offset="100%" stopColor="#38bdf8" />
         </linearGradient>
-        <filter id="logoAccentGlow" x="-20%" y="-20%" width="140%" height="140%">
+        <filter id="logoNeonGlow" x="-20%" y="-20%" width="140%" height="140%">
           <feGaussianBlur stdDeviation="1.5" result="blur" />
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
@@ -42,7 +42,7 @@ export default function SafeRouteLogo({ size = 32, className = '' }) {
       {/* Subtle Inner Ring */}
       <path
         d="M24 7 C16 7 11 11 11 19 C11 28.5 18 36 24 40 C30 36 37 28.5 37 19 C37 11 32 7 24 7 Z"
-        stroke="var(--color-accent-soft)"
+        stroke="#b99bff"
         strokeOpacity="0.22"
         strokeWidth="1"
         fill="none"
@@ -55,22 +55,22 @@ export default function SafeRouteLogo({ size = 32, className = '' }) {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        filter="url(#logoAccentGlow)"
+        filter="url(#logoNeonGlow)"
       />
 
       {/* Origin Waypoint */}
-      <circle cx="17" cy="34" r="2.5" fill="var(--color-teal)" stroke="var(--color-background)" strokeWidth="1.2" />
+      <circle cx="17" cy="34" r="2.5" fill="#38bdf8" stroke="#090a16" strokeWidth="1.2" />
 
       {/* Mid-route Waypoint */}
-      <circle cx="21" cy="21" r="2" fill="var(--color-accent)" stroke="var(--color-background)" strokeWidth="1.2" />
+      <circle cx="21" cy="21" r="2" fill="#a855f7" stroke="#090a16" strokeWidth="1.2" />
 
       {/* Destination Beacon / Location Pin */}
-      <g filter="url(#logoAccentGlow)">
+      <g filter="url(#logoNeonGlow)">
         <path
           d="M24 10 C21.79 10 20 11.79 20 14 C20 17 24 21.5 24 21.5 C24 21.5 28 17 28 14 C28 11.79 26.21 10 24 10 Z"
-          fill="var(--color-teal)"
+          fill="#00e5ff"
         />
-        <circle cx="24" cy="14" r="1.5" fill="var(--color-background)" />
+        <circle cx="24" cy="14" r="1.5" fill="#090a16" />
       </g>
     </svg>
   )

@@ -270,7 +270,7 @@ export default function SOS({ onNavigate }) {
   };
 
   return (
-    <div className="sos-page" style={{ maxWidth: '960px', margin: '0 auto', padding: '32px 20px 80px' }}>
+    <div style={{ maxWidth: '960px', margin: '0 auto', padding: '32px 20px 80px' }}>
       {/* Header Banner */}
       <div
         style={{
@@ -293,13 +293,13 @@ export default function SOS({ onNavigate }) {
               width: '60px',
               height: '60px',
               borderRadius: '16px',
-              background: 'linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.22), rgb(var(--color-accent-rgb) / 0.35))',
-              border: '1px solid rgb(var(--color-accent-rgb) / 0.5)',
+              background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(185, 28, 28, 0.35))',
+              border: '1px solid rgba(239, 68, 68, 0.5)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--color-accent-soft)',
-              boxShadow: '0 0 24px rgb(var(--color-accent-rgb) / 0.25)',
+              color: '#f87171',
+              boxShadow: '0 0 24px rgba(239, 68, 68, 0.25)',
             }}
           >
             <AlertOctagon size={32} />
@@ -329,9 +329,9 @@ export default function SOS({ onNavigate }) {
                   fontWeight: 700,
                   textTransform: 'uppercase',
                   letterSpacing: '0.06em',
-                  background: 'rgb(var(--color-accent-rgb) / 0.15)',
-                  border: '1px solid rgb(var(--color-accent-rgb) / 0.4)',
-                  color: 'var(--color-accent-soft)',
+                  background: 'rgba(239, 68, 68, 0.15)',
+                  border: '1px solid rgba(239, 68, 68, 0.4)',
+                  color: '#fca5a5',
                 }}
               >
                 <Radio size={12} className="admin-sos-pulse" />
@@ -363,8 +363,8 @@ export default function SOS({ onNavigate }) {
       {/* Safety Notice Card */}
       <div
         style={{
-          background: 'rgb(var(--color-accent-soft-rgb) / 0.1)',
-          border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.35)',
+          background: 'rgba(245, 158, 11, 0.1)',
+          border: '1px solid rgba(245, 158, 11, 0.35)',
           borderRadius: '14px',
           padding: '14px 18px',
           display: 'flex',
@@ -376,7 +376,7 @@ export default function SOS({ onNavigate }) {
           lineHeight: 1.5,
         }}
       >
-        <AlertTriangle size={20} style={{ color: 'var(--color-accent-soft)', flexShrink: 0 }} />
+        <AlertTriangle size={20} style={{ color: '#f59e0b', flexShrink: 0 }} />
         <span>
           <strong>Emergency Protocol:</strong> Triggering SOS logs your verified GPS coordinates to SafeRoute's
           internal dispatch records. In immediate life-threatening situations, also dial municipal emergency services
@@ -417,7 +417,7 @@ export default function SOS({ onNavigate }) {
               transform: 'translateX(-50%)',
               width: '240px',
               height: '180px',
-              background: 'radial-gradient(circle, rgb(var(--color-accent-rgb) / 0.2), transparent 70%)',
+              background: 'radial-gradient(circle, rgba(239, 68, 68, 0.2), transparent 70%)',
               filter: 'blur(30px)',
               pointerEvents: 'none',
             }}
@@ -450,11 +450,11 @@ export default function SOS({ onNavigate }) {
                 width: '150px',
                 height: '150px',
                 borderRadius: '50%',
-                background: 'radial-gradient(circle at 35% 35%, var(--color-accent), var(--color-accent) 70%, var(--color-accent))',
-                border: '4px solid rgb(var(--color-accent-rgb) / 0.4)',
+                background: 'radial-gradient(circle at 35% 35%, #ef4444, #b91c1c 70%, #7f1d1d)',
+                border: '4px solid rgba(254, 202, 202, 0.4)',
                 boxShadow: isSubmitting
-                  ? '0 0 30px rgb(var(--color-accent-rgb) / 0.8)'
-                  : '0 0 45px rgb(var(--color-accent-rgb) / 0.5), inset 0 2px 8px rgba(255,255,255,0.4)',
+                  ? '0 0 30px rgba(239, 68, 68, 0.8)'
+                  : '0 0 45px rgba(239, 68, 68, 0.5), inset 0 2px 8px rgba(255,255,255,0.4)',
                 color: '#ffffff',
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: '2rem',
@@ -504,10 +504,10 @@ export default function SOS({ onNavigate }) {
                         borderRadius: '8px',
                         fontSize: '0.78rem',
                         fontWeight: 600,
-                        border: selectedType === type.id ? '1px solid var(--color-accent)' : '1px solid var(--line)',
+                        border: selectedType === type.id ? '1px solid #ef4444' : '1px solid var(--line)',
                         background:
-                          selectedType === type.id ? 'rgb(var(--color-accent-rgb) / 0.16)' : 'rgba(255, 255, 255, 0.03)',
-                        color: selectedType === type.id ? 'var(--color-accent-soft)' : 'var(--muted)',
+                          selectedType === type.id ? 'rgba(239, 68, 68, 0.16)' : 'rgba(255, 255, 255, 0.03)',
+                        color: selectedType === type.id ? '#fca5a5' : 'var(--muted)',
                         cursor: 'pointer',
                         transition: 'background 120ms ease',
                       }}
@@ -567,7 +567,7 @@ export default function SOS({ onNavigate }) {
                     justifyContent: 'center',
                     gap: '6px',
                     padding: '8px 14px',
-                    background: 'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
+                    background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
                     color: '#ffffff',
                     border: 'none',
                     borderRadius: '8px',
@@ -612,9 +612,9 @@ export default function SOS({ onNavigate }) {
                 marginTop: '16px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                background: 'rgb(var(--color-teal-dark-rgb) / 0.12)',
-                border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
-                color: 'var(--color-teal)',
+                background: 'rgba(16, 185, 129, 0.12)',
+                border: '1px solid rgba(16, 185, 129, 0.35)',
+                color: '#6ee7b7',
                 fontSize: '0.84rem',
                 width: '100%',
                 display: 'flex',
@@ -634,9 +634,9 @@ export default function SOS({ onNavigate }) {
                 marginTop: '16px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                background: 'rgb(var(--color-accent-rgb) / 0.12)',
-                border: '1px solid rgb(var(--color-accent-rgb) / 0.35)',
-                color: 'var(--color-accent-soft)',
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.35)',
+                color: '#fca5a5',
                 fontSize: '0.84rem',
                 width: '100%',
                 display: 'flex',
@@ -656,14 +656,14 @@ export default function SOS({ onNavigate }) {
                 marginTop: '16px',
                 padding: '12px 16px',
                 borderRadius: '10px',
-                background: 'rgb(var(--color-accent-rgb) / 0.08)',
-                border: '1px solid rgb(var(--color-accent-rgb) / 0.3)',
+                background: 'rgba(239, 68, 68, 0.08)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
                 width: '100%',
                 textAlign: 'left',
                 fontSize: '0.82rem',
               }}
             >
-              <div style={{ fontWeight: 700, color: 'var(--color-accent-soft)', marginBottom: '4px' }}>
+              <div style={{ fontWeight: 700, color: '#f87171', marginBottom: '4px' }}>
                 SOS Signal Recorded (ID #{lastRecordedSos.id})
               </div>
               <div style={{ color: 'var(--text-subtle)' }}>
@@ -689,7 +689,7 @@ export default function SOS({ onNavigate }) {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <PhoneCall size={20} style={{ color: 'var(--color-accent)' }} />
+              <PhoneCall size={20} style={{ color: '#ef4444' }} />
               <h2
                 style={{
                   fontSize: '1.08rem',
@@ -739,9 +739,9 @@ export default function SOS({ onNavigate }) {
                       gap: '6px',
                       padding: '6px 12px',
                       borderRadius: '8px',
-                      background: 'rgb(var(--color-accent-rgb) / 0.15)',
-                      border: '1px solid rgb(var(--color-accent-rgb) / 0.35)',
-                      color: 'var(--color-accent-soft)',
+                      background: 'rgba(239, 68, 68, 0.15)',
+                      border: '1px solid rgba(239, 68, 68, 0.35)',
+                      color: '#fca5a5',
                       fontWeight: 700,
                       fontSize: '0.88rem',
                       fontFamily: "'Space Grotesk', sans-serif",
@@ -830,7 +830,7 @@ export default function SOS({ onNavigate }) {
                     Add Trusted Emergency Contact
                   </div>
                   {contactError && (
-                    <div style={{ color: 'var(--color-accent-soft)', fontSize: '0.78rem' }}>{contactError}</div>
+                    <div style={{ color: '#fca5a5', fontSize: '0.78rem' }}>{contactError}</div>
                   )}
                   <input
                     type="text"
@@ -884,7 +884,7 @@ export default function SOS({ onNavigate }) {
                     disabled={isAddingContact}
                     style={{
                       padding: '8px 14px',
-                      background: 'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
+                      background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
                       color: '#ffffff',
                       border: 'none',
                       borderRadius: '8px',
@@ -934,10 +934,10 @@ export default function SOS({ onNavigate }) {
                           href={`tel:${contact.phone}`}
                           style={{
                             padding: '6px 10px',
-                            background: 'rgb(var(--color-teal-dark-rgb) / 0.15)',
-                            border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
+                            background: 'rgba(16, 185, 129, 0.15)',
+                            border: '1px solid rgba(16, 185, 129, 0.35)',
                             borderRadius: '6px',
-                            color: 'var(--color-teal)',
+                            color: '#6ee7b7',
                             fontSize: '0.78rem',
                             fontWeight: 600,
                             textDecoration: 'none',
@@ -1038,22 +1038,22 @@ export default function SOS({ onNavigate }) {
                           borderRadius: '12px',
                           background:
                             item.status === 'pending'
-                              ? 'rgb(var(--color-accent-rgb) / 0.18)'
+                              ? 'rgba(239, 68, 68, 0.18)'
                               : item.status === 'responding'
-                              ? 'rgb(var(--color-accent-soft-rgb) / 0.18)'
-                              : 'rgb(var(--color-teal-dark-rgb) / 0.18)',
+                              ? 'rgba(245, 158, 11, 0.18)'
+                              : 'rgba(16, 185, 129, 0.18)',
                           color:
                             item.status === 'pending'
-                              ? 'var(--color-accent-soft)'
+                              ? '#fca5a5'
                               : item.status === 'responding'
-                              ? 'var(--color-text-subtle)'
-                              : 'var(--color-teal)',
+                              ? '#fde68a'
+                              : '#6ee7b7',
                           border:
                             item.status === 'pending'
-                              ? '1px solid rgb(var(--color-accent-rgb) / 0.4)'
+                              ? '1px solid rgba(239, 68, 68, 0.4)'
                               : item.status === 'responding'
-                              ? '1px solid rgb(var(--color-accent-soft-rgb) / 0.4)'
-                              : '1px solid rgb(var(--color-teal-dark-rgb) / 0.4)',
+                              ? '1px solid rgba(245, 158, 11, 0.4)'
+                              : '1px solid rgba(16, 185, 129, 0.4)',
                         }}
                       >
                         {item.status}
@@ -1078,10 +1078,10 @@ export default function SOS({ onNavigate }) {
                       onClick={() => handleUpdateStatus(item.id, 'resolved')}
                       style={{
                         padding: '6px 14px',
-                        background: 'rgb(var(--color-teal-dark-rgb) / 0.15)',
-                        border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.4)',
+                        background: 'rgba(16, 185, 129, 0.15)',
+                        border: '1px solid rgba(16, 185, 129, 0.4)',
                         borderRadius: '8px',
-                        color: 'var(--color-teal)',
+                        color: '#6ee7b7',
                         fontSize: '0.8rem',
                         fontWeight: 600,
                         cursor: 'pointer',

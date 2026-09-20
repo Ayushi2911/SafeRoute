@@ -80,7 +80,7 @@ export default function HomePage({ onNavigate }) {
           {/* Descriptive Pillar Cards (No fake stats) */}
           <div className="hero-pillars-grid">
             <div className="pillar-card">
-              <div className="pillar-icon-wrap icon-teal">
+              <div className="pillar-icon-wrap icon-cyan">
                 <Compass size={22} />
               </div>
               <div className="pillar-body">
@@ -90,7 +90,7 @@ export default function HomePage({ onNavigate }) {
             </div>
 
             <div className="pillar-card">
-              <div className="pillar-icon-wrap icon-mauve">
+              <div className="pillar-icon-wrap icon-purple">
                 <Shield size={22} />
               </div>
               <div className="pillar-body">
@@ -100,7 +100,7 @@ export default function HomePage({ onNavigate }) {
             </div>
 
             <div className="pillar-card">
-              <div className="pillar-icon-wrap icon-mauve">
+              <div className="pillar-icon-wrap icon-rose">
                 <Radio size={22} />
               </div>
               <div className="pillar-body">
@@ -110,7 +110,7 @@ export default function HomePage({ onNavigate }) {
             </div>
 
             <div className="pillar-card">
-              <div className="pillar-icon-wrap icon-teal-dark">
+              <div className="pillar-icon-wrap icon-emerald">
                 <HeartPulse size={22} />
               </div>
               <div className="pillar-body">
@@ -434,7 +434,7 @@ export default function HomePage({ onNavigate }) {
                     <span className="bar-val">Active Triage</span>
                   </div>
                   <div className="bar-track">
-                    <div className="bar-fill fill-teal" style={{ width: '78%' }} />
+                    <div className="bar-fill fill-cyan" style={{ width: '78%' }} />
                   </div>
                 </div>
 
@@ -444,7 +444,7 @@ export default function HomePage({ onNavigate }) {
                     <span className="bar-val">Citywide</span>
                   </div>
                   <div className="bar-track">
-                    <div className="bar-fill fill-accent" style={{ width: '92%' }} />
+                    <div className="bar-fill fill-purple" style={{ width: '92%' }} />
                   </div>
                 </div>
 
@@ -454,7 +454,7 @@ export default function HomePage({ onNavigate }) {
                     <span className="bar-val">Optimal</span>
                   </div>
                   <div className="bar-track">
-                    <div className="bar-fill fill-teal-dark" style={{ width: '85%' }} />
+                    <div className="bar-fill fill-emerald" style={{ width: '85%' }} />
                   </div>
                 </div>
               </div>
