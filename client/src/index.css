@@ -115,6 +115,27 @@
   --glow-opacity: 0.35;
 }
 
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  background-color: var(--color-input);
+  border-color: var(--color-input-border);
+  color: var(--color-text-primary);
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus,
+[data-theme="light"] textarea:focus {
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px rgb(var(--color-teal-dark-rgb) / 0.16);
+}
+
 * {
   box-sizing: border-box;
 }

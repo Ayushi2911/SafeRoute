@@ -315,7 +315,7 @@
 }
 
 [data-theme="light"] .app-nav-auth-profile {
-  color: var(--color-accent-soft);
+  color: var(--color-text);
   border-color: rgb(var(--color-primary-light-rgb) / 0.25);
   background: rgb(var(--color-primary-light-rgb) / 0.06);
 }
@@ -323,6 +323,7 @@
 [data-theme="light"] .app-nav-auth-profile:hover {
   background: rgb(var(--color-primary-light-rgb) / 0.12);
   border-color: rgb(var(--color-primary-light-rgb) / 0.45);
+  color: var(--color-text);
 }
 
 [data-theme="light"] .app-nav-auth-logout:hover {
@@ -635,6 +636,13 @@
   color: var(--color-primary);
 }
 
+[data-theme="light"] .app-nav-link:hover,
+[data-theme="light"] .app-nav-mobile-link:hover,
+[data-theme="light"] .app-nav-mobile-theme-row:hover,
+[data-theme="light"] .app-nav-theme-toggle:hover {
+  color: var(--color-text);
+}
+
 [data-theme="light"] .app-nav-mobile-link-sos {
   color: var(--color-primary-light);
   background: rgb(var(--color-accent-rgb) / 0.06);
@@ -644,6 +652,10 @@
 [data-theme="light"] .app-nav-mobile-link-sos:hover {
   background: var(--color-primary-light);
   color: #ffffff;
+}
+
+[data-theme="light"] .app-nav-mobile-register {
+  color: var(--color-text);
 }
 
 [data-theme="light"] .app-nav-mobile-theme-row {

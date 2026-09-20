@@ -253,20 +253,22 @@ function IncidentReport({ onNavigate }) {
 
         [data-theme="light"] .incident-status {
           background: rgba(255, 255, 255, 0.9);
+          color: var(--color-text);
         }
 
         [data-theme="light"] .incident-card {
           background: rgba(255, 255, 255, 0.94);
           border-color: rgb(var(--color-primary-light-rgb) / 0.22);
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+          color: var(--color-text);
         }
 
         [data-theme="light"] .incident-input,
         [data-theme="light"] .incident-select,
         [data-theme="light"] .incident-textarea {
-          background: var(--color-text-heading);
+          background: var(--color-input);
           border-color: var(--color-text-subtle);
-          color: var(--color-text);
+          color: var(--color-text-primary);
         }
 
         [data-theme="light"] .incident-input::placeholder,
@@ -275,8 +277,34 @@ function IncidentReport({ onNavigate }) {
         }
 
         [data-theme="light"] .incident-severity {
-          background: var(--color-text-heading);
+          background: var(--color-input);
           border-color: rgb(var(--color-primary-light-rgb) / 0.25);
+          color: var(--color-text);
+        }
+
+        [data-theme="light"] .incident-label,
+        [data-theme="light"] .incident-card-title,
+        [data-theme="light"] .incident-intro,
+        [data-theme="light"] .incident-upload-title,
+        [data-theme="light"] .incident-guideline-heading,
+        [data-theme="light"] .incident-guideline-note,
+        [data-theme="light"] .incident-severity-name {
+          color: var(--color-text);
+        }
+
+        [data-theme="light"] .incident-severity-description,
+        [data-theme="light"] .incident-upload-copy,
+        [data-theme="light"] .incident-location-status,
+        [data-theme="light"] .incident-privacy,
+        [data-theme="light"] .incident-guideline,
+        [data-theme="light"] .incident-message {
+          color: var(--color-text-muted);
+        }
+
+        [data-theme="light"] .incident-button:not(.incident-submit-button):hover,
+        [data-theme="light"] .incident-severity:hover,
+        [data-theme="light"] .incident-upload:hover {
+          color: var(--color-text);
         }
 
         .incident-page *,

@@ -1416,6 +1416,40 @@
   color: var(--color-text);
 }
 
+[data-theme="light"] .card-title-wrap h3,
+[data-theme="light"] .service-name,
+[data-theme="light"] .zone-meta strong,
+[data-theme="light"] .metric-value,
+[data-theme="light"] .route-card-title,
+[data-theme="light"] .score-number,
+[data-theme="light"] .score-tier,
+[data-theme="light"] .route-summary-text {
+  color: var(--color-text);
+}
+
+[data-theme="light"] .card-subtitle,
+[data-theme="light"] .card-footer-note,
+[data-theme="light"] .card-footer-status,
+[data-theme="light"] .metric-label,
+[data-theme="light"] .zone-meta span,
+[data-theme="light"] .service-sub,
+[data-theme="light"] .item-label {
+  color: var(--color-text-muted);
+}
+
+[data-theme="light"] .bento-card:hover,
+[data-theme="light"] .service-sample-row:hover,
+[data-theme="light"] .route-card:hover {
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+[data-theme="light"] .layer-toggle-btn:hover,
+[data-theme="light"] .btn-call-emergency:hover,
+[data-theme="light"] .popup-btn:hover {
+  color: var(--color-text);
+}
+
 [data-theme="light"] .leaflet-popup-content-wrapper {
   background: #ffffff !important;
   color: var(--color-text) !important;

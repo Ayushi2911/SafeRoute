@@ -131,6 +131,32 @@
   color: var(--color-primary);
 }
 
+[data-theme="light"] .admin-header-title h1,
+[data-theme="light"] .admin-chart-header h3,
+[data-theme="light"] .admin-stat-number,
+[data-theme="light"] .admin-table td,
+[data-theme="light"] .admin-table th {
+  color: var(--color-text);
+}
+
+[data-theme="light"] .admin-stat-label,
+[data-theme="light"] .admin-stat-footer,
+[data-theme="light"] .admin-header-subtitle,
+[data-theme="light"] .admin-chart-empty {
+  color: var(--color-text-muted);
+}
+
+[data-theme="light"] .admin-nav-btn:hover,
+[data-theme="light"] .admin-pill-btn:hover,
+[data-theme="light"] .admin-action-btn:hover {
+  color: var(--color-text);
+}
+
+[data-theme="light"] .admin-table tr:hover td {
+  color: var(--color-text);
+  background: rgb(var(--color-primary-light-rgb) / 0.06);
+}
+
 /* Minimalist Canvas Layout */
 .admin-body {
   min-height: 100vh;
