@@ -205,18 +205,18 @@ function IncidentReport({ onNavigate }) {
     >
       <style>{`
         .incident-page {
-          --incident-background: #080713;
-          --incident-surface: rgba(24, 18, 42, 0.78);
-          --incident-surface-light: rgba(39, 27, 63, 0.72);
-          --incident-line: rgba(222, 193, 255, 0.14);
-          --incident-line-strong: rgba(226, 127, 255, 0.48);
-          --incident-white: #fbf8ff;
-          --incident-lavender: #dcd0ec;
-          --incident-muted: #a398b9;
-          --incident-faint: #756986;
-          --incident-pink: #ef70bd;
-          --incident-violet: #9b6cff;
-          --incident-cyan: #88d9ec;
+          --incident-background: var(--color-background);
+          --incident-surface: rgb(var(--color-surface-rgb) / 0.78);
+          --incident-surface-light: rgb(var(--color-surface-elevated-rgb) / 0.72);
+          --incident-line: rgb(var(--color-accent-soft-rgb) / 0.14);
+          --incident-line-strong: rgb(var(--color-accent-rgb) / 0.48);
+          --incident-white: var(--color-text-heading);
+          --incident-lavender: var(--color-text-subtle);
+          --incident-muted: var(--color-text-muted);
+          --incident-faint: var(--color-text-muted);
+          --incident-pink: var(--color-rose);
+          --incident-primary: var(--color-accent);
+          --incident-cyan: var(--color-blue);
           position: relative;
           width: 100%;
           min-height: 100vh;
@@ -225,29 +225,29 @@ function IncidentReport({ onNavigate }) {
           padding: 48px clamp(18px, 5vw, 78px) 68px;
           color: var(--incident-white);
           background:
-            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.18), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.1), transparent 28rem),
-            linear-gradient(125deg, #080713 0%, #0d0a1c 48%, #100b20 100%);
+            radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.18), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgb(var(--color-rose-rgb) / 0.1), transparent 28rem),
+            linear-gradient(125deg, var(--color-background) 0%, var(--color-surface) 48%, var(--color-surface) 100%);
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
         [data-theme="light"] .incident-page {
-          --incident-background: #f8f9fc;
+          --incident-background: var(--color-background);
           --incident-surface: rgba(255, 255, 255, 0.92);
           --incident-surface-light: rgba(241, 245, 249, 0.92);
           --incident-line: rgba(148, 163, 184, 0.22);
-          --incident-line-strong: rgba(124, 58, 237, 0.45);
-          --incident-white: #0f172a;
-          --incident-lavender: #334155;
-          --incident-muted: #64748b;
-          --incident-faint: #94a3b8;
-          --incident-pink: #db2777;
-          --incident-violet: #7c3aed;
-          --incident-cyan: #0284c7;
+          --incident-line-strong: rgb(var(--color-primary-light-rgb) / 0.45);
+          --incident-white: var(--color-text);
+          --incident-lavender: var(--color-text-subtle);
+          --incident-muted: var(--color-text-muted);
+          --incident-faint: var(--color-text-muted);
+          --incident-pink: var(--color-rose);
+          --incident-primary: var(--color-primary-light);
+          --incident-cyan: var(--color-blue-dark);
           background:
-            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.06), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.05), transparent 28rem),
-            linear-gradient(125deg, #f8f9fc 0%, #f1f5f9 48%, #ffffff 100%);
+            radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.06), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgb(var(--color-rose-rgb) / 0.05), transparent 28rem),
+            linear-gradient(125deg, var(--color-background) 0%, var(--color-surface-elevated) 48%, #ffffff 100%);
           color: var(--incident-white);
         }
 
@@ -264,18 +264,18 @@ function IncidentReport({ onNavigate }) {
         [data-theme="light"] .incident-input,
         [data-theme="light"] .incident-select,
         [data-theme="light"] .incident-textarea {
-          background: #f8fafc;
-          border-color: #cbd5e1;
-          color: #0f172a;
+          background: var(--color-text-heading);
+          border-color: var(--color-text-subtle);
+          color: var(--color-text);
         }
 
         [data-theme="light"] .incident-input::placeholder,
         [data-theme="light"] .incident-textarea::placeholder {
-          color: #94a3b8;
+          color: var(--color-text-muted);
         }
 
         [data-theme="light"] .incident-severity {
-          background: #f8fafc;
+          background: var(--color-text-heading);
           border-color: rgba(148, 163, 184, 0.25);
         }
 
@@ -321,7 +321,7 @@ function IncidentReport({ onNavigate }) {
           display: flex;
           align-items: center;
           gap: 9px;
-          color: #dba6ff;
+          color: var(--color-accent-soft);
           font-size: 0.68rem;
           font-weight: 800;
           letter-spacing: 0.17em;
@@ -333,7 +333,7 @@ function IncidentReport({ onNavigate }) {
           height: 8px;
           border-radius: 50%;
           background: var(--incident-pink);
-          box-shadow: 0 0 0 5px rgba(239, 112, 189, 0.12), 0 0 18px rgba(239, 112, 189, 0.8);
+          box-shadow: 0 0 0 5px rgb(var(--color-rose-rgb) / 0.12), 0 0 18px rgb(var(--color-rose-rgb) / 0.8);
         }
 
         .incident-brand-wrap {
@@ -348,8 +348,8 @@ function IncidentReport({ onNavigate }) {
           width: 48px;
           height: 48px;
           border-radius: 12px;
-          background: rgba(185, 155, 255, 0.12);
-          border: 1px solid rgba(185, 155, 255, 0.3);
+          background: rgb(var(--color-accent-soft-rgb) / 0.12);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.3);
           flex-shrink: 0;
           margin-top: 4px;
         }
@@ -389,10 +389,10 @@ function IncidentReport({ onNavigate }) {
           width: 36px;
           height: 36px;
           place-items: center;
-          border: 1px solid rgba(239, 112, 189, 0.3);
+          border: 1px solid rgb(var(--color-rose-rgb) / 0.3);
           border-radius: 11px;
           color: #ffacd9;
-          background: linear-gradient(145deg, rgba(239, 112, 189, 0.2), rgba(155, 108, 255, 0.13));
+          background: linear-gradient(145deg, rgb(var(--color-rose-rgb) / 0.2), rgb(var(--color-primary-light-rgb) / 0.13));
           font-size: 1rem;
         }
 
@@ -419,10 +419,10 @@ function IncidentReport({ onNavigate }) {
           gap: 8px;
           min-height: 50px;
           padding: 0 16px;
-          border: 1px solid rgba(209, 137, 255, 0.38);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.38);
           border-radius: 11px;
-          color: #edc9ff;
-          background: rgba(155, 108, 255, 0.1);
+          color: var(--color-text-subtle);
+          background: rgb(var(--color-primary-light-rgb) / 0.1);
           font-size: 0.72rem;
           font-weight: 760;
           text-decoration: none;
@@ -430,9 +430,9 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-nav-link:hover {
-          border-color: #e29aff;
-          background: rgba(173, 87, 255, 0.2);
-          box-shadow: 0 8px 22px rgba(149, 72, 218, 0.2);
+          border-color: var(--color-accent-soft);
+          background: rgb(var(--color-accent-rgb) / 0.2);
+          box-shadow: 0 8px 22px rgb(var(--color-primary-light-rgb) / 0.2);
           transform: translateY(-2px);
         }
 
@@ -620,9 +620,9 @@ function IncidentReport({ onNavigate }) {
           border-radius: 50%;
         }
 
-        .incident-severity-low .incident-severity-dot { background: #74d7ad; box-shadow: 0 0 12px #74d7ad; }
-        .incident-severity-medium .incident-severity-dot { background: #eac267; box-shadow: 0 0 12px #eac267; }
-        .incident-severity-high .incident-severity-dot { background: #f36e9e; box-shadow: 0 0 12px #f36e9e; }
+        .incident-severity-low .incident-severity-dot { background: var(--color-blue); box-shadow: 0 0 12px var(--color-blue); }
+        .incident-severity-medium .incident-severity-dot { background: var(--color-accent-soft); box-shadow: 0 0 12px var(--color-accent-soft); }
+        .incident-severity-high .incident-severity-dot { background: var(--color-accent-soft); box-shadow: 0 0 12px var(--color-accent-soft); }
 
         .incident-selected-mark {
           display: grid;
@@ -638,7 +638,7 @@ function IncidentReport({ onNavigate }) {
 
         .incident-severity.is-selected .incident-selected-mark {
           border-color: #f39ddd;
-          background: linear-gradient(135deg, var(--incident-pink), var(--incident-violet));
+          background: linear-gradient(135deg, var(--incident-pink), var(--incident-primary));
           opacity: 1;
         }
 
@@ -672,10 +672,10 @@ function IncidentReport({ onNavigate }) {
           gap: 8px;
           min-height: 50px;
           padding: 0 16px;
-          border: 1px solid rgba(209, 137, 255, 0.38);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.38);
           border-radius: 11px;
-          color: #edc9ff;
-          background: rgba(155, 108, 255, 0.1);
+          color: var(--color-text-subtle);
+          background: rgb(var(--color-primary-light-rgb) / 0.1);
           font: inherit;
           font-size: 0.72rem;
           font-weight: 760;
@@ -684,9 +684,9 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-button:hover {
-          border-color: #e29aff;
-          background: rgba(173, 87, 255, 0.2);
-          box-shadow: 0 8px 22px rgba(149, 72, 218, 0.2);
+          border-color: var(--color-accent-soft);
+          background: rgb(var(--color-accent-rgb) / 0.2);
+          box-shadow: 0 8px 22px rgb(var(--color-primary-light-rgb) / 0.2);
           transform: translateY(-2px);
         }
 
@@ -794,7 +794,7 @@ function IncidentReport({ onNavigate }) {
           border: 1px solid rgba(231, 111, 185, 0.23);
           border-radius: 18px;
           background:
-            linear-gradient(100deg, rgba(67, 25, 62, 0.68), rgba(27, 18, 51, 0.84)),
+            linear-gradient(100deg, rgb(var(--color-primary-rgb) / 0.68), rgba(27, 18, 51, 0.84)),
             var(--incident-surface);
           box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
           animation: incident-rise 600ms 230ms ease both;
@@ -837,7 +837,7 @@ function IncidentReport({ onNavigate }) {
         .incident-message {
           margin-top: 11px;
           padding: 12px 15px;
-          border: 1px solid rgba(136, 217, 236, 0.25);
+          border: 1px solid rgb(var(--color-blue-rgb) / 0.25);
           border-radius: 10px;
           color: #b4edfa;
           background: rgba(83, 174, 199, 0.09);
@@ -903,7 +903,7 @@ function IncidentReport({ onNavigate }) {
           place-items: center;
           border-radius: 7px;
           color: #f3b4ff;
-          background: linear-gradient(135deg, rgba(222, 105, 209, 0.28), rgba(132, 92, 255, 0.23));
+          background: linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.28), rgba(132, 92, 255, 0.23));
           font-size: 0.62rem;
           font-weight: 800;
         }
@@ -990,8 +990,8 @@ function IncidentReport({ onNavigate }) {
                   alignItems: 'center',
                   gap: '8px',
                   padding: '10px 14px',
-                  background: 'rgba(139, 92, 246, 0.1)',
-                  border: '1px solid rgba(185, 155, 255, 0.25)',
+                  background: 'rgb(var(--color-accent-rgb) / 0.1)',
+                  border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.25)',
                   borderRadius: '10px',
                   marginBottom: '18px',
                   fontSize: '0.86rem',
@@ -1011,24 +1011,24 @@ function IncidentReport({ onNavigate }) {
                   justifyContent: 'space-between',
                   gap: '12px',
                   padding: '12px 14px',
-                  background: 'rgba(245, 158, 11, 0.1)',
-                  border: '1px solid rgba(245, 158, 11, 0.3)',
+                  background: 'rgb(var(--color-accent-soft-rgb) / 0.1)',
+                  border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.3)',
                   borderRadius: '10px',
                   marginBottom: '18px',
                   fontSize: '0.86rem',
-                  color: '#fde68a',
+                  color: 'var(--color-text-subtle)',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <AlertTriangle size={16} style={{ color: '#f59e0b', flexShrink: 0 }} />
+                  <AlertTriangle size={16} style={{ color: 'var(--color-accent-soft)', flexShrink: 0 }} />
                   <span>Citizen sign-in required to submit verified reports.</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => onNavigate && onNavigate('login')}
                   style={{
-                    background: 'rgba(245, 158, 11, 0.2)',
-                    border: '1px solid rgba(245, 158, 11, 0.4)',
+                    background: 'rgb(var(--color-accent-soft-rgb) / 0.2)',
+                    border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.4)',
                     color: '#fef3c7',
                     borderRadius: '6px',
                     padding: '5px 12px',

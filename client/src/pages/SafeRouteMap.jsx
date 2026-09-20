@@ -265,7 +265,7 @@ export default function SafeRouteMap() {
     riskZones.forEach((zone) => {
       const isHigh = zone.risk_level === 'high';
       const isMed = zone.risk_level === 'medium';
-      const color = isHigh ? '#ef4444' : isMed ? '#f59e0b' : '#10b981';
+      const color = isHigh ? 'var(--color-accent)' : isMed ? 'var(--color-accent-soft)' : 'var(--color-blue-dark)';
 
       const circle = L.circle([zone.latitude, zone.longitude], {
         radius: zone.radius,
@@ -544,7 +544,7 @@ export default function SafeRouteMap() {
           allLatLngs.push(...latLngs);
 
           const polyline = L.polyline(latLngs, {
-            color: '#10b981',
+            color: 'var(--color-blue-dark)',
             weight: 6,
             opacity: 0.92,
           });
@@ -565,7 +565,7 @@ export default function SafeRouteMap() {
           allLatLngs.push(...fastLatLngs);
 
           const fastPolyline = L.polyline(fastLatLngs, {
-            color: '#f59e0b',
+            color: 'var(--color-accent-soft)',
             weight: 4,
             opacity: 0.8,
             dashArray: '6, 8',
@@ -587,7 +587,7 @@ export default function SafeRouteMap() {
           allLatLngs.push(...safeLatLngs);
 
           const safePolyline = L.polyline(safeLatLngs, {
-            color: '#10b981',
+            color: 'var(--color-blue-dark)',
             weight: 6,
             opacity: 0.95,
           });
@@ -771,7 +771,7 @@ export default function SafeRouteMap() {
             {/* Destination Field */}
             <div className="input-group">
               <label htmlFor="destination-input">
-                <Milestone size={15} className="text-purple" />
+                <Milestone size={15} className="text-accent" />
                 <span>Destination</span>
               </label>
               <input

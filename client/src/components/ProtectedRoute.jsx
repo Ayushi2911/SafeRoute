@@ -86,14 +86,14 @@ export default function ProtectedRoute({ children, onNavigate, message }) {
                 justifyContent: 'center',
                 gap: '8px',
                 padding: '12px 20px',
-                background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
+                background: 'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
                 color: '#ffffff',
                 border: 'none',
                 borderRadius: '10px',
                 fontWeight: 600,
                 fontSize: '0.92rem',
                 cursor: 'pointer',
-                boxShadow: '0 4px 16px rgba(139, 92, 246, 0.3)',
+                boxShadow: '0 4px 16px rgb(var(--color-accent-rgb) / 0.3)',
                 transition: 'transform 150ms ease, box-shadow 150ms ease',
               }}
             >

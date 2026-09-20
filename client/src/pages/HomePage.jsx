@@ -90,7 +90,7 @@ export default function HomePage({ onNavigate }) {
             </div>
 
             <div className="pillar-card">
-              <div className="pillar-icon-wrap icon-purple">
+              <div className="pillar-icon-wrap icon-rose">
                 <Shield size={22} />
               </div>
               <div className="pillar-body">
@@ -444,7 +444,7 @@ export default function HomePage({ onNavigate }) {
                     <span className="bar-val">Citywide</span>
                   </div>
                   <div className="bar-track">
-                    <div className="bar-fill fill-purple" style={{ width: '92%' }} />
+                    <div className="bar-fill fill-accent" style={{ width: '92%' }} />
                   </div>
                 </div>
 

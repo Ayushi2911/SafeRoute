@@ -176,9 +176,9 @@ export default function AdminDashboard() {
   });
 
   const SEVERITY_COLORS = {
-    high: '#f43f5e',
-    medium: '#f59e0b',
-    low: '#c084fc'
+    high: 'var(--color-accent)',
+    medium: 'var(--color-accent-soft)',
+    low: 'var(--color-accent-soft)'
   };
 
   const velocityData = analytics?.velocityData || [
@@ -211,9 +211,9 @@ export default function AdminDashboard() {
       {/* Alert Notices */}
       {errorMessage && (
         <div style={{
-          backgroundColor: 'rgba(244, 63, 94, 0.15)',
-          border: '1px solid #f43f5e',
-          color: '#fda4af',
+          backgroundColor: 'rgb(var(--color-accent-rgb) / 0.15)',
+          border: '1px solid var(--color-accent)',
+          color: 'var(--color-accent-soft)',
           padding: '12px 18px',
           borderRadius: 8,
           marginBottom: 16,
@@ -223,16 +223,16 @@ export default function AdminDashboard() {
           fontFamily: 'var(--font-mono)',
           fontSize: 12
         }}>
-          <AlertCircle size={16} color="#f43f5e" />
+          <AlertCircle size={16} color="var(--color-accent)" />
           <span>Unable to load the admin workspace. Please try again.</span>
         </div>
       )}
 
       {actionNotice && (
         <div style={{
-          backgroundColor: actionNotice.type === 'success' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(244, 63, 94, 0.15)',
-          border: `1px solid ${actionNotice.type === 'success' ? '#10b981' : '#f43f5e'}`,
-          color: actionNotice.type === 'success' ? '#6ee7b7' : '#fda4af',
+          backgroundColor: actionNotice.type === 'success' ? 'rgb(var(--color-blue-dark-rgb) / 0.15)' : 'rgb(var(--color-accent-rgb) / 0.15)',
+          border: `1px solid ${actionNotice.type === 'success' ? 'var(--color-blue-dark)' : 'var(--color-accent)'}`,
+          color: actionNotice.type === 'success' ? 'var(--color-blue)' : 'var(--color-accent-soft)',
           padding: '10px 16px',
           borderRadius: 8,
           marginBottom: 16,
@@ -253,9 +253,9 @@ export default function AdminDashboard() {
               width: 48,
               height: 48,
               borderRadius: 14,
-              background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(168, 85, 247, 0.18))',
-              border: '1px solid rgba(185, 155, 255, 0.38)',
-              boxShadow: '0 0 20px rgba(168, 85, 247, 0.25)',
+              background: 'linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.35), rgb(var(--color-accent-rgb) / 0.18))',
+              border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.38)',
+              boxShadow: '0 0 20px rgb(var(--color-accent-rgb) / 0.25)',
               flexShrink: 0,
               marginTop: 4
             }}>
@@ -341,7 +341,7 @@ export default function AdminDashboard() {
             </div>
             <h2 className="admin-stat-number">{stats.totalUsers}</h2>
             <div className="admin-stat-footer">
-              <Zap size={13} color="#dba6ff" /> Active protected citizens
+              <Zap size={13} color="var(--color-accent-soft)" /> Active protected citizens
             </div>
           </div>
 
@@ -354,7 +354,7 @@ export default function AdminDashboard() {
             </div>
             <h2 className="admin-stat-number">{stats.pendingIncidents}</h2>
             <div className="admin-stat-footer">
-              <Clock size={13} color="#f59e0b" /> Verified for citizen safety
+              <Clock size={13} color="var(--color-accent-soft)" /> Verified for citizen safety
             </div>
           </div>
 
@@ -367,7 +367,7 @@ export default function AdminDashboard() {
             </div>
             <h2 className="admin-stat-number">{stats.verifiedIncidents}</h2>
             <div className="admin-stat-footer">
-              <CheckCircle size={13} color="#10b981" /> Mapped and secured
+              <CheckCircle size={13} color="var(--color-blue-dark)" /> Mapped and secured
             </div>
           </div>
 
@@ -378,9 +378,9 @@ export default function AdminDashboard() {
                 <ShieldAlert size={18} />
               </div>
             </div>
-            <h2 className="admin-stat-number" style={{ color: '#ff3864' }}>{stats.activeSos}</h2>
+            <h2 className="admin-stat-number" style={{ color: 'var(--color-accent)' }}>{stats.activeSos}</h2>
             <div className="admin-stat-footer">
-              <Activity size={13} color="#ff3864" /> Live emergency assistance
+              <Activity size={13} color="var(--color-accent)" /> Live emergency assistance
             </div>
           </div>
         </div>
@@ -399,18 +399,18 @@ export default function AdminDashboard() {
                   {analytics?.categoryBreakdown ? (
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={analytics.categoryBreakdown}>
-                        <XAxis dataKey="category" stroke="#6b7280" fontSize={11} tickLine={false} />
-                        <YAxis stroke="#6b7280" fontSize={11} tickLine={false} />
+                        <XAxis dataKey="category" stroke="var(--color-text-muted)" fontSize={11} tickLine={false} />
+                        <YAxis stroke="var(--color-text-muted)" fontSize={11} tickLine={false} />
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#1f2028',
-                            border: '1px solid #2e303a',
+                            backgroundColor: 'var(--color-surface-elevated)',
+                            border: '1px solid var(--color-border)',
                             borderRadius: 6,
-                            color: '#f3f4f6',
+                            color: 'var(--color-text)',
                             boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
                           }}
                         />
-                        <Bar dataKey="count" fill="#c084fc" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="count" fill="var(--color-accent-soft)" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   ) : (
@@ -442,16 +442,16 @@ export default function AdminDashboard() {
                           {analytics.severityBreakdown.map((entry, index) => (
                             <Cell
                               key={`cell-${index}`}
-                              fill={SEVERITY_COLORS[entry.severity?.toLowerCase()] || '#c084fc'}
+                              fill={SEVERITY_COLORS[entry.severity?.toLowerCase()] || 'var(--color-accent-soft)'}
                             />
                           ))}
                         </Pie>
                         <Tooltip
                           contentStyle={{
-                            backgroundColor: '#1f2028',
-                            border: '1px solid #2e303a',
+                            backgroundColor: 'var(--color-surface-elevated)',
+                            border: '1px solid var(--color-border)',
                             borderRadius: 6,
-                            color: '#f3f4f6',
+                            color: 'var(--color-text)',
                             boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
                           }}
                         />
@@ -476,21 +476,21 @@ export default function AdminDashboard() {
                   <AreaChart data={velocityData}>
                     <defs>
                       <linearGradient id="curveGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#c084fc" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="#c084fc" stopOpacity={0} />
+                        <stop offset="5%" stopColor="var(--color-accent-soft)" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="var(--color-accent-soft)" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <XAxis dataKey="time" stroke="#6b7280" fontSize={11} tickLine={false} />
-                    <YAxis stroke="#6b7280" fontSize={11} tickLine={false} />
+                    <XAxis dataKey="time" stroke="var(--color-text-muted)" fontSize={11} tickLine={false} />
+                    <YAxis stroke="var(--color-text-muted)" fontSize={11} tickLine={false} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#1f2028',
-                        border: '1px solid #2e303a',
+                        backgroundColor: 'var(--color-surface-elevated)',
+                        border: '1px solid var(--color-border)',
                         borderRadius: 6,
                         boxShadow: '0 8px 24px rgba(0,0,0,0.5)'
                       }}
                     />
-                    <Area type="monotone" dataKey="reports" stroke="#c084fc" strokeWidth={2.5} fillOpacity={1} fill="url(#curveGrad)" />
+                    <Area type="monotone" dataKey="reports" stroke="var(--color-accent-soft)" strokeWidth={2.5} fillOpacity={1} fill="url(#curveGrad)" />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -519,11 +519,11 @@ export default function AdminDashboard() {
                   {riskZones.map(z => (
                     <tr key={z.id}>
                       <td style={{ fontFamily: 'var(--font-mono)' }}>ZONE-0{z.id}</td>
-                      <td style={{ fontWeight: 600, color: '#f3f4f6' }}>{z.area_name}</td>
+                      <td style={{ fontWeight: 600, color: 'var(--color-text)' }}>{z.area_name}</td>
                       <td style={{ fontFamily: 'var(--font-mono)' }}>{Number(z.latitude).toFixed(4)}, {Number(z.longitude).toFixed(4)}</td>
                       <td>{z.radius} m</td>
                       <td><span className={`status-tag ${z.risk_level}`}>{z.risk_level}</span></td>
-                      <td style={{ fontWeight: 700, color: z.safety_score > 75 ? '#10b981' : z.safety_score > 50 ? '#f59e0b' : '#f43f5e' }}>
+                      <td style={{ fontWeight: 700, color: z.safety_score > 75 ? 'var(--color-blue-dark)' : z.safety_score > 50 ? 'var(--color-accent-soft)' : 'var(--color-accent)' }}>
                         {z.safety_score} / 100
                       </td>
                     </tr>
@@ -547,7 +547,7 @@ export default function AdminDashboard() {
 
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
                 <div style={{ position: 'relative' }}>
-                  <Search size={14} style={{ position: 'absolute', left: 12, top: 11, color: '#6b7280' }} />
+                  <Search size={14} style={{ position: 'absolute', left: 12, top: 11, color: 'var(--color-text-muted)' }} />
                   <input
                     type="text"
                     placeholder="Search reports..."
@@ -558,7 +558,7 @@ export default function AdminDashboard() {
                       border: '1px solid var(--border-subtle)',
                       borderRadius: 6,
                       padding: '8px 14px 8px 34px',
-                      color: '#f3f4f6',
+                      color: 'var(--color-text)',
                       fontSize: 12,
                       outline: 'none',
                       width: 220
@@ -598,7 +598,7 @@ export default function AdminDashboard() {
               <tbody>
                 {filteredIncidents.length === 0 ? (
                   <tr>
-                    <td colSpan="9" style={{ textAlign: 'center', color: '#9ca3af', padding: 28 }}>
+                    <td colSpan="9" style={{ textAlign: 'center', color: 'var(--color-text-muted)', padding: 28 }}>
                       No incident reports match this filter.
                     </td>
                   </tr>
@@ -606,7 +606,7 @@ export default function AdminDashboard() {
                   filteredIncidents.map((item) => (
                     <tr key={item.id}>
                       <td style={{ fontFamily: 'var(--font-mono)' }}>#{item.id}</td>
-                      <td style={{ fontWeight: 600, color: '#f3f4f6' }}>{item.category}</td>
+                      <td style={{ fontWeight: 600, color: 'var(--color-text)' }}>{item.category}</td>
                       <td>
                         <span className={`status-tag ${item.severity?.toLowerCase()}`}>
                           {item.severity}
@@ -620,26 +620,26 @@ export default function AdminDashboard() {
                               {item.aiAnalysis.urgency} ({item.aiAnalysis.confidence}%)
                             </span>
                             {item.aiAnalysis.detectedKeywords?.length > 0 && (
-                              <div style={{ fontSize: '10px', color: '#6b7280', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
+                              <div style={{ fontSize: '10px', color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
                                 {item.aiAnalysis.detectedKeywords.join(', ')}
                               </div>
                             )}
                           </div>
                         ) : (
-                          <span style={{ fontSize: 11, color: '#6b7280' }}>Pending</span>
+                          <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>Pending</span>
                         )}
                       </td>
                       <td>
-                        <div style={{ fontWeight: 600, color: '#f3f4f6' }}>{item.address || 'GPS Coordinates'}</div>
-                        <div style={{ fontSize: 11, color: '#6b7280', fontFamily: 'var(--font-mono)' }}>
+                        <div style={{ fontWeight: 600, color: 'var(--color-text)' }}>{item.address || 'GPS Coordinates'}</div>
+                        <div style={{ fontSize: 11, color: 'var(--color-text-muted)', fontFamily: 'var(--font-mono)' }}>
                           <MapPin size={10} style={{ display: 'inline', marginRight: 3 }} />
                           {Number(item.latitude).toFixed(4)}, {Number(item.longitude).toFixed(4)}
                         </div>
                       </td>
-                      <td style={{ maxWidth: 240, color: '#9ca3af' }}>{item.description}</td>
+                      <td style={{ maxWidth: 240, color: 'var(--color-text-muted)' }}>{item.description}</td>
                       <td>
-                        <div style={{ fontWeight: 600, color: '#f3f4f6' }}>{item.reporter_name || 'Anonymous'}</div>
-                        <div style={{ fontSize: 11, color: '#6b7280' }}>{item.reporter_phone || item.reporter_email || '-'}</div>
+                        <div style={{ fontWeight: 600, color: 'var(--color-text)' }}>{item.reporter_name || 'Anonymous'}</div>
+                        <div style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>{item.reporter_phone || item.reporter_email || '-'}</div>
                       </td>
                       <td>
                         <span className={`status-tag ${item.status}`}>
@@ -663,7 +663,7 @@ export default function AdminDashboard() {
                             </button>
                           </div>
                         ) : (
-                          <span style={{ fontSize: 11, color: '#6b7280', fontWeight: 600 }}>Reviewed</span>
+                          <span style={{ fontSize: 11, color: 'var(--color-text-muted)', fontWeight: 600 }}>Reviewed</span>
                         )}
                       </td>
                     </tr>
@@ -686,24 +686,24 @@ export default function AdminDashboard() {
 
             <div className="admin-sos-grid">
               {sosRequests.length === 0 ? (
-                <p style={{ color: '#9ca3af' }}>No active emergency requests.</p>
+                <p style={{ color: 'var(--color-text-muted)' }}>No active emergency requests.</p>
               ) : (
                 sosRequests.map((sos) => (
                   <div key={sos.id} className={`admin-sos-card ${sos.status}`}>
                     {sos.status === 'pending' && <div className="admin-sos-pulse" />}
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                      <span style={{ fontSize: 11, color: '#f43f5e', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>EMERGENCY #{sos.id}</span>
+                      <span style={{ fontSize: 11, color: 'var(--color-accent)', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>EMERGENCY #{sos.id}</span>
                       <span className={`status-tag ${sos.status}`}>{sos.status}</span>
                     </div>
 
-                    <h3 style={{ margin: '0 0 8px', fontSize: 16, fontFamily: 'var(--font-display)', color: '#f3f4f6' }}>{sos.emergency_type}</h3>
-                    <p style={{ margin: '0 0 14px', fontSize: 13, color: '#cbd5e1' }}>"{sos.message}"</p>
+                    <h3 style={{ margin: '0 0 8px', fontSize: 16, fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}>{sos.emergency_type}</h3>
+                    <p style={{ margin: '0 0 14px', fontSize: 13, color: 'var(--color-text-subtle)' }}>"{sos.message}"</p>
 
-                    <div style={{ fontSize: 12, color: '#9ca3af', borderTop: '1px solid #2e303a', paddingTop: 10, marginBottom: 16 }}>
-                      <div><strong style={{ color: '#f3f4f6' }}>Citizen:</strong> {sos.user_name || 'Emergency User'} ({sos.user_phone || 'N/A'})</div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-muted)', borderTop: '1px solid var(--color-border)', paddingTop: 10, marginBottom: 16 }}>
+                      <div><strong style={{ color: 'var(--color-text)' }}>Citizen:</strong> {sos.user_name || 'Emergency User'} ({sos.user_phone || 'N/A'})</div>
                       <div style={{ fontFamily: 'var(--font-mono)', marginTop: 2 }}>
-                        <strong style={{ color: '#f3f4f6' }}>Coordinates:</strong> {Number(sos.latitude).toFixed(4)}, {Number(sos.longitude).toFixed(4)}
+                        <strong style={{ color: 'var(--color-text)' }}>Coordinates:</strong> {Number(sos.latitude).toFixed(4)}, {Number(sos.longitude).toFixed(4)}
                       </div>
                     </div>
 
@@ -760,7 +760,7 @@ export default function AdminDashboard() {
                 {services.map(s => (
                   <tr key={s.id}>
                     <td style={{ fontFamily: 'var(--font-mono)' }}>SVC-0{s.id}</td>
-                    <td style={{ fontWeight: 600, color: '#f3f4f6' }}>{s.name}</td>
+                    <td style={{ fontWeight: 600, color: 'var(--color-text)' }}>{s.name}</td>
                     <td>
                       <span className={`status-tag ${s.type === 'police' ? 'low' : s.type === 'hospital' ? 'verified' : 'medium'}`}>
                         {s.type.replace('_', ' ')}
@@ -804,9 +804,9 @@ export default function AdminDashboard() {
                 {users.map((u) => (
                   <tr key={u.id}>
                     <td style={{ fontFamily: 'var(--font-mono)' }}>USR-00{u.id}</td>
-                    <td style={{ fontWeight: 600, color: '#f3f4f6' }}>{u.name}</td>
-                    <td style={{ color: '#cbd5e1' }}>{u.email}</td>
-                    <td style={{ color: '#9ca3af' }}>{u.phone || '-'}</td>
+                    <td style={{ fontWeight: 600, color: 'var(--color-text)' }}>{u.name}</td>
+                    <td style={{ color: 'var(--color-text-subtle)' }}>{u.email}</td>
+                    <td style={{ color: 'var(--color-text-muted)' }}>{u.phone || '-'}</td>
                     <td>
                       <span className={`status-tag ${u.role === 'admin' ? 'verified' : 'low'}`}>
                         {u.role}

@@ -133,10 +133,10 @@ export default function Login({ onNavigate }) {
               alignItems: 'center',
               gap: '10px',
               padding: '12px 14px',
-              background: 'rgba(239, 68, 68, 0.12)',
-              border: '1px solid rgba(239, 68, 68, 0.35)',
+              background: 'rgb(var(--color-accent-rgb) / 0.12)',
+              border: '1px solid rgb(var(--color-accent-rgb) / 0.35)',
               borderRadius: '10px',
-              color: '#fca5a5',
+              color: 'var(--color-accent-soft)',
               fontSize: '0.86rem',
               marginBottom: '20px',
             }}
@@ -274,7 +274,7 @@ export default function Login({ onNavigate }) {
               width: '100%',
               padding: '13px',
               marginTop: '6px',
-              background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
+              background: 'linear-gradient(135deg, var(--color-accent), var(--color-primary-light))',
               color: '#ffffff',
               border: 'none',
               borderRadius: '10px',
@@ -282,7 +282,7 @@ export default function Login({ onNavigate }) {
               fontSize: '0.95rem',
               cursor: isSubmitting ? 'not-allowed' : 'pointer',
               opacity: isSubmitting ? 0.75 : 1,
-              boxShadow: '0 4px 20px rgba(139, 92, 246, 0.35)',
+              boxShadow: '0 4px 20px rgb(var(--color-accent-rgb) / 0.35)',
               transition: 'transform 150ms ease, box-shadow 150ms ease',
             }}
           >
@@ -331,7 +331,7 @@ export default function Login({ onNavigate }) {
             color: 'var(--muted)',
           }}
         >
-          <ShieldCheck size={14} style={{ color: '#10b981' }} />
+          <ShieldCheck size={14} style={{ color: 'var(--color-blue-dark)' }} />
           <span>Encrypted citizen session security</span>
         </div>
       </div>
