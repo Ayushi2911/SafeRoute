@@ -230,9 +230,9 @@ export default function AdminDashboard() {
 
       {actionNotice && (
         <div style={{
-          backgroundColor: actionNotice.type === 'success' ? 'rgb(var(--color-blue-dark-rgb) / 0.15)' : 'rgb(var(--color-accent-rgb) / 0.15)',
-          border: `1px solid ${actionNotice.type === 'success' ? 'var(--color-blue-dark)' : 'var(--color-accent)'}`,
-          color: actionNotice.type === 'success' ? 'var(--color-blue)' : 'var(--color-accent-soft)',
+          backgroundColor: actionNotice.type === 'success' ? 'rgb(var(--color-teal-dark-rgb) / 0.15)' : 'rgb(var(--color-accent-rgb) / 0.15)',
+          border: `1px solid ${actionNotice.type === 'success' ? 'var(--color-teal-dark)' : 'var(--color-accent)'}`,
+          color: actionNotice.type === 'success' ? 'var(--color-teal)' : 'var(--color-accent-soft)',
           padding: '10px 16px',
           borderRadius: 8,
           marginBottom: 16,
@@ -367,7 +367,7 @@ export default function AdminDashboard() {
             </div>
             <h2 className="admin-stat-number">{stats.verifiedIncidents}</h2>
             <div className="admin-stat-footer">
-              <CheckCircle size={13} color="var(--color-blue-dark)" /> Mapped and secured
+              <CheckCircle size={13} color="var(--color-teal-dark)" /> Mapped and secured
             </div>
           </div>
 
@@ -523,7 +523,7 @@ export default function AdminDashboard() {
                       <td style={{ fontFamily: 'var(--font-mono)' }}>{Number(z.latitude).toFixed(4)}, {Number(z.longitude).toFixed(4)}</td>
                       <td>{z.radius} m</td>
                       <td><span className={`status-tag ${z.risk_level}`}>{z.risk_level}</span></td>
-                      <td style={{ fontWeight: 700, color: z.safety_score > 75 ? 'var(--color-blue-dark)' : z.safety_score > 50 ? 'var(--color-accent-soft)' : 'var(--color-accent)' }}>
+                      <td style={{ fontWeight: 700, color: z.safety_score > 75 ? 'var(--color-teal-dark)' : z.safety_score > 50 ? 'var(--color-accent-soft)' : 'var(--color-accent)' }}>
                         {z.safety_score} / 100
                       </td>
                     </tr>

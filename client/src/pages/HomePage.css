@@ -20,8 +20,8 @@
   text-align: center;
   background:
     radial-gradient(circle at 50% 18%, rgb(var(--color-accent-rgb) / 0.16), transparent 32rem),
-    radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.09), transparent 28rem),
-    linear-gradient(180deg, rgba(9, 10, 18, 0.7) 0%, rgb(var(--color-surface-rgb) / 0.95) 100%);
+    radial-gradient(circle at 20% 50%, rgb(var(--color-primary-light-rgb) / 0.09), transparent 28rem),
+    linear-gradient(180deg, rgb(var(--color-background-rgb) / 0.7) 0%, rgb(var(--color-surface-rgb) / 0.95) 100%);
 }
 
 .hero-glow-orb {
@@ -70,7 +70,7 @@
 }
 
 .hero-badge-icon {
-  color: var(--color-blue);
+  color: var(--color-teal);
 }
 
 .hero-logo-mark {
@@ -112,7 +112,7 @@
 }
 
 .hero-headline-gradient {
-  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-accent) 50%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-accent) 50%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -240,28 +240,28 @@
   margin-bottom: 14px;
 }
 
-.icon-cyan {
-  color: var(--color-blue);
-  background: rgb(var(--color-blue-rgb) / 0.12);
-  border: 1px solid rgb(var(--color-blue-rgb) / 0.25);
+.icon-teal {
+  color: var(--color-teal);
+  background: rgb(var(--color-teal-rgb) / 0.12);
+  border: 1px solid rgb(var(--color-teal-rgb) / 0.25);
 }
 
-.icon-rose {
+.icon-mauve {
   color: var(--color-accent-soft);
   background: rgb(var(--color-accent-soft-rgb) / 0.12);
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.25);
 }
 
-.icon-rose {
+.icon-mauve {
   color: var(--color-accent-soft);
   background: rgb(var(--color-accent-soft-rgb) / 0.12);
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.25);
 }
 
-.icon-emerald {
-  color: var(--color-blue);
-  background: rgb(var(--color-blue-rgb) / 0.12);
-  border: 1px solid rgb(var(--color-blue-rgb) / 0.25);
+.icon-teal-dark {
+  color: var(--color-teal);
+  background: rgb(var(--color-teal-rgb) / 0.12);
+  border: 1px solid rgb(var(--color-teal-rgb) / 0.25);
 }
 
 .pillar-body h3 {
@@ -316,7 +316,7 @@
   align-items: center;
   gap: 7px;
   margin-bottom: 12px;
-  color: var(--color-blue);
+  color: var(--color-teal);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
@@ -355,7 +355,7 @@
 }
 
 .check-icon {
-  color: var(--color-blue);
+  color: var(--color-teal);
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -421,7 +421,7 @@
   align-items: center;
   gap: 8px;
   font-size: 0.82rem;
-  color: var(--color-blue);
+  color: var(--color-teal);
   font-weight: 600;
 }
 
@@ -429,8 +429,8 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-blue-dark);
-  box-shadow: 0 0 10px var(--color-blue-dark);
+  background: var(--color-teal-dark);
+  box-shadow: 0 0 10px var(--color-teal-dark);
 }
 
 .display-badge {
@@ -447,8 +447,8 @@
   gap: 16px;
   padding: 16px;
   border-radius: 14px;
-  background: rgba(9, 10, 18, 0.6);
-  border: 1px solid rgb(var(--color-blue-dark-rgb) / 0.25);
+  background: rgb(var(--color-background-rgb) / 0.6);
+  border: 1px solid rgb(var(--color-teal-dark-rgb) / 0.25);
   margin-bottom: 18px;
 }
 
@@ -460,8 +460,8 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(var(--color-blue-dark-rgb) / 0.2), rgb(var(--color-blue-dark-rgb) / 0.05));
-  border: 2px solid var(--color-blue-dark);
+  background: radial-gradient(circle, rgb(var(--color-teal-dark-rgb) / 0.2), rgb(var(--color-teal-dark-rgb) / 0.05));
+  border: 2px solid var(--color-teal-dark);
   flex-shrink: 0;
 }
 
@@ -469,7 +469,7 @@
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-blue);
+  color: var(--color-teal);
   line-height: 1;
 }
 
@@ -525,8 +525,8 @@
 }
 
 .dot-blue {
-  background: var(--color-blue);
-  box-shadow: 0 0 8px rgb(var(--color-blue-rgb) / 0.6);
+  background: var(--color-teal);
+  box-shadow: 0 0 8px rgb(var(--color-teal-rgb) / 0.6);
 }
 
 /* Reporting Steps */
@@ -545,14 +545,14 @@
   padding: 14px 18px;
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.1);
   border-radius: 12px;
-  background: rgba(9, 10, 18, 0.6);
+  background: rgb(var(--color-background-rgb) / 0.6);
 }
 
 .step-number {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-blue);
+  color: var(--color-teal);
 }
 
 .step-card h4 {
@@ -616,7 +616,7 @@
   align-items: center;
   gap: 6px;
   margin: 0 0 12px;
-  color: var(--color-blue);
+  color: var(--color-teal);
   font-size: 0.85rem;
 }
 
@@ -636,9 +636,9 @@
 .status-tag {
   padding: 3px 8px;
   border-radius: 5px;
-  background: rgb(var(--color-blue-dark-rgb) / 0.12);
-  border: 1px solid rgb(var(--color-blue-dark-rgb) / 0.25);
-  color: var(--color-blue);
+  background: rgb(var(--color-teal-dark-rgb) / 0.12);
+  border: 1px solid rgb(var(--color-teal-dark-rgb) / 0.25);
+  color: var(--color-teal);
   font-size: 0.74rem;
 }
 
@@ -697,15 +697,15 @@
 }
 
 .police-card:hover {
-  border-color: rgb(var(--color-blue-rgb) / 0.45);
+  border-color: rgb(var(--color-teal-rgb) / 0.45);
 }
 
 .medical-card:hover {
-  border-color: rgb(var(--color-blue-dark-rgb) / 0.45);
+  border-color: rgb(var(--color-teal-dark-rgb) / 0.45);
 }
 
 .fire-card:hover {
-  border-color: rgba(249, 115, 22, 0.45);
+  border-color: rgb(var(--color-accent-rgb) / 0.45);
 }
 
 .helpline-card:hover {
@@ -761,33 +761,33 @@
 }
 
 .btn-police {
-  background: rgb(var(--color-blue-rgb) / 0.15);
-  border: 1px solid rgb(var(--color-blue-rgb) / 0.35);
-  color: var(--color-blue);
+  background: rgb(var(--color-teal-rgb) / 0.15);
+  border: 1px solid rgb(var(--color-teal-rgb) / 0.35);
+  color: var(--color-teal);
 }
 
 .btn-police:hover {
-  background: rgb(var(--color-blue-rgb) / 0.28);
+  background: rgb(var(--color-teal-rgb) / 0.28);
 }
 
 .btn-medical {
-  background: rgb(var(--color-blue-dark-rgb) / 0.15);
-  border: 1px solid rgb(var(--color-blue-dark-rgb) / 0.35);
-  color: var(--color-blue);
+  background: rgb(var(--color-teal-dark-rgb) / 0.15);
+  border: 1px solid rgb(var(--color-teal-dark-rgb) / 0.35);
+  color: var(--color-teal);
 }
 
 .btn-medical:hover {
-  background: rgb(var(--color-blue-dark-rgb) / 0.28);
+  background: rgb(var(--color-teal-dark-rgb) / 0.28);
 }
 
 .btn-fire {
-  background: rgba(249, 115, 22, 0.15);
-  border: 1px solid rgba(249, 115, 22, 0.35);
-  color: #fb923c;
+  background: rgb(var(--color-accent-rgb) / 0.15);
+  border: 1px solid rgb(var(--color-accent-rgb) / 0.35);
+  color: var(--color-accent);
 }
 
 .btn-fire:hover {
-  background: rgba(249, 115, 22, 0.28);
+  background: rgb(var(--color-accent-rgb) / 0.28);
 }
 
 .btn-helpline {
@@ -925,7 +925,7 @@
 }
 
 .bar-val {
-  color: var(--color-blue);
+  color: var(--color-teal);
   font-weight: 600;
 }
 
@@ -942,16 +942,16 @@
   border-radius: 9999px;
 }
 
-.fill-cyan {
-  background: linear-gradient(90deg, var(--color-blue), var(--color-blue));
+.fill-teal {
+  background: linear-gradient(90deg, var(--color-teal), var(--color-teal));
 }
 
 .fill-accent {
   background: linear-gradient(90deg, var(--color-accent), var(--color-accent-soft));
 }
 
-.fill-emerald {
-  background: linear-gradient(90deg, var(--color-blue-dark), var(--color-blue));
+.fill-teal-dark {
+  background: linear-gradient(90deg, var(--color-teal-dark), var(--color-teal));
 }
 
 /* =========================================================================
@@ -1006,7 +1006,7 @@
 .home-footer {
   padding: 56px clamp(20px, 6vw, 84px) 32px;
   border-top: 1px solid var(--line);
-  background: rgba(9, 10, 18, 0.95);
+  background: rgb(var(--color-background-rgb) / 0.95);
 }
 
 .footer-top {
@@ -1044,7 +1044,7 @@
 
 .brand-tagline {
   font-size: 0.74rem;
-  color: var(--color-blue);
+  color: var(--color-teal);
 }
 
 .footer-mission {
@@ -1179,12 +1179,12 @@
 [data-theme="light"] .home-hero-section {
   background:
     radial-gradient(circle at 50% 18%, rgb(var(--color-accent-rgb) / 0.08), transparent 32rem),
-    radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.06), transparent 28rem),
+    radial-gradient(circle at 20% 50%, rgb(var(--color-primary-light-rgb) / 0.06), transparent 28rem),
     linear-gradient(180deg, rgba(248, 249, 252, 0.8) 0%, rgba(241, 245, 249, 0.95) 100%);
 }
 
 [data-theme="light"] .hero-brand-name {
-  background: linear-gradient(135deg, #1e1b4b 40%, var(--color-primary-light) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 40%, var(--color-primary-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -1216,7 +1216,7 @@
 
 [data-theme="light"] .pillar-card {
   background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(148, 163, 184, 0.2);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.2);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
@@ -1251,12 +1251,12 @@
 
 [data-theme="light"] .display-card-inner {
   background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(148, 163, 184, 0.25);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.25);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
 }
 
 [data-theme="light"] .display-card-header {
-  border-bottom-color: rgba(148, 163, 184, 0.15);
+  border-bottom-color: rgb(var(--color-primary-light-rgb) / 0.15);
 }
 
 [data-theme="light"] .route-score-preview {
@@ -1274,7 +1274,7 @@
 
 [data-theme="light"] .step-card {
   background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(148, 163, 184, 0.2);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.2);
 }
 
 [data-theme="light"] .step-card h4 {
@@ -1305,7 +1305,7 @@
 
 [data-theme="light"] .emergency-service-card {
   background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(148, 163, 184, 0.2);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.2);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
@@ -1315,7 +1315,7 @@
 
 [data-theme="light"] .emergency-map-banner {
   background: linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.08) 0%, rgb(var(--color-accent-rgb) / 0.05) 100%);
-  border-color: rgba(148, 163, 184, 0.25);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.25);
 }
 
 [data-theme="light"] .banner-copy h4 {
@@ -1332,7 +1332,7 @@
 }
 
 [data-theme="light"] .btn-banner-action:hover {
-  background: #5b21b6;
+  background: var(--color-accent);
 }
 
 [data-theme="light"] .point-item strong {
@@ -1341,7 +1341,7 @@
 
 [data-theme="light"] .analytics-display-card {
   background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(148, 163, 184, 0.25);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.25);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
 }
 
@@ -1357,7 +1357,7 @@
   background:
     radial-gradient(circle at 80% 20%, rgb(var(--color-accent-rgb) / 0.08), transparent 24rem),
     rgba(255, 255, 255, 0.9);
-  border-color: rgba(148, 163, 184, 0.25);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.25);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
 }
 

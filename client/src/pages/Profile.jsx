@@ -330,10 +330,10 @@ export default function Profile({ onNavigate }) {
             alignItems: 'center',
             gap: '10px',
             padding: '12px 16px',
-            background: 'rgb(var(--color-blue-dark-rgb) / 0.12)',
-            border: '1px solid rgb(var(--color-blue-dark-rgb) / 0.35)',
+            background: 'rgb(var(--color-teal-dark-rgb) / 0.12)',
+            border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
             borderRadius: '10px',
-            color: 'var(--color-blue)',
+            color: 'var(--color-teal)',
             fontSize: '0.88rem',
             marginBottom: '20px',
           }}

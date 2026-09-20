@@ -331,7 +331,7 @@ export default function Login({ onNavigate }) {
             color: 'var(--muted)',
           }}
         >
-          <ShieldCheck size={14} style={{ color: 'var(--color-blue-dark)' }} />
+          <ShieldCheck size={14} style={{ color: 'var(--color-teal-dark)' }} />
           <span>Encrypted citizen session security</span>
         </div>
       </div>

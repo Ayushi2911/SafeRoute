@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Harmonized burgundy and blue operational base */
+  /* Harmonized navy and teal operational base */
   --bg-deep: var(--color-background);
   --bg-surface: var(--color-surface);
 
@@ -33,17 +33,17 @@
     inset 0 -1px 1px rgba(255, 255, 255, 0.05);
 
   /* Palette accents */
-  --accent-blue: var(--color-blue);
-  --accent-blue-glow: 0 0 16px rgb(var(--color-blue-rgb) / 0.4);
-  --accent-blue-bg: rgb(var(--color-blue-rgb) / 0.12);
+  --accent-teal: var(--color-teal);
+  --accent-teal-glow: 0 0 16px rgb(var(--color-teal-rgb) / 0.4);
+  --accent-teal-bg: rgb(var(--color-teal-rgb) / 0.12);
 
-  --accent-coral: var(--color-accent-soft);
-  --accent-coral-glow: 0 0 16px rgb(var(--color-accent-soft-rgb) / 0.45);
-  --accent-coral-bg: rgb(var(--color-accent-soft-rgb) / 0.14);
+  --accent-lavender: var(--color-accent-soft);
+  --accent-lavender-glow: 0 0 16px rgb(var(--color-accent-soft-rgb) / 0.45);
+  --accent-lavender-bg: rgb(var(--color-accent-soft-rgb) / 0.14);
 
-  --accent-rose: var(--color-rose);
-  --accent-blue-dark: var(--color-blue-dark);
-  --accent-coral-soft: var(--color-accent-soft);
+  --accent-mauve: var(--color-accent);
+  --accent-teal-dark: var(--color-teal-dark);
+  --accent-lavender: var(--color-accent-soft);
   --accent-danger: var(--color-accent);
 
   /* Typography Colors */
@@ -62,7 +62,7 @@
   --bg-surface: #ffffff;
   --glass-card: rgba(255, 255, 255, 0.9);
   --glass-card-hover: rgba(255, 255, 255, 0.98);
-  --glass-border: rgba(148, 163, 184, 0.22);
+  --glass-border: rgb(var(--color-primary-light-rgb) / 0.22);
   --glass-border-focus: rgb(var(--color-primary-light-rgb) / 0.45);
 
   --clay-card-shadow:
@@ -92,7 +92,7 @@
   background-color: var(--bg-deep);
   background-image:
     radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.06), transparent 32rem),
-    radial-gradient(circle at 5% 92%, rgb(var(--color-rose-rgb) / 0.05), transparent 32rem),
+    radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.05), transparent 32rem),
     linear-gradient(125deg, var(--color-background) 0%, var(--color-surface-elevated) 48%, #ffffff 100%);
   color: var(--text-high);
 }
@@ -116,7 +116,7 @@
 
 [data-theme="light"] .admin-filter-group {
   background: var(--color-surface-elevated);
-  border-color: rgba(148, 163, 184, 0.25);
+  border-color: rgb(var(--color-primary-light-rgb) / 0.25);
 }
 
 [data-theme="light"] .admin-table td {
@@ -137,7 +137,7 @@
   background-color: var(--bg-deep);
   background-image:
     radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.18), transparent 32rem),
-    radial-gradient(circle at 5% 92%, rgb(var(--color-rose-rgb) / 0.12), transparent 32rem),
+    radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.12), transparent 32rem),
     linear-gradient(125deg, var(--color-background) 0%, var(--color-surface) 48%, var(--color-surface) 100%);
   background-attachment: fixed;
   color: var(--text-high);
@@ -176,7 +176,7 @@
   left: 20px;
   right: 20px;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-accent-soft), var(--color-blue), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-accent-soft), var(--color-teal), transparent);
   border-radius: 2px;
 }
 
@@ -237,7 +237,7 @@
 /* Luminous Navigation Tabs Strip */
 .admin-nav-tabs {
   display: flex;
-  background: rgba(14, 10, 24, 0.85);
+  background: rgb(var(--color-background-rgb) / 0.85);
   border: 1px solid var(--glass-border);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
   padding: 4px;
@@ -269,14 +269,14 @@
 }
 
 .admin-nav-btn.active {
-  background: linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.25) 0%, rgb(var(--color-rose-rgb) / 0.2) 100%);
+  background: linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.25) 0%, rgb(var(--color-mauve-rgb) / 0.2) 100%);
   box-shadow: 0 4px 18px rgb(var(--color-primary-light-rgb) / 0.35), inset 0 1px rgba(255, 255, 255, 0.15);
   color: var(--color-text-heading);
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.55);
-  box-shadow: inset 0 -2px 0 rgba(239, 202, 255, 0.7);
+  box-shadow: inset 0 -2px 0 rgb(var(--color-accent-soft-rgb) / 0.7);
 }
 
-/* Luminous Action Buttons with Violet Ambient Glow */
+/* Palette action buttons with soft ambient emphasis */
 .admin-pill-btn {
   display: inline-flex;
   align-items: center;
@@ -321,14 +321,14 @@
 }
 
 .admin-action-btn.verify {
-  background: linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.3) 0%, rgb(var(--color-rose-rgb) / 0.25) 100%);
+  background: linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.3) 0%, rgb(var(--color-mauve-rgb) / 0.25) 100%);
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.45);
   color: var(--color-text-heading);
   box-shadow: 0 6px 20px rgb(var(--color-primary-light-rgb) / 0.25), inset 0 1px rgba(255, 255, 255, 0.12);
 }
 
 .admin-action-btn.verify:hover {
-  background: linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.45) 0%, rgb(var(--color-rose-rgb) / 0.35) 100%);
+  background: linear-gradient(135deg, rgb(var(--color-primary-light-rgb) / 0.45) 0%, rgb(var(--color-mauve-rgb) / 0.35) 100%);
   border-color: var(--color-accent-soft);
   box-shadow: 0 10px 28px rgb(var(--color-primary-light-rgb) / 0.45), inset 0 1px rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
@@ -409,7 +409,7 @@
 .admin-stat-card:hover {
   transform: translateY(-3px);
   border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.65), 0 0 20px -8px rgb(var(--color-blue-rgb) / 0.15);
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.65), 0 0 20px -8px rgb(var(--color-teal-rgb) / 0.15);
 }
 
 .admin-stat-card:hover::before {
@@ -446,22 +446,22 @@
 }
 
 .admin-stat-icon.primary {
-  background: rgb(var(--color-blue-rgb) / 0.12);
-  color: var(--accent-blue);
-  border: 1px solid rgb(var(--color-blue-rgb) / 0.3);
-  box-shadow: var(--accent-blue-glow);
+  background: rgb(var(--color-teal-rgb) / 0.12);
+  color: var(--accent-teal);
+  border: 1px solid rgb(var(--color-teal-rgb) / 0.3);
+  box-shadow: var(--accent-teal-glow);
 }
 
 .admin-stat-icon.warning {
   background: rgb(var(--color-accent-soft-rgb) / 0.12);
-  color: var(--accent-coral-soft);
+  color: var(--accent-lavender);
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.3);
 }
 
 .admin-stat-icon.success {
-  background: rgb(var(--color-blue-dark-rgb) / 0.12);
-  color: var(--accent-blue-dark);
-  border: 1px solid rgb(var(--color-blue-dark-rgb) / 0.3);
+  background: rgb(var(--color-teal-dark-rgb) / 0.12);
+  color: var(--accent-teal-dark);
+  border: 1px solid rgb(var(--color-teal-dark-rgb) / 0.3);
 }
 
 .admin-stat-icon.danger {
@@ -617,9 +617,9 @@
 
 .status-tag.verified,
 .status-tag.resolved {
-  background: rgb(var(--color-blue-dark-rgb) / 0.12);
-  color: var(--color-blue);
-  border: 1px solid rgb(var(--color-blue-dark-rgb) / 0.3);
+  background: rgb(var(--color-teal-dark-rgb) / 0.12);
+  color: var(--color-teal);
+  border: 1px solid rgb(var(--color-teal-dark-rgb) / 0.3);
 }
 
 .status-tag.rejected,
@@ -631,14 +631,14 @@
 }
 
 .status-tag.low {
-  background: var(--accent-blue-bg);
-  color: var(--accent-blue);
-  border: 1px solid rgb(var(--color-blue-rgb) / 0.3);
+  background: var(--accent-teal-bg);
+  color: var(--accent-teal);
+  border: 1px solid rgb(var(--color-teal-rgb) / 0.3);
 }
 
 .status-tag.responding {
-  background: var(--accent-coral-bg);
-  color: var(--accent-coral);
+  background: var(--accent-lavender-bg);
+  color: var(--accent-lavender);
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.3);
 }
 

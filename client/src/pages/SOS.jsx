@@ -293,7 +293,7 @@ export default function SOS({ onNavigate }) {
               width: '60px',
               height: '60px',
               borderRadius: '16px',
-              background: 'linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.22), rgba(185, 28, 28, 0.35))',
+              background: 'linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.22), rgb(var(--color-accent-rgb) / 0.35))',
               border: '1px solid rgb(var(--color-accent-rgb) / 0.5)',
               display: 'flex',
               alignItems: 'center',
@@ -450,8 +450,8 @@ export default function SOS({ onNavigate }) {
                 width: '150px',
                 height: '150px',
                 borderRadius: '50%',
-                background: 'radial-gradient(circle at 35% 35%, var(--color-accent), #b91c1c 70%, #7f1d1d)',
-                border: '4px solid rgba(254, 202, 202, 0.4)',
+                background: 'radial-gradient(circle at 35% 35%, var(--color-accent), var(--color-accent) 70%, var(--color-accent))',
+                border: '4px solid rgb(var(--color-accent-rgb) / 0.4)',
                 boxShadow: isSubmitting
                   ? '0 0 30px rgb(var(--color-accent-rgb) / 0.8)'
                   : '0 0 45px rgb(var(--color-accent-rgb) / 0.5), inset 0 2px 8px rgba(255,255,255,0.4)',
@@ -612,9 +612,9 @@ export default function SOS({ onNavigate }) {
                 marginTop: '16px',
                 padding: '10px 14px',
                 borderRadius: '8px',
-                background: 'rgb(var(--color-blue-dark-rgb) / 0.12)',
-                border: '1px solid rgb(var(--color-blue-dark-rgb) / 0.35)',
-                color: 'var(--color-blue)',
+                background: 'rgb(var(--color-teal-dark-rgb) / 0.12)',
+                border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
+                color: 'var(--color-teal)',
                 fontSize: '0.84rem',
                 width: '100%',
                 display: 'flex',
@@ -934,10 +934,10 @@ export default function SOS({ onNavigate }) {
                           href={`tel:${contact.phone}`}
                           style={{
                             padding: '6px 10px',
-                            background: 'rgb(var(--color-blue-dark-rgb) / 0.15)',
-                            border: '1px solid rgb(var(--color-blue-dark-rgb) / 0.35)',
+                            background: 'rgb(var(--color-teal-dark-rgb) / 0.15)',
+                            border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
                             borderRadius: '6px',
-                            color: 'var(--color-blue)',
+                            color: 'var(--color-teal)',
                             fontSize: '0.78rem',
                             fontWeight: 600,
                             textDecoration: 'none',
@@ -1041,19 +1041,19 @@ export default function SOS({ onNavigate }) {
                               ? 'rgb(var(--color-accent-rgb) / 0.18)'
                               : item.status === 'responding'
                               ? 'rgb(var(--color-accent-soft-rgb) / 0.18)'
-                              : 'rgb(var(--color-blue-dark-rgb) / 0.18)',
+                              : 'rgb(var(--color-teal-dark-rgb) / 0.18)',
                           color:
                             item.status === 'pending'
                               ? 'var(--color-accent-soft)'
                               : item.status === 'responding'
                               ? 'var(--color-text-subtle)'
-                              : 'var(--color-blue)',
+                              : 'var(--color-teal)',
                           border:
                             item.status === 'pending'
                               ? '1px solid rgb(var(--color-accent-rgb) / 0.4)'
                               : item.status === 'responding'
                               ? '1px solid rgb(var(--color-accent-soft-rgb) / 0.4)'
-                              : '1px solid rgb(var(--color-blue-dark-rgb) / 0.4)',
+                              : '1px solid rgb(var(--color-teal-dark-rgb) / 0.4)',
                         }}
                       >
                         {item.status}
@@ -1078,10 +1078,10 @@ export default function SOS({ onNavigate }) {
                       onClick={() => handleUpdateStatus(item.id, 'resolved')}
                       style={{
                         padding: '6px 14px',
-                        background: 'rgb(var(--color-blue-dark-rgb) / 0.15)',
-                        border: '1px solid rgb(var(--color-blue-dark-rgb) / 0.4)',
+                        background: 'rgb(var(--color-teal-dark-rgb) / 0.15)',
+                        border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.4)',
                         borderRadius: '8px',
-                        color: 'var(--color-blue)',
+                        color: 'var(--color-teal)',
                         fontSize: '0.8rem',
                         fontWeight: 600,
                         cursor: 'pointer',

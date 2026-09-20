@@ -27,7 +27,7 @@
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(169, 132, 255, 0.1), rgba(169, 132, 255, 0.035) 36%, transparent 72%);
+  background: radial-gradient(circle, rgb(var(--color-accent-soft-rgb) / 0.1), rgb(var(--color-accent-soft-rgb) / 0.035) 36%, transparent 72%);
   filter: blur(18px);
   opacity: 0;
   pointer-events: none;
@@ -48,7 +48,7 @@
   min-height: 72px;
   padding: 12px clamp(18px, 4vw, 56px);
   border-bottom: 1px solid var(--line);
-  background: rgba(9, 10, 18, 0.92);
+  background: rgb(var(--color-background-rgb) / 0.92);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(18px);
 }
@@ -79,7 +79,7 @@
 
 .app-brand:hover .app-brand-logo {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 16px rgb(var(--color-blue-rgb) / 0.6));
+  filter: drop-shadow(0 0 16px rgb(var(--color-teal-rgb) / 0.6));
 }
 
 .app-brand-mark {
@@ -90,7 +90,7 @@
   border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.55);
   border-radius: 9px;
   color: var(--color-text-subtle);
-  background: linear-gradient(145deg, rgb(var(--color-accent-soft-rgb) / 0.2), rgba(224, 112, 181, 0.12));
+  background: linear-gradient(145deg, rgb(var(--color-accent-soft-rgb) / 0.2), rgb(var(--color-accent-soft-rgb) / 0.12));
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
 }
@@ -141,7 +141,7 @@
   border-color: rgb(var(--color-accent-soft-rgb) / 0.3);
   color: var(--color-text-subtle);
   background: var(--accent-soft);
-  box-shadow: inset 0 -2px 0 rgba(208, 181, 255, 0.75);
+  box-shadow: inset 0 -2px 0 rgb(var(--color-accent-soft-rgb) / 0.75);
 }
 
 .app-nav-link-sos {
@@ -293,14 +293,14 @@
   color: #ffffff;
   background: var(--color-primary-light);
   border-color: var(--color-primary-light);
-  box-shadow: 0 0 14px rgba(220, 38, 38, 0.3);
+  box-shadow: 0 0 14px rgb(var(--color-accent-rgb) / 0.3);
 }
 
 [data-theme="light"] .app-nav-link-sos.is-active {
   border-color: var(--color-primary-light);
   color: #ffffff;
   background: var(--color-primary-light);
-  box-shadow: inset 0 -2px 0 #991b1b, 0 0 16px rgba(220, 38, 38, 0.35);
+  box-shadow: inset 0 -2px 0 var(--color-accent), 0 0 16px rgb(var(--color-accent-rgb) / 0.35);
 }
 
 [data-theme="light"] .app-nav-auth-register {
@@ -315,7 +315,7 @@
 }
 
 [data-theme="light"] .app-nav-auth-profile {
-  color: #4338ca;
+  color: var(--color-accent-soft);
   border-color: rgb(var(--color-primary-light-rgb) / 0.25);
   background: rgb(var(--color-primary-light-rgb) / 0.06);
 }

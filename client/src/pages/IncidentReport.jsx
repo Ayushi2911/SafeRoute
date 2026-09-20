@@ -214,9 +214,9 @@ function IncidentReport({ onNavigate }) {
           --incident-lavender: var(--color-text-subtle);
           --incident-muted: var(--color-text-muted);
           --incident-faint: var(--color-text-muted);
-          --incident-pink: var(--color-rose);
+          --incident-mauve: var(--color-accent);
           --incident-primary: var(--color-accent);
-          --incident-cyan: var(--color-blue);
+          --incident-teal: var(--color-teal);
           position: relative;
           width: 100%;
           min-height: 100vh;
@@ -226,7 +226,7 @@ function IncidentReport({ onNavigate }) {
           color: var(--incident-white);
           background:
             radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.18), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgb(var(--color-rose-rgb) / 0.1), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.1), transparent 28rem),
             linear-gradient(125deg, var(--color-background) 0%, var(--color-surface) 48%, var(--color-surface) 100%);
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
@@ -235,18 +235,18 @@ function IncidentReport({ onNavigate }) {
           --incident-background: var(--color-background);
           --incident-surface: rgba(255, 255, 255, 0.92);
           --incident-surface-light: rgba(241, 245, 249, 0.92);
-          --incident-line: rgba(148, 163, 184, 0.22);
+          --incident-line: rgb(var(--color-primary-light-rgb) / 0.22);
           --incident-line-strong: rgb(var(--color-primary-light-rgb) / 0.45);
           --incident-white: var(--color-text);
           --incident-lavender: var(--color-text-subtle);
           --incident-muted: var(--color-text-muted);
           --incident-faint: var(--color-text-muted);
-          --incident-pink: var(--color-rose);
+          --incident-mauve: var(--color-accent);
           --incident-primary: var(--color-primary-light);
-          --incident-cyan: var(--color-blue-dark);
+          --incident-teal: var(--color-teal-dark);
           background:
             radial-gradient(circle at 91% 7%, rgb(var(--color-primary-light-rgb) / 0.06), transparent 28rem),
-            radial-gradient(circle at 5% 92%, rgb(var(--color-rose-rgb) / 0.05), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgb(var(--color-mauve-rgb) / 0.05), transparent 28rem),
             linear-gradient(125deg, var(--color-background) 0%, var(--color-surface-elevated) 48%, #ffffff 100%);
           color: var(--incident-white);
         }
@@ -257,7 +257,7 @@ function IncidentReport({ onNavigate }) {
 
         [data-theme="light"] .incident-card {
           background: rgba(255, 255, 255, 0.94);
-          border-color: rgba(148, 163, 184, 0.22);
+          border-color: rgb(var(--color-primary-light-rgb) / 0.22);
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
         }
 
@@ -276,7 +276,7 @@ function IncidentReport({ onNavigate }) {
 
         [data-theme="light"] .incident-severity {
           background: var(--color-text-heading);
-          border-color: rgba(148, 163, 184, 0.25);
+          border-color: rgb(var(--color-primary-light-rgb) / 0.25);
         }
 
         .incident-page *,
@@ -293,7 +293,7 @@ function IncidentReport({ onNavigate }) {
           width: 340px;
           height: 340px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(214, 93, 223, 0.105), rgba(139, 74, 255, 0.04) 38%, transparent 70%);
+          background: radial-gradient(circle, rgb(var(--color-accent-soft-rgb) / 0.105), rgb(var(--color-accent-soft-rgb) / 0.04) 38%, transparent 70%);
           content: "";
           pointer-events: none;
           transform: translate(-50%, -50%);
@@ -332,8 +332,8 @@ function IncidentReport({ onNavigate }) {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: var(--incident-pink);
-          box-shadow: 0 0 0 5px rgb(var(--color-rose-rgb) / 0.12), 0 0 18px rgb(var(--color-rose-rgb) / 0.8);
+          background: var(--incident-mauve);
+          box-shadow: 0 0 0 5px rgb(var(--color-mauve-rgb) / 0.12), 0 0 18px rgb(var(--color-mauve-rgb) / 0.8);
         }
 
         .incident-brand-wrap {
@@ -380,7 +380,7 @@ function IncidentReport({ onNavigate }) {
           padding: 15px 17px;
           border: 1px solid var(--incident-line);
           border-radius: 15px;
-          background: rgba(26, 19, 45, 0.7);
+          background: rgb(var(--color-background-rgb) / 0.7);
           box-shadow: inset 0 1px rgba(255, 255, 255, 0.05), 0 14px 32px rgba(0, 0, 0, 0.15);
         }
 
@@ -389,10 +389,10 @@ function IncidentReport({ onNavigate }) {
           width: 36px;
           height: 36px;
           place-items: center;
-          border: 1px solid rgb(var(--color-rose-rgb) / 0.3);
+          border: 1px solid rgb(var(--color-mauve-rgb) / 0.3);
           border-radius: 11px;
-          color: #ffacd9;
-          background: linear-gradient(145deg, rgb(var(--color-rose-rgb) / 0.2), rgb(var(--color-primary-light-rgb) / 0.13));
+          color: var(--color-accent-soft);
+          background: linear-gradient(145deg, rgb(var(--color-mauve-rgb) / 0.2), rgb(var(--color-primary-light-rgb) / 0.13));
           font-size: 1rem;
         }
 
@@ -446,15 +446,15 @@ function IncidentReport({ onNavigate }) {
           border: 1px solid var(--incident-line);
           border-radius: 21px;
           background:
-            linear-gradient(145deg, rgba(45, 28, 70, 0.73), rgba(18, 15, 33, 0.86)),
+            linear-gradient(145deg, rgb(var(--color-background-rgb) / 0.73), rgb(var(--color-background-rgb) / 0.86)),
             var(--incident-surface);
           box-shadow: 0 25px 65px rgba(0, 0, 0, 0.22), inset 0 1px rgba(255, 255, 255, 0.045);
           transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
         }
 
         .incident-card:hover {
-          border-color: rgba(208, 125, 255, 0.27);
-          box-shadow: 0 29px 72px rgba(0, 0, 0, 0.3), 0 0 28px rgba(161, 88, 255, 0.06), inset 0 1px rgba(255, 255, 255, 0.06);
+          border-color: rgb(var(--color-accent-soft-rgb) / 0.27);
+          box-shadow: 0 29px 72px rgba(0, 0, 0, 0.3), 0 0 28px rgb(var(--color-accent-soft-rgb) / 0.06), inset 0 1px rgba(255, 255, 255, 0.06);
           transform: translateY(-2px);
         }
 
@@ -471,7 +471,7 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-kicker {
-          color: #d69dff;
+          color: var(--color-accent-soft);
           font-size: 0.65rem;
         }
 
@@ -499,7 +499,7 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-required {
-          color: #f497ce;
+          color: var(--color-accent-soft);
           font-size: 0.63rem;
           font-weight: 650;
           letter-spacing: 0.04em;
@@ -510,11 +510,11 @@ function IncidentReport({ onNavigate }) {
         .incident-select,
         .incident-textarea {
           width: 100%;
-          border: 1px solid rgba(215, 187, 246, 0.17);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.17);
           border-radius: 11px;
           outline: none;
           color: var(--incident-white);
-          background: rgba(9, 8, 20, 0.65);
+          background: rgb(var(--color-background-rgb) / 0.65);
           font: inherit;
           transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
         }
@@ -539,7 +539,7 @@ function IncidentReport({ onNavigate }) {
           position: absolute;
           top: 50%;
           right: 16px;
-          color: #bda5d9;
+          color: var(--color-accent-soft);
           content: "⌄";
           pointer-events: none;
           transform: translateY(-55%);
@@ -555,14 +555,14 @@ function IncidentReport({ onNavigate }) {
 
         .incident-input::placeholder,
         .incident-textarea::placeholder {
-          color: #716780;
+          color: var(--color-accent);
         }
 
         .incident-input:hover,
         .incident-select:hover,
         .incident-textarea:hover {
-          border-color: rgba(220, 137, 255, 0.4);
-          background: rgba(15, 11, 28, 0.8);
+          border-color: rgb(var(--color-accent-soft-rgb) / 0.4);
+          background: rgb(var(--color-background-rgb) / 0.8);
         }
 
         .incident-input:focus,
@@ -571,8 +571,8 @@ function IncidentReport({ onNavigate }) {
         .incident-button:focus-visible,
         .incident-severity:focus-visible,
         .incident-upload:focus-within {
-          border-color: #d786ff;
-          box-shadow: 0 0 0 3px rgba(194, 104, 255, 0.15), 0 0 22px rgba(194, 104, 255, 0.1);
+          border-color: var(--color-accent-soft);
+          box-shadow: 0 0 0 3px rgb(var(--color-accent-soft-rgb) / 0.15), 0 0 22px rgb(var(--color-accent-soft-rgb) / 0.1);
         }
 
         .incident-severity-grid {
@@ -584,26 +584,26 @@ function IncidentReport({ onNavigate }) {
         .incident-severity {
           min-height: 91px;
           padding: 14px 12px;
-          border: 1px solid rgba(215, 187, 246, 0.15);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.15);
           border-radius: 12px;
           outline: none;
           color: var(--incident-white);
           text-align: left;
-          background: rgba(9, 8, 20, 0.42);
+          background: rgb(var(--color-background-rgb) / 0.42);
           cursor: pointer;
           transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
         }
 
         .incident-severity:hover {
-          border-color: rgba(220, 137, 255, 0.48);
-          background: rgba(32, 19, 51, 0.72);
+          border-color: rgb(var(--color-accent-soft-rgb) / 0.48);
+          background: rgb(var(--color-background-rgb) / 0.72);
           transform: translateY(-3px);
         }
 
         .incident-severity.is-selected {
-          border-color: #e692ff;
-          background: linear-gradient(145deg, rgba(124, 53, 154, 0.36), rgba(46, 23, 72, 0.75));
-          box-shadow: 0 0 0 1px rgba(233, 142, 255, 0.15), 0 9px 28px rgba(168, 71, 204, 0.19);
+          border-color: var(--color-accent-soft);
+          background: linear-gradient(145deg, rgb(var(--color-accent-rgb) / 0.36), rgb(var(--color-accent-rgb) / 0.75));
+          box-shadow: 0 0 0 1px rgb(var(--color-accent-soft-rgb) / 0.15), 0 9px 28px rgb(var(--color-accent-soft-rgb) / 0.19);
           transform: translateY(-3px);
         }
 
@@ -620,7 +620,7 @@ function IncidentReport({ onNavigate }) {
           border-radius: 50%;
         }
 
-        .incident-severity-low .incident-severity-dot { background: var(--color-blue); box-shadow: 0 0 12px var(--color-blue); }
+        .incident-severity-low .incident-severity-dot { background: var(--color-teal); box-shadow: 0 0 12px var(--color-teal); }
         .incident-severity-medium .incident-severity-dot { background: var(--color-accent-soft); box-shadow: 0 0 12px var(--color-accent-soft); }
         .incident-severity-high .incident-severity-dot { background: var(--color-accent-soft); box-shadow: 0 0 12px var(--color-accent-soft); }
 
@@ -637,8 +637,8 @@ function IncidentReport({ onNavigate }) {
         }
 
         .incident-severity.is-selected .incident-selected-mark {
-          border-color: #f39ddd;
-          background: linear-gradient(135deg, var(--incident-pink), var(--incident-primary));
+          border-color: var(--color-accent-soft);
+          background: linear-gradient(135deg, var(--incident-mauve), var(--incident-primary));
           opacity: 1;
         }
 
@@ -707,8 +707,8 @@ function IncidentReport({ onNavigate }) {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: #8c789e;
-          box-shadow: 0 0 8px rgba(191, 127, 219, 0.5);
+          background: var(--color-accent);
+          box-shadow: 0 0 8px rgb(var(--color-accent-soft-rgb) / 0.5);
           content: "";
         }
 
@@ -718,21 +718,21 @@ function IncidentReport({ onNavigate }) {
           min-height: 176px;
           align-items: center;
           justify-content: center;
-          border: 1px dashed rgba(207, 132, 255, 0.46);
+          border: 1px dashed rgb(var(--color-accent-soft-rgb) / 0.46);
           border-radius: 14px;
           outline: none;
           text-align: center;
           background:
-            linear-gradient(135deg, rgba(169, 84, 228, 0.1), rgba(27, 16, 47, 0.3)),
+            linear-gradient(135deg, rgb(var(--color-accent-soft-rgb) / 0.1), rgb(var(--color-background-rgb) / 0.3)),
             repeating-linear-gradient(135deg, transparent 0 12px, rgba(255, 255, 255, 0.012) 12px 13px);
           cursor: pointer;
           transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
         }
 
         .incident-upload:hover {
-          border-color: #e19aff;
-          background-color: rgba(119, 55, 159, 0.18);
-          box-shadow: 0 0 26px rgba(186, 80, 230, 0.12);
+          border-color: var(--color-accent-soft);
+          background-color: rgb(var(--color-accent-rgb) / 0.18);
+          box-shadow: 0 0 26px rgb(var(--color-accent-soft-rgb) / 0.12);
         }
 
         .incident-upload input {
@@ -748,10 +748,10 @@ function IncidentReport({ onNavigate }) {
           height: 45px;
           margin: 0 auto 12px;
           place-items: center;
-          border: 1px solid rgba(224, 147, 255, 0.36);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.36);
           border-radius: 13px;
-          color: #f0b5ff;
-          background: linear-gradient(145deg, rgba(222, 113, 235, 0.2), rgba(126, 77, 255, 0.2));
+          color: var(--color-accent-soft);
+          background: linear-gradient(145deg, rgb(var(--color-accent-soft-rgb) / 0.2), rgb(var(--color-accent-soft-rgb) / 0.2));
           font-size: 1.25rem;
         }
 
@@ -777,7 +777,7 @@ function IncidentReport({ onNavigate }) {
           margin: 10px auto 0;
           padding: 0;
           overflow: hidden;
-          color: #efb4ff;
+          color: var(--color-accent-soft);
           font-size: 0.66rem;
           list-style: none;
           text-overflow: ellipsis;
@@ -791,10 +791,10 @@ function IncidentReport({ onNavigate }) {
           gap: 24px;
           margin-top: 18px;
           padding: 22px 25px;
-          border: 1px solid rgba(231, 111, 185, 0.23);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.23);
           border-radius: 18px;
           background:
-            linear-gradient(100deg, rgb(var(--color-primary-rgb) / 0.68), rgba(27, 18, 51, 0.84)),
+            linear-gradient(100deg, rgb(var(--color-primary-rgb) / 0.68), rgb(var(--color-background-rgb) / 0.84)),
             var(--incident-surface);
           box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
           animation: incident-rise 600ms 230ms ease both;
@@ -812,7 +812,7 @@ function IncidentReport({ onNavigate }) {
 
         .incident-privacy-icon {
           flex: 0 0 auto;
-          color: #f09bd0;
+          color: var(--color-accent-soft);
           font-size: 1rem;
         }
 
@@ -820,27 +820,27 @@ function IncidentReport({ onNavigate }) {
           min-width: 218px;
           border-color: transparent;
           color: white;
-          background: linear-gradient(110deg, #bd5adf, #e861ae 52%, #8e6aff);
-          box-shadow: 0 11px 30px rgba(202, 83, 183, 0.27), inset 0 1px rgba(255, 255, 255, 0.22);
+          background: linear-gradient(110deg, var(--color-accent-soft), var(--color-accent-soft) 52%, var(--color-accent-soft));
+          box-shadow: 0 11px 30px rgb(var(--color-accent-soft-rgb) / 0.27), inset 0 1px rgba(255, 255, 255, 0.22);
         }
 
         .incident-submit-button:hover {
           border-color: rgba(255, 255, 255, 0.25);
-          background: linear-gradient(110deg, #c96ae9, #f074bd 52%, #9b78ff);
-          box-shadow: 0 14px 34px rgba(202, 83, 183, 0.4), 0 0 25px rgba(207, 97, 237, 0.19);
+          background: linear-gradient(110deg, var(--color-accent-soft), var(--color-accent-soft) 52%, var(--color-accent-soft));
+          box-shadow: 0 14px 34px rgb(var(--color-accent-soft-rgb) / 0.4), 0 0 25px rgb(var(--color-accent-soft-rgb) / 0.19);
         }
 
         .incident-submit-button:active {
-          box-shadow: 0 5px 14px rgba(202, 83, 183, 0.24);
+          box-shadow: 0 5px 14px rgb(var(--color-accent-soft-rgb) / 0.24);
         }
 
         .incident-message {
           margin-top: 11px;
           padding: 12px 15px;
-          border: 1px solid rgb(var(--color-blue-rgb) / 0.25);
+          border: 1px solid rgb(var(--color-teal-rgb) / 0.25);
           border-radius: 10px;
-          color: #b4edfa;
-          background: rgba(83, 174, 199, 0.09);
+          color: var(--color-primary-light);
+          background: rgb(var(--color-primary-light-rgb) / 0.09);
           font-size: 0.72rem;
           animation: incident-rise 240ms ease both;
         }
@@ -880,18 +880,18 @@ function IncidentReport({ onNavigate }) {
           gap: 12px;
           min-height: 65px;
           padding: 13px;
-          border: 1px solid rgba(215, 187, 246, 0.1);
+          border: 1px solid rgb(var(--color-accent-soft-rgb) / 0.1);
           border-radius: 11px;
           color: var(--incident-muted);
           font-size: 0.72rem;
           line-height: 1.48;
-          background: rgba(8, 7, 17, 0.3);
+          background: rgb(var(--color-background-rgb) / 0.3);
           transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
         }
 
         .incident-guideline:hover {
-          border-color: rgba(217, 126, 255, 0.3);
-          background: rgba(40, 23, 60, 0.48);
+          border-color: rgb(var(--color-accent-soft-rgb) / 0.3);
+          background: rgb(var(--color-background-rgb) / 0.48);
           transform: translateY(-2px);
         }
 
@@ -902,8 +902,8 @@ function IncidentReport({ onNavigate }) {
           flex: 0 0 auto;
           place-items: center;
           border-radius: 7px;
-          color: #f3b4ff;
-          background: linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.28), rgba(132, 92, 255, 0.23));
+          color: var(--color-accent-soft);
+          background: linear-gradient(135deg, rgb(var(--color-accent-rgb) / 0.28), rgb(var(--color-accent-soft-rgb) / 0.23));
           font-size: 0.62rem;
           font-weight: 800;
         }
@@ -995,10 +995,10 @@ function IncidentReport({ onNavigate }) {
                   borderRadius: '10px',
                   marginBottom: '18px',
                   fontSize: '0.86rem',
-                  color: '#e0d8ff',
+                  color: 'var(--color-accent-soft)',
                 }}
               >
-                <ShieldCheck size={16} style={{ color: '#a78bfa', flexShrink: 0 }} />
+                <ShieldCheck size={16} style={{ color: 'var(--color-accent-soft)', flexShrink: 0 }} />
                 <span>
                   Reporting as verified citizen: <strong>{user.name}</strong> ({user.email})
                 </span>
@@ -1029,7 +1029,7 @@ function IncidentReport({ onNavigate }) {
                   style={{
                     background: 'rgb(var(--color-accent-soft-rgb) / 0.2)',
                     border: '1px solid rgb(var(--color-accent-soft-rgb) / 0.4)',
-                    color: '#fef3c7',
+                    color: 'var(--color-accent)',
                     borderRadius: '6px',
                     padding: '5px 12px',
                     fontSize: '0.8rem',

@@ -180,10 +180,10 @@ export default function Register({ onNavigate }) {
               alignItems: 'center',
               gap: '10px',
               padding: '12px 14px',
-              background: 'rgb(var(--color-blue-dark-rgb) / 0.12)',
-              border: '1px solid rgb(var(--color-blue-dark-rgb) / 0.35)',
+              background: 'rgb(var(--color-teal-dark-rgb) / 0.12)',
+              border: '1px solid rgb(var(--color-teal-dark-rgb) / 0.35)',
               borderRadius: '10px',
-              color: 'var(--color-blue)',
+              color: 'var(--color-teal)',
               fontSize: '0.86rem',
               marginBottom: '18px',
             }}
@@ -473,7 +473,7 @@ export default function Register({ onNavigate }) {
             color: 'var(--muted)',
           }}
         >
-          <ShieldCheck size={14} style={{ color: 'var(--color-blue-dark)' }} />
+          <ShieldCheck size={14} style={{ color: 'var(--color-teal-dark)' }} />
           <span>Encrypted citizen session security</span>
         </div>
       </div>
