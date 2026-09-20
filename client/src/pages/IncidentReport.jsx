@@ -341,6 +341,18 @@ function IncidentReport({ onNavigate }) {
           border: 1px solid rgba(109, 40, 217, 0.25);
         }
 
+        [data-theme="light"] .incident-page .incident-select:hover,
+        [data-theme="light"] .incident-page .incident-select:focus,
+        [data-theme="light"] .incident-page .incident-select:active {
+          background: #f8fafc !important;
+          color: #0f172a !important;
+        }
+
+        [data-theme="light"] .incident-page .incident-select option {
+          background: #ffffff;
+          color: #0f172a;
+        }
+
         .incident-page *,
         .incident-page *::before,
         .incident-page *::after {
