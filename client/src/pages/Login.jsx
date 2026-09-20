@@ -62,6 +62,7 @@ export default function Login({ onNavigate }) {
 
   return (
     <div
+      className="auth-page login-page"
       style={{
         display: 'flex',
         justifyContent: 'center',

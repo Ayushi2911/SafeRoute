@@ -138,6 +138,7 @@ export default function Profile({ onNavigate }) {
   if (loading) {
     return (
       <div
+        className="profile-page"
         style={{
           display: 'flex',
           justifyContent: 'center',

@@ -299,6 +299,15 @@ export default function SOS({ onNavigate }) {
           color: #047857 !important;
         }
 
+        [data-theme="light"] .sos-page [style*="color: rgb(252, 165, 165)"],
+        [data-theme="light"] .sos-page [style*="color: rgb(248, 113, 113)"] {
+          color: #b91c1c !important;
+        }
+
+        [data-theme="light"] .sos-page [style*="color: rgb(110, 231, 183)"] {
+          color: #047857 !important;
+        }
+
         [data-theme="light"] .sos-page a[style*="color: var(--text)"] {
           color: #0f172a !important;
         }

@@ -39,7 +39,7 @@
   --text: #0f172a;
   --text-heading: #0f172a;
   --text-subtle: #334155;
-  --muted: #64748b;
+  --muted: #475569;
   --accent: #7c3aed;
   --accent-soft: rgba(124, 58, 237, 0.08);
   --accent-hover: #6d28d9;
@@ -47,6 +47,45 @@
   --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
   --nav-bg: rgba(255, 255, 255, 0.92);
   --glow-opacity: 0.35;
+}
+
+[data-theme="light"] body,
+[data-theme="light"] #root {
+  color: #0f172a;
+}
+
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  color: #0f172a !important;
+  caret-color: #0f172a;
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #64748b !important;
+  opacity: 1;
+}
+
+[data-theme="light"] select option {
+  color: #0f172a;
+  background: #ffffff;
+}
+
+[data-theme="light"] button:disabled {
+  color: #64748b !important;
+}
+
+[data-theme="light"] a:not([class]) {
+  color: #5b21b6;
+}
+
+[data-theme="light"] [style*="color: var(--muted)"] {
+  color: #475569 !important;
+}
+
+[data-theme="light"] [style*="color: var(--text-subtle)"] {
+  color: #334155 !important;
 }
 
 * {

@@ -1454,3 +1454,133 @@
   color: #334155;
   border: 1px solid #cbd5e1;
 }
+
+[data-theme="light"] .header-icon-box,
+[data-theme="light"] .icon-accent {
+  color: #6d28d9;
+}
+
+[data-theme="light"] .eyebrow-tag,
+[data-theme="light"] .map-badge {
+  color: #5b21b6;
+}
+
+[data-theme="light"] .header-status-badge {
+  color: #047857;
+}
+
+[data-theme="light"] .saferoute-notification.info,
+[data-theme="light"] .saferoute-notification.success,
+[data-theme="light"] .saferoute-notification.warning,
+[data-theme="light"] .saferoute-notification.error {
+  color: #334155;
+}
+
+[data-theme="light"] .route-tip,
+[data-theme="light"] .map-subtext,
+[data-theme="light"] .legend-item,
+[data-theme="light"] .zone-meta span,
+[data-theme="light"] .empty-state-notice {
+  color: #475569;
+}
+
+[data-theme="light"] .form-heading,
+[data-theme="light"] .mini-status-header,
+[data-theme="light"] .map-tool-btn,
+[data-theme="light"] .zone-meta strong {
+  color: #0f172a;
+}
+
+[data-theme="light"] .input-group input::placeholder {
+  color: #64748b;
+}
+
+[data-theme="light"] .btn-icon-swap,
+[data-theme="light"] .btn-location-gps {
+  color: #334155;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .btn-icon-swap:hover,
+[data-theme="light"] .btn-location-gps:hover,
+[data-theme="light"] .map-tool-btn:hover {
+  color: #334155;
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+[data-theme="light"] .layer-toggle-btn {
+  color: #334155;
+}
+
+[data-theme="light"] .layer-toggle-btn:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+[data-theme="light"] .layer-toggle-btn.active {
+  color: #5b21b6;
+}
+
+[data-theme="light"] .toggle-status-indicator {
+  color: #475569;
+  background: rgba(100, 116, 139, 0.12);
+}
+
+[data-theme="light"] .layer-toggle-btn.active .toggle-status-indicator {
+  color: #047857;
+}
+
+[data-theme="light"] .score-label,
+[data-theme="light"] .score-tier,
+[data-theme="light"] .breakdown-label,
+[data-theme="light"] .card-footer-note,
+[data-theme="light"] .metric-tile span,
+[data-theme="light"] .card-description,
+[data-theme="light"] .route-card-subtitle,
+[data-theme="light"] .zone-meta span {
+  color: #475569;
+}
+
+[data-theme="light"] .score-tier.safe,
+[data-theme="light"] .score-tier.caution,
+[data-theme="light"] .score-tier.danger,
+[data-theme="light"] .zone-score-pill.good,
+[data-theme="light"] .zone-score-pill.caution,
+[data-theme="light"] .zone-score-pill.danger {
+  color: #334155;
+}
+
+[data-theme="light"] .popup-tag.high,
+[data-theme="light"] .popup-tag.danger {
+  color: #b91c1c;
+}
+
+[data-theme="light"] .popup-tag.medium,
+[data-theme="light"] .popup-tag.caution {
+  color: #92400e;
+}
+
+[data-theme="light"] .popup-tag.low,
+[data-theme="light"] .popup-tag.info {
+  color: #047857;
+}
+
+[data-theme="light"] .popup-type-badge.police {
+  color: #1d4ed8;
+}
+
+[data-theme="light"] .popup-type-badge.hospital {
+  color: #047857;
+}
+
+[data-theme="light"] .popup-type-badge.fire_station {
+  color: #c2410c;
+}
+
+[data-theme="light"] .popup-desc,
+[data-theme="light"] .popup-sub,
+[data-theme="light"] .popup-time {
+  color: #475569 !important;
+}
