@@ -139,6 +139,43 @@ function IncidentHistory({ onNavigate }) {
           box-sizing: border-box;
         }
 
+        [data-theme="light"] .incident-history-page {
+          --history-background: #f8f9fc;
+          --history-surface: rgba(255, 255, 255, 0.92);
+          --history-surface-light: rgba(241, 245, 249, 0.92);
+          --history-line: rgba(148, 163, 184, 0.22);
+          --history-line-strong: rgba(124, 58, 237, 0.45);
+          --history-white: #0f172a;
+          --history-lavender: #334155;
+          --history-muted: #64748b;
+          --history-faint: #94a3b8;
+          --history-pink: #db2777;
+          --history-violet: #7c3aed;
+          background:
+            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.06), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.05), transparent 28rem),
+            linear-gradient(125deg, #f8f9fc 0%, #f1f5f9 48%, #ffffff 100%);
+          color: var(--history-white);
+        }
+
+        [data-theme="light"] .incident-history-card {
+          background: rgba(255, 255, 255, 0.94);
+          border-color: rgba(148, 163, 184, 0.22);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="light"] .incident-history-filter-btn {
+          background: #f1f5f9;
+          border-color: rgba(148, 163, 184, 0.25);
+          color: #334155;
+        }
+
+        [data-theme="light"] .incident-history-filter-btn.active {
+          background: rgba(124, 58, 237, 0.1);
+          border-color: rgba(124, 58, 237, 0.45);
+          color: #6d28d9;
+        }
+
         .incident-history-page *,
         .incident-history-page *::before,
         .incident-history-page *::after {

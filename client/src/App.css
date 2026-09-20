@@ -112,7 +112,8 @@
   font-size: 0.68rem;
 }
 
-.app-nav-links {
+.app-nav-links,
+.app-nav-desktop-links {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -237,36 +238,502 @@
     radial-gradient(circle at 50% 0%, rgba(185, 155, 255, 0.08), transparent 18rem),
     rgba(24, 18, 42, 0.78);
 }
-@media (max-width: 760px) {
+/* =========================================================================
+   Light Theme Nav & Shell Overrides
+   ========================================================================= */
+[data-theme="light"] .app-shell {
+  background:
+    radial-gradient(circle at 14% 18%, rgba(124, 58, 237, 0.05), transparent 24rem),
+    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+  background-size: auto, 42px 42px, 42px 42px;
+}
+
+[data-theme="light"] .app-shell::before {
+  background: radial-gradient(circle at 50% -20%, rgba(124, 58, 237, 0.05), transparent 34rem);
+}
+
+[data-theme="light"] .cursor-glow {
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.06), transparent 72%);
+}
+
+[data-theme="light"] .app-nav {
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .app-brand-copy strong {
+  color: #0f172a;
+}
+
+[data-theme="light"] .app-brand-copy small {
+  color: var(--muted);
+}
+
+[data-theme="light"] .app-nav-link:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .app-nav-link.is-active {
+  border-color: rgba(124, 58, 237, 0.35);
+  color: #6d28d9;
+  background: var(--accent-soft);
+  box-shadow: inset 0 -2px 0 #7c3aed;
+}
+
+[data-theme="light"] .app-nav-link-sos {
+  color: #dc2626;
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+[data-theme="light"] .app-nav-link-sos:hover {
+  color: #ffffff;
+  background: #dc2626;
+  border-color: #dc2626;
+  box-shadow: 0 0 14px rgba(220, 38, 38, 0.3);
+}
+
+[data-theme="light"] .app-nav-link-sos.is-active {
+  border-color: #dc2626;
+  color: #ffffff;
+  background: #dc2626;
+  box-shadow: inset 0 -2px 0 #991b1b, 0 0 16px rgba(220, 38, 38, 0.35);
+}
+
+[data-theme="light"] .app-nav-auth-register {
+  border-color: rgba(124, 58, 237, 0.3);
+  color: #6d28d9;
+  background: rgba(124, 58, 237, 0.08);
+}
+
+[data-theme="light"] .app-nav-auth-register:hover {
+  background: rgba(124, 58, 237, 0.16);
+  border-color: rgba(124, 58, 237, 0.6);
+}
+
+[data-theme="light"] .app-nav-auth-profile {
+  color: #4338ca;
+  border-color: rgba(99, 102, 241, 0.25);
+  background: rgba(99, 102, 241, 0.06);
+}
+
+[data-theme="light"] .app-nav-auth-profile:hover {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.45);
+}
+
+[data-theme="light"] .app-nav-auth-logout:hover {
+  color: #dc2626;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* =========================================================================
+   Theme Toggle Button (Desktop & Generic)
+   ========================================================================= */
+.app-nav-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: all 160ms ease;
+  margin-left: 2px;
+}
+
+.app-nav-theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+.theme-toggle-icon {
+  transition: transform 220ms ease;
+}
+
+.theme-toggle-sun {
+  color: #fbbf24;
+}
+
+.theme-toggle-moon {
+  color: #7c3aed;
+}
+
+.app-nav-theme-toggle:hover .theme-toggle-icon {
+  transform: rotate(20deg);
+}
+
+[data-theme="light"] .app-nav-theme-toggle {
+  background: rgba(0, 0, 0, 0.03);
+  color: #475569;
+}
+
+[data-theme="light"] .app-nav-theme-toggle:hover {
+  background: rgba(124, 58, 237, 0.08);
+  color: #6d28d9;
+}
+
+/* =========================================================================
+   Hamburger Menu Button (Mobile)
+   ========================================================================= */
+.app-nav-hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 160ms ease;
+  flex-shrink: 0;
+}
+
+.app-nav-hamburger-btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+}
+
+[data-theme="light"] .app-nav-hamburger-btn {
+  background: rgba(0, 0, 0, 0.04);
+  color: #0f172a;
+}
+
+[data-theme="light"] .app-nav-hamburger-btn:hover {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+/* =========================================================================
+   Mobile Drawer & Backdrop
+   ========================================================================= */
+.app-nav-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: navFadeIn 200ms ease forwards;
+}
+
+@keyframes navFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.app-nav-mobile-drawer {
+  position: fixed;
+  top: 72px;
+  bottom: 0;
+  left: 0;
+  right: auto;
+  z-index: 999;
+  width: min(320px, 85vw);
+  max-width: 340px;
+  height: calc(100vh - 72px);
+  height: calc(100dvh - 72px);
+  max-height: calc(100vh - 72px);
+  max-height: calc(100dvh - 72px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: var(--surface-overlay);
+  border-right: 1px solid var(--line);
+  border-bottom: none;
+  box-shadow: 12px 0 36px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease;
+}
+
+.app-nav-mobile-drawer.is-open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.app-nav-mobile-scroll {
+  padding: 16px 20px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.app-nav-mobile-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.app-nav-mobile-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 4px;
+  padding: 0 4px;
+}
+
+.app-nav-mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: inherit;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 140ms ease;
+}
+
+.app-nav-mobile-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--line);
+}
+
+.app-nav-mobile-link.is-active {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.app-nav-mobile-link-sos {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.app-nav-mobile-link-sos:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #ffffff;
+}
+
+.app-nav-mobile-link-sos.is-active {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.app-nav-mobile-register {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--line-strong);
+}
+
+.app-nav-mobile-logout {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.app-nav-mobile-logout:hover {
+  background: rgba(239, 68, 68, 0.16);
+  color: #f87171;
+}
+
+.app-nav-mobile-divider {
+  height: 1px;
+  background: var(--line);
+  margin: 2px 0;
+}
+
+/* Mobile Theme Row Button */
+.app-nav-mobile-theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 140ms ease;
+  margin-top: 4px;
+}
+
+.app-nav-mobile-theme-row:hover {
+  background: var(--accent-soft);
+  border-color: var(--line-strong);
+}
+
+.app-nav-mobile-theme-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-nav-mobile-theme-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--line-strong);
+}
+
+.app-nav-mobile-install {
+  margin-top: 4px;
+}
+
+.app-nav-mobile-install .pwa-nav-install-btn {
+  width: 100%;
+  justify-content: center;
+  margin-left: 0;
+  min-height: 44px;
+}
+
+[data-theme="light"] .app-nav-mobile-drawer {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 10px 0 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .app-nav-mobile-link {
+  background: rgba(0, 0, 0, 0.02);
+  color: #0f172a;
+}
+
+[data-theme="light"] .app-nav-mobile-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .app-nav-mobile-link.is-active {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.4);
+  color: #6d28d9;
+}
+
+[data-theme="light"] .app-nav-mobile-link-sos {
+  color: #dc2626;
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+[data-theme="light"] .app-nav-mobile-link-sos:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+[data-theme="light"] .app-nav-mobile-theme-row {
+  background: rgba(0, 0, 0, 0.02);
+  color: #0f172a;
+}
+
+[data-theme="light"] .app-nav-mobile-theme-row:hover {
+  background: rgba(124, 58, 237, 0.08);
+}
+
+/* =========================================================================
+   Responsive Breakpoints
+   ========================================================================= */
+@media (max-width: 768px) {
   .cursor-glow {
     display: none;
   }
 
   .app-nav {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 12px;
-    padding: 14px 16px;
+    padding: 12px 18px;
+    gap: 16px;
   }
 
+  /* Hide full horizontal desktop navigation on mobile */
+  .app-nav-desktop-links,
   .app-nav-links {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 2px;
+    display: none !important;
+  }
+
+  /* Display hamburger button on mobile */
+  .app-nav-hamburger-btn {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Hide mobile elements on desktop */
+  .app-nav-mobile-backdrop,
+  .app-nav-mobile-drawer {
+    display: none !important;
+  }
+
+  .app-nav-hamburger-btn {
+    display: none !important;
+  }
+}
+
+/* Fluid responsive navigation for tablet/laptop screens */
+@media (min-width: 769px) and (max-width: 1080px) {
+  .app-nav {
+    gap: 14px;
+    padding: 12px clamp(12px, 2vw, 24px);
   }
 
   .app-nav-link {
-    flex: 0 0 auto;
+    padding: 8px 9px;
+    font-size: 0.77rem;
   }
 
-  .app-content {
-    min-height: calc(100vh - 122px);
+  .app-brand-copy small {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-nav {
+    padding: 10px 14px;
+    min-height: 64px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .cursor-glow,
-    .app-nav-link {
-      transition: none;
-    }
+  .app-nav-mobile-drawer {
+    top: 64px;
+    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    width: min(300px, 86vw);
+  }
+
+  .app-brand-copy small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow,
+  .app-nav-link,
+  .app-nav-mobile-drawer,
+  .app-nav-theme-toggle {
+    transition: none;
   }
 }

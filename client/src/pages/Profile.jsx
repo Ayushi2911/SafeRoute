@@ -201,7 +201,7 @@ export default function Profile({ onNavigate }) {
                   fontSize: '1.45rem',
                   fontWeight: 700,
                   fontFamily: "'Space Grotesk', sans-serif",
-                  color: '#f5f3fb',
+                  color: 'var(--text-heading)',
                   margin: 0,
                 }}
               >
@@ -244,9 +244,9 @@ export default function Profile({ onNavigate }) {
                 alignItems: 'center',
                 gap: '8px',
                 padding: '9px 18px',
-                background: 'rgba(185, 155, 255, 0.12)',
-                border: '1px solid rgba(185, 155, 255, 0.3)',
-                color: '#e9dcff',
+                background: 'var(--accent-soft)',
+                border: '1px solid var(--line-strong)',
+                color: 'var(--accent)',
                 borderRadius: '10px',
                 fontSize: '0.88rem',
                 fontWeight: 600,
@@ -363,7 +363,7 @@ export default function Profile({ onNavigate }) {
                 fontWeight: 700,
                 fontFamily: "'Space Grotesk', sans-serif",
                 margin: 0,
-                color: '#f5f3fb',
+                color: 'var(--text-heading)',
               }}
             >
               Citizen Account Info
@@ -375,7 +375,7 @@ export default function Profile({ onNavigate }) {
               <span style={{ fontSize: '0.78rem', color: 'var(--muted)', display: 'block', marginBottom: '4px' }}>
                 FULL NAME
               </span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f5f3fb', fontSize: '0.94rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text)', fontSize: '0.94rem' }}>
                 <User size={16} style={{ color: 'var(--muted)' }} />
                 <span>{citizen?.name || 'Not provided'}</span>
               </div>
@@ -385,7 +385,7 @@ export default function Profile({ onNavigate }) {
               <span style={{ fontSize: '0.78rem', color: 'var(--muted)', display: 'block', marginBottom: '4px' }}>
                 EMAIL ADDRESS
               </span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f5f3fb', fontSize: '0.94rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text)', fontSize: '0.94rem' }}>
                 <Mail size={16} style={{ color: 'var(--muted)' }} />
                 <span>{citizen?.email || 'Not provided'}</span>
               </div>
@@ -395,7 +395,7 @@ export default function Profile({ onNavigate }) {
               <span style={{ fontSize: '0.78rem', color: 'var(--muted)', display: 'block', marginBottom: '4px' }}>
                 CONTACT PHONE
               </span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f5f3fb', fontSize: '0.94rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text)', fontSize: '0.94rem' }}>
                 <Phone size={16} style={{ color: 'var(--muted)' }} />
                 <span>{citizen?.phone || 'No phone registered'}</span>
               </div>
@@ -405,7 +405,7 @@ export default function Profile({ onNavigate }) {
               <span style={{ fontSize: '0.78rem', color: 'var(--muted)', display: 'block', marginBottom: '4px' }}>
                 REGISTRATION STATUS
               </span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f5f3fb', fontSize: '0.94rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text)', fontSize: '0.94rem' }}>
                 <Calendar size={16} style={{ color: 'var(--muted)' }} />
                 <span>
                   {citizen?.created_at
@@ -439,7 +439,7 @@ export default function Profile({ onNavigate }) {
                 fontWeight: 700,
                 fontFamily: "'Space Grotesk', sans-serif",
                 margin: 0,
-                color: '#f5f3fb',
+                color: 'var(--text-heading)',
               }}
             >
               Safety Profile &amp; Preferences
@@ -467,7 +467,7 @@ export default function Profile({ onNavigate }) {
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    background: 'rgba(9, 10, 18, 0.7)',
+                    background: 'var(--input-bg)',
                     border: '1px solid var(--line)',
                     borderRadius: '8px',
                     color: 'var(--text)',
@@ -494,7 +494,7 @@ export default function Profile({ onNavigate }) {
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    background: 'rgba(9, 10, 18, 0.7)',
+                    background: 'var(--input-bg)',
                     border: '1px solid var(--line)',
                     borderRadius: '8px',
                     color: 'var(--text)',
@@ -521,7 +521,7 @@ export default function Profile({ onNavigate }) {
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    background: 'rgba(9, 10, 18, 0.7)',
+                    background: 'var(--input-bg)',
                     border: '1px solid var(--line)',
                     borderRadius: '8px',
                     color: 'var(--text)',
@@ -548,7 +548,7 @@ export default function Profile({ onNavigate }) {
                   style={{
                     width: '100%',
                     padding: '8px 12px',
-                    background: 'rgba(9, 10, 18, 0.7)',
+                    background: 'var(--input-bg)',
                     border: '1px solid var(--line)',
                     borderRadius: '8px',
                     color: 'var(--text)',
@@ -588,7 +588,7 @@ export default function Profile({ onNavigate }) {
                 <span style={{ fontSize: '0.78rem', color: 'var(--muted)', display: 'block', marginBottom: '4px' }}>
                   AGE &amp; GENDER
                 </span>
-                <div style={{ color: '#f5f3fb', fontSize: '0.94rem' }}>
+                <div style={{ color: 'var(--text)', fontSize: '0.94rem' }}>
                   {profile?.age || profile?.gender
                     ? `${profile?.age ? `${profile.age} years old` : ''}${profile?.age && profile?.gender ? ' • ' : ''}${profile?.gender || ''}`
                     : 'Not specified'}
@@ -599,7 +599,7 @@ export default function Profile({ onNavigate }) {
                 <span style={{ fontSize: '0.78rem', color: 'var(--muted)', display: 'block', marginBottom: '4px' }}>
                   RESIDENTIAL ADDRESS
                 </span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f5f3fb', fontSize: '0.94rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text)', fontSize: '0.94rem' }}>
                   <MapPin size={16} style={{ color: 'var(--muted)' }} />
                   <span>{profile?.address || 'No residential address set'}</span>
                 </div>
@@ -611,10 +611,10 @@ export default function Profile({ onNavigate }) {
                 </span>
                 <div
                   style={{
-                    color: profile?.safety_preferences ? '#e0d8ff' : 'var(--muted)',
+                    color: profile?.safety_preferences ? 'var(--text)' : 'var(--muted)',
                     fontSize: '0.9rem',
                     lineHeight: 1.5,
-                    background: 'rgba(9, 10, 18, 0.45)',
+                    background: 'var(--surface-raised)',
                     padding: '10px 14px',
                     borderRadius: '8px',
                     border: '1px solid var(--line)',

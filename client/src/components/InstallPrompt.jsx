@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Download, X, Smartphone } from 'lucide-react'
 import './InstallPrompt.css'
 
-export default function InstallPrompt() {
+export default function InstallPrompt({ renderBanner = true, className = '' }) {
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [isInstallable, setIsInstallable] = useState(false)
   const [dismissed, setDismissed] = useState(() => {
@@ -71,7 +71,7 @@ export default function InstallPrompt() {
     <>
       {/* Discreet button in header/nav */}
       <button
-        className="pwa-nav-install-btn"
+        className={`pwa-nav-install-btn ${className}`.trim()}
         onClick={handleInstallClick}
         title="Install SafeRoute as an app"
         type="button"
@@ -81,7 +81,7 @@ export default function InstallPrompt() {
       </button>
 
       {/* Floating subtle banner (if not dismissed) */}
-      {!dismissed && (
+      {renderBanner && !dismissed && (
         <aside className="pwa-install-banner" aria-label="App installation notice">
           <div className="pwa-banner-icon-wrap" aria-hidden="true">
             <Smartphone size={20} className="pwa-banner-icon" />

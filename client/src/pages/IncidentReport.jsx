@@ -231,6 +231,54 @@ function IncidentReport({ onNavigate }) {
           font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
+        [data-theme="light"] .incident-page {
+          --incident-background: #f8f9fc;
+          --incident-surface: rgba(255, 255, 255, 0.92);
+          --incident-surface-light: rgba(241, 245, 249, 0.92);
+          --incident-line: rgba(148, 163, 184, 0.22);
+          --incident-line-strong: rgba(124, 58, 237, 0.45);
+          --incident-white: #0f172a;
+          --incident-lavender: #334155;
+          --incident-muted: #64748b;
+          --incident-faint: #94a3b8;
+          --incident-pink: #db2777;
+          --incident-violet: #7c3aed;
+          --incident-cyan: #0284c7;
+          background:
+            radial-gradient(circle at 91% 7%, rgba(156, 92, 255, 0.06), transparent 28rem),
+            radial-gradient(circle at 5% 92%, rgba(235, 81, 169, 0.05), transparent 28rem),
+            linear-gradient(125deg, #f8f9fc 0%, #f1f5f9 48%, #ffffff 100%);
+          color: var(--incident-white);
+        }
+
+        [data-theme="light"] .incident-status {
+          background: rgba(255, 255, 255, 0.9);
+        }
+
+        [data-theme="light"] .incident-card {
+          background: rgba(255, 255, 255, 0.94);
+          border-color: rgba(148, 163, 184, 0.22);
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="light"] .incident-input,
+        [data-theme="light"] .incident-select,
+        [data-theme="light"] .incident-textarea {
+          background: #f8fafc;
+          border-color: #cbd5e1;
+          color: #0f172a;
+        }
+
+        [data-theme="light"] .incident-input::placeholder,
+        [data-theme="light"] .incident-textarea::placeholder {
+          color: #94a3b8;
+        }
+
+        [data-theme="light"] .incident-severity {
+          background: #f8fafc;
+          border-color: rgba(148, 163, 184, 0.25);
+        }
+
         .incident-page *,
         .incident-page *::before,
         .incident-page *::after {

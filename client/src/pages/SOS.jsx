@@ -312,7 +312,7 @@ export default function SOS({ onNavigate }) {
                   fontSize: '1.5rem',
                   fontWeight: 700,
                   fontFamily: "'Space Grotesk', sans-serif",
-                  color: '#f5f3fb',
+                  color: 'var(--text-heading)',
                   margin: 0,
                 }}
               >
@@ -351,7 +351,7 @@ export default function SOS({ onNavigate }) {
               fontFamily: "'Space Grotesk', sans-serif",
               fontSize: '0.9rem',
               fontWeight: 700,
-              color: '#d4ceee',
+              color: 'var(--text-subtle)',
               letterSpacing: '0.06em',
             }}
           >
@@ -363,15 +363,15 @@ export default function SOS({ onNavigate }) {
       {/* Safety Notice Card */}
       <div
         style={{
-          background: 'rgba(245, 158, 11, 0.08)',
-          border: '1px solid rgba(245, 158, 11, 0.28)',
+          background: 'rgba(245, 158, 11, 0.1)',
+          border: '1px solid rgba(245, 158, 11, 0.35)',
           borderRadius: '14px',
           padding: '14px 18px',
           display: 'flex',
           alignItems: 'center',
           gap: '12px',
           marginBottom: '28px',
-          color: '#fde68a',
+          color: 'var(--text)',
           fontSize: '0.86rem',
           lineHeight: 1.5,
         }}
@@ -428,7 +428,7 @@ export default function SOS({ onNavigate }) {
               fontSize: '1.25rem',
               fontWeight: 700,
               fontFamily: "'Space Grotesk', sans-serif",
-              color: '#f5f3fb',
+              color: 'var(--text-heading)',
               margin: '0 0 6px',
             }}
           >
@@ -486,7 +486,7 @@ export default function SOS({ onNavigate }) {
                     display: 'block',
                     fontSize: '0.78rem',
                     fontWeight: 600,
-                    color: '#d4ceee',
+                    color: 'var(--text-subtle)',
                     textAlign: 'left',
                     marginBottom: '8px',
                   }}
@@ -529,7 +529,7 @@ export default function SOS({ onNavigate }) {
                   style={{
                     width: '100%',
                     padding: '10px 14px',
-                    background: 'rgba(9, 10, 18, 0.7)',
+                    background: 'var(--input-bg)',
                     border: '1px solid var(--line)',
                     borderRadius: '10px',
                     color: 'var(--text)',
@@ -543,7 +543,7 @@ export default function SOS({ onNavigate }) {
             <div
               style={{
                 width: '100%',
-                background: 'rgba(17, 18, 28, 0.8)',
+                background: 'var(--surface-raised)',
                 border: '1px solid var(--line)',
                 borderRadius: '12px',
                 padding: '18px 16px',
@@ -551,7 +551,7 @@ export default function SOS({ onNavigate }) {
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '8px' }}>
                 <ShieldAlert size={18} style={{ color: 'var(--accent)' }} />
-                <strong style={{ fontSize: '0.9rem', color: '#f5f3fb' }}>Citizen Account Required</strong>
+                <strong style={{ fontSize: '0.9rem', color: 'var(--text-heading)' }}>Citizen Account Required</strong>
               </div>
               <p style={{ fontSize: '0.8rem', color: 'var(--muted)', margin: '0 0 14px', lineHeight: 1.4 }}>
                 To verify caller legitimacy and link emergency contacts, citizen sign-in is required before recording SOS requests.
@@ -589,8 +589,8 @@ export default function SOS({ onNavigate }) {
                     justifyContent: 'center',
                     gap: '6px',
                     padding: '8px 14px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    color: '#e0d8ff',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                     border: '1px solid var(--line)',
                     borderRadius: '8px',
                     fontSize: '0.82rem',
@@ -666,7 +666,7 @@ export default function SOS({ onNavigate }) {
               <div style={{ fontWeight: 700, color: '#f87171', marginBottom: '4px' }}>
                 SOS Signal Recorded (ID #{lastRecordedSos.id})
               </div>
-              <div style={{ color: '#d4ceee' }}>
+              <div style={{ color: 'var(--text-subtle)' }}>
                 Coordinates: {lastRecordedSos.latitude}, {lastRecordedSos.longitude}
               </div>
               <div style={{ color: 'var(--muted)', fontSize: '0.78rem', marginTop: '2px' }}>
@@ -695,7 +695,7 @@ export default function SOS({ onNavigate }) {
                   fontSize: '1.08rem',
                   fontWeight: 700,
                   fontFamily: "'Space Grotesk', sans-serif",
-                  color: '#f5f3fb',
+                  color: 'var(--text-heading)',
                   margin: 0,
                 }}
               >
@@ -716,7 +716,7 @@ export default function SOS({ onNavigate }) {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     padding: '12px 16px',
-                    background: 'rgba(9, 10, 18, 0.65)',
+                    background: 'var(--surface-raised)',
                     border: '1px solid var(--line)',
                     borderRadius: '12px',
                     textDecoration: 'none',
@@ -725,7 +725,7 @@ export default function SOS({ onNavigate }) {
                   }}
                 >
                   <div>
-                    <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#f5f3fb' }}>
+                    <div style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-heading)' }}>
                       {hotline.name}
                     </div>
                     <div style={{ fontSize: '0.76rem', color: 'var(--muted)' }}>
@@ -781,7 +781,7 @@ export default function SOS({ onNavigate }) {
                       fontSize: '1.08rem',
                       fontWeight: 700,
                       fontFamily: "'Space Grotesk', sans-serif",
-                      color: '#f5f3fb',
+                      color: 'var(--text-heading)',
                       margin: 0,
                     }}
                   >
@@ -797,10 +797,10 @@ export default function SOS({ onNavigate }) {
                     alignItems: 'center',
                     gap: '5px',
                     padding: '6px 12px',
-                    background: 'rgba(185, 155, 255, 0.12)',
-                    border: '1px solid rgba(185, 155, 255, 0.3)',
+                    background: 'var(--accent-soft)',
+                    border: '1px solid var(--line-strong)',
                     borderRadius: '8px',
-                    color: '#e9dcff',
+                    color: 'var(--accent)',
                     fontSize: '0.8rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -816,7 +816,7 @@ export default function SOS({ onNavigate }) {
                 <form
                   onSubmit={handleAddContactSubmit}
                   style={{
-                    background: 'rgba(9, 10, 18, 0.6)',
+                    background: 'var(--surface-raised)',
                     border: '1px solid var(--line)',
                     borderRadius: '12px',
                     padding: '16px',
@@ -826,7 +826,7 @@ export default function SOS({ onNavigate }) {
                     gap: '10px',
                   }}
                 >
-                  <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#e0d8ff' }}>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-heading)' }}>
                     Add Trusted Emergency Contact
                   </div>
                   {contactError && (
@@ -840,7 +840,7 @@ export default function SOS({ onNavigate }) {
                     required
                     style={{
                       padding: '8px 12px',
-                      background: 'rgba(17, 18, 28, 0.9)',
+                      background: 'var(--input-bg)',
                       border: '1px solid var(--line)',
                       borderRadius: '8px',
                       color: 'var(--text)',
@@ -856,7 +856,7 @@ export default function SOS({ onNavigate }) {
                     required
                     style={{
                       padding: '8px 12px',
-                      background: 'rgba(17, 18, 28, 0.9)',
+                      background: 'var(--input-bg)',
                       border: '1px solid var(--line)',
                       borderRadius: '8px',
                       color: 'var(--text)',
@@ -871,7 +871,7 @@ export default function SOS({ onNavigate }) {
                     onChange={(e) => setNewContact({ ...newContact, relationship: e.target.value })}
                     style={{
                       padding: '8px 12px',
-                      background: 'rgba(17, 18, 28, 0.9)',
+                      background: 'var(--input-bg)',
                       border: '1px solid var(--line)',
                       borderRadius: '8px',
                       color: 'var(--text)',
@@ -916,13 +916,13 @@ export default function SOS({ onNavigate }) {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: '10px 14px',
-                        background: 'rgba(9, 10, 18, 0.65)',
+                        background: 'var(--surface-raised)',
                         border: '1px solid var(--line)',
                         borderRadius: '10px',
                       }}
                     >
                       <div>
-                        <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#f5f3fb' }}>
+                        <div style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-heading)' }}>
                           {contact.contact_name}
                         </div>
                         <div style={{ fontSize: '0.76rem', color: 'var(--muted)' }}>
@@ -991,7 +991,7 @@ export default function SOS({ onNavigate }) {
                 fontSize: '1.15rem',
                 fontWeight: 700,
                 fontFamily: "'Space Grotesk', sans-serif",
-                color: '#f5f3fb',
+                color: 'var(--text-heading)',
                 margin: 0,
               }}
             >
@@ -1019,14 +1019,14 @@ export default function SOS({ onNavigate }) {
                     flexWrap: 'wrap',
                     gap: '12px',
                     padding: '14px 18px',
-                    background: 'rgba(9, 10, 18, 0.65)',
+                    background: 'var(--surface-raised)',
                     border: '1px solid var(--line)',
                     borderRadius: '12px',
                   }}
                 >
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                      <strong style={{ color: '#f5f3fb', fontSize: '0.92rem' }}>
+                      <strong style={{ color: 'var(--text-heading)', fontSize: '0.92rem' }}>
                         {item.emergency_type || 'Emergency SOS'}
                       </strong>
                       <span
@@ -1066,7 +1066,7 @@ export default function SOS({ onNavigate }) {
                       {item.message && ` • "${item.message}"`}
                     </div>
 
-                    <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.74rem', marginTop: '3px' }}>
+                    <div style={{ color: 'var(--muted)', fontSize: '0.74rem', marginTop: '3px' }}>
                       Triggered: {new Date(item.created_at).toLocaleString()}
                       {item.resolved_at && ` • Resolved: ${new Date(item.resolved_at).toLocaleString()}`}
                     </div>

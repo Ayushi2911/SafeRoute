@@ -130,7 +130,7 @@ export default function Register({ onNavigate }) {
                 fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: '1.25rem',
                 fontWeight: 700,
-                color: '#f5f3fb',
+                color: 'var(--text-heading)',
                 letterSpacing: '0.06em',
               }}
             >
@@ -142,7 +142,7 @@ export default function Register({ onNavigate }) {
               fontSize: '1.45rem',
               fontWeight: 700,
               fontFamily: "'Space Grotesk', sans-serif",
-              color: '#f5f3fb',
+              color: 'var(--text-heading)',
               margin: '0 0 6px',
             }}
           >
@@ -201,7 +201,7 @@ export default function Register({ onNavigate }) {
                 display: 'block',
                 fontSize: '0.82rem',
                 fontWeight: 600,
-                color: '#d4ceee',
+                color: 'var(--text-subtle)',
                 marginBottom: '6px',
               }}
             >
@@ -231,7 +231,7 @@ export default function Register({ onNavigate }) {
                 style={{
                   width: '100%',
                   padding: '11px 14px 11px 42px',
-                  background: 'rgba(9, 10, 18, 0.7)',
+                  background: 'var(--input-bg)',
                   border: '1px solid var(--line)',
                   borderRadius: '10px',
                   color: 'var(--text)',
@@ -249,7 +249,7 @@ export default function Register({ onNavigate }) {
                 display: 'block',
                 fontSize: '0.82rem',
                 fontWeight: 600,
-                color: '#d4ceee',
+                color: 'var(--text-subtle)',
                 marginBottom: '6px',
               }}
             >
@@ -279,7 +279,7 @@ export default function Register({ onNavigate }) {
                 style={{
                   width: '100%',
                   padding: '11px 14px 11px 42px',
-                  background: 'rgba(9, 10, 18, 0.7)',
+                  background: 'var(--input-bg)',
                   border: '1px solid var(--line)',
                   borderRadius: '10px',
                   color: 'var(--text)',
@@ -297,7 +297,7 @@ export default function Register({ onNavigate }) {
                 display: 'block',
                 fontSize: '0.82rem',
                 fontWeight: 600,
-                color: '#d4ceee',
+                color: 'var(--text-subtle)',
                 marginBottom: '6px',
               }}
             >
@@ -327,7 +327,7 @@ export default function Register({ onNavigate }) {
                 style={{
                   width: '100%',
                   padding: '11px 42px 11px 42px',
-                  background: 'rgba(9, 10, 18, 0.7)',
+                  background: 'var(--input-bg)',
                   border: '1px solid var(--line)',
                   borderRadius: '10px',
                   color: 'var(--text)',
@@ -365,7 +365,7 @@ export default function Register({ onNavigate }) {
                 display: 'block',
                 fontSize: '0.82rem',
                 fontWeight: 600,
-                color: '#d4ceee',
+                color: 'var(--text-subtle)',
                 marginBottom: '6px',
               }}
             >
@@ -394,7 +394,7 @@ export default function Register({ onNavigate }) {
                 style={{
                   width: '100%',
                   padding: '11px 14px 11px 42px',
-                  background: 'rgba(9, 10, 18, 0.7)',
+                  background: 'var(--input-bg)',
                   border: '1px solid var(--line)',
                   borderRadius: '10px',
                   color: 'var(--text)',
@@ -470,7 +470,7 @@ export default function Register({ onNavigate }) {
             justifyContent: 'center',
             gap: '6px',
             fontSize: '0.78rem',
-            color: 'rgba(255,255,255,0.4)',
+            color: 'var(--muted)',
           }}
         >
           <ShieldCheck size={14} style={{ color: '#10b981' }} />
