@@ -8,19 +8,68 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  --canvas: #090a12;
-  --surface: #11121c;
-  --surface-raised: #171827;
-  --surface-overlay: rgba(17, 18, 28, 0.95);
-  --line: rgba(224, 216, 255, 0.13);
-  --line-strong: rgba(185, 155, 255, 0.4);
-  --text: #f5f3fb;
-  --text-heading: #ffffff;
-  --text-subtle: #d4ceee;
-  --muted: #9a99ac;
-  --accent: #b99bff;
-  --accent-soft: rgba(185, 155, 255, 0.12);
-  --accent-hover: #cbb4ff;
+
+  /* SafeRoute 427b33f Original Dark Palette Tokens */
+  --color-background: #090a12;
+  --color-surface: #11121c;
+  --color-surface-elevated: #171827;
+  --color-surface-glass: rgba(24, 18, 42, 0.82);
+  --color-surface-overlay: rgba(17, 18, 28, 0.95);
+
+  --color-text: #f5f3fb;
+  --color-text-heading: #ffffff;
+  --color-text-subtle: #d4ceee;
+  --color-text-muted: #9a99ac;
+
+  --color-border: rgba(224, 216, 255, 0.13);
+  --color-border-strong: rgba(185, 155, 255, 0.4);
+  --color-border-glass: rgba(222, 193, 255, 0.14);
+
+  /* Primary Violet & Lavender Accents */
+  --color-primary: #7c3aed;
+  --color-primary-light: #b99bff;
+  --color-primary-dark: #6d28d9;
+  --color-accent: #b99bff;
+  --color-accent-soft: rgba(185, 155, 255, 0.12);
+  --color-accent-hover: #cbb4ff;
+
+  /* Cyber & Neon Accents */
+  --color-cyan: #00e5ff;
+  --color-cyan-teal: #06b6d4;
+  --color-cyan-sky: #38bdf8;
+  --color-purple: #8b5cf6;
+  --color-magenta: #d946ef;
+  --color-pink: #ef70bd;
+
+  /* System Status Accents */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-danger-soft: #f87171;
+  --color-focus: #b99bff;
+
+  /* RGB Channels for Alpha Composition */
+  --color-background-rgb: 9 10 18;
+  --color-surface-rgb: 17 18 28;
+  --color-surface-elevated-rgb: 23 24 39;
+  --color-primary-rgb: 124 58 237;
+  --color-accent-rgb: 185 155 255;
+  --color-cyan-rgb: 0 229 255;
+
+  /* Core Layout Aliases (427b33f Compatibility) */
+  --canvas: var(--color-background);
+  --surface: var(--color-surface);
+  --surface-raised: var(--color-surface-elevated);
+  --surface-overlay: var(--color-surface-overlay);
+  --line: var(--color-border);
+  --line-strong: var(--color-border-strong);
+  --text: var(--color-text);
+  --text-heading: var(--color-text-heading);
+  --text-subtle: var(--color-text-subtle);
+  --muted: var(--color-text-muted);
+  --accent: var(--color-accent);
+  --accent-soft: var(--color-accent-soft);
+  --accent-hover: var(--color-accent-hover);
   --input-bg: rgba(9, 10, 18, 0.7);
   --card-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
   --nav-bg: rgba(9, 10, 18, 0.92);
@@ -30,19 +79,68 @@
 [data-theme="light"] {
   color: #0f172a;
   background: #f8f9fc;
-  --canvas: #f8f9fc;
-  --surface: #ffffff;
-  --surface-raised: #f1f5f9;
-  --surface-overlay: rgba(255, 255, 255, 0.95);
-  --line: rgba(100, 116, 139, 0.2);
-  --line-strong: rgba(124, 58, 237, 0.4);
-  --text: #0f172a;
-  --text-heading: #0f172a;
-  --text-subtle: #334155;
-  --muted: #64748b;
-  --accent: #7c3aed;
-  --accent-soft: rgba(124, 58, 237, 0.08);
-  --accent-hover: #6d28d9;
+
+  /* SafeRoute 427b33f Original Light Palette Tokens */
+  --color-background: #f8f9fc;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f1f5f9;
+  --color-surface-glass: rgba(255, 255, 255, 0.92);
+  --color-surface-overlay: rgba(255, 255, 255, 0.95);
+
+  --color-text: #0f172a;
+  --color-text-heading: #0f172a;
+  --color-text-subtle: #334155;
+  --color-text-muted: #64748b;
+
+  --color-border: rgba(100, 116, 139, 0.2);
+  --color-border-strong: rgba(124, 58, 237, 0.4);
+  --color-border-glass: rgba(148, 163, 184, 0.22);
+
+  /* Primary Violet Accents (Light) */
+  --color-primary: #7c3aed;
+  --color-primary-light: #8b5cf6;
+  --color-primary-dark: #6d28d9;
+  --color-accent: #7c3aed;
+  --color-accent-soft: rgba(124, 58, 237, 0.08);
+  --color-accent-hover: #6d28d9;
+
+  /* Cyber Accents (Light Mode Calibrated) */
+  --color-cyan: #0284c7;
+  --color-cyan-teal: #0891b2;
+  --color-cyan-sky: #0369a1;
+  --color-purple: #7c3aed;
+  --color-magenta: #c026d3;
+  --color-pink: #db2777;
+
+  /* System Status Accents */
+  --color-success: #059669;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-danger-soft: #ef4444;
+  --color-focus: #7c3aed;
+
+  /* RGB Channels for Alpha Composition */
+  --color-background-rgb: 248 249 252;
+  --color-surface-rgb: 255 255 255;
+  --color-surface-elevated-rgb: 241 245 249;
+  --color-primary-rgb: 124 58 237;
+  --color-accent-rgb: 124 58 237;
+  --color-cyan-rgb: 2 132 199;
+
+  /* Core Layout Aliases (427b33f Compatibility) */
+  --canvas: var(--color-background);
+  --surface: var(--color-surface);
+  --surface-raised: var(--color-surface-elevated);
+  --surface-overlay: var(--color-surface-overlay);
+  --line: var(--color-border);
+  --line-strong: var(--color-border-strong);
+  --text: var(--color-text);
+  --text-heading: var(--color-text-heading);
+  --text-subtle: var(--color-text-subtle);
+  --muted: var(--color-text-muted);
+  --accent: var(--color-accent);
+  --accent-soft: var(--color-accent-soft);
+  --accent-hover: var(--color-accent-hover);
   --input-bg: #ffffff;
   --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
   --nav-bg: rgba(255, 255, 255, 0.92);
