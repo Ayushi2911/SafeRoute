@@ -279,80 +279,6 @@ function IncidentReport({ onNavigate }) {
           border-color: rgba(148, 163, 184, 0.25);
         }
 
-        [data-theme="light"] .incident-kicker,
-        [data-theme="light"] .incident-eyebrow {
-          color: #6d28d9;
-        }
-
-        [data-theme="light"] .incident-required {
-          color: #9d174d;
-        }
-
-        [data-theme="light"] .incident-select-wrap::after {
-          color: #475569;
-        }
-
-        [data-theme="light"] .incident-input::placeholder,
-        [data-theme="light"] .incident-textarea::placeholder,
-        [data-theme="light"] .incident-location-status,
-        [data-theme="light"] .incident-upload-copy,
-        [data-theme="light"] .incident-guideline-note,
-        [data-theme="light"] .incident-privacy,
-        [data-theme="light"] .incident-guideline {
-          color: #475569;
-        }
-
-        [data-theme="light"] .incident-button {
-          color: #6d28d9;
-          background: rgba(124, 58, 237, 0.1);
-          border-color: rgba(124, 58, 237, 0.4);
-        }
-
-        [data-theme="light"] .incident-button:hover {
-          color: #5b21b6;
-          background: rgba(124, 58, 237, 0.16);
-          border-color: rgba(124, 58, 237, 0.65);
-        }
-
-        [data-theme="light"] .incident-severity-description,
-        [data-theme="light"] .incident-status span {
-          color: #475569;
-        }
-
-        [data-theme="light"] .incident-auth-banner {
-          color: #334155 !important;
-        }
-
-        [data-theme="light"] .incident-auth-banner button {
-          color: #92400e !important;
-        }
-
-        [data-theme="light"] .incident-submit-button {
-          color: #ffffff !important;
-        }
-
-        [data-theme="light"] .incident-guideline {
-          color: #334155 !important;
-        }
-
-        [data-theme="light"] .incident-guideline-number {
-          color: #6d28d9 !important;
-          background: rgba(124, 58, 237, 0.14);
-          border: 1px solid rgba(109, 40, 217, 0.25);
-        }
-
-        [data-theme="light"] .incident-page .incident-select:hover,
-        [data-theme="light"] .incident-page .incident-select:focus,
-        [data-theme="light"] .incident-page .incident-select:active {
-          background: #f8fafc !important;
-          color: #0f172a !important;
-        }
-
-        [data-theme="light"] .incident-page .incident-select option {
-          background: #ffffff;
-          color: #0f172a;
-        }
-
         .incident-page *,
         .incident-page *::before,
         .incident-page *::after {
@@ -1059,7 +985,6 @@ function IncidentReport({ onNavigate }) {
           <section className="incident-card incident-form-card" aria-labelledby="incident-details-title">
             {isAuthenticated && user ? (
               <div
-                className="incident-auth-banner"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -1080,7 +1005,6 @@ function IncidentReport({ onNavigate }) {
               </div>
             ) : (
               <div
-                className="incident-auth-banner"
                 style={{
                   display: 'flex',
                   alignItems: 'center',

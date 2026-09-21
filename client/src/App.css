@@ -330,31 +330,6 @@
   background: rgba(239, 68, 68, 0.1);
 }
 
-[data-theme="light"] .auth-page [style*="color: var(--text-heading)"],
-[data-theme="light"] .profile-page [style*="color: var(--text-heading)"] {
-  color: #0f172a !important;
-}
-
-[data-theme="light"] .auth-page [style*="color: var(--text-subtle)"],
-[data-theme="light"] .profile-page [style*="color: var(--text-subtle)"] {
-  color: #334155 !important;
-}
-
-[data-theme="light"] .auth-page [style*="color: #fca5a5"],
-[data-theme="light"] .profile-page [style*="color: #fca5a5"] {
-  color: #b91c1c !important;
-}
-
-[data-theme="light"] .auth-page [style*="color: #6ee7b7"],
-[data-theme="light"] .profile-page [style*="color: #6ee7b7"] {
-  color: #047857 !important;
-}
-
-[data-theme="light"] .auth-page button:hover,
-[data-theme="light"] .profile-page button:hover {
-  text-decoration: none;
-}
-
 /* =========================================================================
    Theme Toggle Button (Desktop & Generic)
    ========================================================================= */

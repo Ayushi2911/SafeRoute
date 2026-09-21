@@ -90,7 +90,6 @@ export default function Register({ onNavigate }) {
 
   return (
     <div
-      className="auth-page register-page"
       style={{
         display: 'flex',
         justifyContent: 'center',
