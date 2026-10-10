@@ -14,7 +14,7 @@ const sosRoutes = require("./routes/sosRoutes");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Production-ready CORS setup supporting local and deployed origins
+// Production-ready CORS setup supporting local, Render, and Netlify origins
 const defaultOrigins = [
   "http://localhost:5000",
   "http://localhost:5173",
@@ -25,16 +25,28 @@ const defaultOrigins = [
   "https://saferoute-7xd8.onrender.com",
 ];
 
-const configuredOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(",").map((url) => url.trim())
-  : [];
+const envOrigins = [
+  ...(process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(",") : []),
+  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(",") : []),
+]
+  .map((url) => url.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
 
-const allowedOrigins = [...new Set([...defaultOrigins, ...configuredOrigins])];
+const allowedOrigins = [...new Set([...defaultOrigins, ...envOrigins])];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      const isAllowed =
+        allowedOrigins.includes(origin) ||
+        allowedOrigins.includes("*") ||
+        /^https:\/\/.*\.netlify\.app$/.test(origin);
+
+      if (isAllowed) {
         return callback(null, true);
       }
       return callback(new Error(`Origin ${origin} not allowed by CORS`));

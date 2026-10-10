@@ -5,7 +5,7 @@
  * Uses VITE_API_BASE_URL when defined (e.g. in production: https://saferoute-backend-lgis.onrender.com),
  * falling back to local development (http://localhost:5000).
  */
-const rawBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const rawBaseUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL;
 
 export const API_BASE_URL = rawBaseUrl && typeof rawBaseUrl === 'string'
   ? rawBaseUrl.trim().replace(/\/+$/, '')
